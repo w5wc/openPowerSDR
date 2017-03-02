@@ -3707,8 +3707,9 @@ nтолько курсора фильтра в RX2</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkFWCATUBypass.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>9, 69</source>
-          <target state="needs-review-translation">9, 69</target>
+          <source>59, 53</source>
+          <target state="needs-review-translation">59, 53</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkFWCATUBypass.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -3723,8 +3724,9 @@ nтолько курсора фильтра в RX2</target>
           <target state="needs-review-translation">TopCenter</target>
         </trans-unit>
         <trans-unit id="chkFWCATUBypass.ToolTip" translate="yes" xml:space="preserve">
-          <source>Click to bypass the ATU</source>
-          <target state="translated">Включает обход ATU</target>
+          <source>Activates PureSignal 2.0 Auto-Calibrate Mode</source>
+          <target state="needs-review-translation">Включает обход ATU</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkFWCATU.Appearance" translate="yes" extype="System.Windows.Forms.Appearance, System.Windows.Forms" xml:space="preserve">
           <source>Button</source>
@@ -9582,10 +9584,6 @@ PWR, EQ, микрофонный вход</target>
           <source>Add a Multi Tracking Notch Filter</source>
           <target state="translated">blank</target>
         </trans-unit>
-        <trans-unit id="btnTNFAdd.Visible" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
-          <source>False</source>
-          <target state="needs-review-translation">False</target>
-        </trans-unit>
         <trans-unit id="ptbRX2AF.BackgroundImageLayout" translate="yes" extype="System.Windows.Forms.ImageLayout, System.Windows.Forms" xml:space="preserve">
           <source>Stretch</source>
           <target state="needs-review-translation">Stretch</target>
@@ -10167,6 +10165,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="NRToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="NRToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>NR</source>
@@ -10175,6 +10174,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="ANFToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ANFToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>ANF</source>
@@ -10183,6 +10183,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="NBToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="NBToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>NB</source>
@@ -10191,6 +10192,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="NB2ToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="NB2ToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>NB2</source>
@@ -10199,6 +10201,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="BINToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="BINToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>BIN</source>
@@ -10207,6 +10210,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="MultiRXToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="MultiRXToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>Multi-RX</source>
@@ -10215,6 +10219,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="RX1AVGToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RX1AVGToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>AVG</source>
@@ -10223,6 +10228,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="RX1PeakToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>121, 22</source>
           <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RX1PeakToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>Peak</source>
@@ -10559,6 +10565,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="bandToolStripMenuItem6.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>105, 22</source>
           <target state="needs-review-translation">105, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="bandToolStripMenuItem6.Text" translate="yes" xml:space="preserve">
           <source>Band</source>
@@ -10671,6 +10678,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="modeToolStripMenuItem1.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>105, 22</source>
           <target state="needs-review-translation">105, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="modeToolStripMenuItem1.Text" translate="yes" xml:space="preserve">
           <source>Mode</source>
@@ -10767,6 +10775,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="filterToolStripMenuItem11.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>105, 22</source>
           <target state="needs-review-translation">105, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="filterToolStripMenuItem11.Text" translate="yes" xml:space="preserve">
           <source>Filter</source>
@@ -10831,6 +10840,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="dSPToolStripMenuItem1.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>105, 22</source>
           <target state="needs-review-translation">105, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="dSPToolStripMenuItem1.Text" translate="yes" xml:space="preserve">
           <source>DSP</source>
@@ -10839,6 +10849,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="nR2ToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="nR2ToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>NR</source>
@@ -10847,6 +10858,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="aNF2ToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="aNF2ToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>ANF</source>
@@ -10855,6 +10867,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="nB2ToolStripMenuItem1.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="nB2ToolStripMenuItem1.Text" translate="yes" xml:space="preserve">
           <source>NB</source>
@@ -10863,6 +10876,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="nBRX2ToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="nBRX2ToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>NB2</source>
@@ -10871,6 +10885,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="bIN2ToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="bIN2ToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>BIN</source>
@@ -10879,6 +10894,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="RX2AVGToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RX2AVGToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>AVG</source>
@@ -10887,6 +10903,7 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="RX2PeakToolStripMenuItem.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>99, 22</source>
           <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="RX2PeakToolStripMenuItem.Text" translate="yes" xml:space="preserve">
           <source>Peak</source>
@@ -16025,6 +16042,110 @@ PWR, EQ, микрофонный вход</target>
         <trans-unit id="$this.TrayHeight" translate="yes" extype="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
           <source>101</source>
           <target state="needs-review-translation">101</target>
+        </trans-unit>
+        <trans-unit id="chkFWCATUBypass.Text" translate="yes" xml:space="preserve">
+          <source>PS-A</source>
+          <target state="new">PS-A</target>
+        </trans-unit>
+        <trans-unit id="NR2ToolStripMenuItem1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>121, 22</source>
+          <target state="needs-review-translation">152, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="NR2ToolStripMenuItem1.Text" translate="yes" xml:space="preserve">
+          <source>NR2</source>
+          <target state="new">NR2</target>
+        </trans-unit>
+        <trans-unit id="NR2StripMenuItem2.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>99, 22</source>
+          <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="NR2StripMenuItem2.Text" translate="yes" xml:space="preserve">
+          <source>NR2</source>
+          <target state="new">NR2</target>
+        </trans-unit>
+        <trans-unit id="SNBtoolStripMenuItem.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>121, 22</source>
+          <target state="needs-review-translation">121, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="SNBtoolStripMenuItem.Text" translate="yes" xml:space="preserve">
+          <source>SNB</source>
+          <target state="new">SNB</target>
+        </trans-unit>
+        <trans-unit id="SNBtoolStripMenuItem1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>99, 22</source>
+          <target state="needs-review-translation">99, 22</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="SNBtoolStripMenuItem1.Text" translate="yes" xml:space="preserve">
+          <source>SNB</source>
+          <target state="new">SNB</target>
+        </trans-unit>
+        <trans-unit id="btnTNFAdd.Visible" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>False</source>
+          <target state="needs-review-translation">False</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAVolts.Font" translate="yes" xml:space="preserve" extype="System.Drawing.Font, System.Drawing">
+          <source>Arial, 9.75pt</source>
+          <target state="needs-review-translation">Arial, 9.75pt</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAVolts.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>9, 252</source>
+          <target state="needs-review-translation">9, 252</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAVolts.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>88, 15</source>
+          <target state="needs-review-translation">88, 15</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAVolts.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>69</source>
+          <target state="needs-review-translation">69</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAVolts.TextAlign" translate="yes" xml:space="preserve" extype="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+          <source>Center</source>
+          <target state="needs-review-translation">Center</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAAmps.Font" translate="yes" xml:space="preserve" extype="System.Drawing.Font, System.Drawing">
+          <source>Arial, 9.75pt</source>
+          <target state="needs-review-translation">Arial, 9.75pt</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAAmps.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>97, 252</source>
+          <target state="needs-review-translation">97, 252</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAAmps.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>88, 15</source>
+          <target state="needs-review-translation">88, 15</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAAmps.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>70</source>
+          <target state="needs-review-translation">70</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIPAAmps.TextAlign" translate="yes" xml:space="preserve" extype="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+          <source>Center</source>
+          <target state="needs-review-translation">Center</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIBlank.Font" translate="yes" xml:space="preserve" extype="System.Drawing.Font, System.Drawing">
+          <source>Arial, 9.75pt</source>
+          <target state="needs-review-translation">Arial, 9.75pt</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIBlank.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>185, 252</source>
+          <target state="needs-review-translation">185, 252</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIBlank.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>112, 15</source>
+          <target state="needs-review-translation">112, 15</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIBlank.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>71</source>
+          <target state="needs-review-translation">71</target>
+        </trans-unit>
+        <trans-unit id="txtDisplayOrionMKIIBlank.TextAlign" translate="yes" xml:space="preserve" extype="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+          <source>Center</source>
+          <target state="needs-review-translation">Center</target>
         </trans-unit>
       </group>
     </body>

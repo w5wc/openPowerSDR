@@ -27,6 +27,9 @@ namespace PowerSDR
         public static extern void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetDelayXmit(int bit, int loops);  
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetDiagData(int* a, int count);  // get diag data, count is how many slots are in array 
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -218,6 +221,9 @@ namespace PowerSDR
         public static extern void SetMicPTT(int bits);
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetGndRx2onTx(int bits);
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getAndResetADC_Overload();
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -249,6 +255,12 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getAlexFwdPower();
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int getAIN3();
+
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int getAIN4();
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getHermesDCVoltage();
@@ -369,5 +381,9 @@ namespace PowerSDR
 
         [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAIN4Voltage(int v);
+     
+        [DllImport("JanusAudio.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void isOrionMKII(int v);
+
     }
 }

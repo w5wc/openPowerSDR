@@ -531,30 +531,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="console.de.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.es.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.fr.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.it.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.ja.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.ko.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.ru.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.zh-Hans.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="console.zh-Hant.resx">
       <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="cwedit.de.resx">
       <DependentUpon>cwedit.cs</DependentUpon>

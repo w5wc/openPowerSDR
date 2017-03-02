@@ -583,7 +583,7 @@
     <value>Off</value>
   </data>
   <data name="chkFWCATUBypass.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 69</value>
+    <value>59, 53</value>
   </data>
   <data name="chkFWCATUBypass.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -4499,9 +4499,6 @@
   </data>
   <data name="btnTNFAdd.ToolTip" xml:space="preserve">
     <value>Ajouter un manuel suivi filtre coupe-bande</value>
-  </data>
-  <data name="btnTNFAdd.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="ptbRX2AF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -8584,4 +8581,64 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>101</value>
   </metadata>
+  <data name="NR2ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="NR2StripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="SNBtoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="SNBtoolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="btnTNFAdd.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAVolts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAVolts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 252</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAVolts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 15</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAVolts.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAVolts.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAAmps.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAAmps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 252</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAAmps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 15</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAAmps.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="txtDisplayOrionMKIIPAAmps.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="txtDisplayOrionMKIIBlank.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="txtDisplayOrionMKIIBlank.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 252</value>
+  </data>
+  <data name="txtDisplayOrionMKIIBlank.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 15</value>
+  </data>
+  <data name="txtDisplayOrionMKIIBlank.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="txtDisplayOrionMKIIBlank.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
 </root>

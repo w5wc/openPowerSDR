@@ -492,6 +492,10 @@ KD5TFDVK6APHAUDIO_API int getRefPower() {
 	return RefPower; 
 } 
 
+KD5TFDVK6APHAUDIO_API int getAIN3() {
+	return AIN3;
+}
+
 /*
 C0
 0 0 0 1 1 x x x    
@@ -500,6 +504,10 @@ C2 - Bits 7-0  of AIN4 from Penny or Hermes*
 C3 – Bits 15-8 of AIN6,13.8v supply on Hermes*
 C4 – Bits 7-0  of AIN6,13.8v supply on Hermes*
 */
+
+KD5TFDVK6APHAUDIO_API int getAIN4() {
+	return AIN4;
+}
 
 KD5TFDVK6APHAUDIO_API int getHermesDCVoltage() { 
 	return HermesDCV;
@@ -563,6 +571,8 @@ KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() {
 	return Mercury4FWVersion; 
 } 
 
+
+// PC to HPSDR Commands
 /*
 C0
 0 0 0 0 0 0 0 0
@@ -572,11 +582,22 @@ C0
 
 KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) { 
         if ( xmit != 0 ) {
-                XmitBit = 1;
+               XmitBit = 1;
+				//reset_control_idx = 1;
         }
         else {
                 XmitBit = 0;
         }
+}
+
+KD5TFDVK6APHAUDIO_API void SetDelayXmit(int bit, int loops) {
+
+	if (loops != 0)
+	{
+		delay_Xmit_loop = loops;
+		delay_Xmit = bit;
+	}
+
 }
 
 /*
@@ -675,6 +696,9 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_only_ant, int trx_ant, int rx_o
 	else { 
 		AlexRxOut = 0; 
 	} 
+
+	//delay_Xmit = 1;
+
 	return;
 }
 
@@ -711,7 +735,11 @@ KD5TFDVK6APHAUDIO_API void SetNRx(int nrx) {
 
 KD5TFDVK6APHAUDIO_API void EnableDiversity2(int g) { 
 	if ( g == 0 ) diversitymode2 = 0; 
-	else diversitymode2 = 1;
+	else
+	{
+		diversitymode2 = 1;
+		//reset_control_idx = 1;
+	}
 	return;
 }
 
@@ -738,6 +766,7 @@ C0
 // ff in hz 
 KD5TFDVK6APHAUDIO_API void SetTXVFOfreq(int tx) {
        VFOfreq_tx = tx;
+	   //reset_control_idx = 1;
         return;
 }
 
@@ -889,11 +918,6 @@ KD5TFDVK6APHAUDIO_API void SetAlexTRRelayBit(int bit) {
 		AlexTRRelay = 0x80; 
 	else
 		AlexTRRelay = 0;
-	return;
-}
-
-KD5TFDVK6APHAUDIO_API void SetAlex2HPFBits(int bits) { 
-	Alex2HPFMask = bits; 
 	return;
 }
 
@@ -1400,6 +1424,33 @@ C4
             +-+------------ PWM Max pulse width (bits [1:0])
 */
 
+/*
+C0
+0 0 1 0 0 1 0 x
+C1
+0 0 0 0 0 0 0 0
+| | | | | | | |
+| | | | | | | +------------ 
+| | | | | | +-------------- 
+| | | | | +---------------- 
+| | | | +------------------ 
+| | | +-------------------- 
+| | +---------------------- 
+| +------------------------ 
++-------------------------- RX2 Ground
+*/
+
+KD5TFDVK6APHAUDIO_API void SetAlex2HPFBits(int bits) {
+	Alex2HPFMask = bits;
+	return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetGndRx2onTx(int e)
+{
+	gndrx2ontx = e << 7;
+}
+
+
 KD5TFDVK6APHAUDIO_API void SetEERPWMmax(int max) {
          eer_pwm_max = max; 
 }
@@ -1594,3 +1645,9 @@ KD5TFDVK6APHAUDIO_API void SetAIN4Voltage(int v)
 {
 	ain4_voltage = v;
 }
+
+KD5TFDVK6APHAUDIO_API void isOrionMKII(int v)
+{
+	is_orion_mkii = v;
+}
+
