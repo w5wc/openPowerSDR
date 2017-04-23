@@ -6310,86 +6310,270 @@ namespace PowerSDR
 
         public float PA10W
         {
-            get { return (float)udPA10W.Value; }
-            set { udPA10W.Value = (decimal)value; }
+            get 
+            {
+                float rv = (float)ud100PA10W.Value;
+
+                switch(console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                     rv = (float)ud10PA1W.Value; 
+                       break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA20W.Value;
+                        break;
+                }
+                return rv;
+
+            }
         }
 
         public float PA20W
         {
-            get { return (float)udPA20W.Value; }
-            set { udPA20W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA20W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA2W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA40W.Value;
+                        break;
+                }
+                return rv;
+            }
         }
 
         public float PA30W
         {
-            get { return (float)udPA30W.Value; }
-            set { udPA30W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA30W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                     rv = (float)ud10PA3W.Value;
+                       break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA60W.Value;
+                        break;
+                }
+                return rv;
+            }
         }
 
         public float PA40W
         {
-            get { return (float)udPA40W.Value; }
-            set { udPA40W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA40W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA4W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA80W.Value;
+                        break;
+                }
+                return rv;
+            }
         }
 
         public float PA50W
         {
-            get { return (float)udPA50W.Value; }
-            set { udPA50W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA50W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA5W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA100W.Value;
+                       break;
+                }
+                 return rv;
+            }
         }
 
         public float PA60W
         {
-            get { return (float)udPA60W.Value; }
-            set { udPA60W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA60W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA6W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                     rv = (float)ud200PA120W.Value;
+                       break;
+                }
+                return rv;
+            }
         }
 
         public float PA70W
         {
-            get { return (float)udPA70W.Value; }
-            set { udPA70W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA70W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA7W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA140W.Value;
+                       break;
+                }
+                return rv;
+            }
         }
 
         public float PA80W
         {
-            get { return (float)udPA80W.Value; }
-            set { udPA80W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA80W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA8W.Value;
+                         break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA160W.Value;
+                        break;
+                }
+                return rv;
+            }
         }
 
         public float PA90W
         {
-            get { return (float)udPA90W.Value; }
-            set { udPA90W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA90W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA9W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA180W.Value;
+                        break;
+                }
+                return rv;
+            }
         }
 
         public float PA100W
         {
-            get { return (float)udPA100W.Value; }
-            set { udPA100W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA100W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA10W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA200W.Value;
+                        break;
+                }
+                 return rv;
+            }
         }
 
         public float PA110W
         {
-            get { return (float)udPA110W.Value; }
-            set { udPA110W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA110W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                    rv = (float)ud10PA11W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                    rv = (float)ud200PA220W.Value;
+                        break;
+                }
+                return rv;
+            }
         }
 
         public float PA120W
         {
-            get { return (float)udPA120W.Value; }
-            set { udPA120W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA120W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                   rv = (float)ud10PA12W.Value;
+                         break;
+                    case HPSDRModel.ANAN8000D:
+                     rv = (float)ud200PA240W.Value;
+                       break;
+                }
+                return rv;
+            }
         }
 
         public float PA130W
         {
-            get { return (float)udPA130W.Value; }
-            set { udPA130W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA130W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                   rv = (float)ud10PA13W.Value;
+                        break;
+                    case HPSDRModel.ANAN8000D:
+                     rv = (float)ud200PA260W.Value;
+                        break;
+                }
+                 return rv;
+            }
         }
 
         public float PA140W
         {
-            get { return (float)udPA140W.Value; }
-            set { udPA140W.Value = (decimal)value; }
+            get
+            {
+                float rv = (float)ud100PA140W.Value;
+                switch (console.CurrentHPSDRModel)
+                {
+                    case HPSDRModel.ANAN10:
+                    case HPSDRModel.ANAN10E:
+                     rv = (float)ud10PA14W.Value;
+                       break;
+                    case HPSDRModel.ANAN8000D:
+                     rv = (float)ud200PA280W.Value;
+                        break;
+                }
+                 return rv;
+            }
         }
 
         // Added 06/21/05 BT for CAT commands
@@ -8071,6 +8255,10 @@ namespace PowerSDR
                 tpAlexFilterControl.Text = "LPF";
                 panelAlexRXXVRTControl.Visible = false;
                 labelAlexFilterActive.Location = new Point(298, 0);
+              //  grp10WattMeterTrim.Visible = true;
+              //  grp100WattMeterTrim.Visible = false;
+              //  grp200WattMeterTrim.Visible = false;
+                grp10WattMeterTrim.BringToFront();
             }
             else if (radGenModelANAN8000D.Checked)
             {
@@ -8086,7 +8274,10 @@ namespace PowerSDR
                 labelAlexFilterActive.Location = new Point(275, 0);
                 ud6mRx2LNAGainOffset.Visible = true;
                 lblRx26mLNA.Visible = true;
- 
+             //   grp10WattMeterTrim.Visible = false;
+              //  grp100WattMeterTrim.Visible = false;
+              //  grp200WattMeterTrim.Visible = true;
+                grp200WattMeterTrim.BringToFront();
             }
             else
             {
@@ -8104,7 +8295,10 @@ namespace PowerSDR
                 labelAlexFilterActive.Location = new Point(275, 0);
                 ud6mRx2LNAGainOffset.Visible = false;
                 lblRx26mLNA.Visible = false;
-
+            //    grp10WattMeterTrim.Visible = false;
+             //   grp100WattMeterTrim.Visible = true;
+             //   grp200WattMeterTrim.Visible = false;
+                grp100WattMeterTrim.BringToFront();
             }
 
             if (radGenModelHermes.Checked || radGenModelHPSDR.Checked)
@@ -18679,25 +18873,65 @@ namespace PowerSDR
             textPARevPower.Text = "";
             textRevADCValue.Text = "";
             textRevVoltage.Text = "";
+            textCaldFwdPower.Text = "";
+            textSWR.Text = "";
         }
 
         private void btnResetWattMeterValues_Click(object sender, EventArgs e)
         {
-            udPA10W.Value = 10;
-            udPA20W.Value = 20;
-            udPA30W.Value = 30;
-            udPA40W.Value = 40;
-            udPA50W.Value = 50;
-            udPA60W.Value = 60;
-            udPA70W.Value = 70;
-            udPA80W.Value = 80;
-            udPA90W.Value = 90;
-            udPA100W.Value = 100;
-            udPA110W.Value = 110;
-            udPA120W.Value = 120;
-            udPA130W.Value = 130;
-            udPA140W.Value = 140;
-        }
+            switch(console.CurrentHPSDRModel)
+            {
+                case HPSDRModel.ANAN10:
+                case HPSDRModel.ANAN10E:
+                ud10PA1W.Value = 1;
+                ud10PA2W.Value = 2;
+                ud10PA3W.Value = 3;
+                ud10PA4W.Value = 4;
+                ud10PA5W.Value = 5;
+                ud10PA6W.Value = 6;
+                ud10PA7W.Value = 7;
+                ud10PA8W.Value = 8;
+                ud10PA9W.Value = 9;
+                ud10PA10W.Value = 10;
+                ud10PA11W.Value = 11;
+                ud10PA12W.Value = 12;
+                ud10PA13W.Value = 13;
+                ud10PA14W.Value = 14;
+                    break;
+                case HPSDRModel.ANAN8000D:
+                ud200PA20W.Value = 20;
+                ud200PA40W.Value = 40;
+                ud200PA60W.Value = 60;
+                ud200PA80W.Value = 80;
+                ud200PA100W.Value = 100;
+                ud200PA120W.Value = 120;
+                ud200PA140W.Value = 140;
+                ud200PA160W.Value = 160;
+                ud200PA180W.Value = 180;
+                ud200PA200W.Value = 200;
+                ud200PA220W.Value = 220;
+                ud200PA240W.Value = 240;
+                ud200PA260W.Value = 260;
+                ud200PA280W.Value = 280;
+                   break;
+                default:
+                ud100PA10W.Value = 10;
+                ud100PA20W.Value = 20;
+                ud100PA30W.Value = 30;
+                ud100PA40W.Value = 40;
+                ud100PA50W.Value = 50;
+                ud100PA60W.Value = 60;
+                ud100PA70W.Value = 70;
+                ud100PA80W.Value = 80;
+                ud100PA90W.Value = 90;
+                ud100PA100W.Value = 100;
+                ud100PA110W.Value = 110;
+                ud100PA120W.Value = 120;
+                ud100PA130W.Value = 130;
+                ud100PA140W.Value = 140;
+                    break;
+            }
+       }
 
         public void ForceEnablePureSignal()
         {

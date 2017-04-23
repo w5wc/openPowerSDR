@@ -606,6 +606,24 @@
         AAAAAAAB4AAAAAAAAAHgAAAAAAAAA/AAAAAAAAAH//////////8=
 </target>
         </trans-unit>
+        <trans-unit id="richTextBox1.Text" translate="yes" xml:space="preserve">
+          <source>Begin with all spinners set equal to their labelled value.
+For each spinner, from minimum to maximum, adjust the output power
+such that your CALIBRATED EXTERNAL METER is equal to the spinner
+value.  Record the values appearing in the Thetis 'Fwd Pwr' meter.
+After completing measurements for all spinners, enter your
+recorded values into the respective spinners.  DO NOT USE
+POWER EXCEEDING THE RATING OF YOUR RADIO!
+</source>
+          <target state="new">Begin with all spinners set equal to their labelled value.
+For each spinner, from minimum to maximum, adjust the output power
+such that your CALIBRATED EXTERNAL METER is equal to the spinner
+value.  Record the values appearing in the Thetis 'Fwd Pwr' meter.
+After completing measurements for all spinners, enter your
+recorded values into the respective spinners.  DO NOT USE
+POWER EXCEEDING THE RATING OF YOUR RADIO!
+</target>
+        </trans-unit>
       </group>
     </body>
   </file>

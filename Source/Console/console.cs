@@ -755,8 +755,8 @@ namespace PowerSDR
         //public float[] tx_image_phase_table;				// table used to store image cal info
         //public int[][] tx_carrier_table;					// table used to store tx carrier cal info
         //public int[][] pa_bias_table;						// table used to store PA Bias settings
-        public float[][] rx1_level_table;					// table used to store RX1 Level cal settings
-        public float[][] rx2_level_table;					// table used to store RX2 Level cal settings
+       // public float[][] rx1_level_table;					// table used to store RX1 Level cal settings
+       // public float[][] rx2_level_table;					// table used to store RX2 Level cal settings
         // public float[][] pa_bridge_table;					// table used to store PA Bridge cal settings
         //public float[] swr_table;							// table used to calibrate SWR
         //public float[] atu_swr_table;						// table used to cal SWR at ATU power
@@ -841,6 +841,11 @@ namespace PowerSDR
         public float calfwdpower = 0.0f;
         public float alex_swr = 0.0f;
         private float average_drivepwr = 0.0f;
+        private float average_revadc = 0.0f;
+        private float average_fwdadc = 0.0f;
+        private float average_drvadc = 0.0f;
+       // private float fwd_volts = 0.0f;
+       // private float rev_volts = 0.0f;
         private float volts_138 = 0.0f;
 
         private static MemoryStream msgrab = new MemoryStream(Properties.Resources.grab);
@@ -1902,6 +1907,9 @@ namespace PowerSDR
             UpdateWaterfallLevelValues();
             UpdateDisplayGridLevelValues();
             UpdateDiversityValues();
+
+            rx1_meter_cal_offset = rx_meter_cal_offset_by_radio[(int)current_hpsdr_model];
+            RX1DisplayCalOffset = rx_display_cal_offset_by_radio[(int)current_hpsdr_model];
 
             foreach (string s in CmdLineArgs)
             {
@@ -7812,8 +7820,8 @@ namespace PowerSDR
                 {
                     case HPSDRModel.ANAN8000D:
                     case HPSDRModel.ORIONMKII:
-                        rx_meter_cal_offset_by_radio[i] = 9.6215f; //3.00f;
-                        rx_display_cal_offset_by_radio[i] = 9.6721f; //3.36f;
+                        rx_meter_cal_offset_by_radio[i] = 0.9449f; 
+                        rx_display_cal_offset_by_radio[i] = 0.9468f; 
                         break;
                     default:
                         rx_meter_cal_offset_by_radio[i] = 0.98f;
@@ -7973,7 +7981,7 @@ namespace PowerSDR
             //    for (int j = 0; j < 8; j++)
             //        pa_bias_table[i][j] = 0;
             //}
-
+            /*
             rx1_level_table = new float[(int)Band.LAST][]; // 3 settings per band (display_offset, preamp, multimeter offset)
             for (int i = 0; i < (int)Band.LAST; i++)
             {
@@ -7991,7 +7999,7 @@ namespace PowerSDR
                 rx2_level_table[i][1] = -20.0f;
                 rx2_level_table[i][2] = -11.5f;
             }
-
+            */
             /*  pa_bridge_table = new float[(int)Band.LAST][];
               for (int i = 0; i < (int)Band.LAST; i++)
               {
@@ -8818,7 +8826,7 @@ namespace PowerSDR
                  s = s.Substring(0, s.Length - 1);
                  a.Add(s);
              } */
-
+            /*
             for (int i = 0; i < (int)Band.LAST; i++)
             {
                 s = "rx1_level_table[" + i + "]/";
@@ -8836,7 +8844,7 @@ namespace PowerSDR
                 s = s.Substring(0, s.Length - 1);
                 a.Add(s);
             }
-
+            */
             /*  for (int i = 0; i < (int)Band.LAST; i++)
               {
                   s = "pa_bridge_table[" + i + "]/";
@@ -9362,7 +9370,7 @@ namespace PowerSDR
                                   flex5000DebugForm.SetPAPot(i, (byte)pa_bias_table[index][i]);
                           }
                       }
-                  } */
+                  } 
                 else if (name.StartsWith("rx1_level_table"))
                 {
                     int start = name.IndexOf("[") + 1;
@@ -9383,6 +9391,7 @@ namespace PowerSDR
                     for (int i = 0; i < 3; i++)
                         rx2_level_table[index][i] = (float)Math.Round(float.Parse(list[i]), 3);
                 }
+                    */
                 /*   else if (name.StartsWith("pa_bridge_table"))
                    {
                        int start = name.IndexOf("[") + 1;
@@ -10510,7 +10519,7 @@ namespace PowerSDR
             Common.ForceFormOnScreen(SetupForm);
             //Common.ForceFormOnScreen(MemForm);
         }
-
+/*
         public float GetRX1Level(Band b, int index)
         {
             return rx1_level_table[(int)b][index];
@@ -10520,7 +10529,7 @@ namespace PowerSDR
         {
             return rx2_level_table[(int)b][index];
         }
-
+        */
         /* public void ResetMemForm()
         {
             MemForm = null;
@@ -13839,19 +13848,7 @@ namespace PowerSDR
             // POWER EXCEEDING THE RATING OF YOUR RADIO!
             //********************************************************************
             const int entries = 11;                                 // number of table entries
-            float[] table = new float[entries];
-            float[] ANAN100DCal = new float[entries] {    0.0f,      // predetermined calibration factors
-                                                        11.0f,
-                                                        24.0f,
-                                                        35.0f,
-                                                        46.0f,
-                                                        57.0f,
-                                                        67.0f,
-                                                        81.0f,
-                                                        90.0f,
-                                                       103.0f,
-                                                       114.0f };
-
+            float interval = 10.0f;                                 // interval (watts) between labels
             float[] PAsets = new float[entries] { 0.0f,
                                                   SetupForm.PA10W,
                                                   SetupForm.PA20W,
@@ -13868,17 +13865,31 @@ namespace PowerSDR
             {
                 //case HPSDRModel.ANAN100:
                 case HPSDRModel.ANAN100D:
-                    watts = PowerKernel(watts, entries, ANAN100DCal);
+                    interval = 10.0f;
+                    float[] ANAN100DCal = new float[entries] {   0.0f,      // predetermined calibration factors
+                                                                11.0f,
+                                                                24.0f,
+                                                                35.0f,
+                                                                46.0f,
+                                                                57.0f,
+                                                                67.0f,
+                                                                81.0f,
+                                                                90.0f,
+                                                               103.0f,
+                                                               114.0f };
+                    watts = PowerKernel(watts, interval, entries, ANAN100DCal);
+                    break;
+                case HPSDRModel.ANAN8000D:
+                    interval = 20.0f;
                     break;
                 default:
-
+                    interval = 10.0f;
                     break;
             }
-
-            return PowerKernel(watts, entries, PAsets);
+            return PowerKernel(watts, interval, entries, PAsets);
         }
 
-        private float PowerKernel(float watts, int entries, float[] table)
+        private float PowerKernel(float watts, float interval, int entries, float[] table)
         {
             int idx = 0;
             if (watts > table[entries - 1])
@@ -13889,11 +13900,7 @@ namespace PowerSDR
                 if (idx > 0) idx--;
             }
             float frac = (watts - table[idx]) / (table[idx + 1] - table[idx]);
-            if (idx > 0)
-                watts *= 10.0f * ((1.0f - frac) * idx / table[idx] + frac * (idx + 1.0f) / table[idx + 1]);
-            else
-                watts *= 10.0f / table[idx + 1];
-            return watts;
+            return interval * ((1.0f - frac) * (float)idx + frac * (float)(idx + 1));
         }
 
         //public double FWCPAPower(int fwd_adc) // fwd_adc in, fwdwatts out
@@ -21447,8 +21454,11 @@ namespace PowerSDR
                 }
 
                 SetComboPreampForHPSDR();
-                rx1_meter_cal_offset = rx_meter_cal_offset_by_radio[(int)current_hpsdr_model];
-                RX1DisplayCalOffset = rx_display_cal_offset_by_radio[(int)current_hpsdr_model];
+                if (!initializing)
+                {
+                    rx1_meter_cal_offset = rx_meter_cal_offset_by_radio[(int)current_hpsdr_model];
+                    RX1DisplayCalOffset = rx_display_cal_offset_by_radio[(int)current_hpsdr_model];
+                }
             }
         }
 
@@ -31199,30 +31209,30 @@ namespace PowerSDR
                                         else
                                         {
                                             new_meter_data = calfwdpower;
-                                            if (pa_values)
-                                            {
+                                           // if (pa_values)
+                                           // {
                                                 // SetupForm.textDriveFwdADCValue.Text = new_meter_data.ToString("f1") + " W";
                                               //  SetupForm.textPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
                                               //  SetupForm.textPARevPower.Text = alex_rev.ToString("f1") + " W";
-                                            }
+                                          //  }
                                         }
                                     }
                                     else
                                     {
                                         new_meter_data = calfwdpower;
-                                        if (pa_values)
-                                        {
+                                      //  if (pa_values)
+                                      //  {
                                             // SetupForm.textDriveFwdADCValue.Text = new_meter_data.ToString("f1") + " W";
-                                          //  SetupForm.textPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
-                                          //  SetupForm.textPARevPower.Text = alex_rev.ToString("f1") + " W";
-                                        }
+                                           // SetupForm.textPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
+                                           // SetupForm.textPARevPower.Text = alex_rev.ToString("f1") + " W";
+                                      //  }
                                     }
                                 }
                                 else
                                     new_meter_data = drivepwr;
 
                                 if (current_meter_tx_mode == MeterTXMode.SWR_POWER) new_swrmeter_data = alex_swr;
-                                if (pa_values) SetupForm.textDrivePower.Text = average_drivepwr.ToString("f2") + " mW";
+                              //  if (pa_values) SetupForm.textDrivePower.Text = average_drivepwr.ToString("f2") + " mW";
                                 break;
                             case MeterTXMode.REVERSE_POWER:
 
@@ -31240,6 +31250,21 @@ namespace PowerSDR
                                 new_meter_data = -200.0f;
                                 break;
                         }
+
+                    if (pa_values)
+                    {
+                        SetupForm.textDriveFwdADCValue.Text = average_drvadc.ToString("f0");
+                        SetupForm.textFwdADCValue.Text = average_fwdadc.ToString("f0");
+                        SetupForm.textRevADCValue.Text = average_revadc.ToString("f0");
+                        //SetupForm.textFwdVoltage.Text = fwd_volts.ToString("f2") + " V";
+                        //SetupForm.textRevVoltage.Text = rev_volts.ToString("f2") + " V";
+                        SetupForm.textDrivePower.Text = average_drivepwr.ToString("f0") + " mW";
+                        SetupForm.textPAFwdPower.Text = alex_fwd.ToString("f1") + " W";
+                        SetupForm.textPARevPower.Text = alex_rev.ToString("f1") + " W";
+                        SetupForm.textCaldFwdPower.Text = calfwdpower.ToString("f1") + " W";
+                        SetupForm.textSWR.Text = alex_swr.ToString("f2") + ":1";
+                    }
+
                     }
                     meter_data_ready = true;
                     picMultiMeterDigital.Invalidate();
@@ -31436,8 +31461,8 @@ namespace PowerSDR
 
         public float computeRefPower()
         {
-            int adc = 0;
-            int addadc = 0;
+            float adc = 0;
+            const float alpha = 0.90f;
 
             float bridge_volt = 0; 
             float refvoltage = 0;
@@ -31484,23 +31509,26 @@ namespace PowerSDR
                     break;
             }
 
-            for (int count = 0; count < 50; count++)
-            {
+            //for (int count = 0; count < 50; count++)
+            //{
+            //    adc = JanusAudio.getRefPower();
+            //    addadc += adc;
+            //    Thread.Sleep(1);
+            //}
+            //adc = addadc / 50;
                 adc = JanusAudio.getRefPower();
-                addadc += adc;
-                Thread.Sleep(1);
-          }
-            adc = addadc / 50;
+
             if (adc < 0) adc = 0;
 
-            float volts = ((adc - adc_cal_offset) / 4095.0f * refvoltage);
+            float volts = (float)((adc - adc_cal_offset) / 4095.0 * refvoltage);
             if (volts < 0) volts = 0;
-            float watts = ((float)Math.Pow(volts, 2) / bridge_volt);
+            float watts = (float)(Math.Pow(volts, 2) / bridge_volt);
             if (watts < 0) watts = 0;
 
             if (PAValues)
             {
-                SetupForm.textRevADCValue.Text = adc.ToString();
+                average_revadc = alpha * average_revadc + (1.0f - alpha) * adc;
+               // SetupForm.textRevADCValue.Text = adc.ToString();
                 SetupForm.textRevVoltage.Text = volts.ToString("f2") + " V";
             }
 
@@ -31510,10 +31538,8 @@ namespace PowerSDR
         // private int pwr_avg_i = 0;
         public float computeAlexFwdPower()
         {
-
-             int adc = 0;
-             int addadc = 0;
-
+            float adc = 0;
+            const float alpha = 0.90f;
             float bridge_volt = 0;
             float refvoltage = 0;
             int adc_cal_offset = 0;
@@ -31549,28 +31575,32 @@ namespace PowerSDR
                     break;
             }
 
-            for (int count = 0; count < 50; count++)
-            {
+            //for (int count = 0; count < 50; count++)
+            //{
+            //    adc = JanusAudio.getAlexFwdPower();
+            //    addadc += adc;
+            //    Thread.Sleep(1);
+            //}
+            //adc = addadc / 50;
                 adc = JanusAudio.getAlexFwdPower();
-                addadc += adc;
-                Thread.Sleep(1);
-           }
-            adc = addadc / 50;
+
             if (adc < 0) adc = 0;
 
-            float volts = ((adc - adc_cal_offset) / 4095.0f * refvoltage);
+            float volts = (float)((adc - adc_cal_offset) / 4095.0f * refvoltage);
             if (volts < 0) volts = 0;
-            float watts = ((float)Math.Pow(volts, 2) / bridge_volt);
+            float watts = (float)(Math.Pow(volts, 2) / bridge_volt);
 
             if (PAValues)
             {
-                SetupForm.textFwdADCValue.Text = adc.ToString();
+                average_fwdadc = alpha * average_fwdadc + (1.0f - alpha) * adc;
+                // SetupForm.textFwdADCValue.Text = adc.ToString();
+                //fwd_volts = volts;
                 SetupForm.textFwdVoltage.Text = volts.ToString("f2") + " V";
             }
             if (watts < 0) watts = 0;
             return watts;
         }
-
+/*
         public void computeFwdRevPower(out float fwdpwr, out float revpwr)
         {
             int fwd_adc = 0;
@@ -31670,16 +31700,18 @@ namespace PowerSDR
             }
 
        }
-
+*/
         public float computeFwdPower()
         {
+            const float alpha = 0.90f;
             int power_int = JanusAudio.getFwdPower();
             double power_f = (double)power_int;
             double result = 0.0;
 
             if (PAValues)
             {
-                SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+               // SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+                average_drvadc = alpha * average_drvadc + (1.0f - alpha) * power_int;
             }
 
             // SetupForm.txtFwdADCValue.Text = power_int.ToString();
@@ -31732,13 +31764,15 @@ namespace PowerSDR
 
         public float computeOrionMkIIFwdPower()
         {
+            const float alpha = 0.90f;
             int power_int = JanusAudio.getFwdPower();
             double power_f = (double)power_int;
             double result = 0.0;
 
             if (PAValues)
             {
-                SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+                //SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+                average_drvadc = alpha * average_drvadc + (1.0f - alpha) * power_int;
             }
 
             if (power_int <= 1340)
@@ -31790,13 +31824,15 @@ namespace PowerSDR
 
         public float computeOrionFwdPower()
         {
+            const float alpha = 0.90f;
             int power_int = JanusAudio.getFwdPower();
             double power_f = (double)power_int;
             double result = 0.0;
 
             if (PAValues)
             {
-                SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+               // SetupForm.textDriveFwdADCValue.Text = power_int.ToString();
+                average_drvadc = alpha * average_drvadc + (1.0f - alpha) * power_int;
             }
 
             if (power_int <= 1340)
@@ -31845,7 +31881,7 @@ namespace PowerSDR
 
             return (float)result;
         }
-
+/*
         public float computeANANFwdPower()
         {
             int power_int = JanusAudio.getAlexFwdPower();
@@ -31910,7 +31946,7 @@ namespace PowerSDR
 
             return (float)result;
         }
-
+*/
         private float sql_data = -200.0f;
         private void UpdateSQL()
         {
@@ -32757,9 +32793,9 @@ namespace PowerSDR
             {
                 if (mox)
                 {
-                    computeFwdRevPower(out alex_fwd, out alex_rev);
-                   // alex_fwd = computeAlexFwdPower(); //high power
-                   // alex_rev = computeRefPower();
+                   // computeFwdRevPower(out alex_fwd, out alex_rev);
+                    alex_fwd = computeAlexFwdPower(); //high power
+                    alex_rev = computeRefPower();
 
                     switch (current_hpsdr_model)
                     {
@@ -32776,6 +32812,7 @@ namespace PowerSDR
                     }
 
                     calfwdpower = CalibratedPAPower();
+                    average_drivepwr = alpha * average_drivepwr + (1.0f - alpha) * drivepwr;
 
                     rho = (float)Math.Sqrt(alex_rev / alex_fwd);
                     if (float.IsNaN(rho) || float.IsInfinity(rho))
@@ -32783,7 +32820,7 @@ namespace PowerSDR
                     else   
                         swr = (1.0f + rho) / (1.0f - rho);
 
-                    if ((alex_fwd == 0 && alex_rev == 0) || swr < 1.0f) swr = 1.0f;
+                    if ((alex_fwd <= 2 && alex_rev <= 2) || swr < 1.0f) swr = 1.0f;
 
                     if (alexpresent || apollopresent)
                     {
@@ -32810,8 +32847,6 @@ namespace PowerSDR
                         alex_rev = 0;
                     }
 
-                    average_drivepwr = alpha * average_drivepwr + (1.0f - alpha) * drivepwr;
-
                     if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
                     {
                         if (alex_fwd >= 1.0 && alex_fwd <= 10.0 && ptbPWR.Value <= 20)
@@ -32824,7 +32859,7 @@ namespace PowerSDR
                     if (tx_xvtr_index >= 0 || hf_tr_relay)
                         swr_pass = true;
 
-                    if (swr > 2.0 && swrprotection && !swr_pass)
+                    if (swr > 2.25 && alex_fwd > 5.0f && swrprotection && !swr_pass)
                     {
                         high_swr_count++;
                         if (high_swr_count >= 4)
@@ -32853,8 +32888,6 @@ namespace PowerSDR
                     alex_swr = 1.0f;
                 else
                     alex_swr = swr;
-
-                //Thread.Sleep(50);
                 }
 
                 Thread.Sleep(1);
@@ -32866,6 +32899,10 @@ namespace PowerSDR
             calfwdpower = 0;
             alex_swr = 0;
             average_drivepwr = 0;
+            //  average_drvadc = 0;
+            // average_fwdadc = 0;
+            //  average_revadc = 0;
+
         }
 
         private double SWRScale(double ref_pow)

@@ -1931,56 +1931,56 @@ namespace PowerSDR
             string status = "";
 
             parser.nAns = 1;
-            status += ZZSW("") + sep; 
-            status += ZZSP("") + sep;
-            status += ZZTU("") + sep;
-            status += ZZTX("") + sep;
+            status += ZZSW("") + sep; // swap VFOA/B
+            status += ZZSP("") + sep; // VFO Split status
+            status += ZZTU("") + sep; // TUN button status
+            status += ZZTX("") + sep; // MOX button status
            // status += ZZOA("") + sep;
            // status += ZZOB("") + sep;
            // status += ZZOC("") + sep;
             status += "0:0:0:";
 
-            status += ZZRS("") + sep;
-            status += ZZRT("") + sep;
-            status += ZZDM("") + sep;
-            status += ZZGT("") + sep;
-            status += ZZMU("") + sep;
-            status += ZZXS("") + sep;
+            status += ZZRS("") + sep; // RX2 button status
+            status += ZZRT("") + sep; // RIT button status
+            status += ZZDM("") + sep; // current display mode
+            status += ZZGT("") + sep; // AGC constant
+            status += ZZMU("") + sep; // MultiRx status
+            status += ZZXS("") + sep; // XIT status
 
             parser.nAns = 2;
-            status += ZZAC("") + sep;
-            status += ZZMD("") + sep;
-            status += ZZME("") + sep;
-            status += ZZFJ("") + sep;
-            status += ZZFI("") + sep;
+            status += ZZAC("") + sep; // tuning step size
+            status += ZZMD("") + sep; // RX1 DSP mode
+            status += ZZME("") + sep; // RX2 DSP mode
+            status += ZZFJ("") + sep; // RX2 DSP filter
+            status += ZZFI("") + sep; // RX1 filter index
 
             parser.nAns = 3;
            // status += ZZOF("") + sep;
             status += "000:";
-            status += ZZBT("") + sep;
-            status += ZZPC("") + sep;
-            status += ZZBS("") + sep;
-            status += ZZAG("") + sep;
-            status += ZZKS("") + sep;
-            status += ZZTO("") + sep;
+            status += ZZBT("") + sep; // RX2 band
+            status += ZZPC("") + sep; // Drive level
+            status += ZZBS("") + sep; // current band Rx1
+            status += ZZAG("") + sep; // AF gain control
+            status += ZZKS("") + sep; // CWX CW speed
+            status += ZZTO("") + sep; // Tune power level
           
             parser.nAns = 4;
            // status += ZZRV() + sep;
             status += "0000:";
-            status += ZZSM("0") + sep;
+            status += ZZSM("0") + sep; // S meter value
 
             parser.nAns = 5;
-            status += ZZRF("") + sep;
+            status += ZZRF("") + sep; // RIT frequency
            // status += ZZTS() + sep;
             status += "00000:";
-            status += ZZXF("") + sep;
+            status += ZZXF("") + sep; // XIT frequency
 
             parser.nAns = 6;
-            status += ZZCU() + sep;
+            status += ZZCU() + sep; // CPU usage
 
             parser.nAns = 11;
-            status += ZZFA("") + sep;
-            status += ZZFB("");
+            status += ZZFA("") + sep; // VFOA frequency
+            status += ZZFB(""); // VFOB frequency
             parser.nAns = old;
             return status;
         } 
@@ -2430,10 +2430,10 @@ namespace PowerSDR
                 else return "0";
             }
 
-            else if (radio == "ANAN10")
+            else if (radio == "ANAN10" || radio == "ANAN10E")
                 return "0";
 
-            else if (radio == "ANAN100" || radio == "ANAN100D")
+            else if (radio == "ANAN100" || radio == "ANAN100B" || radio == "ANAN100D" || radio == "ANAN200D" || radio == "ANAN8000D")
                 return "1";
             else
                 return parser.Error1;
