@@ -13730,11 +13730,11 @@ namespace PowerSDR
             //     swr = (1.0 + rho) / (1.0 - rho);
             //  }
 
-            if (swr > 2.2)
+            if (swr > 2)
             {
-                JanusAudio.SetSWRProtect(0.5f);
+                JanusAudio.SetSWRProtect(2/(swr+1));
                 HighSWR = true;
-                if (swr > 3) JanusAudio.SetSWRProtect(0.25f);
+
                 if (current_display_engine == DisplayEngine.GDI_PLUS)
                     picDisplay.Invalidate();
             }
@@ -32824,7 +32824,7 @@ namespace PowerSDR
 
                     if (alexpresent || apollopresent)
                     {
-                        if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f) // open ant condition
+                        if ((swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f) && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
                         {
                             swr = 50.0f;
                             JanusAudio.SetSWRProtect(0.01f);
@@ -32859,27 +32859,54 @@ namespace PowerSDR
                     if (tx_xvtr_index >= 0 || hf_tr_relay)
                         swr_pass = true;
 
-                    if (swr > 2.25 && alex_fwd > 5.0f && swrprotection && !swr_pass)
+                    if (current_hpsdr_model != HPSDRModel.ANAN8000D)
                     {
-                        high_swr_count++;
-                        if (high_swr_count >= 4)
+                        if (swr > 2 && alex_fwd > 5.0f && swrprotection && !swr_pass)
+                        {
+                            high_swr_count++;
+                            if (high_swr_count >= 4)
+                            {
+                                high_swr_count = 0;
+                                JanusAudio.SetSWRProtect(2 / (swr + 1));
+                                HighSWR = true;
+
+                                if (current_display_engine == DisplayEngine.GDI_PLUS)
+                                    picDisplay.Invalidate();
+                            }
+                        }
+                        else
                         {
                             high_swr_count = 0;
-                            JanusAudio.SetSWRProtect(0.5f);
-                            HighSWR = true;
-                            if (swr > 3) JanusAudio.SetSWRProtect(0.25f);
-
+                            JanusAudio.SetSWRProtect(1.0f);
+                            HighSWR = false;
                             if (current_display_engine == DisplayEngine.GDI_PLUS)
                                 picDisplay.Invalidate();
                         }
                     }
-                    else
+
+                    if (current_hpsdr_model == HPSDRModel.ANAN8000D)
                     {
-                        high_swr_count = 0;
-                        JanusAudio.SetSWRProtect(1.0f);
-                        HighSWR = false;
-                        if (current_display_engine == DisplayEngine.GDI_PLUS)
-                            picDisplay.Invalidate();
+                        if (swr > 2 && alex_fwd > ptbPWR.Value && swrprotection && !swr_pass)
+                        {
+                            high_swr_count++;
+                            if (high_swr_count >= 4)
+                            {
+                                high_swr_count = 0;
+                                JanusAudio.SetSWRProtect(2 / (swr + 1));
+                                HighSWR = true;
+
+                                if (current_display_engine == DisplayEngine.GDI_PLUS)
+                                    picDisplay.Invalidate();
+                            }
+                        }
+                        else
+                        {
+                            high_swr_count = 0;
+                            JanusAudio.SetSWRProtect(1.0f);
+                            HighSWR = false;
+                            if (current_display_engine == DisplayEngine.GDI_PLUS)
+                                picDisplay.Invalidate();
+                        }
                     }
 
                 end:
