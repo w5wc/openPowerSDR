@@ -13730,9 +13730,9 @@ namespace PowerSDR
             //     swr = (1.0 + rho) / (1.0 - rho);
             //  }
 
-            if (swr > 2)
+            if (swr > 2.0)
             {
-                JanusAudio.SetSWRProtect(2/(swr+1));
+                JanusAudio.SetSWRProtect((float)(2.0 / (swr + 1.0)));
                 HighSWR = true;
 
                 if (current_display_engine == DisplayEngine.GDI_PLUS)
@@ -32824,7 +32824,9 @@ namespace PowerSDR
 
                     if (alexpresent || apollopresent)
                     {
-                        if ((swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f) && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
+                        // in following 'if', K2UE recommends not checking open antenna for the 8000 model
+                        if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f)
+                        // if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
                         {
                             swr = 50.0f;
                             JanusAudio.SetSWRProtect(0.01f);
@@ -32859,54 +32861,30 @@ namespace PowerSDR
                     if (tx_xvtr_index >= 0 || hf_tr_relay)
                         swr_pass = true;
 
-                    if (current_hpsdr_model != HPSDRModel.ANAN8000D)
-                    {
-                        if (swr > 2 && alex_fwd > 5.0f && swrprotection && !swr_pass)
-                        {
-                            high_swr_count++;
-                            if (high_swr_count >= 4)
-                            {
-                                high_swr_count = 0;
-                                JanusAudio.SetSWRProtect(2 / (swr + 1));
-                                HighSWR = true;
+                    float alex_fwd_limit = 5.0f;
+                    // if (current_hpsdr_model == HPSDRModel.ANAN8000D)        // K2UE idea:  try to determine if Hi-Z or Lo-Z load
+                    //     alex_fwd_limit = (float)ptbPWR.Value;               //    by comparing alex_fwd with power setting
 
-                                if (current_display_engine == DisplayEngine.GDI_PLUS)
-                                    picDisplay.Invalidate();
-                            }
-                        }
-                        else
+                    if (swr > 2.25 && alex_fwd > alex_fwd_limit && swrprotection && !swr_pass)
+                    {
+                        high_swr_count++;
+                        if (high_swr_count >= 4)
                         {
                             high_swr_count = 0;
-                            JanusAudio.SetSWRProtect(1.0f);
-                            HighSWR = false;
+                            JanusAudio.SetSWRProtect((float)(2.0 / (swr + 1.0)));
+                            HighSWR = true;
+
                             if (current_display_engine == DisplayEngine.GDI_PLUS)
                                 picDisplay.Invalidate();
                         }
                     }
-
-                    if (current_hpsdr_model == HPSDRModel.ANAN8000D)
+                    else
                     {
-                        if (swr > 2 && alex_fwd > ptbPWR.Value && swrprotection && !swr_pass)
-                        {
-                            high_swr_count++;
-                            if (high_swr_count >= 4)
-                            {
-                                high_swr_count = 0;
-                                JanusAudio.SetSWRProtect(2 / (swr + 1));
-                                HighSWR = true;
-
-                                if (current_display_engine == DisplayEngine.GDI_PLUS)
-                                    picDisplay.Invalidate();
-                            }
-                        }
-                        else
-                        {
-                            high_swr_count = 0;
-                            JanusAudio.SetSWRProtect(1.0f);
-                            HighSWR = false;
-                            if (current_display_engine == DisplayEngine.GDI_PLUS)
-                                picDisplay.Invalidate();
-                        }
+                        high_swr_count = 0;
+                        JanusAudio.SetSWRProtect(1.0f);
+                        HighSWR = false;
+                        if (current_display_engine == DisplayEngine.GDI_PLUS)
+                            picDisplay.Invalidate();
                     }
 
                 end:

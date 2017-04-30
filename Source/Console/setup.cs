@@ -2947,7 +2947,22 @@ namespace PowerSDR
             udDSPSNBThresh2_ValueChanged(this, e);
             // MNF
             chkMNFAutoIncrease_CheckedChanged(this, e);
-            chkEnableXVTRHF_CheckedChanged(this, e);
+
+			chkEnableXVTRHF_CheckedChanged(this, e);
+
+            // CFCompressor
+            chkCFCEnable_CheckedChanged(this, e);
+            setCFCProfile(this, e);
+            tbCFCPRECOMP_Scroll(this, e);
+            chkCFCPeqEnable_CheckedChanged(this, e);
+            tbCFCPEG_Scroll(this, e);
+            // Phase Rotator
+            chkPHROTEnable_CheckedChanged(this, e);
+            udPhRotFreq_ValueChanged(this, e);
+            udPHROTStages_ValueChanged(this, e);
+            // TXEQ
+            console.EQForm.setTXEQProfile(this, e);
+
             chkWheelReverse_CheckedChanged(this, e);
         }
 
@@ -20298,6 +20313,94 @@ namespace PowerSDR
             console.EnableXVTRHF = chkEnableXVTRHF.Checked;
         }
 
+        private void chkCFCEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            int run;
+            if (chkCFCEnable.Checked) run = 1;
+            else                      run = 0;
+            wdsp.SetTXACFCOMPRun(wdsp.id(1, 0), run);
+        }
+
+        private void setCFCProfile(object sender, EventArgs e)
+        {
+            const int nfreqs = 10;
+            double[]F = new double[nfreqs];
+            double[]G = new double[nfreqs];
+            double[]E = new double[nfreqs];
+            F[0] = (double)udCFC0.Value;
+            F[1] = (double)udCFC1.Value;
+            F[2] = (double)udCFC2.Value;
+            F[3] = (double)udCFC3.Value;
+            F[4] = (double)udCFC4.Value;
+            F[5] = (double)udCFC5.Value;
+            F[6] = (double)udCFC6.Value;
+            F[7] = (double)udCFC7.Value;
+            F[8] = (double)udCFC8.Value;
+            F[9] = (double)udCFC9.Value;
+            G[0] = (double)tbCFC0.Value;
+            G[1] = (double)tbCFC1.Value;
+            G[2] = (double)tbCFC2.Value;
+            G[3] = (double)tbCFC3.Value;
+            G[4] = (double)tbCFC4.Value;
+            G[5] = (double)tbCFC5.Value;
+            G[6] = (double)tbCFC6.Value;
+            G[7] = (double)tbCFC7.Value;
+            G[8] = (double)tbCFC8.Value;
+            G[9] = (double)tbCFC9.Value;
+            E[0] = (double)tbCFCEQ0.Value;
+            E[1] = (double)tbCFCEQ1.Value;
+            E[2] = (double)tbCFCEQ2.Value;
+            E[3] = (double)tbCFCEQ3.Value;
+            E[4] = (double)tbCFCEQ4.Value;
+            E[5] = (double)tbCFCEQ5.Value;
+            E[6] = (double)tbCFCEQ6.Value;
+            E[7] = (double)tbCFCEQ7.Value;
+            E[8] = (double)tbCFCEQ8.Value;
+            E[9] = (double)tbCFCEQ9.Value;
+            unsafe 
+            {
+                fixed (double* Fptr = &F[0], Gptr = &G[0], Eptr = &E[0])
+                {
+                    wdsp.SetTXACFCOMPprofile(wdsp.id(1, 0), nfreqs, Fptr, Gptr, Eptr);
+                }
+            }
+        }
+
+        private void tbCFCPRECOMP_Scroll(object sender, EventArgs e)
+        {
+            wdsp.SetTXACFCOMPPrecomp(wdsp.id(1, 0), (double)tbCFCPRECOMP.Value);
+        }
+
+        private void chkCFCPeqEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            int run;
+            if (chkCFCPeqEnable.Checked)    run = 1;
+            else                            run = 0;
+            wdsp.SetTXACFCOMPPeqRun(wdsp.id(1, 0), run);
+        }
+
+        private void chkPHROTEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            int run;
+            if (chkPHROTEnable.Checked) run = 1;
+            else run = 0;
+            wdsp.SetTXAPHROTRun(wdsp.id(1, 0), run);
+        }
+
+        private void udPhRotFreq_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetTXAPHROTCorner(wdsp.id(1, 0), (double)udPhRotFreq.Value);
+        }
+
+        private void udPHROTStages_ValueChanged(object sender, EventArgs e)
+        {
+            wdsp.SetTXAPHROTNstages(wdsp.id(1, 0), (int)udPHROTStages.Value);
+        }
+
+        private void tbCFCPEG_Scroll(object sender, EventArgs e)
+        {
+            wdsp.SetTXACFCOMPPrePeq(wdsp.id(1, 0), (double)tbCFCPEG.Value);
+        }
     }
 
     #region PADeviceInfo Helper Class

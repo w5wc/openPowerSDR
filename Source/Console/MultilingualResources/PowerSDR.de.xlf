@@ -614,24 +614,6 @@
         AAAAAAAB4AAAAAAAAAHgAAAAAAAAA/AAAAAAAAAH//////////8=
 </target>
         </trans-unit>
-        <trans-unit id="richTextBox1.Text" translate="yes" xml:space="preserve">
-          <source>Begin with all spinners set equal to their labelled value.
-For each spinner, from minimum to maximum, adjust the output power
-such that your CALIBRATED EXTERNAL METER is equal to the spinner
-value.  Record the values appearing in the Thetis 'Fwd Pwr' meter.
-After completing measurements for all spinners, enter your
-recorded values into the respective spinners.  DO NOT USE
-POWER EXCEEDING THE RATING OF YOUR RADIO!
-</source>
-          <target state="new">Begin with all spinners set equal to their labelled value.
-For each spinner, from minimum to maximum, adjust the output power
-such that your CALIBRATED EXTERNAL METER is equal to the spinner
-value.  Record the values appearing in the Thetis 'Fwd Pwr' meter.
-After completing measurements for all spinners, enter your
-recorded values into the respective spinners.  DO NOT USE
-POWER EXCEEDING THE RATING OF YOUR RADIO!
-</target>
-        </trans-unit>
       </group>
     </body>
   </file>
@@ -2827,7 +2809,7 @@ POWER EXCEEDING THE RATING OF YOUR RADIO!
         //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8=
 </target>
         </trans-unit>
-        <trans-unit id="toolTip1.TrayLocation" translate="yes" extype="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata" xml:space="preserve">
+        <trans-unit id="toolTip1.TrayLocation" translate="yes" extype="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata" xml:space="preserve">
           <source>17, 17</source>
           <target state="needs-review-translation">17, 17</target>
         </trans-unit>
