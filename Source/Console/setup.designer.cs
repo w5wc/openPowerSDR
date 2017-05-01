@@ -1692,7 +1692,7 @@
             this.lblCFCPEG = new System.Windows.Forms.LabelTS();
             this.lblCFCPEG15 = new System.Windows.Forms.LabelTS();
             this.lblCFCPEG0 = new System.Windows.Forms.LabelTS();
-            this.tbCFCPEG = new System.Windows.Forms.TrackBarTS();
+            this.tbCFCPEQGAIN = new System.Windows.Forms.TrackBarTS();
             this.grpPhRot = new System.Windows.Forms.GroupBoxTS();
             this.lblPHROTStages = new System.Windows.Forms.LabelTS();
             this.udPHROTStages = new System.Windows.Forms.NumericUpDownTS();
@@ -3289,7 +3289,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNBTransition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNB)).BeginInit();
             this.tpDSPCFC.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbCFCPEG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbCFCPEQGAIN)).BeginInit();
             this.grpPhRot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udPHROTStages)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPhRotFreq)).BeginInit();
@@ -27882,7 +27882,7 @@
             this.tpDSPCFC.Controls.Add(this.lblCFCPEG);
             this.tpDSPCFC.Controls.Add(this.lblCFCPEG15);
             this.tpDSPCFC.Controls.Add(this.lblCFCPEG0);
-            this.tpDSPCFC.Controls.Add(this.tbCFCPEG);
+            this.tpDSPCFC.Controls.Add(this.tbCFCPEQGAIN);
             this.tpDSPCFC.Controls.Add(this.grpPhRot);
             this.tpDSPCFC.Controls.Add(this.chkCFCPeqEnable);
             this.tpDSPCFC.Controls.Add(this.lblCFCPRECOMP);
@@ -27968,17 +27968,17 @@
             // 
             // tbCFCPEG
             // 
-            this.tbCFCPEG.AutoSize = false;
-            this.tbCFCPEG.BackColor = System.Drawing.Color.Black;
-            this.tbCFCPEG.LargeChange = 2;
-            this.tbCFCPEG.Location = new System.Drawing.Point(189, 190);
-            this.tbCFCPEG.Minimum = -10;
-            this.tbCFCPEG.Name = "tbCFCPEG";
-            this.tbCFCPEG.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbCFCPEG.Size = new System.Drawing.Size(20, 128);
-            this.tbCFCPEG.TabIndex = 171;
-            this.tbCFCPEG.TickFrequency = 2;
-            this.tbCFCPEG.Scroll += new System.EventHandler(this.tbCFCPEG_Scroll);
+            this.tbCFCPEQGAIN.AutoSize = false;
+            this.tbCFCPEQGAIN.BackColor = System.Drawing.Color.Black;
+            this.tbCFCPEQGAIN.LargeChange = 2;
+            this.tbCFCPEQGAIN.Location = new System.Drawing.Point(189, 190);
+            this.tbCFCPEQGAIN.Minimum = -10;
+            this.tbCFCPEQGAIN.Name = "tbCFCPEG";
+            this.tbCFCPEQGAIN.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbCFCPEQGAIN.Size = new System.Drawing.Size(20, 128);
+            this.tbCFCPEQGAIN.TabIndex = 171;
+            this.tbCFCPEQGAIN.TickFrequency = 2;
+            this.tbCFCPEQGAIN.Scroll += new System.EventHandler(this.tbCFCPEG_Scroll);
             // 
             // grpPhRot
             // 
@@ -48229,7 +48229,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udDSPNB)).EndInit();
             this.tpDSPCFC.ResumeLayout(false);
             this.tpDSPCFC.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbCFCPEG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbCFCPEQGAIN)).EndInit();
             this.grpPhRot.ResumeLayout(false);
             this.grpPhRot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udPHROTStages)).EndInit();
@@ -50143,6 +50143,6 @@
         private System.Windows.Forms.LabelTS lblCFCPEG;
         private System.Windows.Forms.LabelTS lblCFCPEG15;
         private System.Windows.Forms.LabelTS lblCFCPEG0;
-        private System.Windows.Forms.TrackBarTS tbCFCPEG;
+        private System.Windows.Forms.TrackBarTS tbCFCPEQGAIN;
    }
 }

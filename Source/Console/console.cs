@@ -32825,8 +32825,8 @@ namespace PowerSDR
                     if (alexpresent || apollopresent)
                     {
                         // in following 'if', K2UE recommends not checking open antenna for the 8000 model
-                        if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f)
-                        // if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
+                        // if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f)
+                        if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
                         {
                             swr = 50.0f;
                             JanusAudio.SetSWRProtect(0.01f);
@@ -32862,8 +32862,8 @@ namespace PowerSDR
                         swr_pass = true;
 
                     float alex_fwd_limit = 5.0f;
-                    // if (current_hpsdr_model == HPSDRModel.ANAN8000D)        // K2UE idea:  try to determine if Hi-Z or Lo-Z load
-                    //     alex_fwd_limit = (float)ptbPWR.Value;               //    by comparing alex_fwd with power setting
+                    if (current_hpsdr_model == HPSDRModel.ANAN8000D)        // K2UE idea:  try to determine if Hi-Z or Lo-Z load
+                        alex_fwd_limit = 2.0f * (float)ptbPWR.Value;        //    by comparing alex_fwd with power setting
 
                     if (swr > 2.25 && alex_fwd > alex_fwd_limit && swrprotection && !swr_pass)
                     {
