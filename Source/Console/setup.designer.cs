@@ -3929,7 +3929,7 @@
             this.chkSWRTuneProtection.Name = "chkSWRTuneProtection";
             this.chkSWRTuneProtection.Size = new System.Drawing.Size(116, 30);
             this.chkSWRTuneProtection.TabIndex = 4;
-            this.chkSWRTuneProtection.Text = "Disable on Tune Pwr <10W";
+            this.chkSWRTuneProtection.Text = "Disable on Tune Pwr <35W";
             this.toolTip1.SetToolTip(this.chkSWRTuneProtection, "Disables SWR Protection during Tune.");
             this.chkSWRTuneProtection.UseVisualStyleBackColor = true;
             this.chkSWRTuneProtection.CheckedChanged += new System.EventHandler(this.chkSWRTuneProtection_CheckedChanged);
@@ -27966,14 +27966,14 @@
             this.lblCFCPEG0.TabIndex = 172;
             this.lblCFCPEG0.Text = "-10 dB";
             // 
-            // tbCFCPEG
+            // tbCFCPEQGAIN
             // 
             this.tbCFCPEQGAIN.AutoSize = false;
             this.tbCFCPEQGAIN.BackColor = System.Drawing.Color.Black;
             this.tbCFCPEQGAIN.LargeChange = 2;
             this.tbCFCPEQGAIN.Location = new System.Drawing.Point(189, 190);
             this.tbCFCPEQGAIN.Minimum = -10;
-            this.tbCFCPEQGAIN.Name = "tbCFCPEG";
+            this.tbCFCPEQGAIN.Name = "tbCFCPEQGAIN";
             this.tbCFCPEQGAIN.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbCFCPEQGAIN.Size = new System.Drawing.Size(20, 128);
             this.tbCFCPEQGAIN.TabIndex = 171;

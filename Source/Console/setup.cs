@@ -3024,7 +3024,7 @@ namespace PowerSDR
             if (console.EQForm.TXEQEnabled != (bool)rows[0]["TXEQEnabled"])
                 return true;
 
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < eq.Length; i++)
             {
                 if (eq[i] != (int)rows[0]["TXEQ" + i])
                     return true;
@@ -3067,10 +3067,10 @@ namespace PowerSDR
             dr["TXEQNumBands"] = console.EQForm.NumBands;
             int[] eq = console.EQForm.TXEQ;
             dr["TXEQPreamp"] = eq[0];
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < eq.Length; i++)
                 dr["TXEQ" + i.ToString()] = eq[i];
-            for (int i = 11; i < 21; i++)
-                dr["TxEqFreq" + (i - 10).ToString()] = eq[i];
+            for (int i = eq.Length; i < 11; i++)
+                dr["TXEQ" + i.ToString()] = 0;
 
             dr["DXOn"] = console.DX;
             dr["DXLevel"] = console.DXLevel;
@@ -12261,7 +12261,7 @@ namespace PowerSDR
 
             DataRow dr = rows[0];
             int[] eq = null;
-            eq = new int[21];
+            eq = new int[11];
             int[] cfceq = null;
             cfceq = new int[32];
 
@@ -12269,10 +12269,8 @@ namespace PowerSDR
             console.EQForm.NumBands = (int)dr["TXEQNumBands"];
 
             eq[0] = (int)dr["TXEQPreamp"];
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < eq.Length; i++)
                 eq[i] = (int)dr["TXEQ" + i.ToString()];
-            for (int i = 11; i < 21; i++)
-                eq[i] = (int)dr["TxEqFreq" + (i - 10).ToString()];
             console.EQForm.TXEQ = eq;
 
             udTXFilterLow.Value = Math.Min(Math.Max((int)dr["FilterLow"], udTXFilterLow.Minimum), udTXFilterLow.Maximum);
@@ -12448,10 +12446,10 @@ namespace PowerSDR
             dr["TXEQNumBands"] = console.EQForm.NumBands;
             int[] eq = console.EQForm.TXEQ;
             dr["TXEQPreamp"] = eq[0];
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < eq.Length; i++)
                 dr["TXEQ" + i.ToString()] = eq[i];
-            for (int i = 11; i < 21; i++)
-                dr["TxEqFreq" + (i - 10).ToString()] = eq[i];
+            for (int i = eq.Length; i < 11; i++)
+                dr["TXEQ" + i.ToString()] = 0;
 
             dr["DXOn"] = console.DX;
             dr["DXLevel"] = console.DXLevel;

@@ -33,6 +33,11 @@
 //#define INTERLEAVED
 //#define SPLIT_INTERLEAVED
 //#define SDRX
+//
+// Modifications to support the Behringer Midi controllers
+// by Chris Codella, W2PA, May 2017.  Indicated by //-W2PA comment lines. 
+
+using Midi2Cat.Data; //-W2PA Necessary for Behringer MIDI changes
 
 namespace PowerSDR
 {
@@ -1542,6 +1547,7 @@ namespace PowerSDR
         private TextBoxTS txtDisplayOrionMKIIPAVolts;
         private TextBoxTS txtDisplayOrionMKIIPAAmps;
         private TextBoxTS txtDisplayOrionMKIIBlank;
+        private CheckBox chkSyncIT;
         public PictureBox picWaterfall;
 
         #endregion
@@ -1993,13 +1999,13 @@ namespace PowerSDR
             this.comboRX2AGC = new System.Windows.Forms.ComboBoxTS();
             this.chkRX2BIN = new System.Windows.Forms.CheckBoxTS();
             this.ckQuickPlay = new System.Windows.Forms.CheckBoxTS();
-            this.chkMON = new System.Windows.Forms.CheckBoxTS();
             this.ckQuickRec = new System.Windows.Forms.CheckBoxTS();
+            this.chkSR = new System.Windows.Forms.CheckBoxTS();
+            this.comboTuneMode = new System.Windows.Forms.ComboBoxTS();
+            this.chkMON = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2SR = new System.Windows.Forms.CheckBoxTS();
             this.chkMOX = new System.Windows.Forms.CheckBoxTS();
             this.chkTUN = new System.Windows.Forms.CheckBoxTS();
-            this.chkSR = new System.Windows.Forms.CheckBoxTS();
-            this.comboTuneMode = new System.Windows.Forms.ComboBoxTS();
             this.chkX2TR = new System.Windows.Forms.CheckBoxTS();
             this.chkFWCATUBypass = new System.Windows.Forms.CheckBoxTS();
             this.chkFWCATU = new System.Windows.Forms.CheckBoxTS();
@@ -2166,6 +2172,7 @@ namespace PowerSDR
             this.ptbCWAPFGain = new PowerSDR.PrettyTrackBar();
             this.ptbCWAPFBandwidth = new PowerSDR.PrettyTrackBar();
             this.ptbCWAPFFreq = new PowerSDR.PrettyTrackBar();
+            this.chkSyncIT = new System.Windows.Forms.CheckBox();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -2400,12 +2407,12 @@ namespace PowerSDR
             this.lblDisplayPan = new System.Windows.Forms.LabelTS();
             this.picDisplay = new System.Windows.Forms.PictureBox();
             this.picWaterfall = new System.Windows.Forms.PictureBox();
-            this.txtDisplayCursorFreq = new System.Windows.Forms.TextBoxTS();
-            this.txtDisplayOrionMKIIBlank = new System.Windows.Forms.TextBoxTS();
             this.txtDisplayCursorOffset = new System.Windows.Forms.TextBoxTS();
             this.txtDisplayOrionMKIIPAVolts = new System.Windows.Forms.TextBoxTS();
             this.txtDisplayCursorPower = new System.Windows.Forms.TextBoxTS();
             this.txtDisplayOrionMKIIPAAmps = new System.Windows.Forms.TextBoxTS();
+            this.txtDisplayCursorFreq = new System.Windows.Forms.TextBoxTS();
+            this.txtDisplayOrionMKIIBlank = new System.Windows.Forms.TextBoxTS();
             this.panelMode = new System.Windows.Forms.PanelTS();
             this.panelBandHF = new System.Windows.Forms.PanelTS();
             this.txtVFOAFreq = new System.Windows.Forms.TextBoxTS();
@@ -2684,6 +2691,43 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.ckQuickPlay, resources.GetString("ckQuickPlay.ToolTip"));
             this.ckQuickPlay.CheckedChanged += new System.EventHandler(this.ckQuickPlay_CheckedChanged);
             // 
+            // ckQuickRec
+            // 
+            resources.ApplyResources(this.ckQuickRec, "ckQuickRec");
+            this.ckQuickRec.FlatAppearance.BorderSize = 0;
+            this.ckQuickRec.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ckQuickRec.Name = "ckQuickRec";
+            this.toolTip1.SetToolTip(this.ckQuickRec, resources.GetString("ckQuickRec.ToolTip"));
+            this.ckQuickRec.CheckedChanged += new System.EventHandler(this.ckQuickRec_CheckedChanged);
+            // 
+            // chkSR
+            // 
+            resources.ApplyResources(this.chkSR, "chkSR");
+            this.chkSR.BackColor = System.Drawing.Color.Transparent;
+            this.chkSR.Checked = true;
+            this.chkSR.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSR.FlatAppearance.BorderSize = 0;
+            this.chkSR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkSR.Name = "chkSR";
+            this.toolTip1.SetToolTip(this.chkSR, resources.GetString("chkSR.ToolTip"));
+            this.chkSR.UseVisualStyleBackColor = false;
+            this.chkSR.CheckedChanged += new System.EventHandler(this.chkSR_CheckedChanged);
+            // 
+            // comboTuneMode
+            // 
+            this.comboTuneMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.comboTuneMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboTuneMode.DropDownWidth = 42;
+            resources.ApplyResources(this.comboTuneMode, "comboTuneMode");
+            this.comboTuneMode.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.comboTuneMode.Items.AddRange(new object[] {
+            resources.GetString("comboTuneMode.Items"),
+            resources.GetString("comboTuneMode.Items1"),
+            resources.GetString("comboTuneMode.Items2")});
+            this.comboTuneMode.Name = "comboTuneMode";
+            this.toolTip1.SetToolTip(this.comboTuneMode, resources.GetString("comboTuneMode.ToolTip"));
+            this.comboTuneMode.SelectedIndexChanged += new System.EventHandler(this.comboTuneMode_SelectedIndexChanged);
+            // 
             // chkMON
             // 
             resources.ApplyResources(this.chkMON, "chkMON");
@@ -2693,15 +2737,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkMON, resources.GetString("chkMON.ToolTip"));
             this.chkMON.CheckedChanged += new System.EventHandler(this.chkMON_CheckedChanged);
             this.chkMON.Click += new System.EventHandler(this.chkMON_Click);
-            // 
-            // ckQuickRec
-            // 
-            resources.ApplyResources(this.ckQuickRec, "ckQuickRec");
-            this.ckQuickRec.FlatAppearance.BorderSize = 0;
-            this.ckQuickRec.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ckQuickRec.Name = "ckQuickRec";
-            this.toolTip1.SetToolTip(this.ckQuickRec, resources.GetString("ckQuickRec.ToolTip"));
-            this.ckQuickRec.CheckedChanged += new System.EventHandler(this.ckQuickRec_CheckedChanged);
             // 
             // chkRX2SR
             // 
@@ -2732,34 +2767,6 @@ namespace PowerSDR
             this.chkTUN.Name = "chkTUN";
             this.toolTip1.SetToolTip(this.chkTUN, resources.GetString("chkTUN.ToolTip"));
             this.chkTUN.CheckedChanged += new System.EventHandler(this.chkTUN_CheckedChanged);
-            // 
-            // chkSR
-            // 
-            resources.ApplyResources(this.chkSR, "chkSR");
-            this.chkSR.BackColor = System.Drawing.Color.Transparent;
-            this.chkSR.Checked = true;
-            this.chkSR.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSR.FlatAppearance.BorderSize = 0;
-            this.chkSR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkSR.Name = "chkSR";
-            this.toolTip1.SetToolTip(this.chkSR, resources.GetString("chkSR.ToolTip"));
-            this.chkSR.UseVisualStyleBackColor = false;
-            this.chkSR.CheckedChanged += new System.EventHandler(this.chkSR_CheckedChanged);
-            // 
-            // comboTuneMode
-            // 
-            this.comboTuneMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.comboTuneMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboTuneMode.DropDownWidth = 42;
-            resources.ApplyResources(this.comboTuneMode, "comboTuneMode");
-            this.comboTuneMode.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.comboTuneMode.Items.AddRange(new object[] {
-            resources.GetString("comboTuneMode.Items"),
-            resources.GetString("comboTuneMode.Items1"),
-            resources.GetString("comboTuneMode.Items2")});
-            this.comboTuneMode.Name = "comboTuneMode";
-            this.toolTip1.SetToolTip(this.comboTuneMode, resources.GetString("comboTuneMode.ToolTip"));
-            this.comboTuneMode.SelectedIndexChanged += new System.EventHandler(this.comboTuneMode_SelectedIndexChanged);
             // 
             // chkX2TR
             // 
@@ -4767,6 +4774,13 @@ namespace PowerSDR
             this.ptbCWAPFFreq.Value = 0;
             this.ptbCWAPFFreq.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbCWAPFFreq_Scroll);
             // 
+            // chkSyncIT
+            // 
+            resources.ApplyResources(this.chkSyncIT, "chkSyncIT");
+            this.chkSyncIT.Name = "chkSyncIT";
+            this.toolTip1.SetToolTip(this.chkSyncIT, resources.GetString("chkSyncIT.ToolTip"));
+            this.chkSyncIT.UseVisualStyleBackColor = true;
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -6230,6 +6244,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelVFO, "panelVFO");
             this.panelVFO.BackColor = System.Drawing.Color.Transparent;
+            this.panelVFO.Controls.Add(this.chkSyncIT);
             this.panelVFO.Controls.Add(this.chkVAC2);
             this.panelVFO.Controls.Add(this.btnZeroBeat);
             this.panelVFO.Controls.Add(this.chkVFOSplit);
@@ -6681,26 +6696,6 @@ namespace PowerSDR
             this.picWaterfall.TabStop = false;
             this.picWaterfall.Resize += new System.EventHandler(this.picWaterfall_Resize);
             // 
-            // txtDisplayCursorFreq
-            // 
-            this.txtDisplayCursorFreq.BackColor = System.Drawing.Color.Black;
-            this.txtDisplayCursorFreq.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDisplayCursorFreq.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.txtDisplayCursorFreq, "txtDisplayCursorFreq");
-            this.txtDisplayCursorFreq.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.txtDisplayCursorFreq.Name = "txtDisplayCursorFreq";
-            this.txtDisplayCursorFreq.ReadOnly = true;
-            // 
-            // txtDisplayOrionMKIIBlank
-            // 
-            this.txtDisplayOrionMKIIBlank.BackColor = System.Drawing.Color.Black;
-            this.txtDisplayOrionMKIIBlank.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDisplayOrionMKIIBlank.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.txtDisplayOrionMKIIBlank, "txtDisplayOrionMKIIBlank");
-            this.txtDisplayOrionMKIIBlank.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.txtDisplayOrionMKIIBlank.Name = "txtDisplayOrionMKIIBlank";
-            this.txtDisplayOrionMKIIBlank.ReadOnly = true;
-            // 
             // txtDisplayCursorOffset
             // 
             this.txtDisplayCursorOffset.BackColor = System.Drawing.Color.Black;
@@ -6741,6 +6736,26 @@ namespace PowerSDR
             this.txtDisplayOrionMKIIPAAmps.ForeColor = System.Drawing.Color.DodgerBlue;
             this.txtDisplayOrionMKIIPAAmps.Name = "txtDisplayOrionMKIIPAAmps";
             this.txtDisplayOrionMKIIPAAmps.ReadOnly = true;
+            // 
+            // txtDisplayCursorFreq
+            // 
+            this.txtDisplayCursorFreq.BackColor = System.Drawing.Color.Black;
+            this.txtDisplayCursorFreq.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDisplayCursorFreq.Cursor = System.Windows.Forms.Cursors.Default;
+            resources.ApplyResources(this.txtDisplayCursorFreq, "txtDisplayCursorFreq");
+            this.txtDisplayCursorFreq.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.txtDisplayCursorFreq.Name = "txtDisplayCursorFreq";
+            this.txtDisplayCursorFreq.ReadOnly = true;
+            // 
+            // txtDisplayOrionMKIIBlank
+            // 
+            this.txtDisplayOrionMKIIBlank.BackColor = System.Drawing.Color.Black;
+            this.txtDisplayOrionMKIIBlank.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDisplayOrionMKIIBlank.Cursor = System.Windows.Forms.Cursors.Default;
+            resources.ApplyResources(this.txtDisplayOrionMKIIBlank, "txtDisplayOrionMKIIBlank");
+            this.txtDisplayOrionMKIIBlank.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.txtDisplayOrionMKIIBlank.Name = "txtDisplayOrionMKIIBlank";
+            this.txtDisplayOrionMKIIBlank.ReadOnly = true;
             // 
             // panelMode
             // 
@@ -7521,6 +7536,7 @@ namespace PowerSDR
             this.panelDisplay2.ResumeLayout(false);
             this.panelDSP.ResumeLayout(false);
             this.panelVFO.ResumeLayout(false);
+            this.panelVFO.PerformLayout();
             this.panelDateTime.ResumeLayout(false);
             this.panelDateTime.PerformLayout();
             this.panelSoundControls.ResumeLayout(false);
@@ -8580,6 +8596,8 @@ namespace PowerSDR
             a.Add("chkRX2NR_checkstate/" + chkRX2NR.CheckState.ToString());
             a.Add("chkNB_checkstate/" + chkNB.CheckState.ToString());
             a.Add("chkRX2NB_checkstate/" + chkRX2NB.CheckState.ToString());
+            a.Add("chkSyncIT_checkstate/" + chkSyncIT.CheckState.ToString());  //-W2PA Checkbox for synched RIT/XIT
+
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
             a.Add("rx1_meter_cal_offset/" + rx1_meter_cal_offset);
@@ -9598,6 +9616,9 @@ namespace PowerSDR
                         break;
                     case "chkRX2NB_checkstate":
                         chkRX2NB.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
+                        break;
+                    case "chkSyncIT_checkstate":  //-W2PA Checkbox for synched RIT/XIT
+                        chkSyncIT.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
                         break;
                     case "band_160m_index":
                         band_160m_index = Int32.Parse(val);
@@ -32826,7 +32847,8 @@ namespace PowerSDR
                     {
                         // in following 'if', K2UE recommends not checking open antenna for the 8000 model
                         // if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f)
-                        if (swrprotection && alex_fwd > 10.0f && (alex_fwd - alex_rev) < 1.0f && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
+                        //-W2PA Changed to allow 35w - some amplifier tuners need about 30w to reliably start working
+                        if (swrprotection && alex_fwd > 35.0f && (alex_fwd - alex_rev) < 1.0f && current_hpsdr_model != HPSDRModel.ANAN8000D) // open ant condition
                         {
                             swr = 50.0f;
                             JanusAudio.SetSWRProtect(0.01f);
@@ -32851,7 +32873,8 @@ namespace PowerSDR
 
                     if (chkTUN.Checked && disable_swr_on_tune && (alexpresent || apollopresent))
                     {
-                        if (alex_fwd >= 1.0 && alex_fwd <= 10.0 && ptbPWR.Value <= 20)
+                        //-W2PA Changed to allow 35w - some amplifier tuners need about 30w to reliably start working
+                        if (alex_fwd >= 1.0 && alex_fwd <= 35.0 && ptbPWR.Value <= 70)
                         {
                             swr_pass = true;
                         }
@@ -35357,6 +35380,11 @@ namespace PowerSDR
                 ptbPWR.Focus();
             }
 
+            double pct = Convert.ToDouble(new_pwr) / 100.0;  //-W2PA Send LED update back to Behringer
+            if (pct <= 0.0) pct = 0.0;
+            else if (pct < 1.0 / 15.0) pct = 1.0 / 15.0; //-W2PA Don't let the last LED go out until zero
+            Midi2Cat.SendUpdateToMidi(CatCmd.DriveLevel, pct);
+
         }
 
         private void ptbAF_Scroll(object sender, System.EventArgs e)
@@ -35416,6 +35444,10 @@ namespace PowerSDR
             {
                 ptbRF.Focus();
             }
+
+            //-W2PA Update LEDs on Behringer MIDI controller
+            double pct = Convert.ToDouble(ptbRF.Value - ptbRF.Minimum) / Convert.ToDouble(ptbRF.Maximum - ptbRF.Minimum);
+            Midi2Cat.SendUpdateToMidi(CatCmd.AGCLevel_inc, pct);
         }
 
         private void chkMicMute_CheckedChanged(object sender, System.EventArgs e)
@@ -35473,6 +35505,11 @@ namespace PowerSDR
             {
                 ptbCWSpeed.Focus();
             }
+
+            //-W2PA Update LEDs on Behringer MIDI controller
+            double pct = Convert.ToDouble(ptbCWSpeed.Value) / Convert.ToDouble(60);
+            if (pct < 1.0 / 15.0) pct = 1.0 / 15.0;  //-W2PA Don't let the last LED go out
+            Midi2Cat.SendUpdateToMidi(CatCmd.CWSpeed_inc, pct);
         }
 
         private void chkVOX_CheckedChanged(object sender, System.EventArgs e)
@@ -44251,6 +44288,53 @@ namespace PowerSDR
 
             /*if(udRIT.Focused)
                 btnHidden.Focus();*/
+
+            setRIT_LEDs();  //-W2PA Behringer LEDs
+
+            //-W2PA Sync XIT/XIT if selected
+            if (chkSyncIT.Checked)
+            {
+                udXIT.Value = udRIT.Value;
+                setXIT_LEDs();
+            }
+        }
+
+        private void setRIT_LEDs()
+        {
+            //-W2PA Update LEDs on Behringer MIDI controller, within limits of +/- 2kHz.  Beyond that range the extreme L or R LED remains lit.
+            int IT_MIDIminimum = -2000; //-W2PA Change these two values to enable a broader range for the LEDs
+            int IT_MIDImaximum = 2000;  //      But when you do so, it makes them change more gradually, i.e. it takes more turns
+            double fracBetweenLEDs = 1.0 / 14.0;
+            double negTol = 0.5 - fracBetweenLEDs;
+            double posTol = 0.5 + fracBetweenLEDs;
+            double fract = Convert.ToDouble(udRIT.Value - IT_MIDIminimum) / Convert.ToDouble(IT_MIDImaximum - IT_MIDIminimum);
+
+            //-W2PA Light the center LED (#8) only if exactly at zero RIT/XIT
+            if (udRIT.Value < 0 && (fract >= negTol)) fract = negTol;
+            else if (udRIT.Value > 0 && (fract <= posTol)) fract = posTol;
+
+            //-W2PA Prevent the lowest LED from going out completely.
+            if (udRIT.Value <= IT_MIDIminimum + Convert.ToDecimal(fracBetweenLEDs * IT_MIDImaximum)) fract = fracBetweenLEDs;
+            Midi2Cat.SendUpdateToMidi(CatCmd.RIT_inc, fract);
+        }
+
+        private void setXIT_LEDs()
+        {
+            //-W2PA Update LEDs on Behringer MIDI controller, within limits of +/- 2kHz
+            int IT_MIDIminimum = -2000; //-W2PA Change these two values to enable a broader range for the LEDs
+            int IT_MIDImaximum = 2000;  //      But when you do so, it makes them change more gradually, i.e. it takes more turns
+            double fracBetweenLEDs = 1.0 / 14.0;
+            double negTol = 0.5 - fracBetweenLEDs;
+            double posTol = 0.5 + fracBetweenLEDs;
+            double fract = Convert.ToDouble(udXIT.Value - IT_MIDIminimum) / Convert.ToDouble(IT_MIDImaximum - IT_MIDIminimum);
+
+            //-W2PA Light the center LED (#8) only if exactly at zero RIT/XIT
+            if (udXIT.Value < 0 && (fract >= negTol)) fract = negTol;
+            else if (udXIT.Value > 0 && (fract <= posTol)) fract = posTol;
+
+            //-W2PA Prevent the lowest LED from going out completely.
+            if (udXIT.Value <= IT_MIDIminimum + Convert.ToDecimal(fracBetweenLEDs * IT_MIDImaximum)) fract = fracBetweenLEDs;
+            Midi2Cat.SendUpdateToMidi(CatCmd.XIT_inc, fract);
         }
 
         private void udXIT_ValueChanged(object sender, System.EventArgs e)
@@ -44275,6 +44359,15 @@ namespace PowerSDR
 
             //if(udXIT.Focused)
             //btnHidden.Focus();
+
+            setXIT_LEDs(); //-W2PA Behringer LEDs
+
+            //-W2PA Sync XIT/XIT if selected
+            if (chkSyncIT.Checked)
+            {
+                udRIT.Value = udXIT.Value;
+                setRIT_LEDs();
+            }
         }
 
         private void btnXITReset_Click(object sender, System.EventArgs e)
@@ -44950,6 +45043,10 @@ namespace PowerSDR
             {
                 radio.GetDSPRX(0, 0).RXOutputGain = (double)ptbRX0Gain.Value / ptbRX0Gain.Maximum;
                 ptbRX1AF.Value = ptbRX0Gain.Value;
+
+                //-W2PA Update LEDs on Behringer MIDI controller
+                double pct = Convert.ToDouble(ptbRX1AF.Value - ptbRX1AF.Minimum) / Convert.ToDouble(ptbRX1AF.Maximum - ptbRX1AF.Minimum);
+                Midi2Cat.SendUpdateToMidi(CatCmd.VolumeVfoA_inc, pct);
 
             }
 
@@ -46848,6 +46945,10 @@ namespace PowerSDR
             {
                 ptbRX2RF.Focus();
             }
+
+            //-W2PA Update LEDs on Behringer MIDI controller
+            double pct = Convert.ToDouble(ptbRX2RF.Value - ptbRX2RF.Minimum) / Convert.ToDouble(ptbRX2RF.Maximum - ptbRX2RF.Minimum);
+            Midi2Cat.SendUpdateToMidi(CatCmd.RX2AGCLevel_inc, pct);
         }
 
         private void chkRX2Squelch_CheckedChanged(object sender, System.EventArgs e)
@@ -46970,6 +47071,10 @@ namespace PowerSDR
             {
                 ptbRX2Gain.Focus();
             }
+
+            //-W2PA Update LEDs on Behringer MIDI controller
+            double pct = Convert.ToDouble(ptbRX2AF.Value - ptbRX2AF.Minimum) / Convert.ToDouble(ptbRX2AF.Maximum - ptbRX2AF.Minimum);
+            Midi2Cat.SendUpdateToMidi(CatCmd.VolumeVfoB_inc, pct);
         }
 
         private void chkRX2Mute_CheckedChanged(object sender, System.EventArgs e)
