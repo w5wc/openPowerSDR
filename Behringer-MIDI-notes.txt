@@ -1,0 +1,51 @@
+Behringer support in the Midi2Cat project, source code modifications summary
+Chris Codella, W2PA
+3 May 2017 
+
+Compiled and tested on openPowerSDR v3.3.16 forked from W5WC's GitHub repository.  This version temporarily adds "M2" to the program name, indicating it's the second version of Midi2Cat.
+
+All changes to the code are flagged by comment lines beginning with //-W2PA
+The only exceptions are the two instances noted below in which the Designer view caused updates/changes to the automatically generated code.
+
+Most modifications were to the Midi2Cat project.  Diff confirms there were no changes to this package since 3.3.9.
+
+In the PowerSDR project, the following changes were made to three files:
+
+Midi2CatCommands.cs
+Extensive changes to allow interaction with the Behringer controllers.  These changes match up with and make use of changes made in the Midi2Cat project itself.
+
+Console.cs
+1) Code was added to some of the pdbXXX_scroll handler functions to allow the UI to send messages back to the Behringer conrtoller to light its LEDs according to the current setting.  So when you turn a mini-wheel (knob) on the Behringer PL-1, the LEDs light around its range.  And when you slide a slider in the UI that a mini-wheel has been mapped to, the LEDs also change accordingly.
+2) Added a check box to synchronize RIT/XIT.  This is how most rigs operate. But it's a choice now with this check box.  This is one instance in which the Designer view caused updates/changes to the automatically generated code - the handlers for the new check box "chkSyncIT."
+3) Changed the power level that trips SWR protection in Tune mode from 10W to 35W to allow for amplifiers with auto-tuners that don't kick in until around 30W of drive.  Feel free to remove this change.  I can make it a choice in Setup in a later version.  This is one instance in which the Designer view caused updates/changes to the automatically generated code - the label for the checkbox in Setup changed.
+
+CATCommands.cs
+1) The RIT increment was made 10Hz regardless of mode.  Originally it changed.
+
+- - - - - - - 
+
+Changed files list, compared with 3.3.16 pre-fork:
+
+Console folder
+     Midi2CatCommands.cs
+     titlebar.cs (minor)
+     setup.cs (minor)
+     setup.resx (minor)
+     console.cs
+     console.resx
+     setup.designer.cs (minor)
+Console/CAT folder
+     CATCommands.cs
+Midi2Cat folder
+     MidiMessageManager.cs
+Midi2Cat/Midi2Cat.IO folder
+     MidiDevice.cs
+     MidiDeviceSetup.cs
+Midi2Cat/Midi2Cat.Data
+     CatCmdDb.cs
+     Database.cs
+     ControllerMapping.cs
+     
+     
+     
+     
