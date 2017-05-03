@@ -60,9 +60,7 @@ namespace PowerSDR
 		private System.Windows.Forms.TrackBarTS tbRXEQPreamp;
 		private System.Windows.Forms.TrackBarTS tbTXEQPre;
 		private System.Windows.Forms.CheckBoxTS chkRXEQEnabled;
-		private System.Windows.Forms.PictureBox picRXEQ;
-		private System.Windows.Forms.PictureBox picTXEQ;
-		private System.Windows.Forms.ButtonTS btnTXEQReset;
+        private System.Windows.Forms.PictureBox picRXEQ;
 		private System.Windows.Forms.ButtonTS btnRXEQReset;
 		private System.Windows.Forms.LabelTS lblRXEQ15db;
 		private System.Windows.Forms.LabelTS lblTXEQ15db;
@@ -125,7 +123,7 @@ namespace PowerSDR
 			Common.RestoreForm(this, "EQForm", false);
             
 			tbRXEQ_Scroll(this, EventArgs.Empty);
-			tbTXEQ_Scroll(this, EventArgs.Empty);
+			//tbTXEQ_Scroll(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -211,8 +209,6 @@ namespace PowerSDR
             this.tbTXEQ3 = new System.Windows.Forms.TrackBarTS();
             this.tbTXEQ4 = new System.Windows.Forms.TrackBarTS();
             this.tbTXEQ5 = new System.Windows.Forms.TrackBarTS();
-            this.picTXEQ = new System.Windows.Forms.PictureBox();
-            this.btnTXEQReset = new System.Windows.Forms.ButtonTS();
             this.chkTXEQEnabled = new System.Windows.Forms.CheckBoxTS();
             this.tbTXEQ0 = new System.Windows.Forms.TrackBarTS();
             this.tbTXEQ1 = new System.Windows.Forms.TrackBarTS();
@@ -253,7 +249,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTXEQ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ2)).BeginInit();
@@ -721,8 +716,6 @@ namespace PowerSDR
             this.grpTXEQ.Controls.Add(this.tbTXEQ3);
             this.grpTXEQ.Controls.Add(this.tbTXEQ4);
             this.grpTXEQ.Controls.Add(this.tbTXEQ5);
-            this.grpTXEQ.Controls.Add(this.picTXEQ);
-            this.grpTXEQ.Controls.Add(this.btnTXEQReset);
             this.grpTXEQ.Controls.Add(this.chkTXEQEnabled);
             this.grpTXEQ.Controls.Add(this.tbTXEQ0);
             this.grpTXEQ.Controls.Add(this.tbTXEQ1);
@@ -744,7 +737,7 @@ namespace PowerSDR
             this.lblCFCFreq.AutoSize = true;
             this.lblCFCFreq.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCFCFreq.Image = null;
-            this.lblCFCFreq.Location = new System.Drawing.Point(44, 47);
+            this.lblCFCFreq.Location = new System.Drawing.Point(38, 50);
             this.lblCFCFreq.Name = "lblCFCFreq";
             this.lblCFCFreq.Size = new System.Drawing.Size(35, 13);
             this.lblCFCFreq.TabIndex = 159;
@@ -757,7 +750,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ9.Location = new System.Drawing.Point(438, 45);
+            this.udTXEQ9.Location = new System.Drawing.Point(438, 37);
             this.udTXEQ9.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -785,7 +778,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ8.Location = new System.Drawing.Point(398, 68);
+            this.udTXEQ8.Location = new System.Drawing.Point(398, 60);
             this.udTXEQ8.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -813,7 +806,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ7.Location = new System.Drawing.Point(358, 45);
+            this.udTXEQ7.Location = new System.Drawing.Point(358, 37);
             this.udTXEQ7.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -841,7 +834,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ6.Location = new System.Drawing.Point(318, 68);
+            this.udTXEQ6.Location = new System.Drawing.Point(318, 60);
             this.udTXEQ6.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -869,7 +862,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ5.Location = new System.Drawing.Point(278, 45);
+            this.udTXEQ5.Location = new System.Drawing.Point(278, 37);
             this.udTXEQ5.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -897,7 +890,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ4.Location = new System.Drawing.Point(238, 68);
+            this.udTXEQ4.Location = new System.Drawing.Point(238, 60);
             this.udTXEQ4.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -925,7 +918,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ3.Location = new System.Drawing.Point(198, 45);
+            this.udTXEQ3.Location = new System.Drawing.Point(198, 37);
             this.udTXEQ3.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -953,7 +946,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ2.Location = new System.Drawing.Point(158, 68);
+            this.udTXEQ2.Location = new System.Drawing.Point(158, 60);
             this.udTXEQ2.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -981,7 +974,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ1.Location = new System.Drawing.Point(118, 45);
+            this.udTXEQ1.Location = new System.Drawing.Point(118, 37);
             this.udTXEQ1.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -1009,7 +1002,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udTXEQ0.Location = new System.Drawing.Point(78, 68);
+            this.udTXEQ0.Location = new System.Drawing.Point(78, 60);
             this.udTXEQ0.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -1033,7 +1026,7 @@ namespace PowerSDR
             // lblTXEQ15db2
             // 
             this.lblTXEQ15db2.Image = null;
-            this.lblTXEQ15db2.Location = new System.Drawing.Point(483, 95);
+            this.lblTXEQ15db2.Location = new System.Drawing.Point(483, 87);
             this.lblTXEQ15db2.Name = "lblTXEQ15db2";
             this.lblTXEQ15db2.Size = new System.Drawing.Size(32, 16);
             this.lblTXEQ15db2.TabIndex = 129;
@@ -1043,7 +1036,7 @@ namespace PowerSDR
             // lblTXEQ0dB2
             // 
             this.lblTXEQ0dB2.Image = null;
-            this.lblTXEQ0dB2.Location = new System.Drawing.Point(483, 151);
+            this.lblTXEQ0dB2.Location = new System.Drawing.Point(483, 143);
             this.lblTXEQ0dB2.Name = "lblTXEQ0dB2";
             this.lblTXEQ0dB2.Size = new System.Drawing.Size(32, 16);
             this.lblTXEQ0dB2.TabIndex = 128;
@@ -1053,7 +1046,7 @@ namespace PowerSDR
             // lblTXEQminus12db2
             // 
             this.lblTXEQminus12db2.Image = null;
-            this.lblTXEQminus12db2.Location = new System.Drawing.Point(480, 195);
+            this.lblTXEQminus12db2.Location = new System.Drawing.Point(480, 187);
             this.lblTXEQminus12db2.Name = "lblTXEQminus12db2";
             this.lblTXEQminus12db2.Size = new System.Drawing.Size(38, 16);
             this.lblTXEQminus12db2.TabIndex = 130;
@@ -1064,7 +1057,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ9.AutoSize = false;
             this.tbTXEQ9.LargeChange = 3;
-            this.tbTXEQ9.Location = new System.Drawing.Point(448, 89);
+            this.tbTXEQ9.Location = new System.Drawing.Point(448, 81);
             this.tbTXEQ9.Maximum = 15;
             this.tbTXEQ9.Minimum = -12;
             this.tbTXEQ9.Name = "tbTXEQ9";
@@ -1078,7 +1071,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ6.AutoSize = false;
             this.tbTXEQ6.LargeChange = 3;
-            this.tbTXEQ6.Location = new System.Drawing.Point(328, 89);
+            this.tbTXEQ6.Location = new System.Drawing.Point(328, 81);
             this.tbTXEQ6.Maximum = 15;
             this.tbTXEQ6.Minimum = -12;
             this.tbTXEQ6.Name = "tbTXEQ6";
@@ -1092,7 +1085,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ7.AutoSize = false;
             this.tbTXEQ7.LargeChange = 3;
-            this.tbTXEQ7.Location = new System.Drawing.Point(368, 89);
+            this.tbTXEQ7.Location = new System.Drawing.Point(368, 81);
             this.tbTXEQ7.Maximum = 15;
             this.tbTXEQ7.Minimum = -12;
             this.tbTXEQ7.Name = "tbTXEQ7";
@@ -1106,7 +1099,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ8.AutoSize = false;
             this.tbTXEQ8.LargeChange = 3;
-            this.tbTXEQ8.Location = new System.Drawing.Point(408, 89);
+            this.tbTXEQ8.Location = new System.Drawing.Point(408, 81);
             this.tbTXEQ8.Maximum = 15;
             this.tbTXEQ8.Minimum = -12;
             this.tbTXEQ8.Name = "tbTXEQ8";
@@ -1120,7 +1113,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ3.AutoSize = false;
             this.tbTXEQ3.LargeChange = 3;
-            this.tbTXEQ3.Location = new System.Drawing.Point(208, 89);
+            this.tbTXEQ3.Location = new System.Drawing.Point(208, 81);
             this.tbTXEQ3.Maximum = 15;
             this.tbTXEQ3.Minimum = -12;
             this.tbTXEQ3.Name = "tbTXEQ3";
@@ -1134,7 +1127,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ4.AutoSize = false;
             this.tbTXEQ4.LargeChange = 3;
-            this.tbTXEQ4.Location = new System.Drawing.Point(248, 89);
+            this.tbTXEQ4.Location = new System.Drawing.Point(248, 81);
             this.tbTXEQ4.Maximum = 15;
             this.tbTXEQ4.Minimum = -12;
             this.tbTXEQ4.Name = "tbTXEQ4";
@@ -1148,7 +1141,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ5.AutoSize = false;
             this.tbTXEQ5.LargeChange = 3;
-            this.tbTXEQ5.Location = new System.Drawing.Point(288, 89);
+            this.tbTXEQ5.Location = new System.Drawing.Point(288, 81);
             this.tbTXEQ5.Maximum = 15;
             this.tbTXEQ5.Minimum = -12;
             this.tbTXEQ5.Name = "tbTXEQ5";
@@ -1157,27 +1150,6 @@ namespace PowerSDR
             this.tbTXEQ5.TabIndex = 116;
             this.tbTXEQ5.TickFrequency = 3;
             this.tbTXEQ5.Scroll += new System.EventHandler(this.setTXEQProfile);
-            // 
-            // picTXEQ
-            // 
-            this.picTXEQ.BackColor = System.Drawing.Color.Black;
-            this.picTXEQ.Location = new System.Drawing.Point(88, 14);
-            this.picTXEQ.Name = "picTXEQ";
-            this.picTXEQ.Size = new System.Drawing.Size(384, 24);
-            this.picTXEQ.TabIndex = 112;
-            this.picTXEQ.TabStop = false;
-            this.picTXEQ.Paint += new System.Windows.Forms.PaintEventHandler(this.picTXEQ_Paint);
-            // 
-            // btnTXEQReset
-            // 
-            this.btnTXEQReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTXEQReset.Image = null;
-            this.btnTXEQReset.Location = new System.Drawing.Point(480, 18);
-            this.btnTXEQReset.Name = "btnTXEQReset";
-            this.btnTXEQReset.Size = new System.Drawing.Size(42, 20);
-            this.btnTXEQReset.TabIndex = 107;
-            this.btnTXEQReset.Text = "Reset";
-            this.btnTXEQReset.Click += new System.EventHandler(this.btnTXEQReset_Click);
             // 
             // chkTXEQEnabled
             // 
@@ -1193,7 +1165,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ0.AutoSize = false;
             this.tbTXEQ0.LargeChange = 3;
-            this.tbTXEQ0.Location = new System.Drawing.Point(88, 89);
+            this.tbTXEQ0.Location = new System.Drawing.Point(88, 81);
             this.tbTXEQ0.Maximum = 15;
             this.tbTXEQ0.Minimum = -12;
             this.tbTXEQ0.Name = "tbTXEQ0";
@@ -1207,7 +1179,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ1.AutoSize = false;
             this.tbTXEQ1.LargeChange = 3;
-            this.tbTXEQ1.Location = new System.Drawing.Point(128, 89);
+            this.tbTXEQ1.Location = new System.Drawing.Point(128, 81);
             this.tbTXEQ1.Maximum = 15;
             this.tbTXEQ1.Minimum = -12;
             this.tbTXEQ1.Name = "tbTXEQ1";
@@ -1221,7 +1193,7 @@ namespace PowerSDR
             // 
             this.tbTXEQ2.AutoSize = false;
             this.tbTXEQ2.LargeChange = 3;
-            this.tbTXEQ2.Location = new System.Drawing.Point(168, 89);
+            this.tbTXEQ2.Location = new System.Drawing.Point(168, 81);
             this.tbTXEQ2.Maximum = 15;
             this.tbTXEQ2.Minimum = -12;
             this.tbTXEQ2.Name = "tbTXEQ2";
@@ -1235,7 +1207,7 @@ namespace PowerSDR
             // 
             this.lblTXEQPreamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTXEQPreamp.Image = null;
-            this.lblTXEQPreamp.Location = new System.Drawing.Point(8, 73);
+            this.lblTXEQPreamp.Location = new System.Drawing.Point(8, 69);
             this.lblTXEQPreamp.Name = "lblTXEQPreamp";
             this.lblTXEQPreamp.Size = new System.Drawing.Size(48, 16);
             this.lblTXEQPreamp.TabIndex = 105;
@@ -1246,7 +1218,7 @@ namespace PowerSDR
             // 
             this.tbTXEQPre.AutoSize = false;
             this.tbTXEQPre.LargeChange = 3;
-            this.tbTXEQPre.Location = new System.Drawing.Point(16, 89);
+            this.tbTXEQPre.Location = new System.Drawing.Point(16, 81);
             this.tbTXEQPre.Maximum = 15;
             this.tbTXEQPre.Minimum = -12;
             this.tbTXEQPre.Name = "tbTXEQPre";
@@ -1259,7 +1231,7 @@ namespace PowerSDR
             // lblTXEQ15db
             // 
             this.lblTXEQ15db.Image = null;
-            this.lblTXEQ15db.Location = new System.Drawing.Point(56, 97);
+            this.lblTXEQ15db.Location = new System.Drawing.Point(56, 89);
             this.lblTXEQ15db.Name = "lblTXEQ15db";
             this.lblTXEQ15db.Size = new System.Drawing.Size(32, 16);
             this.lblTXEQ15db.TabIndex = 43;
@@ -1269,7 +1241,7 @@ namespace PowerSDR
             // lblTXEQ0dB
             // 
             this.lblTXEQ0dB.Image = null;
-            this.lblTXEQ0dB.Location = new System.Drawing.Point(56, 151);
+            this.lblTXEQ0dB.Location = new System.Drawing.Point(56, 143);
             this.lblTXEQ0dB.Name = "lblTXEQ0dB";
             this.lblTXEQ0dB.Size = new System.Drawing.Size(32, 16);
             this.lblTXEQ0dB.TabIndex = 0;
@@ -1279,7 +1251,7 @@ namespace PowerSDR
             // lblTXEQminus12db
             // 
             this.lblTXEQminus12db.Image = null;
-            this.lblTXEQminus12db.Location = new System.Drawing.Point(52, 193);
+            this.lblTXEQminus12db.Location = new System.Drawing.Point(52, 185);
             this.lblTXEQminus12db.Name = "lblTXEQminus12db";
             this.lblTXEQminus12db.Size = new System.Drawing.Size(38, 16);
             this.lblTXEQminus12db.TabIndex = 45;
@@ -1329,7 +1301,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTXEQ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXEQ2)).EndInit();
@@ -1432,67 +1403,89 @@ namespace PowerSDR
 		{
 			get 
 			{
-				if(rad3Band.Checked)
-				{
-					int[] eq = new int[4];
-                    //eq[0] = tbTXEQPreamp.Value;
-                    //eq[1] = tbTXEQ1.Value;
-                    //eq[2] = tbTXEQ5.Value;
-                    //eq[3] = tbTXEQ9.Value;
-					return eq;
-				}
-				else //if(rad10Band.Checked)
-				{
-					int[] eq = new int[11];
-                    //eq[0] = tbTXEQPreamp.Value;
-                    //eq[1] = tbTXEQ1.Value;
-                    //eq[2] = tbTXEQ2.Value;
-                    //eq[3] = tbTXEQ3.Value;
-                    //eq[4] = tbTXEQ4.Value;
-                    //eq[5] = tbTXEQ5.Value;
-                    //eq[6] = tbTXEQ6.Value;
-                    //eq[7] = tbTXEQ7.Value;
-                    //eq[8] = tbTXEQ8.Value;
-                    //eq[9] = tbTXEQ9.Value;
-                    //eq[10] = tbTXEQ10.Value;
-					return eq;
-				}
+                //if(rad3Band.Checked)
+                //{
+                //    int[] eq = new int[4];
+                //    //eq[0] = tbTXEQPreamp.Value;
+                //    //eq[1] = tbTXEQ1.Value;
+                //    //eq[2] = tbTXEQ5.Value;
+                //    //eq[3] = tbTXEQ9.Value;
+                //    return eq;
+                //}
+                //else //if(rad10Band.Checked)
+                //{
+					int[] eq = new int[21];
+                    eq[0]  = tbTXEQPre.Value;
+                    eq[1]  = tbTXEQ0.Value;
+                    eq[2]  = tbTXEQ1.Value;
+                    eq[3]  = tbTXEQ2.Value;
+                    eq[4]  = tbTXEQ3.Value;
+                    eq[5]  = tbTXEQ4.Value;
+                    eq[6]  = tbTXEQ5.Value;
+                    eq[7]  = tbTXEQ6.Value;
+                    eq[8]  = tbTXEQ7.Value;
+                    eq[9]  = tbTXEQ8.Value;
+                    eq[10] = tbTXEQ9.Value;
+
+                    eq[11] = (int)udTXEQ0.Value;
+                    eq[12] = (int)udTXEQ1.Value;
+                    eq[13] = (int)udTXEQ2.Value;
+                    eq[14] = (int)udTXEQ3.Value;
+                    eq[15] = (int)udTXEQ4.Value;
+                    eq[16] = (int)udTXEQ5.Value;
+                    eq[17] = (int)udTXEQ6.Value;
+                    eq[18] = (int)udTXEQ7.Value;
+                    eq[19] = (int)udTXEQ8.Value;
+                    eq[20] = (int)udTXEQ9.Value;
+                    return eq;
+                //}
 			}
 			set
 			{
-				if(rad3Band.Checked)
-				{
-					if(value.Length < 4)
-					{
-						MessageBox.Show("Error setting TX EQ");
-						return;
-					}
-                    //tbTXEQPreamp.Value = Math.Max(tbTXEQPreamp.Minimum, Math.Min(tbTXEQPreamp.Maximum, value[0]));
-                    //tbTXEQ1.Value = Math.Max(tbTXEQ1.Minimum, Math.Min(tbTXEQ1.Maximum, value[1]));
-                    //tbTXEQ5.Value = Math.Max(tbTXEQ5.Minimum, Math.Min(tbTXEQ5.Maximum, value[2]));
-                    //tbTXEQ9.Value = Math.Max(tbTXEQ9.Minimum, Math.Min(tbTXEQ9.Maximum, value[3]));
-				}
-				else if(rad10Band.Checked)
-				{
-					if(value.Length < 11)
-					{
-						MessageBox.Show("Error setting TX EQ");
-						return;
-					}
-                    //tbTXEQPreamp.Value = Math.Max(tbTXEQPreamp.Minimum, Math.Min(tbTXEQPreamp.Maximum, value[0]));
-                    //tbTXEQ1.Value = Math.Max(tbTXEQ1.Minimum, Math.Min(tbTXEQ1.Maximum, value[1]));
-                    //tbTXEQ2.Value = Math.Max(tbTXEQ2.Minimum, Math.Min(tbTXEQ2.Maximum, value[2]));
-                    //tbTXEQ3.Value = Math.Max(tbTXEQ3.Minimum, Math.Min(tbTXEQ3.Maximum, value[3]));
-                    //tbTXEQ4.Value = Math.Max(tbTXEQ4.Minimum, Math.Min(tbTXEQ4.Maximum, value[4]));
-                    //tbTXEQ5.Value = Math.Max(tbTXEQ5.Minimum, Math.Min(tbTXEQ5.Maximum, value[5]));
-                    //tbTXEQ6.Value = Math.Max(tbTXEQ6.Minimum, Math.Min(tbTXEQ6.Maximum, value[6]));
-                    //tbTXEQ7.Value = Math.Max(tbTXEQ7.Minimum, Math.Min(tbTXEQ7.Maximum, value[7]));
-                    //tbTXEQ8.Value = Math.Max(tbTXEQ8.Minimum, Math.Min(tbTXEQ8.Maximum, value[8]));
-                    //tbTXEQ9.Value = Math.Max(tbTXEQ9.Minimum, Math.Min(tbTXEQ9.Maximum, value[9]));
-                    //tbTXEQ10.Value = Math.Max(tbTXEQ10.Minimum, Math.Min(tbTXEQ10.Maximum, value[10]));
-				}
-				picTXEQ.Invalidate();
-				tbTXEQ_Scroll(this, EventArgs.Empty);
+                //if(rad3Band.Checked)
+                //{
+                //    if(value.Length < 4)
+                //    {
+                //        MessageBox.Show("Error setting TX EQ");
+                //        return;
+                //    }
+                //    //tbTXEQPreamp.Value = Math.Max(tbTXEQPreamp.Minimum, Math.Min(tbTXEQPreamp.Maximum, value[0]));
+                //    //tbTXEQ1.Value = Math.Max(tbTXEQ1.Minimum, Math.Min(tbTXEQ1.Maximum, value[1]));
+                //    //tbTXEQ5.Value = Math.Max(tbTXEQ5.Minimum, Math.Min(tbTXEQ5.Maximum, value[2]));
+                //    //tbTXEQ9.Value = Math.Max(tbTXEQ9.Minimum, Math.Min(tbTXEQ9.Maximum, value[3]));
+                //}
+                //else if(rad10Band.Checked)
+                //{
+                //    if(value.Length < 11)
+                //    {
+                //        MessageBox.Show("Error setting TX EQ");
+                //        return;
+                //    }
+                tbTXEQPre.Value = Math.Max(tbTXEQPre.Minimum, Math.Min(tbTXEQPre.Maximum, value[0]));
+                tbTXEQ0.Value = Math.Max(tbTXEQ0.Minimum, Math.Min(tbTXEQ0.Maximum, value[1]));
+                tbTXEQ1.Value = Math.Max(tbTXEQ1.Minimum, Math.Min(tbTXEQ1.Maximum, value[2]));
+                tbTXEQ2.Value = Math.Max(tbTXEQ2.Minimum, Math.Min(tbTXEQ2.Maximum, value[3]));
+                tbTXEQ3.Value = Math.Max(tbTXEQ3.Minimum, Math.Min(tbTXEQ3.Maximum, value[4]));
+                tbTXEQ4.Value = Math.Max(tbTXEQ4.Minimum, Math.Min(tbTXEQ4.Maximum, value[5]));
+                tbTXEQ5.Value = Math.Max(tbTXEQ5.Minimum, Math.Min(tbTXEQ5.Maximum, value[6]));
+                tbTXEQ6.Value = Math.Max(tbTXEQ6.Minimum, Math.Min(tbTXEQ6.Maximum, value[7]));
+                tbTXEQ7.Value = Math.Max(tbTXEQ7.Minimum, Math.Min(tbTXEQ7.Maximum, value[8]));
+                tbTXEQ8.Value = Math.Max(tbTXEQ8.Minimum, Math.Min(tbTXEQ8.Maximum, value[9]));
+                tbTXEQ9.Value = Math.Max(tbTXEQ9.Minimum, Math.Min(tbTXEQ9.Maximum, value[10]));
+
+                udTXEQ0.Value = Math.Max(udTXEQ0.Minimum, Math.Min(udTXEQ0.Maximum, value[11]));
+                udTXEQ1.Value = Math.Max(udTXEQ1.Minimum, Math.Min(udTXEQ1.Maximum, value[12]));
+                udTXEQ2.Value = Math.Max(udTXEQ2.Minimum, Math.Min(udTXEQ2.Maximum, value[13]));
+                udTXEQ3.Value = Math.Max(udTXEQ3.Minimum, Math.Min(udTXEQ3.Maximum, value[14]));
+                udTXEQ4.Value = Math.Max(udTXEQ4.Minimum, Math.Min(udTXEQ4.Maximum, value[15]));
+                udTXEQ5.Value = Math.Max(udTXEQ5.Minimum, Math.Min(udTXEQ5.Maximum, value[16]));
+                udTXEQ6.Value = Math.Max(udTXEQ6.Minimum, Math.Min(udTXEQ6.Maximum, value[17]));
+                udTXEQ7.Value = Math.Max(udTXEQ7.Minimum, Math.Min(udTXEQ7.Maximum, value[18]));
+                udTXEQ8.Value = Math.Max(udTXEQ8.Minimum, Math.Min(udTXEQ8.Maximum, value[19]));
+                udTXEQ9.Value = Math.Max(udTXEQ9.Minimum, Math.Min(udTXEQ9.Maximum, value[20]));
+                //}
+				//picTXEQ.Invalidate();
+				//tbTXEQ_Scroll(this, EventArgs.Empty);
 			}
 		}
 
@@ -1551,19 +1544,19 @@ namespace PowerSDR
 			picRXEQ.Invalidate();
 		}
 
-		private void tbTXEQ_Scroll(object sender, System.EventArgs e)
-		{
-			int[] txeq = TXEQ;
-			if(rad3Band.Checked) 
-			{
-				console.radio.GetDSPTX(0).TXEQ3 = txeq;
-			}
-			else
-			{
-				console.radio.GetDSPTX(0).TXEQ10 = txeq;
-			}
-			picTXEQ.Invalidate();
-		}
+        //private void tbTXEQ_Scroll(object sender, System.EventArgs e)
+        //{
+        //    int[] txeq = TXEQ;
+        //    if(rad3Band.Checked) 
+        //    {
+        //        console.radio.GetDSPTX(0).TXEQ3 = txeq;
+        //    }
+        //    else
+        //    {
+        //        console.radio.GetDSPTX(0).TXEQ10 = txeq;
+        //    }
+        //    picTXEQ.Invalidate();
+        //}
 
 		private void picRXEQ_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
@@ -1587,27 +1580,27 @@ namespace PowerSDR
 			e.Graphics.DrawLines(new Pen(Color.LightGreen), points);
 		}
 
-		private void picTXEQ_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-		{
-			int[] txeq = TXEQ;
-			if(!chkTXEQEnabled.Checked)
-			{
-				for(int i=0; i<txeq.Length; i++)
-					txeq[i] = 0;
-			}
+        //private void picTXEQ_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        //{
+        //    int[] txeq = TXEQ;
+        //    if(!chkTXEQEnabled.Checked)
+        //    {
+        //        for(int i=0; i<txeq.Length; i++)
+        //            txeq[i] = 0;
+        //    }
 
-			Point[] points = new Point[txeq.Length-1];
-			for(int i=1; i<txeq.Length; i++)
-			{
-				points[i-1].X = (int)((i-1)*picTXEQ.Width/(float)(txeq.Length-2));
-				points[i-1].Y = picTXEQ.Height/2 - (int)(txeq[i]*(picTXEQ.Height-6)/2/15.0f +
-					tbTXEQPre.Value * 3 / 15.0f);
-			}
+        //    Point[] points = new Point[txeq.Length-1];
+        //    for(int i=1; i<txeq.Length; i++)
+        //    {
+        //        points[i-1].X = (int)((i-1)*picTXEQ.Width/(float)(txeq.Length-2));
+        //        points[i-1].Y = picTXEQ.Height/2 - (int)(txeq[i]*(picTXEQ.Height-6)/2/15.0f +
+        //            tbTXEQPre.Value * 3 / 15.0f);
+        //    }
 
-			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-			e.Graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, picTXEQ.Width, picTXEQ.Height);
-			e.Graphics.DrawLines(new Pen(Color.LightGreen), points);
-		}
+        //    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+        //    e.Graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, picTXEQ.Width, picTXEQ.Height);
+        //    e.Graphics.DrawLines(new Pen(Color.LightGreen), points);
+        //}
 
 		private void chkRXEQEnabled_CheckedChanged(object sender, System.EventArgs e)
 		{
@@ -1619,7 +1612,7 @@ namespace PowerSDR
 		private void chkTXEQEnabled_CheckedChanged(object sender, System.EventArgs e)
 		{
 			console.radio.GetDSPTX(0).TXEQOn = chkTXEQEnabled.Checked;
-			picTXEQ.Invalidate();
+			//picTXEQ.Invalidate();
 			console.TXEQ = chkTXEQEnabled.Checked;
 		}
 
@@ -1644,26 +1637,26 @@ namespace PowerSDR
 			tbRXEQ_Scroll(this, EventArgs.Empty);
 		}
 
-		private void btnTXEQReset_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show(
-				"Are you sure you want to reset the Transmit Equalizer\n"+
-				"to flat (zero)?",
-				"Are you sure?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
+        //private void btnTXEQReset_Click(object sender, System.EventArgs e)
+        //{
+        //    DialogResult dr = MessageBox.Show(
+        //        "Are you sure you want to reset the Transmit Equalizer\n"+
+        //        "to flat (zero)?",
+        //        "Are you sure?",
+        //        MessageBoxButtons.YesNo,
+        //        MessageBoxIcon.Question);
 			
-			if(dr == DialogResult.No)
-				return;
+        //    if(dr == DialogResult.No)
+        //        return;
 
-            //foreach(Control c in grpTXEQ.Controls)
-            //{
-            //    if(c.GetType() == typeof(TrackBarTS))
-            //        ((TrackBarTS)c).Value = 0;
-            //}
+        //    foreach (Control c in grpTXEQ.Controls)
+        //    {
+        //        if (c.GetType() == typeof(TrackBarTS))
+        //            ((TrackBarTS)c).Value = 0;
+        //    }
 
-			tbTXEQ_Scroll(this, EventArgs.Empty);
-		}
+        //    //tbTXEQ_Scroll(this, EventArgs.Empty);
+        //}
 
 		private void rad3Band_CheckedChanged(object sender, System.EventArgs e)
 		{
@@ -1724,16 +1717,16 @@ namespace PowerSDR
                 //toolTip1.SetToolTip(tbTXEQ9, "1500-6000Hz");
 
 				RXEQ = console.radio.GetDSPRX(0, 0).RXEQ3;
-				TXEQ = console.radio.GetDSPTX(0).TXEQ3;
+				//TXEQ = console.radio.GetDSPTX(0).TXEQ3;
 
 				tbRXEQ_Scroll(this, EventArgs.Empty);
-				tbTXEQ_Scroll(this, EventArgs.Empty);
+				//tbTXEQ_Scroll(this, EventArgs.Empty);
 
 				picRXEQ.Invalidate();
-				picTXEQ.Invalidate();
+				//picTXEQ.Invalidate();
 		
 				console.radio.GetDSPRX(0, 0).RXEQNumBands = 3;
-				console.radio.GetDSPTX(0).TXEQNumBands = 3;
+				//console.radio.GetDSPTX(0).TXEQNumBands = 3;
 			}
 		}
 
@@ -1796,16 +1789,16 @@ namespace PowerSDR
                 //toolTip1.SetToolTip(tbTXEQ9, "");
 
 				RXEQ = console.radio.GetDSPRX(0, 0).RXEQ10;
-				TXEQ = console.radio.GetDSPTX(0).TXEQ10;
+				//TXEQ = console.radio.GetDSPTX(0).TXEQ10;
 
 				tbRXEQ_Scroll(this, EventArgs.Empty);
-				tbTXEQ_Scroll(this, EventArgs.Empty);
+				//tbTXEQ_Scroll(this, EventArgs.Empty);
 
 				picRXEQ.Invalidate();
-				picTXEQ.Invalidate();	
+				//picTXEQ.Invalidate();	
 			
 				console.radio.GetDSPRX(0, 0).RXEQNumBands = 10;
-				console.radio.GetDSPTX(0).TXEQNumBands = 10;
+				//console.radio.GetDSPTX(0).TXEQNumBands = 10;
 			}
 		}
 

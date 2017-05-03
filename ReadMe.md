@@ -1,7 +1,7 @@
 # OpenHPSDR-PowerSDR
 
-Latest Release v3.3.16 April 30, 2017
-# 3.3.16 (2017-4-30)
+Latest Release v3.3.16 May 2, 2017
+# 3.3.16 (2017-5-2)
 - SWR
 - CFC Tools
 

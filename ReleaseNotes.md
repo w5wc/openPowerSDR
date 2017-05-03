@@ -1,4 +1,4 @@
-# PowerSDR_mRX_PS 3.3.16.0 April 30, 2017
+# PowerSDR_mRX_PS 3.3.16.0 May 2, 2017
 
 
 # 3.2.22 (2015-1-24) 
@@ -161,7 +161,7 @@ The following list of values and states where added to the TX Profiles
 # 3.3.15 (2017-3-31)
   - Corrected sporadic HIGH SWR message seen in v3.3.14
   
-# 3.3.16 (2017-4-30)
+# 3.3.16 (2017-5-2)
   - SWR
   - CFC Tools
 
