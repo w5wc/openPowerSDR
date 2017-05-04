@@ -19,6 +19,10 @@
 //
 // You may contact the author via email at: k5kdn@arrl.net
 //=================================================================
+/*
+Modifications to support the Behringer Midi controllers
+by Chris Codella, W2PA, April 2017.  Indicated by //-W2PA comment lines.
+*/
 
 
 using System;
@@ -1141,8 +1145,8 @@ namespace PowerSDR
 				n = Math.Min(120, n);
 			}
 
-			if(s.Length == parser.nSet)
-			{
+            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            {
 				console.RF = n;
 				return "";
 			}
@@ -1153,9 +1157,10 @@ namespace PowerSDR
 					sign = "+";
 				else
 					sign = "-";
-				// we have to remove the leading zero and replace it with the sign.
-				return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
-			}
+                // we have to remove the leading zero and replace it with the sign.
+                //return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
+                return Convert.ToString(x);  //-W2PA This works fine.
+            }
 			else
 			{
 				return parser.Error1;
@@ -1177,8 +1182,8 @@ namespace PowerSDR
                     n = Math.Min(120, n);
                 }
 
-                if (s.Length == parser.nSet)
-                {
+            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            {
                     console.RX2RF = n;
                     return "";
                 }
@@ -1190,7 +1195,8 @@ namespace PowerSDR
                     else
                         sign = "-";
                     // we have to remove the leading zero and replace it with the sign.
-                    return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+                    //return sign + AddLeadingZeros(Math.Abs(x)).Substring(1);
+                    return Convert.ToString(x);  //-W2PA This works fine.
                 }
                 else
                     return parser.Error1;
@@ -4622,21 +4628,22 @@ namespace PowerSDR
 			{
 				return ZZRF(s);
 			}
-			else if(s.Length == parser.nGet && console.RITOn)
-			{
-				switch(console.RX1DSPMode)
-				{
-					case DSPMode.CWL:
-					case DSPMode.CWU:
-						console.RITValue -= 10;
-						break;
-					case DSPMode.LSB:
-					case DSPMode.USB:
-						console.RITValue -= 50;
-						break;
-				}
-				return "";
-			}
+            else if (s.Length == parser.nGet) // && console.RITOn)  //-W2PA Want to be able to change RIT value even if it's off
+            {
+                //switch(console.RX1DSPMode)
+                //{
+                //	case DSPMode.CWL:
+                //	case DSPMode.CWU:
+                //		console.RITValue -= 10;
+                //		break;
+                //	case DSPMode.LSB:
+                //	case DSPMode.USB:
+                //		console.RITValue -= 50;  
+                //                    break;
+                //            }
+                console.RITValue -= 10;  //-W2PA Changed to be same step in all modes.
+                return "";
+            }
 			else
 				return parser.Error1;
 		}
@@ -4667,9 +4674,10 @@ namespace PowerSDR
 					sign = "+";
 				else
 					sign = "-";
-				// we have to remove the leading zero and replace it with the sign.
-				return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
-			}
+                // we have to remove the leading zero and replace it with the sign.
+                //return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
+                return Convert.ToString(x);  //-W2PA This works fine.
+            }
 			else
 			{
 				return parser.Error1;
@@ -4851,21 +4859,23 @@ namespace PowerSDR
 			{
 				return ZZRF(s);
 			}
-			else if(s.Length == parser.nGet && console.RITOn)
-			{
-				switch(console.RX1DSPMode)
-				{
-					case DSPMode.CWL:
-					case DSPMode.CWU:
-						console.RITValue += 10;
-						break;
-					case DSPMode.LSB:
-					case DSPMode.USB:
-						console.RITValue += 50;
-						break;
-				}
-				return "";
-			}
+			else if(s.Length == parser.nGet) // && console.RITOn)  //-W2PA Want to be able to change RIT value even if it's off
+
+            {
+                //switch(console.RX1DSPMode)
+                //{
+                //	case DSPMode.CWL:
+                //	case DSPMode.CWU:
+                //		console.RITValue += 10;
+                //		break;
+                //	case DSPMode.LSB:
+                //	case DSPMode.USB:
+                //		console.RITValue += 50;  
+                //		break;
+                //            }
+                console.RITValue += 10;  //-W2PA Changed to operate in all modes.
+                return "";
+            }
 			else
 				return parser.Error1;		}
 
@@ -6646,9 +6656,10 @@ namespace PowerSDR
 					sign = "+";
 				else
 					sign = "-";
-				// we have to remove the leading zero and replace it with the sign.
-				return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
-			}
+                // we have to remove the leading zero and replace it with the sign.
+                //return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
+                return Convert.ToString(x);  //-W2PA This works fine.
+            }
 			else
 			{
 				return parser.Error1;

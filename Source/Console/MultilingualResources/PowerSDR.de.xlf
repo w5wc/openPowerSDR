@@ -20790,8 +20790,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnZeroBeat.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>22, 30</source>
+          <source>22, 28</source>
           <target state="needs-review-translation">22, 30</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnZeroBeat.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -20830,8 +20831,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkVFOSplit.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>22, 7</source>
+          <source>22, 5</source>
           <target state="needs-review-translation">22, 7</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkVFOSplit.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -20866,8 +20868,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnRITReset.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>108, 83</source>
+          <source>108, 78</source>
           <target state="needs-review-translation">108, 83</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnRITReset.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>16, 20</source>
@@ -20898,8 +20901,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnXITReset.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>52, 83</source>
+          <source>52, 78</source>
           <target state="needs-review-translation">52, 83</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnXITReset.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>16, 20</source>
@@ -20918,8 +20922,9 @@
           <target state="translated" state-qualifier="mt-suggestion">Löschen beenden</target>
         </trans-unit>
         <trans-unit id="udRIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>76, 103</source>
+          <source>76, 98</source>
           <target state="needs-review-translation">76, 103</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="udRIT.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>56, 20</source>
@@ -20950,8 +20955,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnIFtoVFO.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>22, 53</source>
+          <source>22, 51</source>
           <target state="needs-review-translation">22, 53</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnIFtoVFO.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -20986,8 +20992,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkRIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>76, 83</source>
+          <source>76, 78</source>
           <target state="needs-review-translation">76, 83</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkRIT.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>32, 20</source>
@@ -21026,8 +21033,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnVFOSwap.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 53</source>
+          <source>73, 51</source>
           <target state="needs-review-translation">73, 53</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnVFOSwap.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -21062,8 +21070,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkXIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>20, 83</source>
+          <source>20, 78</source>
           <target state="needs-review-translation">20, 83</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkXIT.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>32, 20</source>
@@ -21102,8 +21111,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnVFOBtoA.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 30</source>
+          <source>73, 28</source>
           <target state="needs-review-translation">73, 30</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnVFOBtoA.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -21122,8 +21132,9 @@
           <target state="translated" state-qualifier="mt-suggestion">VFO VFO B soll ein</target>
         </trans-unit>
         <trans-unit id="udXIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>12, 103</source>
+          <source>12, 98</source>
           <target state="needs-review-translation">12, 103</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="udXIT.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>56, 20</source>
@@ -21154,8 +21165,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnVFOAtoB.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 7</source>
+          <source>73, 5</source>
           <target state="needs-review-translation">73, 7</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnVFOAtoB.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -21590,8 +21602,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkVAC1.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>18, 127</source>
+          <source>18, 141</source>
           <target state="needs-review-translation">18, 127</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkVAC1.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -25052,8 +25065,9 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkVAC2.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 127</source>
+          <source>73, 142</source>
           <target state="needs-review-translation">73, 127</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkVAC2.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>50, 23</source>
@@ -28146,8 +28160,9 @@
           <target state="needs-review-translation">120, 420</target>
         </trans-unit>
         <trans-unit id="panelVFO.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
-          <source>136, 161</source>
+          <source>136, 168</source>
           <target state="needs-review-translation">136, 161</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="panelVFO.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>120</source>
@@ -31530,6 +31545,34 @@
         <trans-unit id="txtDisplayOrionMKIIBlank.TextAlign" translate="yes" xml:space="preserve" extype="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
           <source>Center</source>
           <target state="needs-review-translation">Center</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>Off</source>
+          <target state="needs-review-translation">Off</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>45, 121</source>
+          <target state="needs-review-translation">45, 121</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>54, 17</source>
+          <target state="needs-review-translation">54, 17</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>146</source>
+          <target state="needs-review-translation">146</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.Text" translate="yes" xml:space="preserve">
+          <source>Sync</source>
+          <target state="new">Sync</target>
+        </trans-unit>
+        <trans-unit id="chkSyncIT.ToolTip" translate="yes" xml:space="preserve">
+          <source>Synchronize RIT and XIT</source>
+          <target state="new">Synchronize RIT and XIT</target>
         </trans-unit>
       </group>
     </body>
