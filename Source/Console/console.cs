@@ -32896,8 +32896,8 @@ namespace PowerSDR
                             JanusAudio.SetSWRProtect((float)(2.0 / (swr + 1.0)));
                             HighSWR = true;
 
-                            if (current_display_engine == DisplayEngine.GDI_PLUS)
-                                picDisplay.Invalidate();
+                           // if (current_display_engine == DisplayEngine.GDI_PLUS)
+                               // picDisplay.Invalidate();
                         }
                     }
                     else
@@ -32905,8 +32905,8 @@ namespace PowerSDR
                         high_swr_count = 0;
                         JanusAudio.SetSWRProtect(1.0f);
                         HighSWR = false;
-                        if (current_display_engine == DisplayEngine.GDI_PLUS)
-                            picDisplay.Invalidate();
+                       // if (current_display_engine == DisplayEngine.GDI_PLUS)
+                          //  picDisplay.Invalidate();
                     }
 
                 end:
@@ -32915,8 +32915,10 @@ namespace PowerSDR
                     alex_swr = 1.0f;
                 else
                     alex_swr = swr;
-                }
 
+               // Thread.Sleep(10);
+                }
+                else if (high_swr) HighSWR = false;
                 Thread.Sleep(1);
             }
 
