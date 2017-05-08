@@ -405,6 +405,8 @@ namespace PowerSDR
         DIGL,
         SAM,
         DRM,
+        AM_LSB,
+        AM_USB,
         LAST,
     }
 
@@ -32915,8 +32917,6 @@ namespace PowerSDR
                     alex_swr = 1.0f;
                 else
                     alex_swr = swr;
-
-               // Thread.Sleep(10);
                 }
                 else if (high_swr) HighSWR = false;
                 Thread.Sleep(1);

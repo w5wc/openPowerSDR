@@ -2793,6 +2793,7 @@ namespace PowerSDR
             radRX2USB_CheckedChanged(this, e);
             chkCBlock_CheckedChanged(this, e);
             chkRX2CBlock_CheckedChanged(this, e);
+            radTXDSB_CheckedChanged(this, e);
             // FM Tab
             chkEmphPos_CheckedChanged(this, e);
             chkRemoveTone_CheckedChanged(this, e);
@@ -20543,6 +20544,18 @@ namespace PowerSDR
         private void tbCFCPEG_Scroll(object sender, EventArgs e)
         {
             wdsp.SetTXACFCOMPPrePeq(wdsp.id(1, 0), (double)tbCFCPEQGAIN.Value);
+        }
+
+        private void radTXDSB_CheckedChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (radTXDSB.Checked)
+                value = 0;
+            else if (radTXLSB.Checked)
+                value = 1;
+            else if (radTXUSB.Checked)
+                value = 2;
+            console.radio.GetDSPTX(0).SubAMMode = value;
         }
     }
 
