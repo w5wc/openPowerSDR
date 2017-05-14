@@ -32842,7 +32842,7 @@ namespace PowerSDR
                     else   
                         swr = (1.0f + rho) / (1.0f - rho);
 
-                    if ((alex_fwd <= 2 && alex_rev <= 2) || swr < 1.0f) swr = 1.0f;
+                    if ((alex_fwd <= 2.0f && alex_rev <= 2.0f) || swr < 1.0f) swr = 1.0f;
 
                     if (alexpresent || apollopresent)
                     {
@@ -32889,7 +32889,7 @@ namespace PowerSDR
                     if (current_hpsdr_model == HPSDRModel.ANAN8000D)        // K2UE idea:  try to determine if Hi-Z or Lo-Z load
                         alex_fwd_limit = 2.0f * (float)ptbPWR.Value;        //    by comparing alex_fwd with power setting
 
-                    if (swr > 2.25 && alex_fwd > alex_fwd_limit && swrprotection && !swr_pass)
+                    if (swr > 2.0f && alex_fwd > alex_fwd_limit && swrprotection && !swr_pass)
                     {
                         high_swr_count++;
                         if (high_swr_count >= 4)

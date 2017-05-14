@@ -8000,22 +8000,46 @@ namespace PowerSDR
                 panelAlex1HPFControl.Visible = false;
 
             }
-            console.ANAN8000DPresent = radGenModelANAN8000D.Checked;
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
 
             if (radGenModelANAN8000D.Checked)
             {
-                bool power = console.PowerOn;
+                int nr;
+                bool pwr_cycled = false;
+                if (chkLimitRX.Checked) nr = 2;
+                else nr = 4;
 
-                if (power && (old_model != console.CurrentHPSDRModel))
+                if (chkLimitRX.Checked)
+                    console.StitchedReceivers = 1;
+                else console.StitchedReceivers = 3;
+                if (!chkDisablePureSignal.Checked)
+                    nr = console.psform.NRX(nr, console.CurrentHPSDRModel);
+
+                int old_rate = console.NReceivers;
+                int new_rate = nr;
+                bool power = console.PowerOn;
+                if (power && new_rate != old_rate)
                 {
                     console.PowerOn = false;
                     Thread.Sleep(100);
                 }
+                console.psform.SetPSReceivers(console.CurrentHPSDRModel);
+                console.NReceivers = nr;
 
-                if (power && (old_model != console.CurrentHPSDRModel))
+                if (power && new_rate != old_rate)
                 {
+                    pwr_cycled = true;
                     console.PowerOn = true;
+                }
+
+                if (power && !pwr_cycled)
+                {
+                    if (old_model != console.CurrentHPSDRModel)
+                    {
+                        console.PowerOn = false;
+                        Thread.Sleep(100);
+                        console.PowerOn = true;
+                    }
                 }
             }
         }
@@ -8504,11 +8528,12 @@ namespace PowerSDR
                    tcAudio.SelectedIndex = 0;
                } */
 
-            /*  if (tcDSP.TabPages.Contains(tpDSPImageReject))
+            // Hide CFC tab
+            if (tcDSP.TabPages.Contains(tpDSPCFC))
               {
-                  tcDSP.TabPages.Remove(tpDSPImageReject);
+                  tcDSP.TabPages.Remove(tpDSPCFC);
                   tcDSP.SelectedIndex = 0;
-              } */
+              } 
 
             /* if (tcDSP.TabPages.Contains(tpDSPEER))
               {
@@ -18876,6 +18901,9 @@ namespace PowerSDR
                     break;
                 case HPSDRModel.ANAN200D:
                     radGenModelANAN200D_CheckedChanged(this, EventArgs.Empty);
+                    break;
+                case HPSDRModel.ANAN8000D:
+                    radGenModelANAN8000D_CheckedChanged(this, EventArgs.Empty);
                     break;
             }
         }

@@ -24862,6 +24862,7 @@
             this.grpAMTX.TabIndex = 44;
             this.grpAMTX.TabStop = false;
             this.grpAMTX.Text = "AM Transmit Sideband Select";
+            this.grpAMTX.Visible = false;
             // 
             // radTXUSB
             // 

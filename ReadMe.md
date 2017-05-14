@@ -1,9 +1,8 @@
 # OpenHPSDR-PowerSDR
 
 Latest Release v3.3.16 May 10, 2017
-# 3.3.16 (2017-5-10)
+# 3.3.16 (2017-5-14)
 - SWR
-- CFC Tools
 - MIDI2CAT
 
 # 3.3.15 (2017-3-31)
