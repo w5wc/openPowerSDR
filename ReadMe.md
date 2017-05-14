@@ -10,7 +10,7 @@ Latest Release v3.3.16 May 14, 2017
 
 
 # 3.3.15 (2017-3-31)
-- Corrected sporadic HIGH SWR meassage found in v3.3.14
+- Corrected sporadic HIGH SWR message found in v3.3.14
 
 # 3.3.14 (2017-3-26)
 - PureSignal updated to v2.0.
