@@ -8529,11 +8529,11 @@ namespace PowerSDR
                } */
 
             // Hide CFC tab
-            if (tcDSP.TabPages.Contains(tpDSPCFC))
-              {
-                  tcDSP.TabPages.Remove(tpDSPCFC);
-                  tcDSP.SelectedIndex = 0;
-              } 
+            //if (tcDSP.TabPages.Contains(tpDSPCFC))
+            //  {
+            //      tcDSP.TabPages.Remove(tpDSPCFC);
+            //      tcDSP.SelectedIndex = 0;
+            //  } 
 
             /* if (tcDSP.TabPages.Contains(tpDSPEER))
               {
