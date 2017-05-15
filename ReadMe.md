@@ -1,11 +1,10 @@
-# OpenHPSDR-PowerSDR
+# OpenHPSDR-PowerSDR beta releases
+# Official Releases are located at https://github.com/tapr
 
 Latest Beta Release v3.3.17 May 15, 2017
 # 3.3.17 (2017-5-15)
 - Single side-band Full Carrier (SSBFC)
 - Continuous Frequency Compressor (CFC) audio tools
-
-# Official Releases are located at https://github.com/tapr
 
 # 3.3.16 (2017-5-14)
 - Corrects sporadic HIGH SWR message found in v3.3.14 & v3.3.15
