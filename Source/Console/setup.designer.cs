@@ -39851,9 +39851,9 @@
             this.tpWattMeter.Controls.Add(this.richTextBox1);
             this.tpWattMeter.Controls.Add(this.panelPAValues);
             this.tpWattMeter.Controls.Add(this.chkPAValues);
+            this.tpWattMeter.Controls.Add(this.grp10WattMeterTrim);
             this.tpWattMeter.Controls.Add(this.grp100WattMeterTrim);
             this.tpWattMeter.Controls.Add(this.grp200WattMeterTrim);
-            this.tpWattMeter.Controls.Add(this.grp10WattMeterTrim);
             this.tpWattMeter.Location = new System.Drawing.Point(4, 22);
             this.tpWattMeter.Name = "tpWattMeter";
             this.tpWattMeter.Padding = new System.Windows.Forms.Padding(3);
