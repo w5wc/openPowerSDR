@@ -169,5 +169,3 @@ The following list of values and states where added to the TX Profiles
 - Added 200W Meter Trim range for the 8000DLE.
 
 
-
-
