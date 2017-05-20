@@ -770,6 +770,7 @@
 		<ngetparms>0</ngetparms>
 		<nansparms>1</nansparms>
     </catstruct>
+	<catstruct code="ZZAA">
 		<desc>APF gain</desc>
 		<active>true</active>
 		<nsetparms>1</nsetparms>
