@@ -5917,7 +5917,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnZeroBeat.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>22, 28</source>
+          <source>18, 28</source>
           <target state="needs-review-translation">22, 30</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -5960,7 +5960,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkVFOSplit.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>22, 5</source>
+          <source>18, 5</source>
           <target state="needs-review-translation">22, 7</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -5998,7 +5998,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnRITReset.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>108, 78</source>
+          <source>44, 76</source>
           <target state="needs-review-translation">108, 83</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6031,7 +6031,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnXITReset.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>52, 78</source>
+          <source>105, 76</source>
           <target state="needs-review-translation">52, 83</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6052,7 +6052,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="translated">Сбрасывает расстройку передатчика - XIT</target>
         </trans-unit>
         <trans-unit id="udRIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>76, 98</source>
+          <source>12, 96</source>
           <target state="needs-review-translation">76, 103</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6086,7 +6086,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnIFtoVFO.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>22, 51</source>
+          <source>18, 51</source>
           <target state="needs-review-translation">22, 53</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6123,7 +6123,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkRIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>76, 78</source>
+          <source>12, 76</source>
           <target state="needs-review-translation">76, 83</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6166,7 +6166,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnVFOSwap.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 51</source>
+          <source>69, 51</source>
           <target state="needs-review-translation">73, 53</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6203,7 +6203,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkXIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>20, 78</source>
+          <source>73, 76</source>
           <target state="needs-review-translation">20, 83</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6246,7 +6246,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnVFOBtoA.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 28</source>
+          <source>69, 28</source>
           <target state="needs-review-translation">73, 30</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6267,7 +6267,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="translated">Копирует частоту VFO B в VFO A</target>
         </trans-unit>
         <trans-unit id="udXIT.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>12, 98</source>
+          <source>73, 96</source>
           <target state="needs-review-translation">12, 103</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -6301,7 +6301,7 @@ NR - стандартный. NR2 - обновленный</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnVFOAtoB.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 5</source>
+          <source>69, 5</source>
           <target state="needs-review-translation">73, 7</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -10253,7 +10253,7 @@ PWR, EQ, микрофонный вход</target>
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="chkVAC2.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>73, 142</source>
+          <source>73, 141</source>
           <target state="needs-review-translation">73, 127</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
