@@ -1504,7 +1504,7 @@
     <value>36</value>
   </data>
   <data name="chkCWBreakInEnabled.Text" xml:space="preserve">
-    <value>Semi Break-in</value>
+    <value>Semi Break-In</value>
   </data>
   <data name="chkCWBreakInEnabled.ToolTip" xml:space="preserve">
     <value>Enables Semi Break In operation.</value>
@@ -7608,6 +7608,66 @@
   <data name="&gt;&gt;chkSyncIT.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblCWBreakInDelay.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="lblCWBreakInDelay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblCWBreakInDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 16</value>
+  </data>
+  <data name="lblCWBreakInDelay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="lblCWBreakInDelay.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="lblCWBreakInDelay.Text" xml:space="preserve">
+    <value>Delay (ms):</value>
+  </data>
+  <data name="lblCWBreakInDelay.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblCWBreakInDelay.Name" xml:space="preserve">
+    <value>lblCWBreakInDelay</value>
+  </data>
+  <data name="&gt;&gt;lblCWBreakInDelay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=3.3.19.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblCWBreakInDelay.Parent" xml:space="preserve">
+    <value>grpSemiBreakIn</value>
+  </data>
+  <data name="&gt;&gt;lblCWBreakInDelay.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpSemiBreakIn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 89</value>
+  </data>
+  <data name="grpSemiBreakIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 44</value>
+  </data>
+  <data name="grpSemiBreakIn.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="grpSemiBreakIn.Text" xml:space="preserve">
+    <value>CW Break In</value>
+  </data>
+  <data name="grpSemiBreakIn.ToolTip" xml:space="preserve">
+    <value>Choose between Full or Semi Break-in</value>
+  </data>
+  <data name="&gt;&gt;grpSemiBreakIn.Name" xml:space="preserve">
+    <value>grpSemiBreakIn</value>
+  </data>
+  <data name="&gt;&gt;grpSemiBreakIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=3.3.19.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grpSemiBreakIn.Parent" xml:space="preserve">
+    <value>panelModeSpecificCW</value>
+  </data>
+  <data name="&gt;&gt;grpSemiBreakIn.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
@@ -9647,66 +9707,6 @@
   </data>
   <data name="&gt;&gt;lblCWSpeed.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="lblCWBreakInDelay.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="lblCWBreakInDelay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="lblCWBreakInDelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 16</value>
-  </data>
-  <data name="lblCWBreakInDelay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 16</value>
-  </data>
-  <data name="lblCWBreakInDelay.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="lblCWBreakInDelay.Text" xml:space="preserve">
-    <value>Delay (ms):</value>
-  </data>
-  <data name="lblCWBreakInDelay.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblCWBreakInDelay.Name" xml:space="preserve">
-    <value>lblCWBreakInDelay</value>
-  </data>
-  <data name="&gt;&gt;lblCWBreakInDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=3.3.19.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCWBreakInDelay.Parent" xml:space="preserve">
-    <value>grpSemiBreakIn</value>
-  </data>
-  <data name="&gt;&gt;lblCWBreakInDelay.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grpSemiBreakIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 89</value>
-  </data>
-  <data name="grpSemiBreakIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 44</value>
-  </data>
-  <data name="grpSemiBreakIn.TabIndex" type="System.Int32, mscorlib">
-    <value>77</value>
-  </data>
-  <data name="grpSemiBreakIn.Text" xml:space="preserve">
-    <value>CW Break In</value>
-  </data>
-  <data name="grpSemiBreakIn.ToolTip" xml:space="preserve">
-    <value>Choose between Full or Semi Break-in</value>
-  </data>
-  <data name="&gt;&gt;grpSemiBreakIn.Name" xml:space="preserve">
-    <value>grpSemiBreakIn</value>
-  </data>
-  <data name="&gt;&gt;grpSemiBreakIn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=3.3.19.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grpSemiBreakIn.Parent" xml:space="preserve">
-    <value>panelModeSpecificCW</value>
-  </data>
-  <data name="&gt;&gt;grpSemiBreakIn.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="lblCWPitchFreq.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -2177,6 +2177,8 @@ namespace PowerSDR
             this.ptbCWAPFBandwidth = new PowerSDR.PrettyTrackBar();
             this.ptbCWAPFFreq = new PowerSDR.PrettyTrackBar();
             this.chkSyncIT = new System.Windows.Forms.CheckBox();
+            this.grpSemiBreakIn = new System.Windows.Forms.GroupBoxTS();
+            this.lblCWBreakInDelay = new System.Windows.Forms.LabelTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -2339,8 +2341,6 @@ namespace PowerSDR
             this.lblCWAPFBandwidth = new System.Windows.Forms.LabelTS();
             this.lblCWAPFTune = new System.Windows.Forms.LabelTS();
             this.lblCWSpeed = new System.Windows.Forms.LabelTS();
-            this.grpSemiBreakIn = new System.Windows.Forms.GroupBoxTS();
-            this.lblCWBreakInDelay = new System.Windows.Forms.LabelTS();
             this.lblCWPitchFreq = new System.Windows.Forms.LabelTS();
             this.panelRX2Filter = new System.Windows.Forms.PanelTS();
             this.radRX2Filter1 = new System.Windows.Forms.RadioButtonTS();
@@ -2513,6 +2513,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWAPFGain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWAPFBandwidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWAPFFreq)).BeginInit();
+            this.grpSemiBreakIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).BeginInit();
             this.contextMenuStripFilterRX1.SuspendLayout();
             this.contextMenuStripFilterRX2.SuspendLayout();
@@ -2528,7 +2529,6 @@ namespace PowerSDR
             this.panelFilter.SuspendLayout();
             this.panelModeSpecificCW.SuspendLayout();
             this.grpCWAPF.SuspendLayout();
-            this.grpSemiBreakIn.SuspendLayout();
             this.panelRX2Filter.SuspendLayout();
             this.panelRX2Mode.SuspendLayout();
             this.panelRX2Display.SuspendLayout();
@@ -4785,6 +4785,23 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkSyncIT, resources.GetString("chkSyncIT.ToolTip"));
             this.chkSyncIT.UseVisualStyleBackColor = true;
             // 
+            // grpSemiBreakIn
+            // 
+            this.grpSemiBreakIn.Controls.Add(this.udCWBreakInDelay);
+            this.grpSemiBreakIn.Controls.Add(this.lblCWBreakInDelay);
+            this.grpSemiBreakIn.Controls.Add(this.chkCWBreakInEnabled);
+            this.grpSemiBreakIn.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.grpSemiBreakIn, "grpSemiBreakIn");
+            this.grpSemiBreakIn.Name = "grpSemiBreakIn";
+            this.grpSemiBreakIn.TabStop = false;
+            this.toolTip1.SetToolTip(this.grpSemiBreakIn, resources.GetString("grpSemiBreakIn.ToolTip"));
+            // 
+            // lblCWBreakInDelay
+            // 
+            this.lblCWBreakInDelay.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.lblCWBreakInDelay, "lblCWBreakInDelay");
+            this.lblCWBreakInDelay.Name = "lblCWBreakInDelay";
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -6005,23 +6022,6 @@ namespace PowerSDR
             this.lblCWSpeed.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.lblCWSpeed, "lblCWSpeed");
             this.lblCWSpeed.Name = "lblCWSpeed";
-            // 
-            // grpSemiBreakIn
-            // 
-            this.grpSemiBreakIn.Controls.Add(this.udCWBreakInDelay);
-            this.grpSemiBreakIn.Controls.Add(this.lblCWBreakInDelay);
-            this.grpSemiBreakIn.Controls.Add(this.chkCWBreakInEnabled);
-            this.grpSemiBreakIn.ForeColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.grpSemiBreakIn, "grpSemiBreakIn");
-            this.grpSemiBreakIn.Name = "grpSemiBreakIn";
-            this.grpSemiBreakIn.TabStop = false;
-            this.toolTip1.SetToolTip(this.grpSemiBreakIn, resources.GetString("grpSemiBreakIn.ToolTip"));
-            // 
-            // lblCWBreakInDelay
-            // 
-            this.lblCWBreakInDelay.ForeColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.lblCWBreakInDelay, "lblCWBreakInDelay");
-            this.lblCWBreakInDelay.Name = "lblCWBreakInDelay";
             // 
             // lblCWPitchFreq
             // 
@@ -7516,6 +7516,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWAPFGain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWAPFBandwidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWAPFFreq)).EndInit();
+            this.grpSemiBreakIn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).EndInit();
             this.contextMenuStripFilterRX1.ResumeLayout(false);
             this.contextMenuStripFilterRX2.ResumeLayout(false);
@@ -7532,7 +7533,6 @@ namespace PowerSDR
             this.panelFilter.ResumeLayout(false);
             this.panelModeSpecificCW.ResumeLayout(false);
             this.grpCWAPF.ResumeLayout(false);
-            this.grpSemiBreakIn.ResumeLayout(false);
             this.panelRX2Filter.ResumeLayout(false);
             this.panelRX2Mode.ResumeLayout(false);
             this.panelRX2Display.ResumeLayout(false);

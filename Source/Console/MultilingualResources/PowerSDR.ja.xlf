@@ -19643,8 +19643,8 @@
           <target state="needs-review-translation">36</target>
         </trans-unit>
         <trans-unit id="chkCWBreakInEnabled.Text" translate="yes" xml:space="preserve">
-          <source>Semi Break-in</source>
-          <target state="new">Semi Break-in</target>
+          <source>Semi Break-In</source>
+          <target state="new">Semi Break-In</target>
         </trans-unit>
         <trans-unit id="chkCWBreakInEnabled.ToolTip" translate="yes" xml:space="preserve">
           <source>Enables Semi Break In operation.</source>

@@ -10,6 +10,7 @@ Latest Beta Release v3.3.19 May 28, 2017
  -- ZZAB APB Bandwidth
  -- ZZAA APF Gain
 - Corrected capatability issue with N1MM+ and FocusMaster.
+- relabeled the 'CW Break-In' feature from 'Enabled' to 'Semi Break-In' to better describe the actual behavior.        Toggles between Full Break-In and Semi Break-In.
 
 # 3.3.18 (2017-5-16)
 - Corrects a compatibility issue with DDUtil
