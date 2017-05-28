@@ -1,14 +1,15 @@
 # OpenHPSDR-PowerSDR beta releases
 # Official Releases are located at https://github.com/tapr
 
-Latest Beta Release v3.3.19 May 19, 2017
-# 3.3.19 (2017-5-19)
+Latest Beta Release v3.3.19 May 28, 2017
+# 3.3.19 (2028-5-19)
 - Swaped places with XIT and RIT controls on the console.
 - Added 4 CAT Commands
  -- ZZAP Audio Peak Filter On/Off
  -- ZZAT APF Tune
  -- ZZAB APB Bandwidth
  -- ZZAA APF Gain
+- Corrected capatability issue with N1MM+ and FocusMaster.
 
 # 3.3.18 (2017-5-16)
 - Corrects a compatibility issue with DDUtil
