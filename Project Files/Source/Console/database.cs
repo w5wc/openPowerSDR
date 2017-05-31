@@ -2,7 +2,7 @@
 // database.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
-// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2015  Doug Wigley
+// Copyright (C) 2004-2012  FlexRadio Systems Copyright (C) 2010-2017  Doug Wigley
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,9 +25,12 @@
 //    Austin, TX 78728
 //    USA
 //=================================================================
+// Modifications to the database import function to allow using files created with earlier versions.
+// by Chris Codella, W2PA, May 2017.  Indicated by //-W2PA comment lines. 
 
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using System.Collections;
 using System.Diagnostics;
@@ -50,6 +53,21 @@ namespace PowerSDR
         public static string FileName
         {
             set { file_name = value; }
+        }
+
+        private static Boolean importedDS = false;
+
+        private static string version_nr = "";
+        public static string VersionNumber
+        {
+            set { version_nr = value; }
+            get { return version_nr; }
+        }
+        private static string version_str = "";
+        public static string VersionString
+        {
+            set { version_str = value; }
+            get { return version_str; }
         }
 
         #endregion
@@ -6301,16 +6319,31 @@ namespace PowerSDR
         // Public Member Functions 
         // ======================================================
 
-        public static void Init()
+        public static Boolean Init(Console thisConsole)
         {
             ds = new DataSet("Data");
 
             if (File.Exists(file_name))
+            {
+                try
+                {
                 ds.ReadXml(file_name);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+                
 
             VerifyTables();
 
             CheckBandTextValid();
+
+            VersionNumber = thisConsole.getVersion();
+            VersionString = TitleBar.GetString();
+
+            return true;
         }
 
         public static void Update()
@@ -6328,9 +6361,56 @@ namespace PowerSDR
             }
         }
 
+        //-W2PA Write the database to a specific file
+        public static Boolean WriteDB(string fn)
+        {
+           // if (!File.Exists(fn)) return false;
+
+            try
+            {
+                ds.WriteXml(fn, XmlWriteMode.WriteSchema);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A database write to file operation failed.  " +
+                    "The exception error was:\n\n" + ex.Message,
+                    "ERROR: Database Write Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        //-W2PA Write specific dataset to a file 
+        public static Boolean WriteDB(string fn, DataSet dsIN)
+        {
+            // if (!File.Exists(fn)) return false;
+
+            try
+            {
+                dsIN.WriteXml(fn, XmlWriteMode.WriteSchema);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A database write to file operation failed.  " +
+                    "The exception error was:\n\n" + ex.Message,
+                    "ERROR: Database Write Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean WriteCurrentDB(string fn)
+        {
+            return WriteDB(fn, ds);
+        }
+
         public static void Exit()
         {
+            if (!importedDS) //-W2PA Only update if not just imported.
             Update();
+            else importedDS = false;
             ds = null;
         }
 
@@ -6539,6 +6619,296 @@ namespace PowerSDR
             return list;
         }
 
+        //-W2PA New version of ImportDatabase to merge an old database or partly corruped one with a new default one
+        public static Boolean ImportAndMergeDatabase(string filename, string appDataPath)
+        {
+            importedDS = false;
+            if (!File.Exists(filename)) return false;
+
+            Boolean DBdebug = false;  // Set =true to write various versions of the xml file during testing
+
+            // Initialize the log file
+            string logFN = appDataPath + "ImportLog.txt";
+            FileStream fs = File.Open(logFN, FileMode.Create);
+            fs.Close();
+                       
+            // Make a copy of the existing DB
+            DataSet existingDB = ds.Copy();            
+
+            if (DBdebug) WriteDB(appDataPath + "existingDB.xml", existingDB);
+
+            // Read in DB to be merged 
+            DataSet oldDB = new DataSet();
+            try
+            {
+                oldDB.ReadXml(filename);
+            }
+            catch (Exception)  // Something is seriously wrong with the file.
+            {
+                //MessageBox.Show("The file: " + filename + " could not be read successfully.","Error",
+                //    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (DBdebug) WriteDB(appDataPath + "oldDB.xml", oldDB);
+            WriteImportLog(logFN, "Read <" + filename + ">\n\n");
+
+            // Check that imported DB has basic validity
+            string validationProblems = ValidateImportedDatabase(oldDB);
+            if (validationProblems != "")
+            {
+                WriteImportLog(logFN, validationProblems);
+                return false;
+            }
+
+            DataSet mergedDB = ds.Clone(); // Adopt the new DB schema
+
+            // Start by merging any tables in the imported DB that don't come with a freshly reset database
+            foreach (DataTable oldTable in oldDB.Tables)
+            {
+                Boolean found = false;
+                foreach (DataTable existingTable in existingDB.Tables)
+                {
+                    if (existingTable.TableName == oldTable.TableName)
+                    {                       
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) mergedDB.Merge(oldTable);
+            }            
+
+            foreach (DataTable table in existingDB.Tables)
+            {                
+                DataTableCollection oldDBtables = oldDB.Tables;
+                Boolean foundTable = false;
+                DataTable tempMergedTable = table.Clone();
+                DataTable tempTable = table.Clone();
+
+                switch (table.TableName)
+                {
+                    //------Uncomment this section to allow importing BandText rows from old db, and also comment out duplicate case below
+                    //case "BandText":
+                    //    // Get table of same name in oldDB       
+                    //    tempTable.Clear();
+                    //    tempMergedTable.Clear();
+                    //    foreach (DataTable t in oldDB.Tables)
+                    //    {
+                    //        if (t.TableName == table.TableName)
+                    //        {
+                    //            tempTable = t.Copy();
+                    //            foundTable = true;
+                    //            break;
+                    //        }
+                    //    }
+                    //    if (!foundTable) break;
+
+                    //    // For each row of existingDB, if there is matching Low and High in oldDB, 
+                    //    // copy that entry, else take existing one, into tempMergedTable.
+                    //    foreach (DataRow row in table.Rows)
+                    //    {
+                    //        string selector = "Low = " + row["Low"] + " AND High = " + row["High"];
+                    //        DataRow[] foundRow = tempTable.Select(selector);
+                    //        if (foundRow.Length != 0) tempMergedTable.ImportRow(foundRow[0]);
+                    //        else tempMergedTable.ImportRow(row);
+                    //    }
+
+                    //    // Copy tempTable into mergedDB 
+                    //    mergedDB.Merge(tempMergedTable);
+                    //    WriteImportLog(logFN, "Imported table <" + table.TableName + "> into database.\n")
+                    //    break;
+
+                    case "BandText":
+                    case "BandStack":
+                    case "GroupList":
+                    case "Memory":
+                        mergedDB.Merge(table); // don't overwrite current tables for these cases
+                        WriteImportLog(logFN, "Did not import table <" + table.TableName + "> into database.\n");
+                        break;
+
+                    case "TXProfile":
+                        // Get table of same name in oldDB   
+                        DataTable tempOldTable = oldDB.Tables["TXProfile"].Clone();
+                        tempMergedTable.Clear();
+                        foreach (DataTable t in oldDB.Tables)
+                        {
+                            if (t.TableName == table.TableName)
+                            {
+                                tempOldTable = t.Copy();
+                                foundTable = true;
+                                break;
+                            }
+                        }
+                        if (!foundTable) break;
+
+                        // First, merge all rows of oldDB.
+                        //tempMergedTable.Merge(tempTable,false,MissingSchemaAction.Add);
+                        DataTable tT = ExpandOldTxProfileTable(tempOldTable);
+                        if (tT != null) tempMergedTable.Merge(tT);
+                        else { tempMergedTable.Merge(table); break; } // No default model exists so reject the old TXProfiles
+
+                        // For each row of existingDB, if there is matching key in oldDB, 
+                        // keep that entry, else import new existing one into tempMergedTable.
+                        foreach (DataRow row in table.Rows)
+                        {
+                            string selector = "Name = '" + row["Name"] + "'";
+                            DataRow[] foundRow = tempMergedTable.Select(selector);
+                            if (foundRow.Length == 0) tempMergedTable.ImportRow(row); // If not in the oldDB, take the new one
+                        }
+
+                        // Copy tempTable into mergedDB 
+                        mergedDB.Merge(tempMergedTable);
+                        WriteImportLog(logFN, "Imported table <" + table.TableName + "> into database.\n");
+                        break;
+
+                    case "TXProfileDef":
+                        mergedDB.Merge(table); // don't overwrite current table of defaults
+                        WriteImportLog(logFN, "Did not import table <" + table.TableName + "> into database.\n");
+                        break;
+
+                    // These tables all have Key/Value pairs so can all be processed the same way
+                    case "State":
+                    case "Options":
+                    case "EQForm":
+                    case "MemoryForm":
+                    case "DiversityForm":
+                    case "AmpView":
+                    case "PureSignal":
+                        // Get table of same name in oldDB     
+                        tempTable.Clear();
+                        tempMergedTable.Clear();
+                        foreach (DataTable t in oldDB.Tables)
+                        {
+                            if (t.TableName == table.TableName)
+                            {
+                                tempTable = t.Copy();
+                                foundTable = true;
+                                break;
+                            }                            
+                        }
+                        if (!foundTable)
+                        {
+                            // No corresponding table found in old database - must be new, so retain it as-is
+                            mergedDB.Merge(table);
+                            WriteImportLog(logFN, "New table not found in imported database: " + table.TableName + "\n");
+                            break;
+                        }
+
+                        // For each row of existingDB table, if there is matching key in corresponding oldDB table, 
+                        // copy that entry, else take the existing one, into tempMergedTable.
+                        foreach (DataRow row in table.Rows)
+                        {
+                            string thisKey = Convert.ToString(row["Key"]);
+                            if (thisKey == "VersionNumber") // Exception: don't overwrite version number with an old one
+                            {
+                                row["Value"] = VersionNumber;
+                                tempMergedTable.ImportRow(row);
+                            } 
+                            else if (thisKey == "Version")
+                            {
+                                row["Value"] = VersionString;
+                                tempMergedTable.ImportRow(row);
+                            }
+                            else
+                            {
+                                string selector = "Key = '" + row["Key"] + "'";
+                                DataRow[] foundRow = tempTable.Select(selector);
+                                if (foundRow.Length != 0) tempMergedTable.ImportRow(foundRow[0]);
+                                else tempMergedTable.ImportRow(row);
+                            }                           
+                        }
+
+                        // Merge in the assembled temp table into mergedDB 
+                        mergedDB.Merge(tempMergedTable);
+                        WriteImportLog(logFN, "Imported table <" + table.TableName + "> into database.\n");
+                        break;
+
+                    default:
+                        // Unrecognized table
+                        WriteImportLog(logFN, "Unrecognized table: " + table.TableName + "\n");
+                        break;                        
+                }
+            }
+
+            // If we've gotten this far, activate the newly merged DB
+            ds = mergedDB.Copy();
+
+            // For debugging
+            if (DBdebug)
+            {
+                WriteDB(appDataPath + "mergedDB.xml", mergedDB);
+                WriteDB(appDataPath + "resultantDB.xml", ds);
+            }
+
+            WriteImportLog(logFN, "\nImport succeeded.\n");
+            importedDS = true;  // Prevents overwriting the new database file on next exit
+            return true;
+        }
+
+        //-W2PA Basic validity checks of imported DataSet xml file
+        private static string ValidateImportedDatabase(DataSet oldDB)
+        {
+            string problems = "";
+
+            //Basic kinds of non-validity:
+            if (oldDB.HasErrors 
+                || oldDB.DataSetName != "Data"
+                || !oldDB.IsInitialized
+                || oldDB.Tables.Count == 0
+                )
+            {
+                // For debugging:
+                problems = problems
+                    + "Invalid database read. \n\n"
+                    + "DataSet characteristics:"
+                    + "\nHasErrors=" + oldDB.HasErrors
+                    + "\nDataSetName=" + oldDB.DataSetName
+                    + "\nIsInitialized=" + oldDB.IsInitialized
+                    + "\nNamespace=" + oldDB.Namespace
+                    + "\nNumTables=" + oldDB.Tables.Count
+                    + "\n";
+
+                foreach (DataTable table in oldDB.Tables)
+                {
+                    problems = problems
+                        + "\nTable: " + table.TableName;
+                }
+            }
+
+            return problems;
+        }
+
+        //-W2PA Expand an old TxProfile table into a newer one with more colunms. Fill in missing ones with default values.
+        private static DataTable ExpandOldTxProfileTable(DataTable oldTable)
+        {
+            //Get a Default TXProfile to fill in missing columns in an old version
+            DataTable dsTXPDefTable = ds.Tables["TXProfileDef"];
+            DataTable expandedTable = dsTXPDefTable.Clone();
+            DataRow[] DefaultRows = dsTXPDefTable.Select("Name = 'Default'");
+            DataRow DefaultRow;
+            if (DefaultRows.Length > 0) DefaultRow = DefaultRows[0];  // Found a row of default values
+            else return null;
+
+            foreach (DataRow OldRow in oldTable.Rows)
+            {
+                DataRow newRow = DefaultRow;
+                foreach (DataColumn col in oldTable.Columns) // Overwrite the subset of columns that were in the old table
+                {
+                    newRow[col.ColumnName] = OldRow[col.ColumnName];
+                }
+                expandedTable.ImportRow(newRow);
+            }
+
+            return expandedTable;
+        }
+
+        //-W2PA Write a message to the ImportLog file during the import process
+        private static void WriteImportLog(string logFN, string s)
+        {            
+            File.AppendAllText(logFN, s);
+            return;
+        }
+
+        //-W2PA Original version of ImportDatabase
         public static bool ImportDatabase(string filename)
         {
             if (!File.Exists(filename)) return false;

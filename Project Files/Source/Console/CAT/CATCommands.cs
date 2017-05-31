@@ -2498,6 +2498,7 @@ namespace PowerSDR
 
 			if(s.Length == parser.nSet)
 			{
+                console.SelectRX1VarFilter();  //-W2PA Transfer focus to VAR1
 				n = Convert.ToInt32(s);
 				n = Math.Min(9999, n);
 				n = Math.Max(-9999, n);
@@ -2533,6 +2534,7 @@ namespace PowerSDR
 
 			if(s.Length == parser.nSet)
 				{
+                    console.SelectRX1VarFilter();  //-W2PA Transfer focus to VAR1
 					n = Convert.ToInt32(s);
 					n = Math.Min(9999, n);
 					n = Math.Max(-9999, n);

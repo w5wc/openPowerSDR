@@ -1747,6 +1747,7 @@
             this.tbCFC1 = new System.Windows.Forms.TrackBarTS();
             this.tbCFC2 = new System.Windows.Forms.TrackBarTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
+            this.btnExportCurrentTXProfile = new System.Windows.Forms.Button();
             this.chkLimitExtAmpOnOverload = new System.Windows.Forms.CheckBoxTS();
             this.grpExtTXInhibit = new System.Windows.Forms.GroupBoxTS();
             this.chkTXInhibit = new System.Windows.Forms.CheckBoxTS();
@@ -28837,6 +28838,7 @@
             // 
             // tpTransmit
             // 
+            this.tpTransmit.Controls.Add(this.btnExportCurrentTXProfile);
             this.tpTransmit.Controls.Add(this.chkLimitExtAmpOnOverload);
             this.tpTransmit.Controls.Add(this.grpExtTXInhibit);
             this.tpTransmit.Controls.Add(this.chkDSPTXMeterPeak);
@@ -28861,6 +28863,17 @@
             this.tpTransmit.Size = new System.Drawing.Size(584, 364);
             this.tpTransmit.TabIndex = 5;
             this.tpTransmit.Text = "Transmit";
+            // 
+            // btnExportCurrentTXProfile
+            // 
+            this.btnExportCurrentTXProfile.Location = new System.Drawing.Point(477, 182);
+            this.btnExportCurrentTXProfile.Name = "btnExportCurrentTXProfile";
+            this.btnExportCurrentTXProfile.Size = new System.Drawing.Size(64, 54);
+            this.btnExportCurrentTXProfile.TabIndex = 73;
+            this.btnExportCurrentTXProfile.Text = "Export Current Profile";
+            this.toolTip1.SetToolTip(this.btnExportCurrentTXProfile, "Export the curent profile and save to a file.");
+            this.btnExportCurrentTXProfile.UseVisualStyleBackColor = true;
+            this.btnExportCurrentTXProfile.Click += new System.EventHandler(this.btnExportCurrentTXProfile_Click);
             // 
             // chkLimitExtAmpOnOverload
             // 
@@ -29232,8 +29245,8 @@
             this.btnTXProfileDefImport.Name = "btnTXProfileDefImport";
             this.btnTXProfileDefImport.Size = new System.Drawing.Size(64, 24);
             this.btnTXProfileDefImport.TabIndex = 54;
-            this.btnTXProfileDefImport.Text = "Import";
-            this.toolTip1.SetToolTip(this.btnTXProfileDefImport, "Click to save the current settings to a TX Profile.");
+            this.btnTXProfileDefImport.Text = "Include";
+            this.toolTip1.SetToolTip(this.btnTXProfileDefImport, "Include the selected profile from the above list into my own list of profiles.");
             this.btnTXProfileDefImport.Click += new System.EventHandler(this.btnTXProfileDefImport_Click);
             // 
             // lstTXProfileDef
@@ -46514,7 +46527,7 @@
             this.btnImportDB.Size = new System.Drawing.Size(112, 23);
             this.btnImportDB.TabIndex = 21;
             this.btnImportDB.Text = "Import Database...";
-            this.toolTip1.SetToolTip(this.btnImportDB, "Import a saved PowerSDR Database file.");
+            this.toolTip1.SetToolTip(this.btnImportDB, "Import a database file, or partial database file such as an exported TX Profile.");
             this.btnImportDB.Click += new System.EventHandler(this.btnImportDB_Click);
             // 
             // btnResetDB
@@ -50208,5 +50221,6 @@
         private System.Windows.Forms.RadioButtonTS radTXUSB;
         private System.Windows.Forms.RadioButtonTS radTXLSB;
         private System.Windows.Forms.RadioButtonTS radTXDSB;
-   }
+        private System.Windows.Forms.Button btnExportCurrentTXProfile;
+    }
 }

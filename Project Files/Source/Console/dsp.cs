@@ -2,7 +2,7 @@
 
 This file is part of a program that implements a Software-Defined Radio.
 
-Copyright (C) 2013-2015 Warren Pratt, NR0V
+Copyright (C) 2013-2017 Warren Pratt, NR0V
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -667,6 +667,8 @@ namespace PowerSDR
             LEVELER_PK,
             COMP_PK,
             CPDR_PK,
+            CFC_PK,
+            CFC_G
         }
 
         public enum rxaMeterType
@@ -690,6 +692,9 @@ namespace PowerSDR
             TXA_LVLR_PK,
             TXA_LVLR_AV,
             TXA_LVLR_GAIN,
+            TXA_CFC_PK,
+            TXA_CFC_AV,
+            TXA_CFC_GAIN,
             TXA_COMP_PK,
             TXA_COMP_AV,
             TXA_ALC_PK,
@@ -806,6 +811,12 @@ namespace PowerSDR
 	        case MeterType.CPDR_PK:
                 val = GetTXAMeter(channel, txaMeterType.TXA_COMP_PK);
 		        break;
+            case MeterType.CFC_PK:
+                val = GetTXAMeter(channel, txaMeterType.TXA_CFC_PK);
+                break;
+            case MeterType.CFC_G:
+                val = GetTXAMeter(channel, txaMeterType.TXA_CFC_GAIN);
+                break;
 	        default:
 		        val = -400.0;
 		        break;

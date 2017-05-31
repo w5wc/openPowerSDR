@@ -14534,36 +14534,84 @@ namespace PowerSDR
             string path = console.AppDataPath;
             path = path.Substring(0, path.LastIndexOf("\\"));
             openFileDialog1.InitialDirectory = path;
-            openFileDialog1.ShowDialog();
+            Boolean ok = false;
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ok = CompleteImport();
+            }
+            if (ok) console.Close();  // Save everything 
         }
 
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            CompleteImport();
+            //CompleteImport();
+            //console.Close();
         }
 
-        private void CompleteImport()
+        private Boolean CompleteImport()
         {
-            if (DB.ImportDatabase(openFileDialog1.FileName))
-                MessageBox.Show("Database Imported Successfully");
+            Boolean success;
+            //if (DB.ImportDatabase(openFileDialog1.FileName))
+            //    MessageBox.Show("Database Imported Successfully");
 
-            GetTxProfiles();
-            console.UpdateTXProfile(TXProfile);
+            //-W2PA Import more carefully, allowing DBs created by previous versions to retain settings and options
+            if (DB.ImportAndMergeDatabase(openFileDialog1.FileName, console.AppDataPath)) { 
+                MessageBox.Show("Database Imported Successfully. OpenSDR-PowerSDR mRX PS will now close.\n\nPlease RE-START.");
+                success = true;
+            }
+            else
+            {
+                MessageBox.Show("Database could not be imported. Previous database has been kept.");
+                success = false;
+            }
 
-            GetOptions();					// load all database values
-            console.GetState();
-            if (console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
-            if (console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
-            // if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
+            // Archive old database file write a new one.
+            if (success)
+            {
+                string archivePath = console.AppDataPath + "DB_Archive\\";
+                if (!Directory.Exists(archivePath)) Directory.CreateDirectory(archivePath);
+                string justFileName = console.DBFileName.Substring(console.DBFileName.LastIndexOf("\\") + 1);
+                string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" + DateTime.Now.ToShortTimeString().Replace(":", ".");
+                File.Copy(console.DBFileName, archivePath + "PowerSDR_database_" + datetime + ".xml");
+                File.Delete(console.DBFileName);
+                DB.WriteCurrentDB(console.DBFileName);
 
-            SaveOptions();					// save all database values
-            console.SaveState();
-            if (console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
-            if (console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
-            // if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
+                //// Unnecessary to do this applicationof new settings since we close after import and preserve the newly merged database
+                //// Also, not closing would allow changes to the configuration that would be overwritten
+                //// Saving for later consideration
+                //GetTxProfiles();  // load new database values
+                //GetOptions();
+                //console.GetState();
+                //GetTxProfiles();
+                //GetTxProfileDefs();
+                //if (console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
+                //if (console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
+                //if (console.memoryForm != null) Common.RestoreForm(console.memoryForm, "MemoryForm", false);
+                //if (console.diversityForm != null) Common.RestoreForm(console.diversityForm, "DiversityForm", false);
+                //if (console.psform != null) Common.RestoreForm(console.psform, "PureSignal", false);
+                ////if (console.ampView != null) Common.RestoreForm(console.XVTRForm, "AmpView", false);  //handled by PSform?
+            }
 
-            udTransmitTunePower_ValueChanged(this, EventArgs.Empty);
-            //console.ResetMemForm();
+            return success;
+
+            ////Old code
+            //GetTxProfiles();
+            //console.UpdateTXProfile(TXProfile);
+
+            //GetOptions();					// load all database values
+            //console.GetState();
+            //if (console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
+            //if (console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
+            //// if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
+
+            //SaveOptions();					// save all database values
+            //console.SaveState();
+            //if (console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
+            //if (console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
+            //// if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
+
+            //udTransmitTunePower_ValueChanged(this, EventArgs.Empty);
+            ////console.ResetMemForm();
         }
 
         #endregion
@@ -15918,6 +15966,52 @@ namespace PowerSDR
 
             console.UpdateTXProfile(name);
         }
+
+        //-W2PA Export a single TX Profile to send to someone else for importing.
+        private void ExportCurrentTxProfile()
+        {
+            string fileName = console.AppDataPath + current_profile + ".xml";
+
+            DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
+                "'" + current_profile + "' = Name");
+            DataRow exportRow = null;
+            if (rows.Length > 0)
+            {
+                exportRow = rows[0];
+            }
+            else
+            {
+                MessageBox.Show("Can not locate " + current_profile + ".",  // This should never happen.
+                    "Profile error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            DataSet exDS = DB.ds.Clone();
+            DataTable pTable = pTable = DB.ds.Tables["TxProfile"].Clone();
+            pTable.ImportRow(exportRow);
+            exDS.Merge(pTable);
+
+            try
+            {
+                exDS.WriteXml(fileName); //, XmlWriteMode.WriteSchema); // Writing with schema isn't necessary for import
+            }
+            catch
+            {
+                MessageBox.Show("Can not write " + fileName + ".",
+                    "Export error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("Profile" + current_profile + " has been saved in file " +fileName,
+                    "Done",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+        }
+
 
         private void Setup_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
@@ -20584,6 +20678,11 @@ namespace PowerSDR
             else if (radTXUSB.Checked)
                 value = 2;
             console.radio.GetDSPTX(0).SubAMMode = value;
+        }
+
+        private void btnExportCurrentTXProfile_Click(object sender, EventArgs e)
+        {
+            ExportCurrentTxProfile();
         }
     }
 

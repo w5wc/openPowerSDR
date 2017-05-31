@@ -36,6 +36,8 @@
 //
 // Modifications to support the Behringer Midi controllers
 // by Chris Codella, W2PA, May 2017.  Indicated by //-W2PA comment lines. 
+// Modifications for using the new database import function.  W2PA, 29 May 2017
+
 
 using Midi2Cat.Data; //-W2PA Necessary for Behringer MIDI changes
 
@@ -308,8 +310,9 @@ namespace PowerSDR
         EQ,
         LEVELER,
         LVL_G,
+        CFC_PK,
+        CFC_G,
         COMP,
-        CPDR,
         ALC,
         ALC_G,
         SWR,
@@ -643,6 +646,8 @@ namespace PowerSDR
         public WaveControl WaveForm;
         // public PAQualify PAQualForm;
         //public ProductionTest ProdTestForm;
+
+        public Boolean resetForAutoMerge = false;
 
         private bool run_setup_wizard;						// Used to run the wizard the first time the software comes up
         private bool show_alpha_warning = false;
@@ -1635,6 +1640,8 @@ namespace PowerSDR
             if (db_file_name == "")
                 DBFileName = AppDataPath + "database.xml";
 
+            string autoMergeFileName = AppDataPath + "databaseToMerge.xml"; //-W2PA A legacy database candidate for automatic merging
+
             if (File.Exists(db_file_name))
             {
                 if (Keyboard.IsKeyDown(Keys.LShiftKey) || Keyboard.IsKeyDown(Keys.RShiftKey))
@@ -1644,8 +1651,8 @@ namespace PowerSDR
                     {
                         DialogResult dr = MessageBox.Show(
                             "The database reset function has been tiggered.  Would you like to reset your database?\n\n" +
-                            "If so, a copy of the current database will be placed on the desktop with\n" +
-                            "a date and time stamp in the file name before creating a brand new\n" +
+                            "If so, a copy of the current database will be placed in the DB_Archive folder with\n" +
+                            "a date and time stamp in the file name, before creating a brand new\n" +
                             "database for active use.",
                             "Reset Database?",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -1661,7 +1668,7 @@ namespace PowerSDR
                             if (!Directory.Exists(AppDataPath + "\\DB_Archive\\"))
                                 Directory.CreateDirectory(AppDataPath + "\\DB_Archive\\");
 
-                            File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml");
+                            File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml", true);
                             File.Delete(db_file_name);
                             Thread.Sleep(100);
                         }
@@ -1670,8 +1677,26 @@ namespace PowerSDR
 
                 if (File.Exists(db_file_name))
                 {
-                    DB.Init();
+                    if (!DB.Init(this)) // Init throws an exception on reading XML files that are too corrupted for DataSet.ReadXml to handle.
+                    {  
+                        string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                        string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
+                            DateTime.Now.ToShortTimeString().Replace(":", ".");
 
+                        string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
+                        file = file.Substring(0, file.Length - 4);
+                        if (!Directory.Exists(AppDataPath + "\\DB_Archive\\"))
+                            Directory.CreateDirectory(AppDataPath + "\\DB_Archive\\");
+
+                        File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml", true);
+                        File.Delete(db_file_name);
+                        MessageBox.Show("The database file could not be read. It has been copied to the DB_Archive folder\n\n"
+                                    + "Current database has been reset and initialized.  After the reset, "
+                                    + "you can try importing another working database file using Setup - Import Database.", "Database Read Failure",
+                                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
                     string DBVersion = "";
                     string version = getVersion();
                     ArrayList a = DB.GetVars("State");
@@ -1690,20 +1715,38 @@ namespace PowerSDR
                         }
                     }
 
-                    if (DBVersion != "" && DBVersion != version)
+                        if (DBVersion != "" && DBVersion != version || File.Exists(autoMergeFileName)) // Back-level DB detected
                     {
-                        DialogResult dr = MessageBox.Show(
-                            "The database was created by a different version of PowerSDR.\n" +
-                            "This can result in an undesirable behavior of your radio.\n\n\n" +
-                            "Would you like to reset the database to default values?",
-                            "Wrong Database Detected!",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Warning,
-                            MessageBoxDefaultButton.Button1,
-                            (MessageBoxOptions)0x40000);
+                            //-W2PA Automatically reset, shut down, and import the old database file if possible
 
-                        if (dr == DialogResult.Yes)
+                            if (File.Exists(autoMergeFileName)) // We have already reset and are ready for trying a merge
+                            {                               
+                                //-W2PA Import carefully, allowing use of DB files created by previous versions so as to retain settings and options   
+                                if (DB.ImportAndMergeDatabase(autoMergeFileName, AppDataPath))
+                                {
+                                    string versionName = TitleBar.GetString();
+                                    versionName = versionName.Remove(versionName.LastIndexOf("("));  // strip off date                                    
+                                    File.Delete(autoMergeFileName);
+                                    DB.WriteCurrentDB(db_file_name);
+                                    DB.Init(this);
+                                    MessageBox.Show("Your database from a previous version was imported successfully into a new one.\n\n"
+                                        + versionName + " will now start.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    File.Delete(db_file_name);
+                                    File.Delete(autoMergeFileName);
+                                    Thread.Sleep(100);
+                                    MessageBox.Show("A previous version database file could not be imported. It has been copied to the DB_Archive folder\n\n. "
+                                        + "The current database has been reset and initialized.\n"
+                                        + "You can try importing another working database file using Setup - Import Database.", "Database Import Failure",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                                                                        
+                                }
+                                resetForAutoMerge = false;
+                            }
+                            else  // Not yet ready for trying an automatic merge - get set up for it
                         {
+                                // Archive the old database file and reset database
                             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                             string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
                                 DateTime.Now.ToShortTimeString().Replace(":", ".");
@@ -1712,12 +1755,47 @@ namespace PowerSDR
                             file = file.Substring(0, file.Length - 4);
                             if (!Directory.Exists(AppDataPath + "\\DB_Archive\\"))
                                 Directory.CreateDirectory(AppDataPath + "\\DB_Archive\\");
+                                File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml", true);
+                                File.Copy(db_file_name, autoMergeFileName, true); // After reset and restart, this will be a flag to attempt to merge
+                                File.Delete(db_file_name);
+                                resetForAutoMerge = true;  // a flag to main()
 
-                            File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml");
-                            File.Delete(db_file_name);
-                            Thread.Sleep(100);
+                                MessageBox.Show("Your database file is from a previous version.\nMerging it into a new reset database will now be attempted.\n\n"
+                                    +"Please RE-START when the reset finishes.", "Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }                            
+                            
+                            //-W2PA Old start-up code for when a back-level database is detected
+                            //DialogResult dr = MessageBox.Show(
+                            //    "The database was created by a different version of OpenSDR-PowerSDR.\n" +
+                            //    "This can result in an undesirable behavior of your radio.\n\n\n" +
+                            //    "Would you like to reset the database to default values?",
+                            //    "Wrong Database Version Detected!",
+                            //    MessageBoxButtons.YesNo,
+                            //    MessageBoxIcon.Warning,
+                            //    MessageBoxDefaultButton.Button1,
+                            //    (MessageBoxOptions)0x40000);
+
+                            //if (dr == DialogResult.Yes)
+                            //{
+                            //    string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                            //    string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
+                            //        DateTime.Now.ToShortTimeString().Replace(":", ".");
+
+                            //    string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
+                            //    file = file.Substring(0, file.Length - 4);
+                            //    if (!Directory.Exists(AppDataPath + "\\DB_Archive\\"))
+                            //        Directory.CreateDirectory(AppDataPath + "\\DB_Archive\\");
+
+                            //    File.Copy(db_file_name, AppDataPath + "\\DB_Archive\\PowerSDR_" + file + "_" + datetime + ".xml");
+                            //    File.Delete(db_file_name);
+                            //    Thread.Sleep(100);
+
+                            //    MessageBox.Show("Your database file has been saved in the DB_Archive folder.\n\n" + 
+                            //        "That file or another valid database file may now be imported to recover previous settings and options.");
+                            //}
                         }
                     }
+                    
                 }
 
             }
@@ -1769,7 +1847,7 @@ namespace PowerSDR
             MinimumSize = this.Size;
 
             Splash.SetStatus("Initializing Database");			// Set progress point
-            DB.Init();											// Initialize the database
+            DB.Init(this);											// Initialize the database
 
             InitCTCSS();
             Splash.SetStatus("Initializing Hardware");			// Set progress point
@@ -1936,6 +2014,11 @@ namespace PowerSDR
                 }
             }
 
+            if (resetForAutoMerge)
+            {
+                MessageBox.Show("Please RE-START now.", "Note", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            }
+            
         }
 
 
@@ -7698,8 +7781,14 @@ namespace PowerSDR
 
                 //Application.Run(new Console(args));
                 // wjt hacked
+
                 theConsole = new Console(args);
-                Application.Run(theConsole);
+
+                if (theConsole.resetForAutoMerge)
+                {
+                    Application.Exit();
+                }
+                else Application.Run(theConsole);
             }
             catch (Exception ex)
             {
@@ -7717,6 +7806,14 @@ namespace PowerSDR
         // ======================================================
         // Misc Routines
         // ======================================================
+
+        private bool just_imported_initial_db = false;
+        public bool JustImportedInitialDB
+        {
+            get { return just_imported_initial_db; }
+            set { just_imported_initial_db = value; }
+        }
+
 
         private bool spec_display = true;
         public bool SpecDisplay
@@ -11088,9 +11185,11 @@ namespace PowerSDR
             comboMeterTXMode.Items.Add("EQ");
             comboMeterTXMode.Items.Add("Leveler");
             comboMeterTXMode.Items.Add("Lev Gain");
+            comboMeterTXMode.Items.Add("CFC");
+            comboMeterTXMode.Items.Add("CFC Comp");
+            comboMeterTXMode.Items.Add("COMP");
             comboMeterTXMode.Items.Add("ALC");
             comboMeterTXMode.Items.Add("ALC Comp");
-            comboMeterTXMode.Items.Add("CPDR");
             comboMeterTXMode.Items.Add("Off");
         }
 
@@ -24472,8 +24571,14 @@ namespace PowerSDR
                     case MeterTXMode.LVL_G:
                         text = "Lvl Gain";
                         break;
-                    case MeterTXMode.CPDR:
-                        text = "CPDR";
+                    case MeterTXMode.CFC_PK:
+                        text = "CFC";
+                        break;
+                    case MeterTXMode.CFC_G:
+                        text = "CFC Comp";
+                        break;
+                    case MeterTXMode.COMP:
+                        text = "COMP";
                         break;
                     case MeterTXMode.ALC:
                         text = "ALC";
@@ -28099,9 +28204,11 @@ namespace PowerSDR
                             case MeterTXMode.MIC:
                             case MeterTXMode.EQ:
                             case MeterTXMode.LEVELER:
-                            case MeterTXMode.CPDR:
+                            case MeterTXMode.CFC_PK:
+                            case MeterTXMode.COMP:
                             case MeterTXMode.ALC:
                                 //num += 3.0;  // number no longer has fudge factor added in the dsp, must be remove
+                                num = 12.0;
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
@@ -28115,14 +28222,14 @@ namespace PowerSDR
                                                 pixel_x = (int)(72 + (num + 10.0) / 5.0 * 54);
                                             else if (num <= 0.0f)
                                                 pixel_x = (int)(126 + (num + 5.0) / 5.0 * 48);
-                                            else if (num <= 1.0f)
-                                                pixel_x = (int)(174 + (num - 0.0) / 1.0 * 30);
-                                            else if (num <= 2.0f)
-                                                pixel_x = (int)(204 + (num - 1.0) / 1.0 * 30);
-                                            else if (num <= 3.0f)
-                                                pixel_x = (int)(234 + (num - 2.0) / 1.0 * 30);
+                                            else if (num <= 4.0f)
+                                                pixel_x = (int)(174 + (num - 0.0) / 4.0 * 30);
+                                            else if (num <= 8.0f)
+                                                pixel_x = (int)(204 + (num - 4.0) / 4.0 * 30);
+                                            else if (num <= 12.0f)
+                                                pixel_x = (int)(234 + (num - 8.0) / 4.0 * 30);
                                             else
-                                                pixel_x = (int)(264 + (num - 3.0) / 0.5 * 16);
+                                                pixel_x = (int)(264 + (num - 12.0) / 0.5 * 16);
                                         }
                                         else
                                         {
@@ -28134,14 +28241,14 @@ namespace PowerSDR
                                                 pixel_x = (int)(36 + (num + 10.0) / 5.0 * 27);
                                             else if (num <= 0.0f)
                                                 pixel_x = (int)(63 + (num + 5.0) / 5.0 * 24);
-                                            else if (num <= 1.0f)
-                                                pixel_x = (int)(87 + (num - 0.0) / 1.0 * 15);
-                                            else if (num <= 2.0f)
-                                                pixel_x = (int)(102 + (num - 1.0) / 1.0 * 15);
-                                            else if (num <= 3.0f)
-                                                pixel_x = (int)(117 + (num - 2.0) / 1.0 * 15);
+                                            else if (num <= 4.0f)
+                                                pixel_x = (int)(87 + (num - 0.0) / 4.0 * 15);
+                                            else if (num <= 8.0f)
+                                                pixel_x = (int)(102 + (num - 4.0) / 4.0 * 15);
+                                            else if (num <= 12.0f)
+                                                pixel_x = (int)(117 + (num - 8.0) / 4.0 * 15);
                                             else
-                                                pixel_x = (int)(132 + (num - 3.0) / 0.5 * 8);
+                                                pixel_x = (int)(132 + (num - 12.0) / 0.5 * 8);
                                         }
                                         break;
                                     case 120:
@@ -28153,14 +28260,14 @@ namespace PowerSDR
                                             pixel_x = (int)(40 + (num + 10.0) / 5.0 * 30);
                                         else if (num <= 0.0f)
                                             pixel_x = (int)(70 + (num + 5.0) / 5.0 * 27);
-                                        else if (num <= 1.0f)
-                                            pixel_x = (int)(97 + (num - 0.0) / 1.0 * 17);
-                                        else if (num <= 2.0f)
-                                            pixel_x = (int)(114 + (num - 1.0) / 1.0 * 17);
-                                        else if (num <= 3.0f)
-                                            pixel_x = (int)(131 + (num - 2.0) / 1.0 * 17);
+                                        else if (num <= 4.0f)
+                                            pixel_x = (int)(97 + (num - 0.0) / 4.0 * 17);
+                                        else if (num <= 8.0f)
+                                            pixel_x = (int)(114 + (num - 4.0) / 4.0 * 17);
+                                        else if (num <= 12.0f)
+                                            pixel_x = (int)(131 + (num - 8.0) / 4.0 * 17);
                                         else
-                                            pixel_x = (int)(148 + (num - 3.0) / 0.5 * 23);
+                                            pixel_x = (int)(148 + (num - 12.0) / 0.5 * 23);
                                         break;
                                 }
                                 break;
@@ -28437,6 +28544,7 @@ namespace PowerSDR
                                 break;
                             case MeterTXMode.ALC_G:
                             case MeterTXMode.LVL_G:
+                            case MeterTXMode.CFC_G:
                                 switch ((int)g.DpiX)
                                 {
                                     case 96:
@@ -28626,7 +28734,9 @@ namespace PowerSDR
                                 case MeterTXMode.LEVELER:
                                 case MeterTXMode.LVL_G:
                                 case MeterTXMode.EQ:
-                                case MeterTXMode.CPDR:
+                                case MeterTXMode.CFC_PK:
+                                case MeterTXMode.CFC_G:
+                                case MeterTXMode.COMP:
                                 case MeterTXMode.ALC:
                                 case MeterTXMode.ALC_G:
                                     output = num.ToString(format) + " dB";
@@ -28785,7 +28895,8 @@ namespace PowerSDR
                             case MeterTXMode.MIC:
                             case MeterTXMode.EQ:
                             case MeterTXMode.LEVELER:
-                            case MeterTXMode.CPDR:
+                            case MeterTXMode.CFC_PK:
+                            case MeterTXMode.COMP:
                             case MeterTXMode.ALC:
                                 g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.665), 2);
                                 g.FillRectangle(high_brush, (int)(W * 0.665), H - 4, (int)(W * 0.335) - 2, 2);
@@ -28812,18 +28923,18 @@ namespace PowerSDR
                                 {
                                     g.FillRectangle(high_brush, (int)((double)W * 0.665 + i * spacing - spacing * 0.5), H - 4 - 3, 1, 3);
                                     g.FillRectangle(high_brush, (int)((double)W * 0.665 + i * spacing), H - 4 - 6, 2, 6);
-
+                                    string s = (i * 4).ToString();
                                     //Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-                                    SizeF size = g.MeasureString(i.ToString(), font7, 3, StringFormat.GenericTypographic);
+                                    SizeF size = g.MeasureString(s, font7, 3, StringFormat.GenericTypographic);
                                     double string_width = size.Width - 2.0;
 
                                     g.TextRenderingHint = TextRenderingHint.SystemDefault;
-                                    g.DrawString(i.ToString(), font7, high_brush, (int)(W * 0.665 + i * spacing - (int)string_width), (int)(H - 4 - 8 - string_height));
+                                    g.DrawString(s, font7, high_brush, (int)(W * 0.665 + i * spacing - (int)string_width * s.Length), (int)(H - 4 - 8 - string_height));
                                 }
 
                                 if (num > 0.0) // high area
                                 {
-                                    pixel_x = (int)(W * 0.665 + num / 3.0 * (W * 0.335 - 4));
+                                    pixel_x = (int)(W * 0.665 + num / 12.0 * (W * 0.335 - 4));
                                 }
                                 else
                                 {
@@ -29858,6 +29969,7 @@ namespace PowerSDR
                              */
                             case MeterTXMode.ALC_G:
                             case MeterTXMode.LVL_G:
+                            case MeterTXMode.CFC_G:
                                 g.FillRectangle(low_brush, 0, H - 4, (int)(W * 0.75), 2);
                                 g.FillRectangle(high_brush, (int)(W * 0.75), H - 4, (int)(W * 0.25) - 9, 2);
                                 spacing = (W * 0.75 - 2.0) / 4.0;
@@ -30042,7 +30154,9 @@ namespace PowerSDR
                                 case MeterTXMode.LEVELER:
                                 case MeterTXMode.LVL_G:
                                 case MeterTXMode.EQ:
-                                case MeterTXMode.CPDR:
+                                case MeterTXMode.CFC_PK:
+                                case MeterTXMode.CFC_G:
+                                case MeterTXMode.COMP:
                                 case MeterTXMode.ALC:
                                 case MeterTXMode.ALC_G:
                                     output = num.ToString(format) + " dB";
@@ -31227,7 +31341,15 @@ namespace PowerSDR
                                 num = (float)Math.Max(0, wdsp.CalculateTXMeter(1, wdsp.MeterType.LVL_G));
                                 new_meter_data = num;
                                 break;
-                            case MeterTXMode.CPDR:
+                            case MeterTXMode.CFC_PK:
+                                num = (float)Math.Max(-30.0f, -wdsp.CalculateTXMeter(1, wdsp.MeterType.CFC_PK));
+                                new_meter_data = num;
+                                break;
+                            case MeterTXMode.CFC_G:
+                                num = (float)Math.Max(0, -wdsp.CalculateTXMeter(1, wdsp.MeterType.CFC_G));
+                                new_meter_data = num;
+                                break;
+                            case MeterTXMode.COMP:
                                 if (peak_tx_meter) num = (float)Math.Max(-30.0f, -wdsp.CalculateTXMeter(1, wdsp.MeterType.CPDR_PK));
                                 else num = (float)Math.Max(-30.0f, -wdsp.CalculateTXMeter(1, wdsp.MeterType.CPDR));
                                 new_meter_data = num;
@@ -36567,8 +36689,14 @@ namespace PowerSDR
                     case "Lev Gain":
                         mode = MeterTXMode.LVL_G;
                         break;
-                    case "CPDR":
-                        mode = MeterTXMode.CPDR;
+                    case "CFC":
+                        mode = MeterTXMode.CFC_PK;
+                        break;
+                    case "CFC Comp":
+                        mode = MeterTXMode.CFC_G;
+                        break;
+                    case "COMP":
+                        mode = MeterTXMode.COMP;
                         break;
                     case "ALC":
                         mode = MeterTXMode.ALC;
@@ -36604,9 +36732,11 @@ namespace PowerSDR
                         case MeterTXMode.MIC:
                         case MeterTXMode.EQ:
                         case MeterTXMode.LEVELER:
-                        case MeterTXMode.CPDR:
+                        case MeterTXMode.CFC_PK:
+                        case MeterTXMode.COMP:
                         case MeterTXMode.ALC:
-                            lblMultiSMeter.Text = "   -20            -10               -5              0        1        2        3";
+                            lblMultiSMeter.Text = "   -20            -10               -5              0        4        8       12";
+                           // lblMultiSMeter.Text = "   -20            -10               -5              0        1        2        3";
                             break;
                         case MeterTXMode.FORWARD_POWER:
                         case MeterTXMode.REVERSE_POWER:
@@ -36630,6 +36760,7 @@ namespace PowerSDR
                             lblMultiSMeter.Text = "";
                             break;
                         case MeterTXMode.LVL_G:
+                        case MeterTXMode.CFC_G:
                         case MeterTXMode.ALC_G:
                             lblMultiSMeter.Text = "0                  5                10                15                20";
                             break;
@@ -36645,9 +36776,11 @@ namespace PowerSDR
                         case MeterTXMode.MIC:
                         case MeterTXMode.EQ:
                         case MeterTXMode.LEVELER:
-                        case MeterTXMode.CPDR:
+                        case MeterTXMode.CFC_PK:
+                        case MeterTXMode.COMP:
                         case MeterTXMode.ALC:
-                            lblMultiSMeter.Text = "-20    -10     -5      0   1   2   3";
+                            lblMultiSMeter.Text = "-20    -10     -5      0   4   8  12";
+                           // lblMultiSMeter.Text = "-20    -10     -5      0   1   2   3";
                             break;
                         case MeterTXMode.FORWARD_POWER:
                         case MeterTXMode.REVERSE_POWER:
@@ -36671,6 +36804,7 @@ namespace PowerSDR
                             lblMultiSMeter.Text = "";
                             break;
                         case MeterTXMode.LVL_G:
+                        case MeterTXMode.CFC_G:
                         case MeterTXMode.ALC_G:
                             lblMultiSMeter.Text = "0       5       10      15      20";
                             break;
