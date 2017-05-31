@@ -130,6 +130,9 @@ namespace PowerSDR
         [DllImport("wdsp.dll", EntryPoint = "SetTXAALCDecay", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetTXAALCDecay(int channel, int decay);
 
+        [DllImport("wdsp.dll", EntryPoint = "SetTXAALCMaxGain", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTXAALCMaxGain(int channel, double maxgain);
+
         [DllImport("wdsp.dll", EntryPoint = "SetRXAAMDSBMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetRXAAMDSBMode(int channel, int sbmode);
 
@@ -760,6 +763,16 @@ namespace PowerSDR
 	        return (float)val;
         }
 
+        private static double alcgain = 0.0;
+        public static double ALCGain
+        {
+            get { return alcgain; }
+            set
+            { 
+                alcgain = value;
+            }
+        }
+
         public static float CalculateTXMeter (uint thread, MeterType MT)
         {
 	        int channel = txachannel;
@@ -788,7 +801,7 @@ namespace PowerSDR
                 val = GetTXAMeter(channel, txaMeterType.TXA_COMP_AV);
 		        break;
 	        case MeterType.ALC_G:
-                val = GetTXAMeter(channel, txaMeterType.TXA_ALC_GAIN);
+                val = GetTXAMeter(channel, txaMeterType.TXA_ALC_GAIN) + alcgain;
 		        break;
 	        case MeterType.LVL_G:
                 val = GetTXAMeter(channel, txaMeterType.TXA_LVLR_GAIN);

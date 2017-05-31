@@ -24110,26 +24110,25 @@
             0});
             this.udDSPALCThreshold.Location = new System.Drawing.Point(88, 72);
             this.udDSPALCThreshold.Maximum = new decimal(new int[] {
-            120,
+            10,
             0,
             0,
             0});
             this.udDSPALCThreshold.Minimum = new decimal(new int[] {
-            120,
             0,
             0,
-            -2147483648});
+            0,
+            0});
             this.udDSPALCThreshold.Name = "udDSPALCThreshold";
             this.udDSPALCThreshold.Size = new System.Drawing.Size(48, 20);
             this.udDSPALCThreshold.TabIndex = 6;
             this.toolTip1.SetToolTip(this.udDSPALCThreshold, "This provides for a “threshold” AGC.  Irrespective of how weak a signal is, no ga" +
         "in over this Max Gain is applied.");
             this.udDSPALCThreshold.Value = new decimal(new int[] {
-            120,
             0,
             0,
-            -2147483648});
-            this.udDSPALCThreshold.Visible = false;
+            0,
+            0});
             this.udDSPALCThreshold.ValueChanged += new System.EventHandler(this.udDSPALCThreshold_ValueChanged);
             this.udDSPALCThreshold.LostFocus += new System.EventHandler(this.udDSPALCThreshold_LostFocus);
             // 
@@ -24258,8 +24257,7 @@
             this.lblDSPALCThreshold.Name = "lblDSPALCThreshold";
             this.lblDSPALCThreshold.Size = new System.Drawing.Size(88, 24);
             this.lblDSPALCThreshold.TabIndex = 7;
-            this.lblDSPALCThreshold.Text = "Neg. Gain (dB):";
-            this.lblDSPALCThreshold.Visible = false;
+            this.lblDSPALCThreshold.Text = "Max.Gain (dB):";
             // 
             // grpDSPAGC
             // 
@@ -28022,7 +28020,7 @@
             this.lblCFCPEG0.Name = "lblCFCPEG0";
             this.lblCFCPEG0.Size = new System.Drawing.Size(38, 13);
             this.lblCFCPEG0.TabIndex = 172;
-            this.lblCFCPEG0.Text = "-10 dB";
+            this.lblCFCPEG0.Text = "-16 dB";
             // 
             // tbCFCPEQGAIN
             // 
@@ -28030,7 +28028,7 @@
             this.tbCFCPEQGAIN.BackColor = System.Drawing.Color.Black;
             this.tbCFCPEQGAIN.LargeChange = 2;
             this.tbCFCPEQGAIN.Location = new System.Drawing.Point(189, 190);
-            this.tbCFCPEQGAIN.Minimum = -10;
+            this.tbCFCPEQGAIN.Minimum = -16;
             this.tbCFCPEQGAIN.Name = "tbCFCPEQGAIN";
             this.tbCFCPEQGAIN.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbCFCPEQGAIN.Size = new System.Drawing.Size(20, 128);
@@ -28173,7 +28171,7 @@
             this.lblCFCPC15.Name = "lblCFCPC15";
             this.lblCFCPC15.Size = new System.Drawing.Size(35, 13);
             this.lblCFCPC15.TabIndex = 167;
-            this.lblCFCPC15.Text = "10 dB";
+            this.lblCFCPC15.Text = "16 dB";
             // 
             // lblCFCPC0
             // 
@@ -28192,6 +28190,7 @@
             this.tbCFCPRECOMP.BackColor = System.Drawing.Color.Black;
             this.tbCFCPRECOMP.LargeChange = 2;
             this.tbCFCPRECOMP.Location = new System.Drawing.Point(189, 6);
+            this.tbCFCPRECOMP.Maximum = 16;
             this.tbCFCPRECOMP.Name = "tbCFCPRECOMP";
             this.tbCFCPRECOMP.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbCFCPRECOMP.Size = new System.Drawing.Size(20, 128);

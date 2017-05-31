@@ -12171,7 +12171,8 @@ namespace PowerSDR
 
         private void udDSPALCThreshold_ValueChanged(object sender, System.EventArgs e)
         {
-            //DttSP.SetTXALCBot((double)udDSPALCThreshold.Value);
+            wdsp.SetTXAALCMaxGain(wdsp.id(1, 0), (double)udDSPALCThreshold.Value);
+            wdsp.ALCGain = (double)udDSPALCThreshold.Value;
         }
 
         private void udDSPALCDecay_ValueChanged(object sender, System.EventArgs e)
