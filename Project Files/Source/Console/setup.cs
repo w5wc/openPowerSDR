@@ -338,7 +338,7 @@ namespace PowerSDR
         private LabelTS lblDSPAGCSlope;
         private NumericUpDownTS udDSPAGCDecay;
         private NumericUpDownTS udDSPAGCSlope;
-        private NumericUpDownTS udDSPALCThreshold;
+        private NumericUpDownTS udDSPALCMaximumGain;
         private NumericUpDownTS udDSPALCSlope;
         private NumericUpDownTS udDSPALCDecay;
         private LabelTS lblDSPALCSlope;
@@ -3090,7 +3090,7 @@ namespace PowerSDR
             dr["Lev_HangThreshold"] = tbDSPLevelerHangThreshold.Value;
 
             dr["ALC_Slope"] = (int)udDSPALCSlope.Value;
-            dr["ALC_MaxGain"] = (int)udDSPALCThreshold.Value;
+            dr["ALC_MaximumGain"] = (int)udDSPALCMaximumGain.Value;
             dr["ALC_Attack"] = (int)udDSPALCAttack.Value;
             dr["ALC_Decay"] = (int)udDSPALCDecay.Value;
             dr["ALC_Hang"] = (int)udDSPALCHangTime.Value;
@@ -12171,8 +12171,14 @@ namespace PowerSDR
 
         private void udDSPALCThreshold_ValueChanged(object sender, System.EventArgs e)
         {
-            wdsp.SetTXAALCMaxGain(wdsp.id(1, 0), (double)udDSPALCThreshold.Value);
-            wdsp.ALCGain = (double)udDSPALCThreshold.Value;
+            wdsp.SetTXAALCMaxGain(wdsp.id(1, 0), (double)udDSPALCMaximumGain.Value);
+            wdsp.ALCGain = (double)udDSPALCMaximumGain.Value;
+        }
+
+        private void udDSPALCMaximumGain_ValueChanged(object sender, System.EventArgs e)
+        {
+            wdsp.SetTXAALCMaxGain(wdsp.id(1, 0), (double)udDSPALCMaximumGain.Value);
+            wdsp.ALCGain = (double)udDSPALCMaximumGain.Value;
         }
 
         private void udDSPALCDecay_ValueChanged(object sender, System.EventArgs e)
@@ -12323,7 +12329,7 @@ namespace PowerSDR
             tbDSPLevelerHangThreshold.Value = (int)dr["Lev_HangThreshold"];
 
             udDSPALCSlope.Value = (int)dr["ALC_Slope"];
-            udDSPALCThreshold.Value = (int)dr["ALC_MaxGain"];
+            udDSPALCMaximumGain.Value = (int)dr["ALC_MaximumGain"];
             udDSPALCAttack.Value = (int)dr["ALC_Attack"];
             udDSPALCDecay.Value = (int)dr["ALC_Decay"];
             udDSPALCHangTime.Value = (int)dr["ALC_Hang"];
@@ -12496,7 +12502,7 @@ namespace PowerSDR
             dr["Lev_HangThreshold"] = tbDSPLevelerHangThreshold.Value;
 
             dr["ALC_Slope"] = (int)udDSPALCSlope.Value;
-            dr["ALC_MaxGain"] = (int)udDSPALCThreshold.Value;
+            dr["ALC_MaximumGain"] = (int)udDSPALCMaximumGain.Value;
             dr["ALC_Attack"] = (int)udDSPALCAttack.Value;
             dr["ALC_Decay"] = (int)udDSPALCDecay.Value;
             dr["ALC_Hang"] = (int)udDSPALCHangTime.Value;
@@ -15000,7 +15006,7 @@ namespace PowerSDR
 
         private void udDSPALCThreshold_LostFocus(object sender, EventArgs e)
         {
-            udDSPALCThreshold.Value = udDSPALCThreshold.Value;
+            udDSPALCMaximumGain.Value = udDSPALCMaximumGain.Value;
         }
 
         private void udDSPALCSlope_LostFocus(object sender, EventArgs e)

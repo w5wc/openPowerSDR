@@ -2862,7 +2862,7 @@ namespace PowerSDR
             t.Columns.Add("Lev_Hang", typeof(int));
             t.Columns.Add("Lev_HangThreshold", typeof(int));
             t.Columns.Add("ALC_Slope", typeof(int));
-            t.Columns.Add("ALC_MaxGain", typeof(int));
+            t.Columns.Add("ALC_MaximumGain", typeof(int));
             t.Columns.Add("ALC_Attack", typeof(int));
             t.Columns.Add("ALC_Decay", typeof(int));
             t.Columns.Add("ALC_Hang", typeof(int));
@@ -3025,7 +3025,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -3192,7 +3192,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -3361,7 +3361,7 @@ namespace PowerSDR
             t.Columns.Add("Lev_Hang", typeof(int));
             t.Columns.Add("Lev_HangThreshold", typeof(int));
             t.Columns.Add("ALC_Slope", typeof(int));
-            t.Columns.Add("ALC_MaxGain", typeof(int));
+            t.Columns.Add("ALC_MaximumGain", typeof(int));
             t.Columns.Add("ALC_Attack", typeof(int));
             t.Columns.Add("ALC_Decay", typeof(int));
             t.Columns.Add("ALC_Hang", typeof(int));
@@ -3527,7 +3527,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -3693,7 +3693,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -3859,7 +3859,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -4024,7 +4024,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -4188,7 +4188,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -4352,7 +4352,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -4516,7 +4516,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -4680,7 +4680,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -4844,7 +4844,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5008,7 +5008,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5172,7 +5172,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5336,7 +5336,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5500,7 +5500,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5664,7 +5664,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5828,7 +5828,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -5992,7 +5992,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -6156,7 +6156,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -6320,7 +6320,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -6484,7 +6484,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -6648,7 +6648,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -6812,7 +6812,7 @@ namespace PowerSDR
             dr["Lev_Hang"] = 500;
             dr["Lev_HangThreshold"] = 0;
             dr["ALC_Slope"] = 0;
-            dr["ALC_MaxGain"] = 0;
+            dr["ALC_MaximumGain"] = 0;
             dr["ALC_Attack"] = 2;
             dr["ALC_Decay"] = 10;
             dr["ALC_Hang"] = 500;
@@ -7544,11 +7544,14 @@ namespace PowerSDR
             if (DefaultRows.Length > 0) DefaultRow = DefaultRows[0];  // Found a row of default values
             else return null;
 
+           
+
             foreach (DataRow OldRow in oldTable.Rows)
             {
                 DataRow newRow = DefaultRow;
                 foreach (DataColumn col in oldTable.Columns) // Overwrite the subset of columns that were in the old table
                 {
+                    if ( (ds.Tables["TXProfile"].Columns).Contains(col.ColumnName) )  // Don't import a colummn that's no longer used
                     newRow[col.ColumnName] = OldRow[col.ColumnName];
                 }
                 expandedTable.ImportRow(newRow);

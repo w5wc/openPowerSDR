@@ -1452,7 +1452,7 @@
             this.tbDSPALCHangThreshold = new System.Windows.Forms.TrackBarTS();
             this.udDSPALCHangTime = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPALCHangTime = new System.Windows.Forms.LabelTS();
-            this.udDSPALCThreshold = new System.Windows.Forms.NumericUpDownTS();
+            this.udDSPALCMaximumGain = new System.Windows.Forms.NumericUpDownTS();
             this.udDSPALCSlope = new System.Windows.Forms.NumericUpDownTS();
             this.udDSPALCDecay = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPALCSlope = new System.Windows.Forms.LabelTS();
@@ -3190,7 +3190,7 @@
             this.grpDSPALC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbDSPALCHangThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCHangTime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPALCThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPALCMaximumGain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCSlope)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCDecay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCAttack)).BeginInit();
@@ -24023,7 +24023,7 @@
             this.grpDSPALC.Controls.Add(this.tbDSPALCHangThreshold);
             this.grpDSPALC.Controls.Add(this.udDSPALCHangTime);
             this.grpDSPALC.Controls.Add(this.lblDSPALCHangTime);
-            this.grpDSPALC.Controls.Add(this.udDSPALCThreshold);
+            this.grpDSPALC.Controls.Add(this.udDSPALCMaximumGain);
             this.grpDSPALC.Controls.Add(this.udDSPALCSlope);
             this.grpDSPALC.Controls.Add(this.udDSPALCDecay);
             this.grpDSPALC.Controls.Add(this.lblDSPALCSlope);
@@ -24101,36 +24101,36 @@
             this.lblDSPALCHangTime.Text = "Hang (ms):";
             this.lblDSPALCHangTime.Visible = false;
             // 
-            // udDSPALCThreshold
+            // udDSPALCMaximumGain
             // 
-            this.udDSPALCThreshold.Increment = new decimal(new int[] {
+            this.udDSPALCMaximumGain.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.udDSPALCThreshold.Location = new System.Drawing.Point(88, 72);
-            this.udDSPALCThreshold.Maximum = new decimal(new int[] {
+            this.udDSPALCMaximumGain.Location = new System.Drawing.Point(88, 72);
+            this.udDSPALCMaximumGain.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.udDSPALCThreshold.Minimum = new decimal(new int[] {
+            this.udDSPALCMaximumGain.Minimum = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.udDSPALCThreshold.Name = "udDSPALCThreshold";
-            this.udDSPALCThreshold.Size = new System.Drawing.Size(48, 20);
-            this.udDSPALCThreshold.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.udDSPALCThreshold, "This provides for a “threshold” AGC.  Irrespective of how weak a signal is, no ga" +
+            this.udDSPALCMaximumGain.Name = "udDSPALCMaximumGain";
+            this.udDSPALCMaximumGain.Size = new System.Drawing.Size(48, 20);
+            this.udDSPALCMaximumGain.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.udDSPALCMaximumGain, "This provides for a “threshold” AGC.  Irrespective of how weak a signal is, no ga" +
         "in over this Max Gain is applied.");
-            this.udDSPALCThreshold.Value = new decimal(new int[] {
+            this.udDSPALCMaximumGain.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.udDSPALCThreshold.ValueChanged += new System.EventHandler(this.udDSPALCThreshold_ValueChanged);
-            this.udDSPALCThreshold.LostFocus += new System.EventHandler(this.udDSPALCThreshold_LostFocus);
+            this.udDSPALCMaximumGain.ValueChanged += new System.EventHandler(this.udDSPALCThreshold_ValueChanged);
+            this.udDSPALCMaximumGain.LostFocus += new System.EventHandler(this.udDSPALCThreshold_LostFocus);
             // 
             // udDSPALCSlope
             // 
@@ -48168,7 +48168,7 @@
             this.grpDSPALC.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbDSPALCHangThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCHangTime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDSPALCThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDSPALCMaximumGain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCSlope)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCDecay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPALCAttack)).EndInit();
