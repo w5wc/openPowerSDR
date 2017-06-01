@@ -7543,18 +7543,22 @@ namespace PowerSDR
             DataRow DefaultRow;
             if (DefaultRows.Length > 0) DefaultRow = DefaultRows[0];  // Found a row of default values
             else return null;
-
-           
-
+         
             foreach (DataRow OldRow in oldTable.Rows)
             {
                 DataRow newRow = DefaultRow;
                 foreach (DataColumn col in oldTable.Columns) // Overwrite the subset of columns that were in the old table
                 {
-                    if ( (ds.Tables["TXProfile"].Columns).Contains(col.ColumnName) )  // Don't import a colummn that's no longer used
-                    newRow[col.ColumnName] = OldRow[col.ColumnName];
+                    if ((ds.Tables["TXProfile"].Columns).Contains(col.ColumnName))  // Don't import a row having a colummn that's no longer used
+                    {
+                        System.Type oldType = OldRow[col.ColumnName].GetType();
+                        System.Type newType = newRow[col.ColumnName].GetType();
+                        if (newType == oldType)  // Don't assign a value of a different type
+                            newRow[col.ColumnName] = OldRow[col.ColumnName];
+                    }                                
                 }
-                expandedTable.ImportRow(newRow);
+                if ("Default" != (string)(newRow["Name"]))  // Don't take in the old Default TXProfile at all
+                    expandedTable.ImportRow(newRow);
             }
 
             return expandedTable;
