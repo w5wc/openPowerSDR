@@ -1,8 +1,9 @@
 # OpenHPSDR-PowerSDR beta releases
 # Official Releases are located at https://github.com/tapr
 
-Latest Beta Release v3.3.19 May 28, 2017
-# 3.3.19 (2028-5-19)
+Latest Beta Release v3.4.1 June 1, 2017
+Read the RealeaseNotes.md for more information.
+# 3.4.1 (2017-6-1)
 - Swaped places with XIT and RIT controls on the console.
 - Added 4 CAT Commands
  -- ZZAP Audio Peak Filter On/Off
@@ -10,15 +11,15 @@ Latest Beta Release v3.3.19 May 28, 2017
  -- ZZAB APB Bandwidth
  -- ZZAA APF Gain
 - Corrected capatability issue with N1MM+ and FocusMaster.
-- relabeled the 'CW Break-In' feature from 'Enabled' to 'Semi Break-In' to better describe the actual behavior.        Toggles between Full Break-In and Semi Break-In.
+- relabeled the 'CW Break-In' feature from 'Enabled' to 'Semi Break-In' to better describe the actual behavior. Toggles between Full Break-In and Semi Break-In.
+
+- Single side-band Full Carrier (SSBFC)
+- Continuous Frequency Compressor (CFC) audio tools
 
 # 3.3.18 (2017-5-16)
 - Corrects a compatibility issue with DDUtil
 - Corrects the 10x watt meter reading for the Anan-10/10E transceivers
 
-# 3.3.17 (2017-5-15)
-- Single side-band Full Carrier (SSBFC)
-- Continuous Frequency Compressor (CFC) audio tools
 
 # 3.3.16 (2017-5-14)
 - Corrects sporadic HIGH SWR message found in v3.3.14 & v3.3.15
