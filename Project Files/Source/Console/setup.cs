@@ -15996,7 +15996,7 @@ namespace PowerSDR
 
             try
             {
-                exDS.WriteXml(fileName); //, XmlWriteMode.WriteSchema); // Writing with schema isn't necessary for import
+                exDS.WriteXml(fileName, XmlWriteMode.WriteSchema); // Writing with schema isn't necessary for import?
             }
             catch
             {
