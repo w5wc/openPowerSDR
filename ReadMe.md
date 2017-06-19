@@ -1,8 +1,11 @@
 # OpenHPSDR-PowerSDR beta releases
 # Official Releases are located at https://github.com/tapr
 
-Latest Beta Release v3.4.1 June 1, 2017
+Latest Beta Release v3.4.2 June 10, 2017
 Read the RealeaseNotes.md for more information.
+# 3.4.2 (2017-6-10)
+-
+
 # 3.4.1 (2017-6-1)
 - Swapped places with XIT and RIT controls on the console.
 - Added 4 CAT Commands
