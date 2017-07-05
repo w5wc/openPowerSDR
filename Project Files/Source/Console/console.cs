@@ -8598,6 +8598,7 @@ namespace PowerSDR
             wdsp.CloseChannel(wdsp.id(2, 0));
             wdsp.CloseChannel(wdsp.id(0, 1));
             wdsp.CloseChannel(wdsp.id(0, 0));
+            Thread.Sleep(100);
         }
 
         public void SaveState()
@@ -38124,15 +38125,32 @@ namespace PowerSDR
             {
                 double rx1_osc = Math.Round(-(VFOAFreq - center_frequency) * 1e6);
 
-                if (rx1_osc < -sample_rate1 / 2)
+                //if (rx1_osc < -sample_rate1 / 2)
+                //{
+                //    VFOAFreq = center_frequency + ((sample_rate1 / 2) - 1) * 0.0000010; 
+                //    return;
+                //}
+                //else if (rx1_osc > sample_rate1 / 2)
+                //{
+                //    VFOAFreq = center_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
+                //    return;
+                //}
+
+                //-W2PA If we tune beyond the display limits, re-center and keep going.  Original code above just stops tuning at edges.
+                double Lmargin = Convert.ToDouble( -Display.RX1FilterLow );
+                double Hmargin = Convert.ToDouble( Display.RX1FilterHigh );
+                if (Lmargin < 0.0) Lmargin = 0.0;
+                if (Hmargin < 0.0) Hmargin = 0.0;
+                //double Lmargin = 50.0;
+                //double Hmargin = 50.0;
+                double Ldisp = Convert.ToDouble(Display.RXDisplayLow);
+                double Hdisp = Convert.ToDouble(Display.RXDisplayHigh);
+                if ( ( (-rx1_osc) - Lmargin) < Ldisp || ( (-rx1_osc) + Hmargin) > Hdisp)
                 {
-                    VFOAFreq = center_frequency + ((sample_rate1 / 2) - 1) * 0.0000010;
-                    return;
-                }
-                else if (rx1_osc > sample_rate1 / 2)
-                {
-                    VFOAFreq = center_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
-                    return;
+                    center_frequency = freq;
+                    update_centerfreq = false;
+                    VFOAFreq = freq;
+                    rx1_osc = 0.0;
                 }
 
                 if (chkRIT.Checked)
@@ -38500,12 +38518,23 @@ namespace PowerSDR
                     if (!click_tune_display)
                         FWCDDSFreq = rx_freq; // update rx freq
 
-                    if (click_tune_display && rx1_spectrum_tune_drag)
+                    if (click_tune_display) //&& rx1_spectrum_tune_drag) //-W2PA This was preventing proper receiver adjustment
                     {
                         if (rx1_xvtr_index >= 0)
                             FWCDDSFreq = XVTRForm.TranslateFreq(center_frequency);
                         else
+                        {
                             FWCDDSFreq = center_frequency;
+                            switch (RX1DSPMode)  //-W2PA Account for offset when in CW modes.
+                            {
+                                case DSPMode.CWL:
+                                    FWCDDSFreq += CWPitch * 1.0e-6;
+                                    break;
+                                case DSPMode.CWU:
+                                    FWCDDSFreq -= CWPitch * 1.0e-6;
+                                    break;
+                            }
+                        }
                     }
 
                     if (chkEnableMultiRX.Checked)
@@ -38860,15 +38889,32 @@ namespace PowerSDR
             {
                 double rx2_osc = Math.Round(-(VFOBFreq - center_rx2_frequency) * 1e6);
 
-                if (rx2_osc < -sample_rate1 / 2)
+                //if (rx2_osc < -sample_rate1 / 2)
+                //{
+                //    VFOBFreq = center_rx2_frequency + ((sample_rate1 / 2) - 1) * 0.0000010;
+                //    return;
+                //}
+                //else if (rx2_osc > sample_rate1 / 2)
+                //{
+                //    VFOBFreq = center_rx2_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
+                //    return;
+                //}
+
+                //-W2PA If we tune beyond the display limits, re-center and keep going.  Original code above just stops tuning at edges.
+                double Lmargin = Convert.ToDouble(-Display.RX2FilterLow);
+                double Hmargin = Convert.ToDouble(Display.RX2FilterHigh);
+                if (Lmargin < 0.0) Lmargin = 0.0;
+                if (Hmargin < 0.0) Hmargin = 0.0;
+                //double Lmargin = 50.0;
+                //double Hmargin = 50.0;
+                double Ldisp = Convert.ToDouble(Display.RX2DisplayLow);
+                double Hdisp = Convert.ToDouble(Display.RX2DisplayHigh);
+                if (((-rx2_osc) - Lmargin) < Ldisp || ((-rx2_osc) + Hmargin) > Hdisp)
                 {
-                    VFOBFreq = center_rx2_frequency + ((sample_rate1 / 2) - 1) * 0.0000010;
-                    return;
-                }
-                else if (rx2_osc > sample_rate1 / 2)
-                {
-                    VFOBFreq = center_rx2_frequency + ((-sample_rate1 / 2) + 1) * 0.0000010;
-                    return;
+                    center_rx2_frequency = freq;
+                    update_rx2_centerfreq = false;
+                    VFOBFreq = freq;
+                    rx2_osc = 0.0;
                 }
 
                 if (chkRIT.Checked && VFOSync)
@@ -39243,8 +39289,19 @@ namespace PowerSDR
                 if (!click_tune_rx2_display || set_rx2_freq)
                     RX2DDSFreq = freq;
 
-                if (click_tune_rx2_display && rx2_spectrum_tune_drag)
+                if (click_tune_rx2_display) //&& rx2_spectrum_tune_drag) //-W2PA This was preventing proper receiver adjustment
+                {
                     RX2DDSFreq = center_rx2_frequency;
+                    switch (RX2DSPMode)  //-W2PA Account for offset when in CW modes.
+                    {
+                        case DSPMode.CWL:
+                            RX2DDSFreq += CWPitch * 1.0e-6;
+                            break;
+                        case DSPMode.CWU:
+                            RX2DDSFreq -= CWPitch * 1.0e-6;
+                            break;
+                    }
+                }
             }
 
             set_rx2_freq = false;
@@ -41794,6 +41851,8 @@ namespace PowerSDR
             ptbDisplayPan_Scroll(btnDisplayPanCenter, EventArgs.Empty);
         }
 
+        private double lastZoom = 1.0;
+
         private void ptbDisplayZoom_Scroll(object sender, System.EventArgs e)
         {
             specRX.GetSpecRX(0).ZoomSlider = ((double)ptbDisplayZoom.Value - 10.0) / 230.0;
@@ -41816,6 +41875,15 @@ namespace PowerSDR
 
             CalcDisplayFreq();
             CalcRX2DisplayFreq();
+
+            if (initializing) lastZoom = zoom_factor;
+            Boolean zoomingIn = (zoom_factor > lastZoom);
+            if (ClickTuneDisplay && zoomingIn)  //-W2PA Force centering display when zooming in with CTUN on, to keep the vfo within the display
+            {
+                center_frequency = VFOAFreq; 
+                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+            }
+            lastZoom = zoom_factor; 
 
             //if (ptbDisplayZoom.Focused) btnHidden.Focus();
             if (sender.GetType() == typeof(PrettyTrackBar))
@@ -51512,14 +51580,14 @@ namespace PowerSDR
             // event handler for CTUN
 
             // if (SetupForm != null) SetupForm.X2TR = chkX2TR.Checked;
-            //  if (chkFWCATU.Checked)
+            if (chkFWCATU.Checked)  //-W2PA Was commented-out in 3.4.1 - don't know why
             {
                 bool rit_on = chkRIT.Checked;
                 chkRIT.Checked = false;
                 ClickTuneDisplay = chkFWCATU.Checked;
                 chkRIT.Checked = rit_on;
             }
-            //  else ClickTuneDisplay = false;
+            else ClickTuneDisplay = false;  //-W2PA Was commented-out in 3.4.1 - don't know why
 
             if (chkFWCATU.Checked && chkVFOSync.Checked)
             {
