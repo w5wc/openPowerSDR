@@ -64,6 +64,7 @@ namespace PowerSDR
         public static bool Ext2OutOnTx = false;
         public static bool init_update = false;
         public static bool rx_out_override = false;
+        public static bool TRxAnt = false;
 
 		public void setRxAnt(Band band, byte ant) 
 		{ 
@@ -290,7 +291,8 @@ namespace PowerSDR
                 }
 
                 rx_out = rx_only_ant != 0 ? 1 : 0;
-                trx_ant = RxAnt[idx];
+                if (TRxAnt) trx_ant = TxAnt[idx];
+                else trx_ant = RxAnt[idx];
             }
 
             if (rx_out_override && rx_out == 1)

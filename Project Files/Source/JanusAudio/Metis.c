@@ -262,8 +262,8 @@ int MetisReadDirect(char *bufp, int buflen) {
 
 	fromlen = sizeof(fromaddr);
 
-	rc = recvfrom_withtimeout(listenSock, (char *)&inpacket, sizeof(inpacket), 0, (struct sockaddr *)&fromaddr, &fromlen, 0, 500000);
-	/* rc = recvfrom(listenSock, readbuf, sizeof(readbuf), 0, (struct sockaddr *)&fromaddr, &fromlen);  */
+	//rc = recvfrom_withtimeout(listenSock, (char *)&inpacket, sizeof(inpacket), 0, (struct sockaddr *)&fromaddr, &fromlen, 0, 500000);
+	rc = recvfrom(listenSock, (char *)&inpacket, sizeof(inpacket), 0, (struct sockaddr *)&fromaddr, &fromlen);
 	if (rc < 0) {  /* failed */
 		printf("MRD: recvfrom on listSock failed w/ rc=%d!\n", rc);  fflush(stdout);
 		return rc;
