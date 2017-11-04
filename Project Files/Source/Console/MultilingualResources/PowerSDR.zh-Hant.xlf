@@ -7734,7 +7734,7 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnMemoryQuickRestore.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>170, 41</source>
+          <source>170, 63</source>
           <target state="needs-review-translation">156, 56</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -7773,7 +7773,7 @@
           <target state="needs-review-translation">Off</target>
         </trans-unit>
         <trans-unit id="btnMemoryQuickSave.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>104, 41</source>
+          <source>110, 63</source>
           <target state="needs-review-translation">104, 56</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -7799,8 +7799,9 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">快速儲存 (頻率，篩選器，模式)</target>
         </trans-unit>
         <trans-unit id="txtMemoryQuick.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>16, 61</source>
+          <source>134, 41</source>
           <target state="needs-review-translation">16, 61</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="txtMemoryQuick.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>72, 20</source>
@@ -10066,12 +10067,12 @@
           <target state="needs-review-translation"></target>
         </trans-unit>
         <trans-unit id="btnTNFAdd.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
-          <source>104, 63</source>
+          <source>12, 60</source>
           <target state="needs-review-translation">60, 69</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="btnTNFAdd.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
-          <source>60, 20</source>
+          <source>80, 23</source>
           <target state="needs-review-translation">50, 23</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>

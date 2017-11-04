@@ -4672,7 +4672,7 @@
     <value>Off</value>
   </data>
   <data name="btnMemoryQuickRestore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 41</value>
+    <value>170, 63</value>
   </data>
   <data name="btnMemoryQuickRestore.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
@@ -4714,7 +4714,7 @@
     <value>Off</value>
   </data>
   <data name="btnMemoryQuickSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 41</value>
+    <value>110, 63</value>
   </data>
   <data name="btnMemoryQuickSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
@@ -4744,7 +4744,7 @@
     <value>9</value>
   </data>
   <data name="txtMemoryQuick.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 61</value>
+    <value>134, 41</value>
   </data>
   <data name="txtMemoryQuick.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 20</value>
@@ -7697,6 +7697,51 @@
   </data>
   <data name="&gt;&gt;comboAMTXProfile.ZOrder" xml:space="preserve">
     <value>22</value>
+  </data>
+  <data name="btnTNFAdd.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="btnTNFAdd.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnTNFAdd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnTNFAdd.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="btnTNFAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="btnTNFAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 60</value>
+  </data>
+  <data name="btnTNFAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 23</value>
+  </data>
+  <data name="btnTNFAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="btnTNFAdd.Text" xml:space="preserve">
+    <value>Rx Ant</value>
+  </data>
+  <data name="btnTNFAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="btnTNFAdd.ToolTip" xml:space="preserve">
+    <value>Toggles receive antenna between RX and TX antennas for RX1</value>
+  </data>
+  <data name="&gt;&gt;btnTNFAdd.Name" xml:space="preserve">
+    <value>btnTNFAdd</value>
+  </data>
+  <data name="&gt;&gt;btnTNFAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=3.4.3.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnTNFAdd.Parent" xml:space="preserve">
+    <value>grpVFOBetween</value>
+  </data>
+  <data name="&gt;&gt;btnTNFAdd.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -13106,51 +13151,6 @@
   </data>
   <data name="&gt;&gt;lblTuneStep.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="btnTNFAdd.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="btnTNFAdd.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="btnTNFAdd.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="btnTNFAdd.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="btnTNFAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="btnTNFAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 63</value>
-  </data>
-  <data name="btnTNFAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="btnTNFAdd.TabIndex" type="System.Int32, mscorlib">
-    <value>81</value>
-  </data>
-  <data name="btnTNFAdd.Text" xml:space="preserve">
-    <value>Rx Ant</value>
-  </data>
-  <data name="btnTNFAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="btnTNFAdd.ToolTip" xml:space="preserve">
-    <value>Toggles receive antenna between RX and TX antennas for RX1</value>
-  </data>
-  <data name="&gt;&gt;btnTNFAdd.Name" xml:space="preserve">
-    <value>btnTNFAdd</value>
-  </data>
-  <data name="&gt;&gt;btnTNFAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=3.4.3.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnTNFAdd.Parent" xml:space="preserve">
-    <value>grpVFOBetween</value>
-  </data>
-  <data name="&gt;&gt;btnTNFAdd.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="grpVFOBetween.Location" type="System.Drawing.Point, System.Drawing">
     <value>360, 24</value>

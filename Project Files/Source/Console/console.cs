@@ -2269,6 +2269,7 @@ namespace PowerSDR
             this.grpSemiBreakIn = new System.Windows.Forms.GroupBoxTS();
             this.lblCWBreakInDelay = new System.Windows.Forms.LabelTS();
             this.comboAMTXProfile = new System.Windows.Forms.ComboBoxTS();
+            this.btnTNFAdd = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -2538,7 +2539,6 @@ namespace PowerSDR
             this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
             this.lblTuneStep = new System.Windows.Forms.LabelTS();
             this.grpVFOBetween = new System.Windows.Forms.GroupBoxTS();
-            this.btnTNFAdd = new System.Windows.Forms.CheckBoxTS();
             this.lblDisplayModeTop = new System.Windows.Forms.LabelTS();
             this.lblDisplayModeBottom = new System.Windows.Forms.LabelTS();
             this.grpDisplaySplit = new System.Windows.Forms.GroupBoxTS();
@@ -4903,6 +4903,15 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.comboAMTXProfile, resources.GetString("comboAMTXProfile.ToolTip"));
             this.comboAMTXProfile.SelectedIndexChanged += new System.EventHandler(this.comboAMTXProfile_SelectedIndexChanged);
             // 
+            // btnTNFAdd
+            // 
+            resources.ApplyResources(this.btnTNFAdd, "btnTNFAdd");
+            this.btnTNFAdd.FlatAppearance.BorderSize = 0;
+            this.btnTNFAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnTNFAdd.Name = "btnTNFAdd";
+            this.toolTip1.SetToolTip(this.btnTNFAdd, resources.GetString("btnTNFAdd.ToolTip"));
+            this.btnTNFAdd.CheckedChanged += new System.EventHandler(this.btnTNFAdd_CheckedChanged);
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -7191,15 +7200,6 @@ namespace PowerSDR
             resources.ApplyResources(this.grpVFOBetween, "grpVFOBetween");
             this.grpVFOBetween.Name = "grpVFOBetween";
             this.grpVFOBetween.TabStop = false;
-            // 
-            // btnTNFAdd
-            // 
-            resources.ApplyResources(this.btnTNFAdd, "btnTNFAdd");
-            this.btnTNFAdd.FlatAppearance.BorderSize = 0;
-            this.btnTNFAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnTNFAdd.Name = "btnTNFAdd";
-            this.toolTip1.SetToolTip(this.btnTNFAdd, resources.GetString("btnTNFAdd.ToolTip"));
-            this.btnTNFAdd.CheckedChanged += new System.EventHandler(this.btnTNFAdd_CheckedChanged);
             // 
             // lblDisplayModeTop
             // 
