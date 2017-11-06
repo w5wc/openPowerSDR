@@ -9374,6 +9374,12 @@ namespace PowerSDR
                 string val = vals[1];
                 int num = 0;
 
+                if (name.Contains("by_radio"))
+                {
+                    int iii=1;
+                    iii = 3;
+                }
+
                 if (name.StartsWith("rx1_filters["))
                 {
                     int start = name.IndexOf("[") + 1;
@@ -9646,14 +9652,28 @@ namespace PowerSDR
                 else if (name.StartsWith("rx_meter_cal_offset_by_radio"))
                 {
                     string[] list = val.Split('|');
+                    int numVals = list.Length;
+                    if (numVals == (int)HPSDRModel.LAST)  //-W2PA  The number of rig types in the imported DB matches the number in this version
+                    {
                     for (int i = 0; i < (int)HPSDRModel.LAST; i++)
+                        {
                         rx_meter_cal_offset_by_radio[i] = float.Parse(list[i]);
+                }
+                    }  //-W2PA  else the number has changed so don't import, leave the defaults alone
+                    ;                                         
                 }
                 else if (name.StartsWith("rx_display_cal_offset_by_radio"))
                 {
                     string[] list = val.Split('|');
+                    int numVals = list.Length;
+                    if (numVals == (int)HPSDRModel.LAST)  //-W2PA  The number of rig types in the imported DB matches the number in this version
+                    {
                     for (int i = 0; i < (int)HPSDRModel.LAST; i++)
+                        {
                         rx_display_cal_offset_by_radio[i] = float.Parse(list[i]);
+                }
+                    }  //-W2PA  else the number has changed so don't import, leave the defaults alone
+                    ;
                 }
 
                 /*  else if (name.StartsWith("tx2_by_band"))

@@ -45802,6 +45802,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.udUpdatesPerStepMin);
             this.groupBox1.Controls.Add(this.labelTS402);
             this.groupBox1.Controls.Add(this.labelTS401);
             this.groupBox1.Controls.Add(this.udUpdatesPerStepMax);
