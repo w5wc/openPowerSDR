@@ -21460,16 +21460,6 @@ namespace PowerSDR
             }
         }
 
-        private void labelTS257_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void udUpdatesPerStep_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void udUpdatesPerStepMax_ValueChanged(object sender, EventArgs e)
         {
             decimal currMin = udUpdatesPerStepMin.Value;
