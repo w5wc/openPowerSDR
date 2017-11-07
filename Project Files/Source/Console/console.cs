@@ -4907,7 +4907,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.btnTNFAdd, "btnTNFAdd");
             this.btnTNFAdd.FlatAppearance.BorderSize = 0;
-            this.btnTNFAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnTNFAdd.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnTNFAdd.Name = "btnTNFAdd";
             this.toolTip1.SetToolTip(this.btnTNFAdd, resources.GetString("btnTNFAdd.ToolTip"));
             this.btnTNFAdd.CheckedChanged += new System.EventHandler(this.btnTNFAdd_CheckedChanged);
@@ -22047,6 +22047,8 @@ namespace PowerSDR
                 Band lo_band = Band.FIRST;
                 alex_ant_ctrl_enabled = value;
 
+                UpdateTRXAnt();
+
                 if (rx1_xvtr_index >= 0)
                 {
                     //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
@@ -22068,8 +22070,31 @@ namespace PowerSDR
                     Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, alex_ant_ctrl_enabled, false);
                 }
 
-                //  Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, alex_ant_ctrl_enabled);
+                UpdateTRXAnt();
             }
+        }
+
+        private void UpdateTRXAnt()
+        {
+                if (btnTNFAdd.Checked)
+                {
+                    if (!Alex.trx_ant_not_same)
+                    {
+                        btnTNFAdd.Checked = false;
+                        return;
+                    }
+                    Alex.TRxAnt = true;
+                    btnTNFAdd.Text = "Tx Ant";
+                    btnTNFAdd.ForeColor = Color.Yellow;
+                }
+                else
+                {
+                    Alex.TRxAnt = false;
+                    btnTNFAdd.Text = "Rx Ant";
+                    if (Alex.trx_ant_not_same) btnTNFAdd.ForeColor = Color.SpringGreen;
+                    else btnTNFAdd.ForeColor = SystemColors.ControlLightLight;
+                }
+
         }
 
         private bool rx_out_override = false;
@@ -36339,6 +36364,7 @@ namespace PowerSDR
 
                 if (serialPTT != null) serialPTT.setDTR(true);
 
+                
             }
             else // rx
             {
@@ -36380,6 +36406,7 @@ namespace PowerSDR
                 if (penny_ext_ctrl_enabled)
                     Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
+                UpdateTRXAnt();
                 if (rx1_xvtr_index >= 0)
                 {
                     // Fix Penny O/C VHF control Vk4xv
@@ -36403,10 +36430,13 @@ namespace PowerSDR
                     // Penny.getPenny().UpdateExtCtrl(rx1_band, rx2_band, mox);
 
                     if (alex_ant_ctrl_enabled)
+                    {
                         Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox, false);
+                    }
                 }
 
                 JanusAudio.SetGndRx2onTx(0);
+                UpdateTRXAnt();
             }
 
         }
@@ -38731,6 +38761,7 @@ namespace PowerSDR
                 if (penny_ext_ctrl_enabled)
                     Penny.getPenny().UpdateExtCtrl(lo_band, lo_bandb, mox);
 
+                UpdateTRXAnt();
                 if (rx1_xvtr_index >= 0)
                 {
                     // Fix Penny O/C VHF control Vk4xv
@@ -38753,8 +38784,12 @@ namespace PowerSDR
                     //  Penny.getPenny().UpdateExtCtrl(RX1Band, RX2Band, mox);
 
                     if (alex_ant_ctrl_enabled)
+                    {
                         Alex.getAlex().UpdateAlexAntSelection(RX1Band, mox, false);
+                    }
                 }
+                UpdateTRXAnt();
+
             }
 
             if (tx_band != old_tx_band)
@@ -52387,17 +52422,29 @@ namespace PowerSDR
 
         private void btnTNFAdd_CheckedChanged(object sender, EventArgs e)
         {
-            if (btnTNFAdd.Checked)
-            {
-                Alex.TRxAnt = true;
-                btnTNFAdd.Text = "Tx Ant";
-            }
-            else
-            {
-                Alex.TRxAnt = false;
-                btnTNFAdd.Text = "Rx Ant";
-            }
-            AlexAntCtrlEnabled = alex_ant_ctrl_enabled;
+          //  if (initializing) return;
+          //  if (PowerOn)
+          //  {
+                //if (btnTNFAdd.Checked)
+                //{
+                //    if (!Alex.trx_ant_not_same)
+                //    {
+                //        btnTNFAdd.Checked = false;
+                //        return;
+                //    }
+                //    Alex.TRxAnt = true;
+                //    btnTNFAdd.Text = "Tx Ant";
+                //    btnTNFAdd.ForeColor = Color.YellowGreen;
+                //}
+                //else
+                //{
+                //    Alex.TRxAnt = false;
+                //    btnTNFAdd.Text = "Rx Ant";
+                //    if (Alex.trx_ant_not_same) btnTNFAdd.ForeColor = Color.SpringGreen;
+                //    else btnTNFAdd.ForeColor = SystemColors.ControlLightLight;
+                //}
+                AlexAntCtrlEnabled = alex_ant_ctrl_enabled;
+           // }
         }
 
      }
