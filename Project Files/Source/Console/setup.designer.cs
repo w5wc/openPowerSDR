@@ -2700,6 +2700,7 @@
             this.tpCAT = new System.Windows.Forms.TabPage();
             this.labelTS400 = new System.Windows.Forms.LabelTS();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.udUpdatesPerStepMin = new System.Windows.Forms.NumericUpDownTS();
             this.labelTS402 = new System.Windows.Forms.LabelTS();
             this.labelTS401 = new System.Windows.Forms.LabelTS();
             this.udUpdatesPerStepMax = new System.Windows.Forms.NumericUpDownTS();
@@ -2861,7 +2862,6 @@
             this.btnApply = new System.Windows.Forms.ButtonTS();
             this.btnCancel = new System.Windows.Forms.ButtonTS();
             this.btnOK = new System.Windows.Forms.ButtonTS();
-            this.udUpdatesPerStepMin = new System.Windows.Forms.NumericUpDownTS();
             this.chkEnableRFEPATR = new System.Windows.Forms.CheckBoxTS();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -3794,6 +3794,7 @@
             this.tcCAT.SuspendLayout();
             this.tpCAT.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udUpdatesPerStepMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUpdatesPerStepMax)).BeginInit();
             this.grpFocusMaster.SuspendLayout();
             this.grpCatControlBox.SuspendLayout();
@@ -3834,7 +3835,6 @@
             this.grpImpulseTest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).BeginInit();
             this.grpTestAudioBalance.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udUpdatesPerStepMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS6)).BeginInit();
@@ -20341,7 +20341,7 @@
             this.grpDisplay8000DLE.Size = new System.Drawing.Size(200, 100);
             this.grpDisplay8000DLE.TabIndex = 44;
             this.grpDisplay8000DLE.TabStop = false;
-            this.grpDisplay8000DLE.Text = "ANAN-8000DLE";
+            this.grpDisplay8000DLE.Text = "7000DLE/8000DLE";
             // 
             // chkANAN8000DLEDisplayVoltsAmps
             // 
@@ -45814,6 +45814,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Interface Controller";
             // 
+            // udUpdatesPerStepMin
+            // 
+            this.udUpdatesPerStepMin.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udUpdatesPerStepMin.Location = new System.Drawing.Point(138, 45);
+            this.udUpdatesPerStepMin.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.udUpdatesPerStepMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udUpdatesPerStepMin.Name = "udUpdatesPerStepMin";
+            this.udUpdatesPerStepMin.Size = new System.Drawing.Size(31, 20);
+            this.udUpdatesPerStepMin.TabIndex = 107;
+            this.toolTip1.SetToolTip(this.udUpdatesPerStepMin, "Minimum number of MIDI wheel updates required to produce one frequency step - det" +
+        "ermines the highest sensitivity to wheel rotation.");
+            this.udUpdatesPerStepMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udUpdatesPerStepMin.ValueChanged += new System.EventHandler(this.udUpdatesPerStepMin_ValueChanged);
+            // 
             // labelTS402
             // 
             this.labelTS402.AutoSize = true;
@@ -48038,36 +48068,6 @@
             this.toolTip1.SetToolTip(this.btnOK, "Save current settings and close form.");
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // udUpdatesPerStepMin
-            // 
-            this.udUpdatesPerStepMin.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udUpdatesPerStepMin.Location = new System.Drawing.Point(138, 45);
-            this.udUpdatesPerStepMin.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.udUpdatesPerStepMin.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udUpdatesPerStepMin.Name = "udUpdatesPerStepMin";
-            this.udUpdatesPerStepMin.Size = new System.Drawing.Size(31, 20);
-            this.udUpdatesPerStepMin.TabIndex = 107;
-            this.toolTip1.SetToolTip(this.udUpdatesPerStepMin, "Minimum number of MIDI wheel updates required to produce one frequency step - det" +
-        "ermines the highest sensitivity to wheel rotation.");
-            this.udUpdatesPerStepMin.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udUpdatesPerStepMin.ValueChanged += new System.EventHandler(this.udUpdatesPerStepMin_ValueChanged);
-            // 
             // chkEnableRFEPATR
             // 
             this.chkEnableRFEPATR.Image = null;
@@ -50232,6 +50232,7 @@
             this.tpCAT.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udUpdatesPerStepMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUpdatesPerStepMax)).EndInit();
             this.grpFocusMaster.ResumeLayout(false);
             this.grpFocusMaster.PerformLayout();
@@ -50277,7 +50278,6 @@
             this.grpImpulseTest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).EndInit();
             this.grpTestAudioBalance.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udUpdatesPerStepMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTS6)).EndInit();
