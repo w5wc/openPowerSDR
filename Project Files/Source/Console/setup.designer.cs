@@ -209,6 +209,10 @@
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tpGeneralHardware = new System.Windows.Forms.TabPage();
+            this.grpPROLatency = new System.Windows.Forms.GroupBoxTS();
+            this.radPROLatency4 = new System.Windows.Forms.RadioButtonTS();
+            this.radPROLatency2 = new System.Windows.Forms.RadioButtonTS();
+            this.radPROLatency1 = new System.Windows.Forms.RadioButtonTS();
             this.grpDisablePureSignal = new System.Windows.Forms.GroupBoxTS();
             this.chkDisablePureSignal = new System.Windows.Forms.CheckBoxTS();
             this.grpLimtRX = new System.Windows.Forms.GroupBoxTS();
@@ -2952,6 +2956,7 @@
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
             this.tpGeneralHardware.SuspendLayout();
+            this.grpPROLatency.SuspendLayout();
             this.grpDisablePureSignal.SuspendLayout();
             this.grpLimtRX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
@@ -6226,6 +6231,7 @@
             // tpGeneralHardware
             // 
             this.tpGeneralHardware.BackColor = System.Drawing.SystemColors.Control;
+            this.tpGeneralHardware.Controls.Add(this.grpPROLatency);
             this.tpGeneralHardware.Controls.Add(this.grpDisablePureSignal);
             this.tpGeneralHardware.Controls.Add(this.grpLimtRX);
             this.tpGeneralHardware.Controls.Add(this.udDDSIFFreq);
@@ -6244,6 +6250,56 @@
             this.tpGeneralHardware.TabIndex = 0;
             this.tpGeneralHardware.Text = "Hardware Config";
             this.tpGeneralHardware.Paint += new System.Windows.Forms.PaintEventHandler(this.tpGeneralHardware_Paint);
+            // 
+            // grpPROLatency
+            // 
+            this.grpPROLatency.Controls.Add(this.radPROLatency4);
+            this.grpPROLatency.Controls.Add(this.radPROLatency2);
+            this.grpPROLatency.Controls.Add(this.radPROLatency1);
+            this.grpPROLatency.Location = new System.Drawing.Point(160, 188);
+            this.grpPROLatency.Name = "grpPROLatency";
+            this.grpPROLatency.Size = new System.Drawing.Size(160, 81);
+            this.grpPROLatency.TabIndex = 38;
+            this.grpPROLatency.TabStop = false;
+            this.grpPROLatency.Text = "PRO Latency";
+            // 
+            // radPROLatency4
+            // 
+            this.radPROLatency4.AutoSize = true;
+            this.radPROLatency4.Checked = true;
+            this.radPROLatency4.Image = null;
+            this.radPROLatency4.Location = new System.Drawing.Point(98, 41);
+            this.radPROLatency4.Name = "radPROLatency4";
+            this.radPROLatency4.Size = new System.Drawing.Size(31, 17);
+            this.radPROLatency4.TabIndex = 2;
+            this.radPROLatency4.TabStop = true;
+            this.radPROLatency4.Text = "4";
+            this.radPROLatency4.UseVisualStyleBackColor = true;
+            this.radPROLatency4.CheckedChanged += new System.EventHandler(this.radPROLatency4_CheckedChanged);
+            // 
+            // radPROLatency2
+            // 
+            this.radPROLatency2.AutoSize = true;
+            this.radPROLatency2.Image = null;
+            this.radPROLatency2.Location = new System.Drawing.Point(58, 41);
+            this.radPROLatency2.Name = "radPROLatency2";
+            this.radPROLatency2.Size = new System.Drawing.Size(31, 17);
+            this.radPROLatency2.TabIndex = 1;
+            this.radPROLatency2.Text = "2";
+            this.radPROLatency2.UseVisualStyleBackColor = true;
+            this.radPROLatency2.CheckedChanged += new System.EventHandler(this.radPROLatency2_CheckedChanged);
+            // 
+            // radPROLatency1
+            // 
+            this.radPROLatency1.AutoSize = true;
+            this.radPROLatency1.Image = null;
+            this.radPROLatency1.Location = new System.Drawing.Point(13, 41);
+            this.radPROLatency1.Name = "radPROLatency1";
+            this.radPROLatency1.Size = new System.Drawing.Size(31, 17);
+            this.radPROLatency1.TabIndex = 0;
+            this.radPROLatency1.Text = "1";
+            this.radPROLatency1.UseVisualStyleBackColor = true;
+            this.radPROLatency1.CheckedChanged += new System.EventHandler(this.radPROLatency1_CheckedChanged);
             // 
             // grpDisablePureSignal
             // 
@@ -6298,7 +6354,7 @@
             0,
             0,
             0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(209, 315);
+            this.udDDSIFFreq.Location = new System.Drawing.Point(342, 249);
             this.udDDSIFFreq.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -7046,7 +7102,7 @@
             // grpFRSRegion
             // 
             this.grpFRSRegion.Controls.Add(this.comboFRSRegion);
-            this.grpFRSRegion.Location = new System.Drawing.Point(185, 201);
+            this.grpFRSRegion.Location = new System.Drawing.Point(186, 280);
             this.grpFRSRegion.Name = "grpFRSRegion";
             this.grpFRSRegion.Size = new System.Drawing.Size(110, 55);
             this.grpFRSRegion.TabIndex = 33;
@@ -7089,7 +7145,7 @@
             // chkGeneralUseSi570
             // 
             this.chkGeneralUseSi570.Image = null;
-            this.chkGeneralUseSi570.Location = new System.Drawing.Point(304, 252);
+            this.chkGeneralUseSi570.Location = new System.Drawing.Point(459, 253);
             this.chkGeneralUseSi570.Name = "chkGeneralUseSi570";
             this.chkGeneralUseSi570.Size = new System.Drawing.Size(112, 16);
             this.chkGeneralUseSi570.TabIndex = 32;
@@ -7287,7 +7343,7 @@
             // 
             this.btnWizard.Enabled = false;
             this.btnWizard.Image = null;
-            this.btnWizard.Location = new System.Drawing.Point(221, 262);
+            this.btnWizard.Location = new System.Drawing.Point(502, 249);
             this.btnWizard.Name = "btnWizard";
             this.btnWizard.Size = new System.Drawing.Size(75, 23);
             this.btnWizard.TabIndex = 22;
@@ -7299,7 +7355,7 @@
             // chkGeneralRXOnly
             // 
             this.chkGeneralRXOnly.Image = null;
-            this.chkGeneralRXOnly.Location = new System.Drawing.Point(188, 295);
+            this.chkGeneralRXOnly.Location = new System.Drawing.Point(419, 249);
             this.chkGeneralRXOnly.Name = "chkGeneralRXOnly";
             this.chkGeneralRXOnly.Size = new System.Drawing.Size(96, 16);
             this.chkGeneralRXOnly.TabIndex = 11;
@@ -49301,6 +49357,8 @@
             this.tpGeneral.ResumeLayout(false);
             this.tcGeneral.ResumeLayout(false);
             this.tpGeneralHardware.ResumeLayout(false);
+            this.grpPROLatency.ResumeLayout(false);
+            this.grpPROLatency.PerformLayout();
             this.grpDisablePureSignal.ResumeLayout(false);
             this.grpLimtRX.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
@@ -51825,6 +51883,10 @@
         private System.Windows.Forms.CheckBoxTS chkBlockTxAnt3;
         private System.Windows.Forms.CheckBoxTS chkBlockTxAnt2;
         private System.Windows.Forms.LabelTS labelTS403;
+        private System.Windows.Forms.GroupBoxTS grpPROLatency;
+        private System.Windows.Forms.RadioButtonTS radPROLatency4;
+        private System.Windows.Forms.RadioButtonTS radPROLatency2;
+        private System.Windows.Forms.RadioButtonTS radPROLatency1;
 
     }
 }

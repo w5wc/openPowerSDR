@@ -2672,6 +2672,9 @@ namespace PowerSDR
             radOrionMicTip_CheckedChanged(this, e);
             radOrionBiasOn_CheckedChanged(this, e);
             chkRX2StepAtt_CheckedChanged(this, e);
+            radPROLatency1_CheckedChanged(this, e);
+            radPROLatency2_CheckedChanged(this, e);
+            radPROLatency4_CheckedChanged(this, e);
 
             // Audio Tab
             comboAudioSoundCard_SelectedIndexChanged(this, e);
@@ -21504,6 +21507,21 @@ namespace PowerSDR
             radAlexR_12_CheckedChanged(this, EventArgs.Empty);
             radAlexR_10_CheckedChanged(this, EventArgs.Empty);
             radAlexR_6_CheckedChanged(this, EventArgs.Empty);
+        }
+
+        private void radPROLatency1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radPROLatency1.Checked) JanusAudio.SetProLpacks(1);
+        }
+
+        private void radPROLatency2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radPROLatency2.Checked ) JanusAudio.SetProLpacks(2);
+        }
+
+        private void radPROLatency4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radPROLatency4.Checked) JanusAudio.SetProLpacks(4);
         }
 
         //private void chkCTUNScroll_CheckedChanged(object sender, EventArgs e)
