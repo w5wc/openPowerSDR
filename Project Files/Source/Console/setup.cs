@@ -20030,6 +20030,11 @@ namespace PowerSDR
                     if (chkLimitRX.Checked) nr = 2;
                     else nr = 4;
                     break;
+                case HPSDRModel.ANAN7000D:
+                case HPSDRModel.ANAN8000D:
+                    if (chkLimitRX.Checked) nr = 2;
+                    else nr = 4;
+                    break;
                 default:
                     nr = 2;
                     break;

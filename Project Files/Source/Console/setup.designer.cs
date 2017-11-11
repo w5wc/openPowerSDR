@@ -6258,17 +6258,18 @@
             this.grpPROLatency.Controls.Add(this.radPROLatency1);
             this.grpPROLatency.Location = new System.Drawing.Point(160, 188);
             this.grpPROLatency.Name = "grpPROLatency";
-            this.grpPROLatency.Size = new System.Drawing.Size(160, 81);
+            this.grpPROLatency.Size = new System.Drawing.Size(160, 58);
             this.grpPROLatency.TabIndex = 38;
             this.grpPROLatency.TabStop = false;
             this.grpPROLatency.Text = "PRO Latency";
+            this.toolTip1.SetToolTip(this.grpPROLatency, "Packet ReOrdering Latency");
             // 
             // radPROLatency4
             // 
             this.radPROLatency4.AutoSize = true;
             this.radPROLatency4.Checked = true;
             this.radPROLatency4.Image = null;
-            this.radPROLatency4.Location = new System.Drawing.Point(98, 41);
+            this.radPROLatency4.Location = new System.Drawing.Point(105, 27);
             this.radPROLatency4.Name = "radPROLatency4";
             this.radPROLatency4.Size = new System.Drawing.Size(31, 17);
             this.radPROLatency4.TabIndex = 2;
@@ -6281,7 +6282,7 @@
             // 
             this.radPROLatency2.AutoSize = true;
             this.radPROLatency2.Image = null;
-            this.radPROLatency2.Location = new System.Drawing.Point(58, 41);
+            this.radPROLatency2.Location = new System.Drawing.Point(65, 27);
             this.radPROLatency2.Name = "radPROLatency2";
             this.radPROLatency2.Size = new System.Drawing.Size(31, 17);
             this.radPROLatency2.TabIndex = 1;
@@ -6293,7 +6294,7 @@
             // 
             this.radPROLatency1.AutoSize = true;
             this.radPROLatency1.Image = null;
-            this.radPROLatency1.Location = new System.Drawing.Point(13, 41);
+            this.radPROLatency1.Location = new System.Drawing.Point(20, 27);
             this.radPROLatency1.Name = "radPROLatency1";
             this.radPROLatency1.Size = new System.Drawing.Size(31, 17);
             this.radPROLatency1.TabIndex = 0;
