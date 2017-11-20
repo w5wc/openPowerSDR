@@ -22925,15 +22925,15 @@ namespace PowerSDR
         //   i.e. not just copy frequency alone
         public void CATVFOAtoB()
         {
-            btnVFOAtoB.PerformClick();
+            btnVFOAtoB_Click(this, EventArgs.Empty);
         }
         public void CATVFOBtoA()
         {
-            btnVFOBtoA.PerformClick();
+            btnVFOBtoA_Click(this, EventArgs.Empty);
         }
         public void CATVFOABSwap()
         {
-            btnVFOSwap.PerformClick();
+            btnVFOSwap_Click(this, EventArgs.Empty);
         }
 
 
@@ -31382,7 +31382,7 @@ namespace PowerSDR
                         {
                             case DisplayMode.WATERFALL:
                             case DisplayMode.PANAFALL:
-                                if (mox && !display_duplex && (NReceivers <= 2))
+                                if (mox && !display_duplex && (NReceivers <= 2) || mox && !SetupForm.DisablePureSignal && !display_duplex)
                                 {
                                     if (chkVFOATX.Checked || !chkRX2.Checked)
                                     {
