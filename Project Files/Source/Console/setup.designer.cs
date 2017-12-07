@@ -2918,6 +2918,7 @@
             this.panelTS4 = new System.Windows.Forms.PanelTS();
             this.radioButtonTS5 = new System.Windows.Forms.RadioButtonTS();
             this.radioButtonTS6 = new System.Windows.Forms.RadioButtonTS();
+            this.chkLPFBypass = new System.Windows.Forms.CheckBoxTS();
             tpAlexAntCtrl = new System.Windows.Forms.TabPage();
             grpKBCW = new System.Windows.Forms.GroupBoxTS();
             tpAlexAntCtrl.SuspendLayout();
@@ -14703,6 +14704,7 @@
             // tpAlexFilterControl
             // 
             this.tpAlexFilterControl.BackColor = System.Drawing.SystemColors.Control;
+            this.tpAlexFilterControl.Controls.Add(this.chkLPFBypass);
             this.tpAlexFilterControl.Controls.Add(this.labelAlexFilterActive);
             this.tpAlexFilterControl.Controls.Add(this.panelTS6);
             this.tpAlexFilterControl.Controls.Add(this.labelTS126);
@@ -15352,7 +15354,7 @@
             this.panelTS1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
             this.panelTS1.Controls.Add(this.radAlexManualCntl);
             this.panelTS1.Controls.Add(this.radAlexAutoCntl);
-            this.panelTS1.Location = new System.Drawing.Point(371, 229);
+            this.panelTS1.Location = new System.Drawing.Point(350, 247);
             this.panelTS1.Name = "panelTS1";
             this.panelTS1.Size = new System.Drawing.Size(148, 25);
             this.panelTS1.TabIndex = 0;
@@ -49300,6 +49302,19 @@
             this.radioButtonTS6.Text = "Auto";
             this.radioButtonTS6.UseVisualStyleBackColor = true;
             // 
+            // chkLPFBypass
+            // 
+            this.chkLPFBypass.AutoSize = true;
+            this.chkLPFBypass.Image = null;
+            this.chkLPFBypass.Location = new System.Drawing.Point(353, 216);
+            this.chkLPFBypass.Name = "chkLPFBypass";
+            this.chkLPFBypass.Size = new System.Drawing.Size(113, 17);
+            this.chkLPFBypass.TabIndex = 111;
+            this.chkLPFBypass.Text = "6m/ByPass on RX";
+            this.toolTip1.SetToolTip(this.chkLPFBypass, "Selects the 6m LPF during receive reguardless of frequency.");
+            this.chkLPFBypass.UseVisualStyleBackColor = true;
+            this.chkLPFBypass.CheckedChanged += new System.EventHandler(this.chkLPFBypass_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -49472,6 +49487,7 @@
             this.tpAlexControl.ResumeLayout(false);
             this.tcAlexControl.ResumeLayout(false);
             this.tpAlexFilterControl.ResumeLayout(false);
+            this.tpAlexFilterControl.PerformLayout();
             this.panelTS6.ResumeLayout(false);
             this.panelTS6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAlex10mLPFEnd)).EndInit();
@@ -51888,6 +51904,7 @@
         private System.Windows.Forms.RadioButtonTS radPROLatency4;
         private System.Windows.Forms.RadioButtonTS radPROLatency2;
         private System.Windows.Forms.RadioButtonTS radPROLatency1;
+        private System.Windows.Forms.CheckBoxTS chkLPFBypass;
 
     }
 }

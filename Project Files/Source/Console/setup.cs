@@ -21529,6 +21529,11 @@ namespace PowerSDR
             if (radPROLatency4.Checked) JanusAudio.SetProLpacks(4);
         }
 
+        private void chkLPFBypass_CheckedChanged(object sender, EventArgs e)
+        {
+            console.LPFBypass = chkLPFBypass.Checked;
+        }
+
         //private void chkCTUNScroll_CheckedChanged(object sender, EventArgs e)
         //{
 

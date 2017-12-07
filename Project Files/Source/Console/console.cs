@@ -14938,6 +14938,13 @@ namespace PowerSDR
 
         public void SetAlexLPF(double freq)
         {
+            if (!mox && lpf_bypass)
+            {
+                JanusAudio.SetAlexLPFBits(0x10); // 6m LPF
+                SetupForm.rad6LPFled.Checked = true;
+                return;
+            }
+
             if (chkPower.Checked && alexpresent && SetupForm.radAlexManualCntl.Checked)
             {
                 if ((decimal)freq >= SetupForm.udAlex20mLPFStart.Value && // 30/20m LPF
@@ -25561,6 +25568,24 @@ namespace PowerSDR
             }
         }
 
+        private bool lpf_bypass = false;
+        public bool LPFBypass
+        {
+            get { return lpf_bypass; }
+            set
+            {
+                lpf_bypass = value;
+                if (chkPower.Checked)
+                {
+                    double freq = Double.Parse(txtVFOAFreq.Text);
+                    if (mox) freq = tx_dds_freq_mhz;
+                    SetAlexLPF(freq);
+                    if (!initializing)
+                        txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+                }
+            }
+        }
+
         private bool alex_hpf_bypass = false;
         public bool AlexHPFBypass
         {
@@ -31382,7 +31407,7 @@ namespace PowerSDR
                         {
                             case DisplayMode.WATERFALL:
                             case DisplayMode.PANAFALL:
-                                if (mox && !display_duplex && (NReceivers <= 2) || mox && !SetupForm.DisablePureSignal && !display_duplex)
+                                if (mox && ((!display_duplex  /*&& (StitchedReceivers == 1)) || (!SetupForm.DisablePureSignal && !display_duplex*/)))
                                 {
                                     if (chkVFOATX.Checked || !chkRX2.Checked)
                                     {
