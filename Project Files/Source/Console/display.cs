@@ -1261,7 +1261,6 @@ namespace PowerSDR
             }
         }
 
-        // w6vh
         private static int tx_wf_amp_max = 30;
         public static int TXWFAmpMax
         {
@@ -1281,7 +1280,6 @@ namespace PowerSDR
                 tx_wf_amp_min = value;
             }
         }
-        // w6vh
 
         private static Color band_edge_color = Color.Red;
         private static Pen band_edge_pen = new Pen(band_edge_color);
@@ -10870,17 +10868,11 @@ namespace PowerSDR
                     mid_color = waterfall_mid_color;
                     high_color = waterfall_high_color;
 
-                // LB - comment out as needed.
-                //high_threshold = waterfall_high_threshold;
-
-                // w6vh
                 if (local_mox)
                     high_threshold = (float)TXWFAmpMax;
                 else
                     high_threshold = waterfall_high_threshold;
-                // w6vh
 
-                // w6vh
                 if (local_mox)
                 {
                     low_threshold = (float)TXWFAmpMin;

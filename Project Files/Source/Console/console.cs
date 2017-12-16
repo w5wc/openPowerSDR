@@ -22212,7 +22212,6 @@ namespace PowerSDR
                 vfo_lock = value;
                 bool enabled = !value;
                 txtVFOAFreq.Enabled = enabled;
-                // w6vh
                 txtVFOBFreq.Enabled = enabled;
                 radBand160.Enabled = enabled;
                 radBand80.Enabled = enabled;
@@ -25113,7 +25112,6 @@ namespace PowerSDR
             }
             set
             {
-                // w6vh
                 if (vfo_lock || SetupForm == null) return;
                 value = Math.Max(0, value);
                 txtVFOBFreq.Text = value.ToString("f6");

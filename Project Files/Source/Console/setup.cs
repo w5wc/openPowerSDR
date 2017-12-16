@@ -1915,12 +1915,8 @@ namespace PowerSDR
             udTXGridMax.Value = Display.TXSpectrumGridMax;
             udTXGridMin.Value = Display.TXSpectrumGridMin;
             udTXGridStep.Value = Display.TXSpectrumGridStep;
-
-            // w6vh
             udTXWFAmpMax.Value = Display.TXWFAmpMax;
             udTXWFAmpMin.Value = Display.TXWFAmpMin;
-            // w6vh
-
         }
 
         private void InitDSPTab()
@@ -11977,7 +11973,6 @@ namespace PowerSDR
             Display.TXSpectrumGridMin = (int)udTXGridMin.Value;
         }
 
-        // w6vh
         private void udTXWFAmpMax_ValueChanged(object sender, EventArgs e)
         {
             if (udTXWFAmpMax.Value <= udTXWFAmpMin.Value)
@@ -11991,7 +11986,6 @@ namespace PowerSDR
                 udTXWFAmpMin.Value = udTXWFAmpMax.Value - 10;
             Display.TXWFAmpMin = (int)udTXWFAmpMin.Value;
         }
-        // w6vh
 
         private void udTXGridStep_ValueChanged(object sender, System.EventArgs e)
         {
