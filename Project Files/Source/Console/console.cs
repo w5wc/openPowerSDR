@@ -1557,7 +1557,7 @@ namespace PowerSDR
         private TextBoxTS txtDisplayOrionMKIIPAVolts;
         private TextBoxTS txtDisplayOrionMKIIPAAmps;
         private TextBoxTS txtDisplayOrionMKIIBlank;
-        private CheckBox chkSyncIT;
+        private CheckBoxTS chkSyncIT;
         private CheckBoxTS btnTNFAdd;
         private ComboBoxTS comboAMTXProfile;
         public PictureBox picWaterfall;
@@ -2265,7 +2265,7 @@ namespace PowerSDR
             this.ptbCWAPFGain = new PowerSDR.PrettyTrackBar();
             this.ptbCWAPFBandwidth = new PowerSDR.PrettyTrackBar();
             this.ptbCWAPFFreq = new PowerSDR.PrettyTrackBar();
-            this.chkSyncIT = new System.Windows.Forms.CheckBox();
+            this.chkSyncIT = new System.Windows.Forms.CheckBoxTS();
             this.grpSemiBreakIn = new System.Windows.Forms.GroupBoxTS();
             this.lblCWBreakInDelay = new System.Windows.Forms.LabelTS();
             this.comboAMTXProfile = new System.Windows.Forms.ComboBoxTS();
@@ -8707,7 +8707,7 @@ namespace PowerSDR
             a.Add("chkRX2NR_checkstate/" + chkRX2NR.CheckState.ToString());
             a.Add("chkNB_checkstate/" + chkNB.CheckState.ToString());
             a.Add("chkRX2NB_checkstate/" + chkRX2NB.CheckState.ToString());
-            a.Add("chkSyncIT_checkstate/" + chkSyncIT.CheckState.ToString());  //-W2PA Checkbox for synched RIT/XIT
+          //  a.Add("chkSyncIT_checkstate/" + chkSyncIT.CheckState.ToString());  //-W2PA Checkbox for synched RIT/XIT
 
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
@@ -9748,9 +9748,9 @@ namespace PowerSDR
                     case "chkRX2NB_checkstate":
                         chkRX2NB.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
                         break;
-                    case "chkSyncIT_checkstate":  //-W2PA Checkbox for synched RIT/XIT
-                        chkSyncIT.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
-                        break;
+                   // case "chkSyncIT_checkstate":  //-W2PA Checkbox for synched RIT/XIT
+                    //    chkSyncIT.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
+                   //     break;
                     case "band_160m_index":
                         band_160m_index = Int32.Parse(val);
                         break;
@@ -18957,16 +18957,7 @@ namespace PowerSDR
             {
                 app_data_path = value;
                 Skin.AppDataPath = value;
-            }
-        }
-
-        private static string appdatapath = "";
-        public static string AppDatapath
-        {
-            get { return appdatapath; }
-            set
-            {
-                appdatapath = value;
+                RadioDSP.AppDataPath = value;
             }
         }
 

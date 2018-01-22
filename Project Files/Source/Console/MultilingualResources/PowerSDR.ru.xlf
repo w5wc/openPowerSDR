@@ -16907,6 +16907,10 @@ PWR, EQ, микрофонный вход</target>
           <source>Toggles receive antenna between RX and TX antennas for RX1</source>
           <target state="new">Toggles receive antenna between RX and TX antennas for RX1</target>
         </trans-unit>
+        <trans-unit id="chkSyncIT.Image" translate="yes" xml:space="preserve" extype="System.Resources.ResXNullRef, System.Windows.Forms">
+          <source></source>
+          <target state="needs-review-translation"></target>
+        </trans-unit>
       </group>
     </body>
   </file>

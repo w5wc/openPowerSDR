@@ -8677,4 +8677,7 @@
   <data name="comboAMTXProfile.TabIndex" type="System.Int32, mscorlib">
     <value>115</value>
   </data>
+  <data name="chkSyncIT.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
 </root>
