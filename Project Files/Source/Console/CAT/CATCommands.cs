@@ -1269,9 +1269,9 @@ namespace PowerSDR
 					sign = "+";
 				else
 					sign = "-";
-				// we have to remove the leading zero and replace it with the sign.
-				return sign+AddLeadingZeros(Math.Abs(x)).Substring(1);
-			}
+                // we have to remove the leading zero and replace it with the sign.
+                return sign + (AddLeadingZeros(Math.Abs(x))).Substring(1);
+            }
 			else
 			{
 				return parser.Error1;
@@ -4493,8 +4493,8 @@ namespace PowerSDR
 		{
 			int pwr = 0;
 
-			if(s.Length == parser.nSet)
-			{
+			if(s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            {
 				pwr = Convert.ToInt32(s);
 				console.PWR = pwr;
 				return "";

@@ -35972,6 +35972,10 @@ namespace PowerSDR
             else if (pct < 1.0 / 15.0) pct = 1.0 / 15.0; //-W2PA Don't let the last LED go out until zero
             Midi2Cat.SendUpdateToMidi(CatCmd.DriveLevel, pct);
 
+            //-W2PA Update LEDs on Behringer MIDI controller mini wheel
+            pct = Convert.ToDouble(ptbPWR.Value - ptbPWR.Minimum) / Convert.ToDouble(ptbPWR.Maximum - ptbPWR.Minimum);
+            Midi2Cat.SendUpdateToMidi(CatCmd.DriveLevel_inc, pct);
+
         }
 
         private void ptbAF_Scroll(object sender, System.EventArgs e)

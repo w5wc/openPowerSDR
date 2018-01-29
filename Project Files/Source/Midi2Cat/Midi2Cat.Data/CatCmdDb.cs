@@ -395,6 +395,8 @@ namespace Midi2Cat.Data
         MidiMessagesPerTuneStepDown = 253,
         [CatCommandAttribute("VFO Wheel Sensitivity High/Low Toggle", ControlType.Button, true)]
         MidiMessagesPerTuneStepToggle = 254,
+        [CatCommandAttribute("Drive Level Increment", ControlType.Wheel)]
+        DriveLevel_inc = 255,
         [CatCommandAttribute("Toggle Wheel to VFOA/VFOB ", ControlType.Button)]  //-W2PA Added a toggle between A/B for main wheel 
         ToggleVFOWheel = 700
     }

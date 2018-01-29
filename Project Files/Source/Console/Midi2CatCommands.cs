@@ -2429,6 +2429,7 @@ namespace PowerSDR
         {
             parser.nGet = 0;
             parser.nSet = 1;  //-W2PA changed to allow for 2, 3, 4 digits
+            parser.nAns = 4;
 
             try
             {
@@ -2496,6 +2497,7 @@ namespace PowerSDR
         {
             parser.nGet = 0;
             parser.nSet = 1;  //-W2PA changed to allow for 2, 3, 4 digits
+            parser.nAns = 4;
 
             try
             {
@@ -2673,6 +2675,62 @@ namespace PowerSDR
                 return;
             }
         }
+
+        public void DriveLevel_inc(int msg, MidiDevice device)  //-W2PA Support for Behringer CMD PL-1 style wheel/knobs
+        {
+            parser.nGet = 0;
+            parser.nSet = 1;  //-W2PA changed to allow for 2, 3, 4 digits
+            parser.nAns = 4;
+
+            try
+            {
+                double drvMax = 100;
+                double drvMin = 0;
+                int currDrive = Convert.ToInt32(commands.ZZPC(""));
+
+                if (msg == 127 || msg == 0) return; //-W2PA Ignore knob click presses
+
+                if (msg < 64)
+                {
+                    if (currDrive > drvMin) currDrive--;
+                }
+                else if (msg > 64)
+                {
+                    if (currDrive < drvMax) currDrive++;
+                }
+                commands.ZZPC(Convert.ToString(currDrive));
+
+                double setAGC = Convert.ToDouble(currDrive);
+
+                int nLED = Convert.ToInt32(15.0 * (setAGC - drvMin) / (drvMax - drvMin));
+                if (nLED < 1) nLED = 1;  //-W2PA Keep the last LED from going out.
+                if (nLED > 15) nLED = 15;
+
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+
+        //public void DriveLevel_incr(int msg, MidiDevice device)
+        //{
+        //    parser.nSet = 3;
+        //    parser.nGet = 0;
+        //    parser.nAns = 4;
+
+        //    try
+        //    {
+        //        double drive = msg * 0.787;
+        //        commands.ZZPC(drive.ToString("000"));
+        //        return;
+        //    }
+        //    catch
+        //    {
+        //        return;
+        //    }
+        //}
 
         public CmdState RXEQOnOff(int msg, MidiDevice device)
         {
