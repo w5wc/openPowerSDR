@@ -2239,6 +2239,9 @@
     <value>Waterfall</value>
   </data>
   <data name="comboRX2DisplayMode.Items2" xml:space="preserve">
+    <value>Panafall</value>
+  </data>
+  <data name="comboRX2DisplayMode.Items3" xml:space="preserve">
     <value>Off</value>
   </data>
   <data name="comboRX2DisplayMode.Location" type="System.Drawing.Point, System.Drawing">

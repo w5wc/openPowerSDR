@@ -20238,8 +20238,8 @@ POWER EXCEEDING THE RATING OF YOUR RADIO!
           <target state="new">Waterfall</target>
         </trans-unit>
         <trans-unit id="comboRX2DisplayMode.Items2" translate="yes" xml:space="preserve">
-          <source>Off</source>
-          <target state="new">Off</target>
+          <source>Panafall</source>
+          <target state="new">Panafall</target>
         </trans-unit>
         <trans-unit id="comboRX2DisplayMode.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>9, 15</source>
@@ -31541,6 +31541,10 @@ POWER EXCEEDING THE RATING OF YOUR RADIO!
         <trans-unit id="chkSyncIT.Image" translate="yes" xml:space="preserve" extype="System.Resources.ResXNullRef, System.Windows.Forms">
           <source></source>
           <target state="needs-review-translation"></target>
+        </trans-unit>
+        <trans-unit id="comboRX2DisplayMode.Items3" translate="yes" xml:space="preserve">
+          <source>Off</source>
+          <target state="new">Off</target>
         </trans-unit>
       </group>
     </body>

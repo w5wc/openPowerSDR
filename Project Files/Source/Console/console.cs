@@ -3326,7 +3326,8 @@ namespace PowerSDR
             this.comboRX2DisplayMode.Items.AddRange(new object[] {
             resources.GetString("comboRX2DisplayMode.Items"),
             resources.GetString("comboRX2DisplayMode.Items1"),
-            resources.GetString("comboRX2DisplayMode.Items2")});
+            resources.GetString("comboRX2DisplayMode.Items2"),
+            resources.GetString("comboRX2DisplayMode.Items3")});
             this.comboRX2DisplayMode.Name = "comboRX2DisplayMode";
             this.toolTip1.SetToolTip(this.comboRX2DisplayMode, resources.GetString("comboRX2DisplayMode.ToolTip"));
             this.comboRX2DisplayMode.SelectedIndexChanged += new System.EventHandler(this.comboRX2DisplayMode_SelectedIndexChanged);
@@ -15683,7 +15684,8 @@ namespace PowerSDR
         public void CalcRX2DisplayFreq()
         {
             if (Display.CurrentDisplayModeBottom != DisplayMode.PANADAPTER &&
-                Display.CurrentDisplayModeBottom != DisplayMode.WATERFALL)
+                Display.CurrentDisplayModeBottom != DisplayMode.WATERFALL &&
+                Display.CurrentDisplayModeBottom != DisplayMode.PANAFALL)
                 return;
 
             //double edge_alias = 7200.0;
@@ -28356,23 +28358,36 @@ namespace PowerSDR
 
         private float PixelToDb(float y)
         {
+            int localHeight = picDisplay.Height;
+
+            if (Display.RX2Enabled && Display.CurrentDisplayMode != DisplayMode.PANADAPTER) localHeight /= 2;
+
             if (chkSplitDisplay.Checked || Display.CurrentDisplayMode == DisplayMode.PANAFALL ||
                 Display.CurrentDisplayMode == DisplayMode.PANASCOPE)
             {
                 if (y <= picDisplay.Height / 2) y *= 2.0f;
                 else y = (y - picDisplay.Height / 2) * 2.0f;
             }
-            return (float)(Display.SpectrumGridMax - y * (double)(Display.SpectrumGridMax - Display.SpectrumGridMin) / picDisplay.Height);
+
+            return (float)(Display.SpectrumGridMax - y * (double)(Display.SpectrumGridMax - Display.SpectrumGridMin) / localHeight);
         }
 
         private float PixelToRx2Db(float y)
         {
-            if (chkSplitDisplay.Checked)
+            int localHeight = picDisplay.Height;
+            if (Display.CurrentDisplayModeBottom == DisplayMode.PANAFALL)
+            {
+                if (y <= picDisplay.Height / 2) y *= 2.0f;
+                else y = (y - picDisplay.Height / 2) * 2.0f;
+                localHeight /= 2;
+            }
+            else if (chkSplitDisplay.Checked)
             {
                 if (y <= picDisplay.Height / 2) y *= 2.0f;
                 else y = (y - picDisplay.Height / 2) * 2.0f;
             }
-            return (float)(Display.RX2SpectrumGridMax - y * (double)(Display.RX2SpectrumGridMax - Display.RX2SpectrumGridMin) / picDisplay.Height);
+
+            return (float)(Display.RX2SpectrumGridMax - y * (double)(Display.RX2SpectrumGridMax - Display.RX2SpectrumGridMin) / localHeight);
         }
 
         private float WaterfallPixelToTime(float y)
@@ -31557,6 +31572,23 @@ namespace PowerSDR
                                     fixed (float* ptr = &Display.new_display_data_bottom[0])
                                         SpecHPSDRDLL.GetPixels(1, 0, ptr, ref flag);
                                 }
+                                break;
+                            case DisplayMode.PANAFALL:
+                                if (mox && VFOBTX)
+                                {
+                                    fixed (float* ptr = &Display.new_display_data_bottom[0])
+                                        wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr);
+                                    fixed (float* ptr = &Display.new_waterfall_data_bottom[0])
+                                        wdsp.TXAGetSpecF1(wdsp.id(bottom_thread, 0), ptr);
+                                }
+                                else
+                                {
+                                    fixed (float* ptr = &Display.new_display_data_bottom[0])
+                                        SpecHPSDRDLL.GetPixels(1, 0, ptr, ref flag);
+                                    fixed (float* ptr = &Display.new_waterfall_data_bottom[0])
+                                        SpecHPSDRDLL.GetPixels(1, 1, ptr, ref flag);
+                                }
+                                Display.WaterfallDataReadyBottom = true;
                                 break;
                             case DisplayMode.SCOPE:
                             case DisplayMode.SCOPE2:
@@ -35340,6 +35372,7 @@ namespace PowerSDR
                     Display.CurrentDisplayMode = DisplayMode.PHASE2;
                     break;
                 case "Waterfall":
+                    Display.ClearWaterfallBmp(); // Reset the waterfall buffer and prevent overrun into rx2 display
                     Display.CurrentDisplayMode = DisplayMode.WATERFALL;
                     wdsp.SetRXASpectrum(wdsp.id(0, 0), 0, 0, 0, 0);
                     CalcDisplayFreq();
@@ -35353,6 +35386,7 @@ namespace PowerSDR
                     wdsp.SetRXASpectrum(wdsp.id(0, 0), 1, 0, 0, 0);
                     break;
                 case "Panafall":
+                    Display.ClearWaterfallBmp(); // Reset the waterfall buffer and prevent overrun into rx2 display
                     Display.CurrentDisplayMode = DisplayMode.PANAFALL;
                     wdsp.SetRXASpectrum(wdsp.id(0, 0), 0, 0, 0, 0);
                     CalcDisplayFreq();
@@ -35936,7 +35970,7 @@ namespace PowerSDR
             }
             target_dbm -= gbb;
 
-            double target_volts = Math.Sqrt(Math.Pow(10, target_dbm * 0.1) * 0.05);		// E = Sqrt(P * R) 
+            double target_volts = Math.Sqrt(Math.Pow(10, target_dbm * 0.1) * 0.05);		// E = Sqrt(P * R) = Sqrt((10 ^ (dBm / 10)) * 50 * 10^-3)
 
             if (ptbPWR.Value == 0)
             {
@@ -39339,8 +39373,10 @@ namespace PowerSDR
             if (!initializing && (click_tune_rx2_display) && (passbandWidth < dispWidth) &&
                              ((Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && mox && !VFOBTX) ||
                              (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && mox && !VFOBTX) ||
+                 (Display.CurrentDisplayModeBottom == DisplayMode.PANAFALL && mox && !VFOBTX) ||
                              (Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && !mox) ||
-                             (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox)))
+                 (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox) ||
+                 (Display.CurrentDisplayModeBottom == DisplayMode.PANAFALL && !mox)))
             {
                 double rx2_osc = Math.Round(-(VFOBFreq - center_rx2_frequency) * 1e6);
 
@@ -39450,12 +39486,15 @@ namespace PowerSDR
             if (rx2_enabled)
             {
                 if (!stereo_diversity)
-                {  //-W2PA Freeze display unless we are zoomed in too far to fit the passband
+                {  
+                    //-W2PA Freeze display unless we are zoomed in too far to fit the passband
                     if ((click_tune_rx2_display) && (passbandWidth < dispWidth) &&
                                      ((Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && mox && !VFOBTX) ||
                                      (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && mox && !VFOBTX) ||
+                        (Display.CurrentDisplayModeBottom == DisplayMode.PANAFALL && mox && !VFOBTX) ||
                                      (Display.CurrentDisplayModeBottom == DisplayMode.PANADAPTER && !mox) ||
-                                     (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox)))
+                        (Display.CurrentDisplayModeBottom == DisplayMode.WATERFALL && !mox) ||
+                        (Display.CurrentDisplayModeBottom == DisplayMode.PANAFALL && !mox)))
                     {
                         Display.VFOB = (long)(center_rx2_frequency * 1e6);
                     }
@@ -40134,21 +40173,6 @@ namespace PowerSDR
 
                         switch (Display.CurrentDisplayMode)
                         {
-                            case DisplayMode.PANAFALL:
-                                if ((e.X > display_grid_x && e.X < display_grid_w) &&
-                                    (e.Y < picDisplay.Height / 2 && e.Y > 10))
-                                {
-                                    if (gridminmaxadjust || gridmaxadjust) Cursor = grabbing;
-                                    else Cursor = grab;
-                                    rx1_grid_adjust = true;
-                                    rx2_grid_adjust = false;
-                                }
-                                else
-                                {
-                                    rx1_grid_adjust = false;
-                                    rx2_grid_adjust = false;
-                                }
-                                break;
                             default:
                                 if (rx2_enabled && (e.Y > (picDisplay.Height / 2) && e.Y > 10) &&
                                    (e.X > display_grid_x && e.X < display_grid_w))
@@ -41076,7 +41100,7 @@ namespace PowerSDR
                         if (click_tune_display && !mox)    // Correct cursor frequency when CTUN on -G3OQD
                             temp_text = (rf_freq + (center_frequency - freq)).ToString("f6") + " MHz";      // Disply cursor frequency under Spectrum - G3OQD                            
                         else
-                            temp_text = rf_freq.ToString("f6") + " MHz";      // Disply cursor frequency under Spectrum  
+                            temp_text = rf_freq.ToString("f6") + " MHz";      // Display cursor frequency under Spectrum  
 
                         jper = temp_text.IndexOf(separator) + 4;
                         txtDisplayCursorFreq.Text = String.Copy(temp_text.Insert(jper, " "));
@@ -46119,6 +46143,7 @@ namespace PowerSDR
                     Display.CurrentDisplayModeBottom = DisplayMode.PHASE2;
                     break;
                 case "Waterfall":
+                    Display.ClearWaterfallBmp2(); // Reset the waterfall buffer and prevent overrun into rx2 display
                     Display.CurrentDisplayModeBottom = DisplayMode.WATERFALL;
                     if (chkSplitDisplay.Checked)
                     {
@@ -46128,6 +46153,15 @@ namespace PowerSDR
                     break;
                 case "Histogram":
                     Display.CurrentDisplayModeBottom = DisplayMode.HISTOGRAM;
+                    break;
+                case "Panafall":
+                    Display.ClearWaterfallBmp2(); // Reset the waterfall buffer and prevent overrun into rx2 display
+                    Display.CurrentDisplayModeBottom = DisplayMode.PANAFALL;
+                    if (chkSplitDisplay.Checked)
+                    {
+                        CalcDisplayFreq();
+                        CalcRX2DisplayFreq();
+                    }
                     break;
                 case "Off":
                     Display.CurrentDisplayModeBottom = DisplayMode.OFF;
@@ -46551,8 +46585,6 @@ namespace PowerSDR
                     if (chkEnableMultiRX.Checked)
                         txtVFOABand_LostFocus(this, EventArgs.Empty);
 
-                    if (comboDisplayMode.Items.Contains("Panafall"))
-                        comboDisplayMode.Items.Remove("Panafall");
                     if (comboDisplayMode.SelectedIndex < 0)
                         comboDisplayMode.Text = "Panadapter";
 
@@ -46662,14 +46694,16 @@ namespace PowerSDR
                 if (chkRX2.Checked)
                 {
                     console_basis_size.Height += (panelRX2Filter.Height + 8);
-                    if (!(this.WindowState == FormWindowState.Maximized))
-                        this.Height += (panelRX2Filter.Height + 8);
+                    // Remove this commented code to have main window resize when enabling RX2
+                    //if (!(this.WindowState == FormWindowState.Maximized))
+                    //this.Height += (panelRX2Filter.Height + 8);
                 }
                 else
                 {
                     console_basis_size.Height -= (panelRX2Filter.Height + 8);
-                    if (!(this.WindowState == FormWindowState.Maximized))
-                        this.Height -= (panelRX2Filter.Height + 8);
+                    // Remove this commented code to have main window resize when disabling RX2
+                    //if (!(this.WindowState == FormWindowState.Maximized))
+                    //this.Height -= (panelRX2Filter.Height + 8);
                 }
                 Console_Resize(this, EventArgs.Empty);
             }
@@ -48025,11 +48059,17 @@ namespace PowerSDR
                     Display.CurrentDisplayModeBottom = DisplayMode.PHASE2;
                     break;
                 case "Waterfall":
+                    Display.ClearWaterfallBmp2();
                     Display.CurrentDisplayModeBottom = DisplayMode.WATERFALL;
                     if (chkSplitDisplay.Checked) CalcDisplayFreq();
                     break;
                 case "Histogram":
                     Display.CurrentDisplayModeBottom = DisplayMode.HISTOGRAM;
+                    break;
+                case "Panafall":
+                    Display.ClearWaterfallBmp2();
+                    Display.CurrentDisplayModeBottom = DisplayMode.PANAFALL;
+                    if (chkSplitDisplay.Checked) CalcDisplayFreq();
                     break;
                 case "Off":
                     Display.CurrentDisplayModeBottom = DisplayMode.OFF;
@@ -48838,16 +48878,17 @@ namespace PowerSDR
                 return;
             }
 
-            if (chkRX2.Checked)
-            {
-                if (this.Height < console_basis_size.Height - (panelRX2Filter.Height + 8))
-                    this.Height = console_basis_size.Height - (panelRX2Filter.Height + 8);
-            }
-            else if (this.Height < console_basis_size.Height && !this.collapsedDisplay)
-            {
-                this.Height = console_basis_size.Height;
-                return;
-            }
+            // Not sure what this section of code does...1/30/2018
+            //if (chkRX2.Checked)
+            //{
+            //    if (this.Height < console_basis_size.Height - (panelRX2Filter.Height + 8))
+            //        this.Height = console_basis_size.Height - (panelRX2Filter.Height + 8);
+            //}
+            //else if (this.Height < console_basis_size.Height && !this.collapsedDisplay)
+            //{
+            //    this.Height = console_basis_size.Height;
+            //    return;
+            //}
 
             int h_delta = this.Width - console_basis_size.Width;
             int v_delta = Math.Max(this.Height - console_basis_size.Height, 0);
