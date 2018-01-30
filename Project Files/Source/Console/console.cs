@@ -46693,17 +46693,17 @@ namespace PowerSDR
             {
                 if (chkRX2.Checked)
                 {
+                    if (this.Height <= MinimumSize.Height + panelRX2Filter.Height + 8)
+                        this.Height += (panelRX2Filter.Height + 8);
+
                     console_basis_size.Height += (panelRX2Filter.Height + 8);
-                    // Remove this commented code to have main window resize when enabling RX2
-                    //if (!(this.WindowState == FormWindowState.Maximized))
-                    //this.Height += (panelRX2Filter.Height + 8);
                 }
                 else
                 {
+                    if (this.Height <= MinimumSize.Height + panelRX2Filter.Height + 8)
+                        this.Height -= (panelRX2Filter.Height + 8);
+
                     console_basis_size.Height -= (panelRX2Filter.Height + 8);
-                    // Remove this commented code to have main window resize when disabling RX2
-                    //if (!(this.WindowState == FormWindowState.Maximized))
-                    //this.Height -= (panelRX2Filter.Height + 8);
                 }
                 Console_Resize(this, EventArgs.Empty);
             }
