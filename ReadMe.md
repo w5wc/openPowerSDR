@@ -1,12 +1,13 @@
 # OpenHPSDR-PowerSDR
 
-Latest Release v3.4.8 January 29, 2018
+Latest Release v3.4.8 January 30, 2018
 
 Read the RealeaseNotes.md for more information.
-# 3.4.8 (2018-1-29)
+# 3.4.8 (2018-1-30)
 - Creates new wisdom file for each folder when using the -datapath command
 - Bug fix for Behringer mini-wheels mapping issue when mapping AGC gain
 - Added support for mapping drive level to a Behringer mini-wheel
+- Added Panafall display for RX2
 
 # 3.4.7 (2017-12-22)
 - Control added to force the LPF to the 6m/ByPass posistion during receive. Filters must be under manual control to use. (Setup=>General=>Ant/Filters=>LPF, HPF/LPF, BPF1)
