@@ -8177,6 +8177,7 @@ namespace PowerSDR
             tune_step_list.Add(new TuneStep(250, "250Hz"));
             tune_step_list.Add(new TuneStep(500, "500Hz"));
             tune_step_list.Add(new TuneStep(1000, "1kHz"));
+            tune_step_list.Add(new TuneStep(2000, "2kHz"));
             tune_step_list.Add(new TuneStep(2500, "2.5kHz"));
             tune_step_list.Add(new TuneStep(5000, "5kHz"));
             tune_step_list.Add(new TuneStep(6250, "6.25kHz"));
