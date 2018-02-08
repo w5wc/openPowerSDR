@@ -36498,23 +36498,13 @@ namespace PowerSDR
 
         }
 
+        private CheckState NB_CheckState;
         private void UIMOXChangedTrue()
         {
             Display.MOX = true;
+            NB_CheckState = chkNB.CheckState; // save current state of NB
+            if (display_duplex) chkNB.CheckState = CheckState.Unchecked; // turn off NB/NB2 while transmitting with DUP enabled
             meter_peak_count = multimeter_peak_hold_samples;		// reset multimeter peak
-
-            //switch (Display.CurrentDisplayMode)
-            //{
-            //    case DisplayMode.PANADAPTER:
-            //    case DisplayMode.SPECTRUM:
-            //    case DisplayMode.HISTOGRAM:
-            //    case DisplayMode.WATERFALL:
-            //    case DisplayMode.PANAFALL:
-            //    case DisplayMode.PANASCOPE:
-            //    case DisplayMode.SPECTRASCOPE:
-            //        // Display.DrawBackground();
-            //        break;
-            //}
 
             comboMeterRXMode.ForeColor = Color.Gray;
             comboMeterTXMode.ForeColor = Color.White;
@@ -36538,36 +36528,15 @@ namespace PowerSDR
             }
             SetupForm.MOX = chkMOX.Checked;
             ResetMultiMeterPeak();
-            //chkMOX.BackColor = button_selected_color;
-
             picSquelch.Invalidate();
-
-            /*Thread t = new Thread(new ThreadStart(DelayedDisplayReset));
-            t.Name = "Display Reset";
-            t.Priority = ThreadPriority.BelowNormal;
-            t.IsBackground = true;
-            t.Start();*/
         }
 
         private void UIMOXChangedFalse()
         {
             Display.MOX = false;
-            //switch (Display.CurrentDisplayMode)
-            //{
-            //    case DisplayMode.PANADAPTER:
-            //    case DisplayMode.SPECTRUM:
-            //    case DisplayMode.HISTOGRAM:
-            //    case DisplayMode.WATERFALL:
-            //    case DisplayMode.PANAFALL:
-            //    case DisplayMode.PANASCOPE:
-            //    case DisplayMode.SPECTRASCOPE:
-            //        //  Display.DrawBackground();
-            //        break;
-            //}
-
+            if (display_duplex) chkNB.CheckState = NB_CheckState; // restore saved state of NB
             if (!disable_ui_mox_changes)
             {
-                //  SetupForm.SpurRedEnabled = true;
                 EnableAllBands();
                 EnableAllModes();
                 chkVFOSplit.Enabled = true;
@@ -36598,14 +36567,7 @@ namespace PowerSDR
             SetupForm.MOX = chkMOX.Checked;
             ResetMultiMeterPeak();
             chkMOX.BackColor = SystemColors.Control;
-
             picNoiseGate.Invalidate();
-
-            /*Thread t = new Thread(new ThreadStart(DelayedDisplayReset));
-            t.Name = "Display Reset";
-            t.Priority = ThreadPriority.BelowNormal;
-            t.IsBackground = true;
-            t.Start();*/
         }
 
         // private HiPerfTimer t1 = new HiPerfTimer();
@@ -36624,19 +36586,6 @@ namespace PowerSDR
                 chkMOX.Checked = false;
                 return;
             }
-
-            // if ((current_hpsdr_hardware == HPSDRHW.Angelia && 
-            //    current_hpsdr_model != HPSDRModel.ANAN100D) ||
-            //    (current_hpsdr_hardware == HPSDRHW.Angelia && 
-            //    current_hpsdr_model != HPSDRModel.ANAN200D))
-            //{
-            //    chkMOX.Checked = false;
-            //    MessageBox.Show("Please select the correct radio model in Setup",
-            //    "Incorrect radio selected",
-            //    MessageBoxButtons.OK,
-            //    MessageBoxIcon.Warning);
-            //    return;
-            //}
 
             if (allow_mox_bypass && current_ptt_mode != PTTMode.MIC &&
                                     current_ptt_mode != PTTMode.SPACE &&
@@ -36949,55 +36898,8 @@ namespace PowerSDR
 
             if (tx) UIMOXChangedTrue();
             else UIMOXChangedFalse();
-
-            /*   if (!tx)
-               {
-                   Band lo_band = Band.FIRST;
-                   if (rx1_xvtr_index >= 0)
-                   {
-                       // Fix Penny O/C VHF control Vk4xv
-                       lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), rx1_xvtr_index, false, current_region);
-                       //lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), -1, false, current_region);
-
-                       if (penny_ext_ctrl_enabled)
-                           Penny.getPenny().UpdateExtCtrl(lo_band, mox);
-
-                       if (alex_ant_ctrl_enabled)
-                           Alex.getAlex().UpdateAlexAntSelection(lo_band, mox);
-                   }
-                   else
-                   {
-                       if (penny_ext_ctrl_enabled)
-                           Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
-
-                       if (alex_ant_ctrl_enabled)
-                           Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
-                   }
-               } */
-
-            /*if(tx)
-             {
-                 t1.Stop();
-                 timer7 += t1.DurationMsec;
-                 count7++;
-             }*/
-
-            /*Debug.WriteLine("1:"+(timer1/count1).ToString("f3")+
-                " 2:"+(timer2/count2).ToString("f3")+
-                " 3:"+(timer3/count3).ToString("f3")+
-                " 4:"+(timer4/count4).ToString("f3")+
-                " 5:"+(timer5/count5).ToString("f3")+
-                " 6:"+(timer6/count6).ToString("f3")+
-                " 7:"+(timer7/count7).ToString("f3")+
-                " 8:"+(timer8/count8).ToString("f3")+
-                " 9:"+(timer9/count9).ToString("f3")+
-                " 10:"+(timer10/count10).ToString("f3")+
-                " 11:"+(timer11/count11).ToString("f3")+
-                " 12:"+(timer12/count12).ToString("f3"));*/
-
+ 
         }
-
-        //private Thread mox_update_thread;
 
         private void chkMOX_Click(object sender, System.EventArgs e)
         {

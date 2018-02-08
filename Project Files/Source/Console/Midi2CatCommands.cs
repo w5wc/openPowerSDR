@@ -2362,7 +2362,7 @@ namespace PowerSDR
         public void APFBandwidth(int msg, MidiDevice device)
         {
             parser.nGet = 0;
-            parser.nSet = 1;
+            parser.nSet = 3;
 
             try
             {
@@ -2376,11 +2376,11 @@ namespace PowerSDR
             }
         }
 
-        //-W2PA Added knob/slider control of APF Bandwidth
+        //-W2PA Added knob/slider control of APF Gain
         public void APFGain(int msg, MidiDevice device)
         {
             parser.nGet = 0;
-            parser.nSet = 1;
+            parser.nSet = 4;
 
             try
             {
@@ -2679,7 +2679,7 @@ namespace PowerSDR
         public void DriveLevel_inc(int msg, MidiDevice device)  //-W2PA Support for Behringer CMD PL-1 style wheel/knobs
         {
             parser.nGet = 0;
-            parser.nSet = 1;  //-W2PA changed to allow for 2, 3, 4 digits
+            parser.nSet = 3; 
             parser.nAns = 4;
 
             try
@@ -2698,11 +2698,11 @@ namespace PowerSDR
                 {
                     if (currDrive < drvMax) currDrive++;
                 }
-                commands.ZZPC(Convert.ToString(currDrive));
+                commands.ZZPC(currDrive.ToString("000"));
 
-                double setAGC = Convert.ToDouble(currDrive);
+                double setDrive = Convert.ToDouble(currDrive);
 
-                int nLED = Convert.ToInt32(15.0 * (setAGC - drvMin) / (drvMax - drvMin));
+                int nLED = Convert.ToInt32(15.0 * (setDrive - drvMin) / (drvMax - drvMin));
                 if (nLED < 1) nLED = 1;  //-W2PA Keep the last LED from going out.
                 if (nLED > 15) nLED = 15;
 

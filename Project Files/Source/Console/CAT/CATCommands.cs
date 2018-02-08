@@ -1069,7 +1069,7 @@ namespace PowerSDR
                 n = Math.Min(100, n);
             }
 
-            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            if (s.Length == parser.nSet)
             {
                 console.APFGain = n;
                 return "";
@@ -1105,7 +1105,7 @@ namespace PowerSDR
                 n = Math.Min(150, n);
             }
 
-            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            if (s.Length == parser.nSet)
             {
                 console.APFBandwidth = n;
                 return "";
@@ -1257,7 +1257,7 @@ namespace PowerSDR
 				n = Math.Min(120, n);
 			}
 
-            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            if (s.Length == parser.nSet)
 			{
 				console.RF = n;
 				return "";
@@ -1293,7 +1293,7 @@ namespace PowerSDR
                     n = Math.Min(120, n);
                 }
 
-            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            if (s.Length == parser.nSet)
                 {
                     console.RX2RF = n;
                     return "";
@@ -1326,7 +1326,7 @@ namespace PowerSDR
                 n = Math.Min(250, n);
             }
 
-            if (s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+            if (s.Length >= parser.nSet)
             {
                 console.APFFreq = n;
                 return "";
@@ -4493,7 +4493,7 @@ namespace PowerSDR
 		{
 			int pwr = 0;
 
-			if(s.Length >= parser.nSet)  //-W2PA changed to allow for 2, 3, 4 digits for Midi2Cat
+			if(s.Length == parser.nSet)  
             {
 				pwr = Convert.ToInt32(s);
 				console.PWR = pwr;
