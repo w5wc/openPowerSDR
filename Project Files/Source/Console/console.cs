@@ -10890,20 +10890,23 @@ namespace PowerSDR
                                 case Filter.F2:
                                     preset[m].SetFilter(f, -cw_pitch - 400, -cw_pitch + 400, "800");
                                     break;
+                                //case Filter.F3:
+                                //    preset[m].SetFilter(f, -cw_pitch - 375, -cw_pitch + 375, "750");
+                                //    break;
                                 case Filter.F3:
-                                    preset[m].SetFilter(f, -cw_pitch - 375, -cw_pitch + 375, "750");
-                                    break;
-                                case Filter.F4:
                                     preset[m].SetFilter(f, -cw_pitch - 300, -cw_pitch + 300, "600");
                                     break;
-                                case Filter.F5:
+                                case Filter.F4:
                                     preset[m].SetFilter(f, -cw_pitch - 250, -cw_pitch + 250, "500");
                                     break;
-                                case Filter.F6:
+                                case Filter.F5:
                                     preset[m].SetFilter(f, -cw_pitch - 200, -cw_pitch + 200, "400");
                                     break;
-                                case Filter.F7:
+                                case Filter.F6:
                                     preset[m].SetFilter(f, -cw_pitch - 125, -cw_pitch + 125, "250");
+                                    break;
+                                case Filter.F7:
+                                    preset[m].SetFilter(f, -cw_pitch - 75, -cw_pitch + 75, "150");
                                     break;
                                 case Filter.F8:
                                     preset[m].SetFilter(f, -cw_pitch - 50, -cw_pitch + 50, "100");
@@ -10932,20 +10935,23 @@ namespace PowerSDR
                                 case Filter.F2:
                                     preset[m].SetFilter(f, cw_pitch - 400, cw_pitch + 400, "800");
                                     break;
+                                //case Filter.F3:
+                                //    preset[m].SetFilter(f, cw_pitch - 375, cw_pitch + 375, "750");
+                                //    break;
                                 case Filter.F3:
-                                    preset[m].SetFilter(f, cw_pitch - 375, cw_pitch + 375, "750");
-                                    break;
-                                case Filter.F4:
                                     preset[m].SetFilter(f, cw_pitch - 300, cw_pitch + 300, "600");
                                     break;
-                                case Filter.F5:
+                                case Filter.F4:
                                     preset[m].SetFilter(f, cw_pitch - 250, cw_pitch + 250, "500");
                                     break;
-                                case Filter.F6:
+                                case Filter.F5:
                                     preset[m].SetFilter(f, cw_pitch - 200, cw_pitch + 200, "400");
                                     break;
-                                case Filter.F7:
+                                case Filter.F6:
                                     preset[m].SetFilter(f, cw_pitch - 125, cw_pitch + 125, "250");
+                                    break;
+                                case Filter.F7:
+                                    preset[m].SetFilter(f, cw_pitch - 75, cw_pitch + 75, "150");
                                     break;
                                 case Filter.F8:
                                     preset[m].SetFilter(f, cw_pitch - 50, cw_pitch + 50, "100");
