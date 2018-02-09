@@ -42919,16 +42919,7 @@ namespace PowerSDR
                 wdsp.SetChannelTSlewDown(wdsp.id(0, 1), 0.010);
             }
 
-            //if (new_mode != DSPMode.CWL || new_mode != DSPMode.CWU)
-            //{
-            //    // turn off APF
-            //    radio.GetDSPRX(0, 0).RXAPFRun = false;
-            //    radio.GetDSPRX(0, 1).RXAPFRun = false;
-            //}
-
-
             double rx1_freq = VFOAFreq;
-            // int old_txosc = (int)radio.GetDSPTX(0).TXOsc;
 
             ptbFilterShift.Value = 0;
             btnFilterShiftReset.BackColor = SystemColors.Control;
@@ -42960,6 +42951,9 @@ namespace PowerSDR
                     radio.GetDSPRX(0, 1).RXAPFRun = false;
                     SetupForm.EnableRX1APFControl = false;
                     lblRX1APF.Hide();
+                    // enable ANF
+                    chkANF.Enabled = true;
+                    chkANF_CheckedChanged(this, EventArgs.Empty);
 
                     if (!RX1IsOn60mChannel())
                     {
@@ -42974,7 +42968,6 @@ namespace PowerSDR
                                 rx1_freq += (cw_pitch * 0.0000010);
                                 break;
                         }
-                        // UpdateVFOAFreq(rx1_freq.ToString("f6"));
                         txtVFOAFreq.Text = rx1_freq.ToString("f6");
                     }
                     break;
@@ -42994,6 +42987,9 @@ namespace PowerSDR
                     radio.GetDSPRX(0, 1).RXAPFRun = false;
                     SetupForm.EnableRX1APFControl = false;
                     lblRX1APF.Hide();
+                    // enable ANF
+                    chkANF.Enabled = true;
+                    chkANF_CheckedChanged(this, EventArgs.Empty);
 
                     if (!RX1IsOn60mChannel())
                     {
@@ -43008,7 +43004,6 @@ namespace PowerSDR
                                 rx1_freq -= (cw_pitch * 0.0000010);
                                 break;
                         }
-                        //UpdateVFOAFreq(rx1_freq.ToString("f6"));
                         txtVFOAFreq.Text = rx1_freq.ToString("f6");
                     }
                     break;
@@ -43125,11 +43120,7 @@ namespace PowerSDR
                     ptbFilterShift.Enabled = true;
                     btnFilterShiftReset.Enabled = true;
                     if (new_mode != DSPMode.SPEC || new_mode != DSPMode.FM)
-                        EnableAllFilters();
-                    // if_freq = SetupForm.IFFreq;
-                    //  CalcDisplayFreq();
-                   // chkTNF.Enabled = true;
-                   // btnTNFAdd.Enabled = true;
+                        EnableAllFilters();                  
                     break;
             }
 
@@ -43210,9 +43201,14 @@ namespace PowerSDR
                         }
                         txtVFOAFreq.Text = rx1_freq.ToString("f6");
                     }
-
+                    // enable APF
                     SetupForm.EnableRX1APFControl = true;
                     lblRX1APF.Show();
+                    // turn off ANF
+                    radio.GetDSPRX(0, 0).AutoNotchFilter = false;
+                    radio.GetDSPRX(0, 1).AutoNotchFilter = false;
+                    chkANF.Enabled = false;
+
                     chkCWFWKeyer_CheckedChanged(this, EventArgs.Empty);
                     // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     panelModeSpecificCW.BringToFront();
@@ -43256,9 +43252,14 @@ namespace PowerSDR
                         }
                         txtVFOAFreq.Text = rx1_freq.ToString("f6");
                     }
-
+                    // enable APF
                     SetupForm.EnableRX1APFControl = true;
+                    chkANF.Enabled = false;
                     lblRX1APF.Show();
+                    // turn off ANF
+                    radio.GetDSPRX(0, 0).AutoNotchFilter = false;
+                    radio.GetDSPRX(0, 1).AutoNotchFilter = false;
+
                     chkCWFWKeyer_CheckedChanged(this, EventArgs.Empty);
                     // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     panelModeSpecificCW.BringToFront();
@@ -46764,13 +46765,6 @@ namespace PowerSDR
                 wdsp.SetChannelTSlewDown(wdsp.id(2, 1), 0.010);
             }
 
-            //if (new_mode != DSPMode.CWL || new_mode != DSPMode.CWU)
-            //{
-            //    // turn off APF
-            //    radio.GetDSPRX(1, 0).RXAPFRun = false;
-            //}
-
-
             double rx2_freq = VFOBFreq;
             int old_txosc = (int)radio.GetDSPTX(0).TXOsc;
 
@@ -46803,10 +46797,13 @@ namespace PowerSDR
                         }
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
-
+                    // disable APF
                     radio.GetDSPRX(1, 0).RXAPFRun = false;
                     SetupForm.EnableRX2APFControl = false;
                     lblRX2APF.Hide();
+                    // enable ANF
+                    chkRX2ANF.Enabled = true;
+                    chkRX2ANF_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case DSPMode.CWU:
                     radRX2ModeCWU.BackColor = SystemColors.Control;
@@ -46826,10 +46823,13 @@ namespace PowerSDR
                         }
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
-
+                    // disable APF
                     radio.GetDSPRX(1, 0).RXAPFRun = false;
                     SetupForm.EnableRX2APFControl = false;
                     lblRX2APF.Hide();
+                    // enable ANF
+                    chkRX2ANF.Enabled = true;
+                    chkRX2ANF_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case DSPMode.FM:
                     radRX2ModeFMN.BackColor = SystemColors.Control;
@@ -46990,8 +46990,13 @@ namespace PowerSDR
                         }
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
+                    // enable APF
                     SetupForm.EnableRX2APFControl = true;
                     lblRX2APF.Show();
+                    // disable ANF
+                    radio.GetDSPRX(1, 0).AutoNotchFilter = false;
+                    radio.GetDSPRX(1, 1).AutoNotchFilter = false;
+                    chkRX2ANF.Enabled = false;
                     // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case DSPMode.CWU:
@@ -47020,8 +47025,13 @@ namespace PowerSDR
                         }
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
+                    // enable APF
                     SetupForm.EnableRX2APFControl = true;
                     lblRX2APF.Show();
+                    // disable ANF
+                    radio.GetDSPRX(1, 0).AutoNotchFilter = false;
+                    radio.GetDSPRX(1, 1).AutoNotchFilter = false;
+                    chkRX2ANF.Enabled = false;
                     // chkCWAPFEnabled_CheckedChanged(this, EventArgs.Empty);
                     break;
                 case DSPMode.FM:
@@ -47174,13 +47184,6 @@ namespace PowerSDR
                 txtVFOBFreq.Text = rx2_freq.ToString("f6");
             }
 
-            /* int new_txosc = (int)radio.GetDSPTX(0).TXOsc;
-             if (new_txosc != old_txosc)
-             {
-                 if (fwc_init && (current_model == Model.FLEX5000))
-                     FWC.SetTXOffset(new_txosc);
-             }*/
-
             kToolStripMenuItem.Text = radRX2Filter1.Text = rx2_filters[(int)new_mode].GetName(Filter.F1);
             kToolStripMenuItem1.Text = radRX2Filter2.Text = rx2_filters[(int)new_mode].GetName(Filter.F2);
             kToolStripMenuItem2.Text = radRX2Filter3.Text = rx2_filters[(int)new_mode].GetName(Filter.F3);
@@ -47229,14 +47232,6 @@ namespace PowerSDR
             }
 
             tbFilterWidthScroll_newMode(); // wjt */
-
-            //Display.DrawBackground();
-            //if (rx2_enabled)
-            //{
-            //    UpdateDSP();
-            //    if (chkVFOBTX.Checked)
-            //        UpdateDSP();
-            //}
 
             if (new_mode == DSPMode.CWL || new_mode == DSPMode.CWU)
             {

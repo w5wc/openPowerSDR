@@ -10,6 +10,7 @@ Read the RealeaseNotes.md for more information.
 - Added Panafall display for RX2
 - NB/NB2 is turned OFF while transmitting when DUP is enabled.
 - Added 2kHz Tune Step
+- Changed ANF behavior so that it is disabled when in CW mode.
 
 # 3.4.7 (2017-12-22)
 - Control added to force the LPF to the 6m/ByPass posistion during receive. Filters must be under manual control to use. (Setup=>General=>Ant/Filters=>LPF, HPF/LPF, BPF1)
