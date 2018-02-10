@@ -3973,8 +3973,10 @@ namespace PowerSDR
             this.chkVFOLock.FlatAppearance.BorderSize = 0;
             this.chkVFOLock.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkVFOLock.Name = "chkVFOLock";
+            this.chkVFOLock.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkVFOLock, resources.GetString("chkVFOLock.ToolTip"));
             this.chkVFOLock.CheckedChanged += new System.EventHandler(this.chkVFOLock_CheckedChanged);
+            this.chkVFOLock.CheckStateChanged += new System.EventHandler(this.chkVFOLock_CheckStateChanged);
             // 
             // chkVFOSync
             // 
@@ -8709,7 +8711,7 @@ namespace PowerSDR
             a.Add("chkRX2NR_checkstate/" + chkRX2NR.CheckState.ToString());
             a.Add("chkNB_checkstate/" + chkNB.CheckState.ToString());
             a.Add("chkRX2NB_checkstate/" + chkRX2NB.CheckState.ToString());
-          //  a.Add("chkSyncIT_checkstate/" + chkSyncIT.CheckState.ToString());  //-W2PA Checkbox for synched RIT/XIT
+            a.Add("chkVFOLock_checkstate/" + chkVFOLock.CheckState.ToString());  
 
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
@@ -9750,9 +9752,9 @@ namespace PowerSDR
                     case "chkRX2NB_checkstate":
                         chkRX2NB.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
                         break;
-                   // case "chkSyncIT_checkstate":  //-W2PA Checkbox for synched RIT/XIT
-                    //    chkSyncIT.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
-                   //     break;
+                    case "chkVFOLock_checkstate":  
+                        chkVFOLock.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
+                        break;
                     case "band_160m_index":
                         band_160m_index = Int32.Parse(val);
                         break;
@@ -17199,7 +17201,7 @@ namespace PowerSDR
 
             DisableAllFilters();
             DisableAllModes();
-            VFOLock = true;
+            VFOLock = CheckState.Indeterminate;
 
             calibration_mutex.WaitOne();
             //fixed (float* ptr = &a[0])
@@ -17322,7 +17324,7 @@ namespace PowerSDR
             progress.Hide();
             EnableAllFilters();
             EnableAllModes();
-            VFOLock = false;
+            VFOLock = CheckState.Unchecked;
             chkRX1Preamp.Enabled = true;
             chkRX2Preamp.Enabled = true;
             comboDisplayMode.Enabled = true;
@@ -17406,7 +17408,7 @@ namespace PowerSDR
 
             DisableAllFilters();
             DisableAllModes();
-            VFOLock = true;
+            VFOLock = CheckState.Checked;
             comboPreamp.Enabled = false;
             comboDisplayMode.Enabled = false;
 
@@ -17448,9 +17450,9 @@ namespace PowerSDR
                 if (run[i])
                 {
                     int error_count = 0;
-                    VFOLock = false;
+                    VFOLock = CheckState.Unchecked;
                     VFOAFreq = band_freqs[i];				// set frequency
-                    VFOLock = true;
+                    VFOLock = CheckState.Checked;
                     ptbPWR.Value = Math.Min(target_watts, max_pwr[i]);
                     int target = ptbPWR.Value;
 
@@ -17631,7 +17633,7 @@ namespace PowerSDR
 
             EnableAllFilters();
             EnableAllModes();
-            VFOLock = false;
+            VFOLock = CheckState.Unchecked;
             comboPreamp.Enabled = true;
             comboDisplayMode.Enabled = true;
 
@@ -22203,16 +22205,105 @@ namespace PowerSDR
             }
         }
 
-        private bool vfo_lock = false;
-        public bool VFOLock
+        //private bool vfo_lock = false;
+        //public bool VFOLock
+        //{
+        //    get { return vfo_lock; }
+        //    set
+        //    {
+        //        vfo_lock = value;
+        //        bool enabled = !value;
+        //        txtVFOAFreq.Enabled = enabled;
+        //        txtVFOBFreq.Enabled = enabled;
+        //        radBand160.Enabled = enabled;
+        //        radBand80.Enabled = enabled;
+        //        radBand60.Enabled = enabled;
+        //        radBand40.Enabled = enabled;
+        //        radBand30.Enabled = enabled;
+        //        radBand20.Enabled = enabled;
+        //        radBand17.Enabled = enabled;
+        //        radBand15.Enabled = enabled;
+        //        radBand12.Enabled = enabled;
+        //        radBand10.Enabled = enabled;
+        //        radBand6.Enabled = enabled;
+        //        radBand2.Enabled = enabled;
+        //        radBandWWV.Enabled = enabled;
+        //        radBandGEN.Enabled = enabled;
+        //        btnBandHF.Enabled = enabled;
+        //        btnBandVHF.Enabled = enabled;
+        //        radBandVHF0.Enabled = enabled;
+        //        radBandVHF1.Enabled = enabled;
+        //        radBandVHF2.Enabled = enabled;
+        //        radBandVHF3.Enabled = enabled;
+        //        radBandVHF4.Enabled = enabled;
+        //        radBandVHF5.Enabled = enabled;
+        //        radBandVHF6.Enabled = enabled;
+        //        radBandVHF7.Enabled = enabled;
+        //        radBandVHF8.Enabled = enabled;
+        //        radBandVHF5.Enabled = enabled;
+        //        radBandVHF9.Enabled = enabled;
+        //        radBandVHF10.Enabled = enabled;
+        //        radBandVHF11.Enabled = enabled;
+        //        radBandVHF12.Enabled = enabled;
+        //        radBandVHF13.Enabled = enabled;
+
+        //        radModeLSB.Enabled = enabled;
+        //        radModeUSB.Enabled = enabled;
+        //        radModeDSB.Enabled = enabled;
+        //        radModeCWL.Enabled = enabled;
+        //        radModeCWU.Enabled = enabled;
+        //        radModeFMN.Enabled = enabled;
+        //        radModeAM.Enabled = enabled;
+        //        radModeSAM.Enabled = enabled;
+        //        radModeSPEC.Enabled = enabled;
+        //        radModeDIGL.Enabled = enabled;
+        //        radModeDIGU.Enabled = enabled;
+        //        radModeDRM.Enabled = enabled;
+
+        //        btnVFOBtoA.Enabled = enabled;
+        //        btnVFOSwap.Enabled = enabled;
+
+        //        btnMemoryQuickRestore.Enabled = enabled;
+        //    }
+        //}
+
+        private CheckState vfo_lock = CheckState.Unchecked;
+        public CheckState VFOLock
         {
             get { return vfo_lock; }
             set
             {
                 vfo_lock = value;
-                bool enabled = !value;
-                txtVFOAFreq.Enabled = enabled;
-                txtVFOBFreq.Enabled = enabled;
+                bool enabled = true;
+                switch (vfo_lock)
+                {
+                    case CheckState.Unchecked: // unlock both VFOs
+                        txtVFOAFreq.Enabled = enabled;
+                        txtVFOBFreq.Enabled = enabled;
+                        chkVFOLock.Text = "VFO Lock";
+                        break;
+                    case CheckState.Checked: // lock only VFOA
+                        enabled = false;
+                        txtVFOAFreq.Enabled = false;
+                        txtVFOBFreq.Enabled = true;
+                        chkVFOLock.Text = "VFOA Lock";
+                        break;
+                    case CheckState.Indeterminate: // lock both VFOA & VFOB
+                        enabled = false;
+                        txtVFOAFreq.Enabled = false;
+                        txtVFOBFreq.Enabled = false;
+                        chkVFOLock.Text = "VFOAB Lock";
+                        break;
+                    default:
+                        enabled = true;
+                        txtVFOAFreq.Enabled = enabled;
+                        txtVFOBFreq.Enabled = enabled;
+                        chkVFOLock.Text = "VFO Lock";
+                        break;
+                }
+
+               // txtVFOAFreq.Enabled = enabled;
+               // txtVFOBFreq.Enabled = enabled;
                 radBand160.Enabled = enabled;
                 radBand80.Enabled = enabled;
                 radBand60.Enabled = enabled;
@@ -25051,7 +25142,7 @@ namespace PowerSDR
             }
             set
             {
-                if (vfo_lock || SetupForm == null) return;
+                if ((vfo_lock != CheckState.Unchecked) || SetupForm == null) return;
                 if (!this.InvokeRequired)
                 {
                     // UpdateVFOAFreq(value.ToString("f6"));
@@ -25091,7 +25182,7 @@ namespace PowerSDR
 
             set
             {
-                if (vfo_lock || SetupForm == null) return;
+                if ((vfo_lock != CheckState.Unchecked) || SetupForm == null) return;
                 txtVFOABand.Text = value.ToString("f6");
                 txtVFOABand_LostFocus(this, EventArgs.Empty);
             }
@@ -25112,7 +25203,7 @@ namespace PowerSDR
             }
             set
             {
-                if (vfo_lock || SetupForm == null) return;
+                if ((vfo_lock == CheckState.Indeterminate) || SetupForm == null) return;
                 value = Math.Max(0, value);
                 txtVFOBFreq.Text = value.ToString("f6");
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
@@ -34608,7 +34699,7 @@ namespace PowerSDR
                             break;
                     }
                 }
-                else if (e.KeyCode == key_band_up && !vfo_lock)
+                else if (e.KeyCode == key_band_up && (vfo_lock == CheckState.Unchecked))
                 {
                     switch (rx1_band)
                     {
@@ -34776,7 +34867,7 @@ namespace PowerSDR
                             break;
                     }
                 }
-                else if (e.KeyCode == key_band_down && !vfo_lock)
+                else if (e.KeyCode == key_band_down && (vfo_lock == CheckState.Unchecked))
                 {
                     switch (rx1_band)
                     {
@@ -34994,7 +35085,7 @@ namespace PowerSDR
                         chkMOX.Checked = false;
                     }
                 }
-                else if (vfo_lock || !quick_qsy)
+                else if ((vfo_lock != CheckState.Unchecked) || !quick_qsy)
                 {
                     return;
                 }
@@ -37661,8 +37752,17 @@ namespace PowerSDR
 
         private void chkVFOLock_CheckedChanged(object sender, System.EventArgs e)
         {
-            VFOLock = chkVFOLock.Checked;
-            if (chkVFOLock.Checked)
+            //VFOLock = chkVFOLock.Checked;
+            //if (chkVFOLock.Checked)
+            //    chkVFOLock.BackColor = button_selected_color;
+            //else
+            //    chkVFOLock.BackColor = SystemColors.Control;
+        }
+
+        private void chkVFOLock_CheckStateChanged(object sender, EventArgs e)
+        {
+            VFOLock = chkVFOLock.CheckState;
+            if (chkVFOLock.CheckState != CheckState.Unchecked)
                 chkVFOLock.BackColor = button_selected_color;
             else
                 chkVFOLock.BackColor = SystemColors.Control;
