@@ -101,7 +101,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         public const float CLEAR_FLAG = -999.999F;				// for resetting buffers
-        public const int BUFFER_SIZE = 4096;
+        public const int BUFFER_SIZE = 16384;
 
         public static Console console;
         //private static Mutex background_image_mutex;			// used to lock the base display image
