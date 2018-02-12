@@ -210,6 +210,7 @@
             this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tpGeneralHardware = new System.Windows.Forms.TabPage();
             this.grpPROLatency = new System.Windows.Forms.GroupBoxTS();
+            this.radPROLatency0 = new System.Windows.Forms.RadioButtonTS();
             this.radPROLatency4 = new System.Windows.Forms.RadioButtonTS();
             this.radPROLatency2 = new System.Windows.Forms.RadioButtonTS();
             this.radPROLatency1 = new System.Windows.Forms.RadioButtonTS();
@@ -1139,7 +1140,9 @@
             this.grpAudioSampleRate1 = new System.Windows.Forms.GroupBoxTS();
             this.comboAudioSampleRate1 = new System.Windows.Forms.ComboBoxTS();
             this.tpVAC = new System.Windows.Forms.TabPage();
-            this.chkVAC1Advanced = new System.Windows.Forms.CheckBoxTS();
+            this.labelTS404 = new System.Windows.Forms.LabelTS();
+            this.lblOoopCounter = new System.Windows.Forms.LabelTS();
+            this.chkVAC1Varsamp = new System.Windows.Forms.CheckBoxTS();
             this.grpVAC1monitor = new System.Windows.Forms.GroupBoxTS();
             this.lblRingbufferIn = new System.Windows.Forms.LabelTS();
             this.lblRingbufferOut = new System.Windows.Forms.LabelTS();
@@ -1196,7 +1199,7 @@
             this.comboAudioDriver2 = new System.Windows.Forms.ComboBoxTS();
             this.chkAudioEnableVAC = new System.Windows.Forms.CheckBoxTS();
             this.tpVAC2 = new System.Windows.Forms.TabPage();
-            this.chkVAC2Advanced = new System.Windows.Forms.CheckBoxTS();
+            this.chkVAC2Varsamp = new System.Windows.Forms.CheckBoxTS();
             this.grpVAC2monitor = new System.Windows.Forms.GroupBoxTS();
             this.lblRingbufferInVAC2 = new System.Windows.Forms.LabelTS();
             this.lblRingbufferOutVAC2 = new System.Windows.Forms.LabelTS();
@@ -6317,6 +6320,7 @@
             // 
             // grpPROLatency
             // 
+            this.grpPROLatency.Controls.Add(this.radPROLatency0);
             this.grpPROLatency.Controls.Add(this.radPROLatency4);
             this.grpPROLatency.Controls.Add(this.radPROLatency2);
             this.grpPROLatency.Controls.Add(this.radPROLatency1);
@@ -6328,12 +6332,24 @@
             this.grpPROLatency.Text = "PRO Latency";
             this.toolTip1.SetToolTip(this.grpPROLatency, "Packet ReOrdering Latency");
             // 
+            // radPROLatency0
+            // 
+            this.radPROLatency0.AutoSize = true;
+            this.radPROLatency0.Image = null;
+            this.radPROLatency0.Location = new System.Drawing.Point(17, 27);
+            this.radPROLatency0.Name = "radPROLatency0";
+            this.radPROLatency0.Size = new System.Drawing.Size(31, 17);
+            this.radPROLatency0.TabIndex = 3;
+            this.radPROLatency0.Text = "0";
+            this.radPROLatency0.UseVisualStyleBackColor = true;
+            this.radPROLatency0.CheckedChanged += new System.EventHandler(this.radPROLatency0_CheckedChanged);
+            // 
             // radPROLatency4
             // 
             this.radPROLatency4.AutoSize = true;
             this.radPROLatency4.Checked = true;
             this.radPROLatency4.Image = null;
-            this.radPROLatency4.Location = new System.Drawing.Point(105, 27);
+            this.radPROLatency4.Location = new System.Drawing.Point(113, 27);
             this.radPROLatency4.Name = "radPROLatency4";
             this.radPROLatency4.Size = new System.Drawing.Size(31, 17);
             this.radPROLatency4.TabIndex = 2;
@@ -6346,7 +6362,7 @@
             // 
             this.radPROLatency2.AutoSize = true;
             this.radPROLatency2.Image = null;
-            this.radPROLatency2.Location = new System.Drawing.Point(65, 27);
+            this.radPROLatency2.Location = new System.Drawing.Point(81, 27);
             this.radPROLatency2.Name = "radPROLatency2";
             this.radPROLatency2.Size = new System.Drawing.Size(31, 17);
             this.radPROLatency2.TabIndex = 1;
@@ -6358,7 +6374,7 @@
             // 
             this.radPROLatency1.AutoSize = true;
             this.radPROLatency1.Image = null;
-            this.radPROLatency1.Location = new System.Drawing.Point(20, 27);
+            this.radPROLatency1.Location = new System.Drawing.Point(49, 27);
             this.radPROLatency1.Name = "radPROLatency1";
             this.radPROLatency1.Size = new System.Drawing.Size(31, 17);
             this.radPROLatency1.TabIndex = 0;
@@ -19566,7 +19582,9 @@
             // 
             // tpVAC
             // 
-            this.tpVAC.Controls.Add(this.chkVAC1Advanced);
+            this.tpVAC.Controls.Add(this.labelTS404);
+            this.tpVAC.Controls.Add(this.lblOoopCounter);
+            this.tpVAC.Controls.Add(this.chkVAC1Varsamp);
             this.tpVAC.Controls.Add(this.grpVAC1monitor);
             this.tpVAC.Controls.Add(this.chkMOXAllowBypass);
             this.tpVAC.Controls.Add(this.chkSPACEAllowBypass);
@@ -19587,18 +19605,41 @@
             this.tpVAC.TabIndex = 1;
             this.tpVAC.Text = "VAC 1";
             // 
-            // chkVAC1Advanced
+            // labelTS404
             // 
-            this.chkVAC1Advanced.AutoSize = true;
-            this.chkVAC1Advanced.Image = null;
-            this.chkVAC1Advanced.Location = new System.Drawing.Point(462, 275);
-            this.chkVAC1Advanced.Name = "chkVAC1Advanced";
-            this.chkVAC1Advanced.Size = new System.Drawing.Size(75, 17);
-            this.chkVAC1Advanced.TabIndex = 85;
-            this.chkVAC1Advanced.Text = "Advanced";
-            this.toolTip1.SetToolTip(this.chkVAC1Advanced, "Show diagnostics monitor for resampler");
-            this.chkVAC1Advanced.UseVisualStyleBackColor = true;
-            this.chkVAC1Advanced.CheckedChanged += new System.EventHandler(this.chkVAC1Advanced_CheckedChanged);
+            this.labelTS404.AutoSize = true;
+            this.labelTS404.Image = null;
+            this.labelTS404.Location = new System.Drawing.Point(516, 306);
+            this.labelTS404.Name = "labelTS404";
+            this.labelTS404.Size = new System.Drawing.Size(43, 13);
+            this.labelTS404.TabIndex = 87;
+            this.labelTS404.Text = "OOOPs";
+            // 
+            // lblOoopCounter
+            // 
+            this.lblOoopCounter.AutoSize = true;
+            this.lblOoopCounter.Image = null;
+            this.lblOoopCounter.Location = new System.Drawing.Point(461, 306);
+            this.lblOoopCounter.Name = "lblOoopCounter";
+            this.lblOoopCounter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblOoopCounter.Size = new System.Drawing.Size(49, 13);
+            this.lblOoopCounter.TabIndex = 86;
+            this.lblOoopCounter.Text = "XXXXXX";
+            this.toolTip1.SetToolTip(this.lblOoopCounter, "Out-of-order or missing packet counter\r\n(click to reset)");
+            this.lblOoopCounter.Click += new System.EventHandler(this.lblOoopCounter_Click);
+            // 
+            // chkVAC1Varsamp
+            // 
+            this.chkVAC1Varsamp.AutoSize = true;
+            this.chkVAC1Varsamp.Image = null;
+            this.chkVAC1Varsamp.Location = new System.Drawing.Point(462, 275);
+            this.chkVAC1Varsamp.Name = "chkVAC1Varsamp";
+            this.chkVAC1Varsamp.Size = new System.Drawing.Size(76, 17);
+            this.chkVAC1Varsamp.TabIndex = 85;
+            this.chkVAC1Varsamp.Text = "Resampler";
+            this.toolTip1.SetToolTip(this.chkVAC1Varsamp, "Enable the adaptive variable resampler");
+            this.chkVAC1Varsamp.UseVisualStyleBackColor = true;
+            this.chkVAC1Varsamp.CheckedChanged += new System.EventHandler(this.chkVAC1Varsamp_CheckedChanged);
             // 
             // grpVAC1monitor
             // 
@@ -20364,7 +20405,7 @@
             // tpVAC2
             // 
             this.tpVAC2.BackColor = System.Drawing.SystemColors.Control;
-            this.tpVAC2.Controls.Add(this.chkVAC2Advanced);
+            this.tpVAC2.Controls.Add(this.chkVAC2Varsamp);
             this.tpVAC2.Controls.Add(this.grpVAC2monitor);
             this.tpVAC2.Controls.Add(this.chkVAC2UseRX2);
             this.tpVAC2.Controls.Add(this.grpVAC2DirectIQ);
@@ -20384,18 +20425,18 @@
             this.tpVAC2.TabIndex = 2;
             this.tpVAC2.Text = "VAC 2";
             // 
-            // chkVAC2Advanced
+            // chkVAC2Varsamp
             // 
-            this.chkVAC2Advanced.AutoSize = true;
-            this.chkVAC2Advanced.Image = null;
-            this.chkVAC2Advanced.Location = new System.Drawing.Point(462, 275);
-            this.chkVAC2Advanced.Name = "chkVAC2Advanced";
-            this.chkVAC2Advanced.Size = new System.Drawing.Size(75, 17);
-            this.chkVAC2Advanced.TabIndex = 91;
-            this.chkVAC2Advanced.Text = "Advanced";
-            this.toolTip1.SetToolTip(this.chkVAC2Advanced, "Show diagnostics monitor for resampler");
-            this.chkVAC2Advanced.UseVisualStyleBackColor = true;
-            this.chkVAC2Advanced.CheckedChanged += new System.EventHandler(this.chkVAC2Advanced_CheckedChanged);
+            this.chkVAC2Varsamp.AutoSize = true;
+            this.chkVAC2Varsamp.Image = null;
+            this.chkVAC2Varsamp.Location = new System.Drawing.Point(462, 275);
+            this.chkVAC2Varsamp.Name = "chkVAC2Varsamp";
+            this.chkVAC2Varsamp.Size = new System.Drawing.Size(76, 17);
+            this.chkVAC2Varsamp.TabIndex = 91;
+            this.chkVAC2Varsamp.Text = "Resampler";
+            this.toolTip1.SetToolTip(this.chkVAC2Varsamp, "Enable the adaptive variable resampler");
+            this.chkVAC2Varsamp.UseVisualStyleBackColor = true;
+            this.chkVAC2Varsamp.CheckedChanged += new System.EventHandler(this.chkVAC2Varsamp_CheckedChanged);
             // 
             // grpVAC2monitor
             // 
@@ -52820,8 +52861,11 @@
         private System.Windows.Forms.LabelTS lblVAC2ovfl;
         private System.Windows.Forms.LabelTS lblVAC2underflows;
         private System.Windows.Forms.LabelTS lblVAC2overflows;
-        private System.Windows.Forms.CheckBoxTS chkVAC1Advanced;
-        private System.Windows.Forms.CheckBoxTS chkVAC2Advanced;
+        private System.Windows.Forms.CheckBoxTS chkVAC1Varsamp;
+        private System.Windows.Forms.CheckBoxTS chkVAC2Varsamp;
+        private System.Windows.Forms.LabelTS lblOoopCounter;
+        private System.Windows.Forms.LabelTS labelTS404;
+        private System.Windows.Forms.RadioButtonTS radPROLatency0;
 
     }
 }

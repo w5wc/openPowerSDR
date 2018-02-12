@@ -2673,6 +2673,7 @@ namespace PowerSDR
             radOrionMicTip_CheckedChanged(this, e);
             radOrionBiasOn_CheckedChanged(this, e);
             chkRX2StepAtt_CheckedChanged(this, e);
+            radPROLatency0_CheckedChanged(this, e);
             radPROLatency1_CheckedChanged(this, e);
             radPROLatency2_CheckedChanged(this, e);
             radPROLatency4_CheckedChanged(this, e);
@@ -2700,8 +2701,8 @@ namespace PowerSDR
             udAudioLineIn1_ValueChanged(this, e);
             udAudioVoltage1_ValueChanged(this, e);
             chkAudioLatencyManual1_CheckedChanged(this, e);
-            chkVAC1Advanced_CheckedChanged(this, e);
-            chkVAC2Advanced_CheckedChanged(this, e);
+            chkVAC1Varsamp_CheckedChanged(this, e);
+            chkVAC2Varsamp_CheckedChanged(this, e);
 
             // Calibration Tab
             udTXDisplayCalOffset_ValueChanged(this, e);
@@ -21531,19 +21532,24 @@ namespace PowerSDR
             radAlexR_6_CheckedChanged(this, EventArgs.Empty);
         }
 
+        private void radPROLatency0_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radPROLatency0.Checked) { JanusAudio.SetProLpacks(0); }
+        }
+
         private void radPROLatency1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radPROLatency1.Checked) JanusAudio.SetProLpacks(1);
+            if (radPROLatency1.Checked) { JanusAudio.SetProLpacks(1); }
         }
 
         private void radPROLatency2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radPROLatency2.Checked ) JanusAudio.SetProLpacks(2);
+            if (radPROLatency2.Checked) { JanusAudio.SetProLpacks(2); }
         }
 
         private void radPROLatency4_CheckedChanged(object sender, EventArgs e)
         {
-            if (radPROLatency4.Checked) JanusAudio.SetProLpacks(4);
+            if (radPROLatency4.Checked) { JanusAudio.SetProLpacks(4); }
         }
 
         private void chkLPFBypass_CheckedChanged(object sender, EventArgs e)
@@ -21553,7 +21559,7 @@ namespace PowerSDR
 
         private void timerVACrmatchMonitor_Tick(object sender, EventArgs e)
         {
-            if (Audio.VACEnabled)
+            if (Audio.VACEnabled && chkVAC1Varsamp.Checked)
             {
                 int underflows, overflows, ringsize;
                 double var;
@@ -21573,9 +21579,16 @@ namespace PowerSDR
                 lblVAC1unfl2.Text = underflows.ToString();
                 lblVAC1var2.Text = var.ToString("F6");
                 lblRingsizeIn.Text = ringsize.ToString();
+
             }
 
-            if (Audio.VAC2Enabled)
+            if (console.PowerOn)
+            {
+                int n = JanusAudio.GetOoopCounter();
+                lblOoopCounter.Text = n.ToString();
+            }
+
+            if (Audio.VAC2Enabled && chkVAC2Varsamp.Checked)
             {
                 int underflows, overflows, ringsize;
                 double var;
@@ -21738,16 +21751,44 @@ namespace PowerSDR
             }
         }
 
-        private void chkVAC1Advanced_CheckedChanged(object sender, EventArgs e)
+        private void chkVAC1Varsamp_CheckedChanged(object sender, EventArgs e)
         {
-            bool b = chkVAC1Advanced.Checked;
+            bool power = console.PowerOn;
+            if (power)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            bool b = chkVAC1Varsamp.Checked;
+            Audio.VarsampEnabledVAC1 = b;
             grpVAC1monitor.Visible = b;
+
+            if (power) console.PowerOn = true;
         }
 
-        private void chkVAC2Advanced_CheckedChanged(object sender, EventArgs e)
+        private void chkVAC2Varsamp_CheckedChanged(object sender, EventArgs e)
         {
-            bool b = chkVAC2Advanced.Checked;
+            bool power = console.PowerOn;
+            if (power)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            bool b = chkVAC2Varsamp.Checked;
+            Audio.VarsampEnabledVAC2 = b;
             grpVAC2monitor.Visible = b;
+
+            if (power) console.PowerOn = true;
+        }
+
+        private void lblOoopCounter_Click(object sender, EventArgs e)
+        {
+            if (console.PowerOn)
+            {
+                JanusAudio.ResetOoopCounter();
+            }
         }
 
         //private void chkCTUNScroll_CheckedChanged(object sender, EventArgs e)
