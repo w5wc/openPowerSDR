@@ -1840,33 +1840,33 @@ namespace PowerSDR
 
             if (varsampEnabledVAC1)
             {
-            // handle VAC Input - data from VAC goes to xmtr input
-            if (vac_enabled)
-            {
-                fixed (double* resampBufPtr = &(resampBufVac1InRead[0]))
+                // handle VAC Input - data from VAC goes to xmtr input
+                if (vac_enabled)
                 {
-                    wdsp.xrmatchOUT(rmatchVac1In, resampBufPtr);
-                    if (vac_bypass || !localmox)
+                    fixed (double* resampBufPtr = &(resampBufVac1InRead[0]))
                     {
-                        if (vox_enabled)
+                        wdsp.xrmatchOUT(rmatchVac1In, resampBufPtr);
+                        if (vac_bypass || !localmox)
                         {
-                            Deswizzle(in_l_ptr3, in_r_ptr3, resampBufPtr, frameCount);
+                            if (vox_enabled)
+                            {
+                                Deswizzle(in_l_ptr3, in_r_ptr3, resampBufPtr, frameCount);
+                            }
+                            else
+                            {
+                                Deswizzle(out_l_ptr2, out_r_ptr2, resampBufPtr, frameCount);
+                            }
                         }
                         else
                         {
-                            Deswizzle(out_l_ptr2, out_r_ptr2, resampBufPtr, frameCount);
+                            Deswizzle(tx_in_l, tx_in_r, resampBufPtr, frameCount);
+                            if (vac_combine_input) AddBuffer(tx_in_l, tx_in_r, frameCount);
+
+                            ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac_preamp);
+                            ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac_preamp);
                         }
                     }
-                    else
-                    {
-                        Deswizzle(tx_in_l, tx_in_r, resampBufPtr, frameCount);
-                        if (vac_combine_input) AddBuffer(tx_in_l, tx_in_r, frameCount);
-
-                        ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac_preamp);
-                        ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac_preamp);
-                    }
                 }
-            }
             }
             else
             {
@@ -1977,25 +1977,25 @@ namespace PowerSDR
 
             if (varsampEnabledVAC2)
             {
-            // handle VAC2 Input
-            if (vac2_enabled)
-            {
-                fixed (double* resampBufPtr = &(resampBufVac2InRead[0]))
+                // handle VAC2 Input
+                if (vac2_enabled)
                 {
-                    wdsp.xrmatchOUT(rmatchVac2In, resampBufPtr);
-                    if (vac_bypass || !localmox || !vfob_tx) // drain VAC2 Input ring buffer
+                    fixed (double* resampBufPtr = &(resampBufVac2InRead[0]))
                     {
-                        Deswizzle(out_l_ptr2, out_r_ptr2, resampBufPtr, frameCount);
-                    }
-                    else    // !vac_bypass && localmox && vfob_tx
-                    {
-                        Deswizzle(tx_in_l, tx_in_r, resampBufPtr, frameCount);
-                        if (vac2_combine_input) AddBuffer(tx_in_l, tx_in_r, frameCount);
-                        ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac2_tx_scale);
-                        ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac2_tx_scale);
+                        wdsp.xrmatchOUT(rmatchVac2In, resampBufPtr);
+                        if (vac_bypass || !localmox || !vfob_tx) // drain VAC2 Input ring buffer
+                        {
+                            Deswizzle(out_l_ptr2, out_r_ptr2, resampBufPtr, frameCount);
+                        }
+                        else    // !vac_bypass && localmox && vfob_tx
+                        {
+                            Deswizzle(tx_in_l, tx_in_r, resampBufPtr, frameCount);
+                            if (vac2_combine_input) AddBuffer(tx_in_l, tx_in_r, frameCount);
+                            ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac2_tx_scale);
+                            ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac2_tx_scale);
+                        }
                     }
                 }
-            }
             }
             else
             {
@@ -2145,26 +2145,26 @@ namespace PowerSDR
 
             if (varsampEnabledVAC1)
             {
-            // handle Direct IQ for VAC - receive I/Q data is sent to VAC
-            if (vac_enabled && vac_output_iq)
-            {
-                if (vac_output_rx2)
+                // handle Direct IQ for VAC - receive I/Q data is sent to VAC
+                if (vac_enabled && vac_output_iq)
                 {
-                    fixed (double* resampBufPtr = &(resampBufVac1OutWrite[0]))
+                    if (vac_output_rx2)
                     {
-                        Swizzle(resampBufPtr, rx2_in_r, rx2_in_l, frameCount);
-                        wdsp.xrmatchIN(rmatchVac1Out, resampBufPtr);
+                        fixed (double* resampBufPtr = &(resampBufVac1OutWrite[0]))
+                        {
+                            Swizzle(resampBufPtr, rx2_in_r, rx2_in_l, frameCount);
+                            wdsp.xrmatchIN(rmatchVac1Out, resampBufPtr);
+                        }
+                    }
+                    else
+                    {
+                        fixed (double* resampBufPtr = &(resampBufVac1OutWrite[0]))
+                        {
+                            Swizzle(resampBufPtr, rx1_in_r, rx1_in_l, frameCount);
+                            wdsp.xrmatchIN(rmatchVac1Out, resampBufPtr);
+                        }
                     }
                 }
-                else
-                {
-                    fixed (double* resampBufPtr = &(resampBufVac1OutWrite[0]))
-                    {
-                        Swizzle(resampBufPtr, rx1_in_r, rx1_in_l, frameCount);
-                        wdsp.xrmatchIN(rmatchVac1Out, resampBufPtr);
-                    }
-                }
-            }
             }
             else
             {
@@ -2261,15 +2261,15 @@ namespace PowerSDR
 
             if (varsampEnabledVAC2)
             {
-            // handle Direct IQ for VAC2
-            if (vac2_enabled && vac2_output_iq)
-            {
-                fixed (double* resampBufPtr = &(resampBufVac2OutWrite[0]))
+                // handle Direct IQ for VAC2
+                if (vac2_enabled && vac2_output_iq)
                 {
-                    Swizzle(resampBufPtr, rx1_in_r, rx1_in_l, frameCount);
-                    wdsp.xrmatchIN(rmatchVac2Out, resampBufPtr);
+                    fixed (double* resampBufPtr = &(resampBufVac2OutWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, rx1_in_r, rx1_in_l, frameCount);
+                        wdsp.xrmatchIN(rmatchVac2Out, resampBufPtr);
+                    }
                 }
-            }
             }
             else
             {
@@ -2605,32 +2605,32 @@ namespace PowerSDR
 
             if (varsampEnabledVAC1)
             {
-            // scale output for VAC -- use chan 4 as spare buffer
-            if (vac_enabled && !vac_output_iq)
-            {
-                if (!localmox)
+                // scale output for VAC -- use chan 4 as spare buffer
+                if (vac_enabled && !vac_output_iq)
                 {
-                    ScaleBuffer(out_l1, out_l4, out_count, (float)vac_rx_scale);
-                    ScaleBuffer(out_r1, out_r4, out_count, (float)vac_rx_scale);
-                }
-                else if (mon)
-                {
-                    ScaleBuffer(out_l2, out_l4, out_count, (float)vac_rx_scale);
-                    ScaleBuffer(out_r2, out_r4, out_count, (float)vac_rx_scale);
-                }
-                else // zero samples going back to VAC since TX monitor is off
-                {
-                    ScaleBuffer(out_l2, out_l4, out_count, 0.0f);
-                    ScaleBuffer(out_r2, out_r4, out_count, 0.0f);
-                }
+                    if (!localmox)
+                    {
+                        ScaleBuffer(out_l1, out_l4, out_count, (float)vac_rx_scale);
+                        ScaleBuffer(out_r1, out_r4, out_count, (float)vac_rx_scale);
+                    }
+                    else if (mon)
+                    {
+                        ScaleBuffer(out_l2, out_l4, out_count, (float)vac_rx_scale);
+                        ScaleBuffer(out_r2, out_r4, out_count, (float)vac_rx_scale);
+                    }
+                    else // zero samples going back to VAC since TX monitor is off
+                    {
+                        ScaleBuffer(out_l2, out_l4, out_count, 0.0f);
+                        ScaleBuffer(out_r2, out_r4, out_count, 0.0f);
+                    }
 
-                // receiver output or monitor(transmitter) output goes to VAC
-                fixed (double* resampBufPtr = &(resampBufVac1OutWrite[0]))
-                {
-                    Swizzle(resampBufPtr, out_l4, out_r4, out_count);
-                    wdsp.xrmatchIN(rmatchVac1Out, resampBufPtr);
+                    // receiver output or monitor(transmitter) output goes to VAC
+                    fixed (double* resampBufPtr = &(resampBufVac1OutWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, out_l4, out_r4, out_count);
+                        wdsp.xrmatchIN(rmatchVac1Out, resampBufPtr);
+                    }
                 }
-            }
             }
             else
             {
@@ -2803,31 +2803,31 @@ namespace PowerSDR
 
             if (varsampEnabledVAC2)
             {
-            // scale output for VAC2 -- use chan 4 as spare buffer
-            if (vac2_enabled && !vac2_output_iq)
-            {
-                if (!localmox || (localmox && !vfob_tx))
+                // scale output for VAC2 -- use chan 4 as spare buffer
+                if (vac2_enabled && !vac2_output_iq)
                 {
-                    ScaleBuffer(out_l3, out_l4, out_count, (float)vac2_rx_scale);
-                    ScaleBuffer(out_r3, out_r4, out_count, (float)vac2_rx_scale);
-                }
-                else if (mon)
-                {
-                    ScaleBuffer(out_l2, out_l4, out_count, (float)vac2_rx_scale);
-                    ScaleBuffer(out_r2, out_r4, out_count, (float)vac2_rx_scale);
-                }
-                else // zero samples going back to VAC since TX monitor is off
-                {
-                    ScaleBuffer(out_l2, out_l4, out_count, 0.0f);
-                    ScaleBuffer(out_r2, out_r4, out_count, 0.0f);
-                }
+                    if (!localmox || (localmox && !vfob_tx))
+                    {
+                        ScaleBuffer(out_l3, out_l4, out_count, (float)vac2_rx_scale);
+                        ScaleBuffer(out_r3, out_r4, out_count, (float)vac2_rx_scale);
+                    }
+                    else if (mon)
+                    {
+                        ScaleBuffer(out_l2, out_l4, out_count, (float)vac2_rx_scale);
+                        ScaleBuffer(out_r2, out_r4, out_count, (float)vac2_rx_scale);
+                    }
+                    else // zero samples going back to VAC since TX monitor is off
+                    {
+                        ScaleBuffer(out_l2, out_l4, out_count, 0.0f);
+                        ScaleBuffer(out_r2, out_r4, out_count, 0.0f);
+                    }
 
-                fixed (double* resampBufPtr = &(resampBufVac2OutWrite[0]))
-                {
-                    Swizzle(resampBufPtr, out_l4, out_r4, out_count);
-                    wdsp.xrmatchIN(rmatchVac2Out, resampBufPtr);
+                    fixed (double* resampBufPtr = &(resampBufVac2OutWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, out_l4, out_r4, out_count);
+                        wdsp.xrmatchIN(rmatchVac2Out, resampBufPtr);
+                    }
                 }
-            }
             }
             else
             {
@@ -5197,34 +5197,34 @@ namespace PowerSDR
 
             if (varsampEnabledVAC1)
             {
-            if (vac_stereo || vac_output_iq)
-            {
-                fixed (double* resampBufPtr = &(resampBufVac1InWrite[0]))
+                if (vac_stereo || vac_output_iq)
                 {
-                    Swizzle(resampBufPtr, in_l_ptr1, in_r_ptr1, frameCount);
-                    wdsp.xrmatchIN(rmatchVac1In, resampBufPtr);
-                }
+                    fixed (double* resampBufPtr = &(resampBufVac1InWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, in_l_ptr1, in_r_ptr1, frameCount);
+                        wdsp.xrmatchIN(rmatchVac1In, resampBufPtr);
+                    }
 
-                fixed (double* resampBufPtr = &(resampBufVac1OutRead[0]))
-                {
-                    wdsp.xrmatchOUT(rmatchVac1Out, resampBufPtr);
-                    Deswizzle(out_l_ptr1, out_r_ptr1, resampBufPtr, frameCount);
+                    fixed (double* resampBufPtr = &(resampBufVac1OutRead[0]))
+                    {
+                        wdsp.xrmatchOUT(rmatchVac1Out, resampBufPtr);
+                        Deswizzle(out_l_ptr1, out_r_ptr1, resampBufPtr, frameCount);
+                    }
                 }
-            }
-            else
-            {
-                fixed (double* resampBufPtr = &(resampBufVac1InWrite[0]))
+                else
                 {
-                    Swizzle(resampBufPtr, in_l_ptr1, in_l_ptr1, frameCount);
-                    wdsp.xrmatchIN(rmatchVac1In, resampBufPtr);
-                }
+                    fixed (double* resampBufPtr = &(resampBufVac1InWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, in_l_ptr1, in_l_ptr1, frameCount);
+                        wdsp.xrmatchIN(rmatchVac1In, resampBufPtr);
+                    }
 
-                fixed (double* resampBufPtr = &(resampBufVac1OutRead[0]))
-                {
-                    wdsp.xrmatchOUT(rmatchVac1Out, resampBufPtr);
-                    Deswizzle(out_l_ptr1, out_l_ptr1, resampBufPtr, frameCount);
+                    fixed (double* resampBufPtr = &(resampBufVac1OutRead[0]))
+                    {
+                        wdsp.xrmatchOUT(rmatchVac1Out, resampBufPtr);
+                        Deswizzle(out_l_ptr1, out_l_ptr1, resampBufPtr, frameCount);
+                    }
                 }
-            }
             }
             else
             {
@@ -5513,34 +5513,34 @@ namespace PowerSDR
 
             if (varsampEnabledVAC2)
             {
-            if (vac2_stereo || vac2_output_iq)
-            {
-                fixed (double* resampBufPtr = &(resampBufVac2InWrite[0]))
+                if (vac2_stereo || vac2_output_iq)
                 {
-                    Swizzle(resampBufPtr, in_l_ptr1, in_r_ptr1, frameCount);
-                    wdsp.xrmatchIN(rmatchVac2In, resampBufPtr);
-                }
+                    fixed (double* resampBufPtr = &(resampBufVac2InWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, in_l_ptr1, in_r_ptr1, frameCount);
+                        wdsp.xrmatchIN(rmatchVac2In, resampBufPtr);
+                    }
 
-                fixed (double* resampBufPtr = &(resampBufVac2OutRead[0]))
-                {
-                    wdsp.xrmatchOUT(rmatchVac2Out, resampBufPtr);
-                    Deswizzle(out_l_ptr1, out_r_ptr1, resampBufPtr, frameCount);
+                    fixed (double* resampBufPtr = &(resampBufVac2OutRead[0]))
+                    {
+                        wdsp.xrmatchOUT(rmatchVac2Out, resampBufPtr);
+                        Deswizzle(out_l_ptr1, out_r_ptr1, resampBufPtr, frameCount);
+                    }
                 }
-            }
-            else
-            {
-                fixed (double* resampBufPtr = &(resampBufVac2InWrite[0]))
+                else
                 {
-                    Swizzle(resampBufPtr, in_l_ptr1, in_l_ptr1, frameCount);
-                    wdsp.xrmatchIN(rmatchVac2In, resampBufPtr);
-                }
+                    fixed (double* resampBufPtr = &(resampBufVac2InWrite[0]))
+                    {
+                        Swizzle(resampBufPtr, in_l_ptr1, in_l_ptr1, frameCount);
+                        wdsp.xrmatchIN(rmatchVac2In, resampBufPtr);
+                    }
 
-                fixed (double* resampBufPtr = &(resampBufVac2OutRead[0]))
-                {
-                    wdsp.xrmatchOUT(rmatchVac2Out, resampBufPtr);
-                    Deswizzle(out_l_ptr1, out_l_ptr1, resampBufPtr, frameCount);
+                    fixed (double* resampBufPtr = &(resampBufVac2OutRead[0]))
+                    {
+                        wdsp.xrmatchOUT(rmatchVac2Out, resampBufPtr);
+                        Deswizzle(out_l_ptr1, out_l_ptr1, resampBufPtr, frameCount);
+                    }
                 }
-            }
             }
             else
             {
@@ -6240,67 +6240,67 @@ namespace PowerSDR
         {
             if (varsampEnabledVAC1)
             {
-            // size the ringbuffers
-            int n, insertSize, vac_in_ringbuffer_size, vac_out_ringbuffer_size = 0;
-            if (!vac_output_iq)
-            {
-                if (sample_rate1 > sample_rate2)
-                    insertSize = block_size_vac * (sample_rate1 / sample_rate2);
+                // size the ringbuffers
+                int n, insertSize, vac_in_ringbuffer_size, vac_out_ringbuffer_size = 0;
+                if (!vac_output_iq)
+                {
+                    if (sample_rate1 > sample_rate2)
+                        insertSize = block_size_vac * (sample_rate1 / sample_rate2);
+                    else
+                        insertSize = block_size_vac / (sample_rate2 / sample_rate1);
+                    n = sample_rate2 * latency2 / 1000;
+                    if (insertSize > n) n = insertSize;
+                    if (block_size1 > n) n = block_size1;
+                    vac_in_ringbuffer_size = 4 * n;
+
+                    if (sample_rate2 > out_rate)
+                        insertSize = out_count * (sample_rate2 / out_rate);
+                    else
+                        insertSize = out_count / (out_rate / sample_rate2);
+                    n = sample_rate2 * latency2 / 1000;
+                    if (insertSize > n) n = insertSize;
+                    if (block_size_vac > n) n = block_size_vac;
+                    vac_out_ringbuffer_size = 4 * n;
+                }
                 else
-                    insertSize = block_size_vac / (sample_rate2 / sample_rate1);
-                n = sample_rate2 * latency2 / 1000;
-                if (insertSize > n) n = insertSize;
-                if (block_size1 > n) n = block_size1;
-                vac_in_ringbuffer_size = 4 * n;
+                {
+                    n = sample_rate1 * latency2 / 1000;
+                    if (block_size1 > n) n = block_size1;
+                    vac_in_ringbuffer_size = 4 * n;
+                    vac_out_ringbuffer_size = 4 * n;
+                }
 
-                if (sample_rate2 > out_rate)
-                    insertSize = out_count * (sample_rate2 / out_rate);
+                // adaptive variable resamplers
+                // buffers for rmatch i/o
+                if (!vac_output_iq)
+                {
+                    rmatchVac1In = wdsp.create_rmatchLegacyV(block_size_vac, block_size1, sample_rate2, sample_rate1, vac_in_ringbuffer_size);
+                    rmatchVac1Out = wdsp.create_rmatchLegacyV(out_count, block_size_vac, out_rate, sample_rate2, vac_out_ringbuffer_size);
+                    resampBufVac1InWrite = new double[2 * block_size_vac];
+                    resampBufVac1InRead = new double[2 * block_size1];
+                    resampBufVac1OutWrite = new double[2 * out_count];
+                    resampBufVac1OutRead = new double[2 * block_size_vac];
+                }
                 else
-                    insertSize = out_count / (out_rate / sample_rate2);
-                n = sample_rate2 * latency2 / 1000;
-                if (insertSize > n) n = insertSize;
-                if (block_size_vac > n) n = block_size_vac;
-                vac_out_ringbuffer_size = 4 * n;
-            }
-            else
-            {
-                n = sample_rate1 * latency2 / 1000;
-                if (block_size1 > n) n = block_size1;
-                vac_in_ringbuffer_size = 4 * n;
-                vac_out_ringbuffer_size = 4 * n;
-            }
+                {
+                    rmatchVac1In = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac_in_ringbuffer_size);
+                    rmatchVac1Out = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac_out_ringbuffer_size);
+                    resampBufVac1InWrite = new double[2 * block_size1];
+                    resampBufVac1InRead = new double[2 * block_size1];
+                    resampBufVac1OutWrite = new double[2 * block_size1];
+                    resampBufVac1OutRead = new double[2 * block_size1];
+                }
 
-            // adaptive variable resamplers
-            // buffers for rmatch i/o
-            if (!vac_output_iq)
-            {
-                rmatchVac1In = wdsp.create_rmatchLegacyV(block_size_vac, block_size1, sample_rate2, sample_rate1, vac_in_ringbuffer_size);
-                rmatchVac1Out = wdsp.create_rmatchLegacyV(out_count, block_size_vac, out_rate, sample_rate2, vac_out_ringbuffer_size);
-                resampBufVac1InWrite = new double[2 * block_size_vac];
-                resampBufVac1InRead = new double[2 * block_size1];
-                resampBufVac1OutWrite = new double[2 * out_count];
-                resampBufVac1OutRead = new double[2 * block_size_vac];
+                Trace.Write("****** InitVAC ******");
+                Trace.Write("Pri Block Size " + block_size1);
+                Trace.Write("Pri Sample Rate " + sample_rate1);
+                Trace.Write("VAC Block Size " + block_size_vac);
+                Trace.Write("VAC Sample Rate  " + sample_rate2);
+                Trace.Write("Latency " + latency2);
+                Trace.Write("Ringbuffer Size " + vac_in_ringbuffer_size + " In");
+                Trace.Write("Ringbuffer Size " + vac_out_ringbuffer_size + " Out");
+                Trace.Write("*********************");
             }
-            else
-            {
-                rmatchVac1In = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac_in_ringbuffer_size);
-                rmatchVac1Out = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac_out_ringbuffer_size);
-                resampBufVac1InWrite = new double[2 * block_size1];
-                resampBufVac1InRead = new double[2 * block_size1];
-                resampBufVac1OutWrite = new double[2 * block_size1];
-                resampBufVac1OutRead = new double[2 * block_size1];
-            }
-
-            Trace.Write("****** InitVAC ******");
-            Trace.Write("Pri Block Size " + block_size1);
-            Trace.Write("Pri Sample Rate " + sample_rate1);
-            Trace.Write("VAC Block Size " + block_size_vac);
-            Trace.Write("VAC Sample Rate  " + sample_rate2);
-            Trace.Write("Latency " + latency2);
-            Trace.Write("Ringbuffer Size " + vac_in_ringbuffer_size + " In");
-            Trace.Write("Ringbuffer Size " + vac_out_ringbuffer_size + " Out");
-            Trace.Write("*********************");
-        }
             else
             {
                 //K5IT - Size the VAC ring buffer to hold twice the samples of the target latency
@@ -6502,67 +6502,67 @@ namespace PowerSDR
         {
             if (varsampEnabledVAC2)
             {
-            // size the ringbuffers
-            int n, insertSize, vac2_in_ringbuffer_size, vac2_out_ringbuffer_size = 0;
-            if (!vac2_output_iq)
-            {
-                if (sample_rate1 > sample_rate3)
-                    insertSize = block_size_vac2 * (sample_rate1 / sample_rate3);
+                // size the ringbuffers
+                int n, insertSize, vac2_in_ringbuffer_size, vac2_out_ringbuffer_size = 0;
+                if (!vac2_output_iq)
+                {
+                    if (sample_rate1 > sample_rate3)
+                        insertSize = block_size_vac2 * (sample_rate1 / sample_rate3);
+                    else
+                        insertSize = block_size_vac2 / (sample_rate3 / sample_rate1);
+                    n = sample_rate3 * latency3 / 1000;
+                    if (insertSize > n) n = insertSize;
+                    if (block_size1 > n) n = block_size1;
+                    vac2_in_ringbuffer_size = 4 * n;
+
+                    if (sample_rate3 > out_rate)
+                        insertSize = out_count * (sample_rate3 / out_rate);
+                    else
+                        insertSize = out_count / (out_rate / sample_rate3);
+                    n = sample_rate3 * latency3 / 1000;
+                    if (insertSize > n) n = insertSize;
+                    if (block_size_vac2 > n) n = block_size_vac2;
+                    vac2_out_ringbuffer_size = 4 * n;
+                }
                 else
-                    insertSize = block_size_vac2 / (sample_rate3 / sample_rate1);
-                n = sample_rate3 * latency3 / 1000;
-                if (insertSize > n) n = insertSize;
-                if (block_size1 > n) n = block_size1;
-                vac2_in_ringbuffer_size = 4 * n;
+                {
+                    n = sample_rate1 * latency3 / 1000;
+                    if (block_size1 > n) n = block_size1;
+                    vac2_in_ringbuffer_size = 4 * n;
+                    vac2_out_ringbuffer_size = 4 * n;
+                }
 
-                if (sample_rate3 > out_rate)
-                    insertSize = out_count * (sample_rate3 / out_rate);
+                // adaptive variable resamplers
+                // buffers for rmatch i/o
+                if (!vac2_output_iq)
+                {
+                    rmatchVac2In = wdsp.create_rmatchLegacyV(block_size_vac2, block_size1, sample_rate3, sample_rate1, vac2_in_ringbuffer_size);
+                    rmatchVac2Out = wdsp.create_rmatchLegacyV(out_count, block_size_vac2, out_rate, sample_rate3, vac2_out_ringbuffer_size);
+                    resampBufVac2InWrite = new double[2 * block_size_vac2];
+                    resampBufVac2InRead = new double[2 * block_size1];
+                    resampBufVac2OutWrite = new double[2 * out_count];
+                    resampBufVac2OutRead = new double[2 * block_size_vac2];
+                }
                 else
-                    insertSize = out_count / (out_rate / sample_rate3);
-                n = sample_rate3 * latency3 / 1000;
-                if (insertSize > n) n = insertSize;
-                if (block_size_vac2 > n) n = block_size_vac2;
-                vac2_out_ringbuffer_size = 4 * n;
-            }
-            else
-            {
-                n = sample_rate1 * latency3 / 1000;
-                if (block_size1 > n) n = block_size1;
-                vac2_in_ringbuffer_size = 4 * n;
-                vac2_out_ringbuffer_size = 4 * n;
-            }
+                {
+                    rmatchVac2In = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac2_in_ringbuffer_size);
+                    rmatchVac2Out = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac2_out_ringbuffer_size);
+                    resampBufVac2InWrite = new double[2 * block_size1];
+                    resampBufVac2InRead = new double[2 * block_size1];
+                    resampBufVac2OutWrite = new double[2 * block_size1];
+                    resampBufVac2OutRead = new double[2 * block_size1];
+                }
 
-            // adaptive variable resamplers
-            // buffers for rmatch i/o
-            if (!vac2_output_iq)
-            {
-                rmatchVac2In = wdsp.create_rmatchLegacyV(block_size_vac2, block_size1, sample_rate3, sample_rate1, vac2_in_ringbuffer_size);
-                rmatchVac2Out = wdsp.create_rmatchLegacyV(out_count, block_size_vac2, out_rate, sample_rate3, vac2_out_ringbuffer_size);
-                resampBufVac2InWrite = new double[2 * block_size_vac2];
-                resampBufVac2InRead = new double[2 * block_size1];
-                resampBufVac2OutWrite = new double[2 * out_count];
-                resampBufVac2OutRead = new double[2 * block_size_vac2];
+                Trace.Write("****** InitVAC2 ******");
+                Trace.Write("Pri Block Size " + block_size1);
+                Trace.Write("Pri Sample Rate " + sample_rate1);
+                Trace.Write("VAC Block Size " + block_size_vac2);
+                Trace.Write("VAC Sample Rate  " + sample_rate3);
+                Trace.Write("Latency " + latency3);
+                Trace.Write("Ringbuffer Size " + vac2_in_ringbuffer_size + " In");
+                Trace.Write("Ringbuffer Size " + vac2_out_ringbuffer_size + " Out");
+                Trace.Write("**********************");
             }
-            else
-            {
-                rmatchVac2In = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac2_in_ringbuffer_size);
-                rmatchVac2Out = wdsp.create_rmatchLegacyV(block_size1, block_size1, sample_rate1, sample_rate1, vac2_out_ringbuffer_size);
-                resampBufVac2InWrite = new double[2 * block_size1];
-                resampBufVac2InRead = new double[2 * block_size1];
-                resampBufVac2OutWrite = new double[2 * block_size1];
-                resampBufVac2OutRead = new double[2 * block_size1];
-            }
-
-            Trace.Write("****** InitVAC2 ******");
-            Trace.Write("Pri Block Size " + block_size1);
-            Trace.Write("Pri Sample Rate " + sample_rate1);
-            Trace.Write("VAC Block Size " + block_size_vac2);
-            Trace.Write("VAC Sample Rate  " + sample_rate3);
-            Trace.Write("Latency " + latency3);
-            Trace.Write("Ringbuffer Size " + vac2_in_ringbuffer_size + " In");
-            Trace.Write("Ringbuffer Size " + vac2_out_ringbuffer_size + " Out");
-            Trace.Write("**********************");
-        }
             else
             {
                 int block_size = block_size_vac2;
@@ -6770,15 +6770,15 @@ namespace PowerSDR
         {
             if (varsampEnabledVAC1)
             {
-            resampBufVac1InWrite = null;
-            resampBufVac1InRead = null;
-            resampBufVac1OutWrite = null;
-            resampBufVac1OutRead = null;
+                resampBufVac1InWrite = null;
+                resampBufVac1InRead = null;
+                resampBufVac1OutWrite = null;
+                resampBufVac1OutRead = null;
 
-            wdsp.destroy_rmatchV(rmatchVac1In);
-            wdsp.destroy_rmatchV(rmatchVac1Out);
-            Trace.Write("CleanUpVAC ");
-        }
+                wdsp.destroy_rmatchV(rmatchVac1In);
+                wdsp.destroy_rmatchV(rmatchVac1Out);
+                Trace.Write("CleanUpVAC ");
+            }
             else
             {
                 Win32.DeleteCriticalSection(cs_vac);
@@ -6874,15 +6874,15 @@ namespace PowerSDR
         {
             if (varsampEnabledVAC2)
             {
-            resampBufVac2InWrite = null;
-            resampBufVac2InRead = null;
-            resampBufVac2OutWrite = null;
-            resampBufVac2OutRead = null;
+                resampBufVac2InWrite = null;
+                resampBufVac2InRead = null;
+                resampBufVac2OutWrite = null;
+                resampBufVac2OutRead = null;
 
-            wdsp.destroy_rmatchV(rmatchVac2In);
-            wdsp.destroy_rmatchV(rmatchVac2Out);
-            Trace.Write("CleanUpVAC2 ");
-        }
+                wdsp.destroy_rmatchV(rmatchVac2In);
+                wdsp.destroy_rmatchV(rmatchVac2Out);
+                Trace.Write("CleanUpVAC2 ");
+            }
             else
             {
                 Win32.DeleteCriticalSection(cs_vac2);
