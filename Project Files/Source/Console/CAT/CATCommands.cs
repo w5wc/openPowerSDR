@@ -34,6 +34,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -6152,27 +6153,56 @@ namespace PowerSDR
 		// Reads or sets the VFO Lock button status
 		public string ZZVL(string s)
 		{
-			if(s.Length == parser.nSet && (s == "0" || s == "1"))
-			{
-				if(s == "0")
-					console.CATVFOLock = false;
-				else if(s == "1")
-					console.CATVFOLock = true;
-				return "";
-			}
-			else if(s.Length == parser.nGet)
-			{
-				bool retval = console.CATVFOLock;
-				if(retval)
-					return "1";
-				else
-					return "0";
-			}
-			else
-			{
-				return parser.Error1;
-			}
-		}
+            //if(s.Length == parser.nSet && (s == "0" || s == "1"))
+            //{
+            //    if(s == "0")
+            //        console.CATVFOLock = false;
+            //    else if(s == "1")
+            //        console.CATVFOLock = true;
+            //    return "";
+            //}
+            //else if(s.Length == parser.nGet)
+            //{
+            //    bool retval = console.CATVFOLock;
+            //    if(retval)
+            //        return "1";
+            //    else
+            //        return "0";
+            //}
+            //else
+            //{
+            //    return parser.Error1;
+            //}
+
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                switch (console.VFOLock)
+                {
+                    case CheckState.Unchecked:
+                        console.CATVFOLock = CheckState.Checked; 
+                        break;
+                    case CheckState.Checked:
+                        console.CATVFOLock = CheckState.Indeterminate;
+                        break;
+                    case CheckState.Indeterminate:
+                         console.CATVFOLock = CheckState.Unchecked;
+                       break;
+                }
+      
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.CATVFOLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
 
         // Reads or sets the VAC Driver
         public string ZZVM(string s)

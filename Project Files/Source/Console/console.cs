@@ -24439,10 +24439,16 @@ namespace PowerSDR
         }
 
         // Added 06/24/05 BT for CAT commands
-        public bool CATVFOLock
+        //public bool CATVFOLock
+        //{
+        //    get { return chkVFOLock.Checked; }
+        //    set { chkVFOLock.Checked = value; }
+        //}
+
+        public CheckState CATVFOLock
         {
-            get { return chkVFOLock.Checked; }
-            set { chkVFOLock.Checked = value; }
+            get { return chkVFOLock.CheckState; }
+            set { chkVFOLock.CheckState = value; }
         }
 
         public string CATGetVersion()
