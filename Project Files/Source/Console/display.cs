@@ -11245,7 +11245,7 @@ namespace PowerSDR
                                 if (console.RX2Enabled)
                                 {
                                     bitmapData = waterfall_bmp.LockBits(
-                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 4 - 14),
+                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 1), // W6VH was 4 - 14
                                         ImageLockMode.ReadWrite,
                                         waterfall_bmp.PixelFormat);
                                     break;
@@ -11253,7 +11253,7 @@ namespace PowerSDR
                                 else
                                 {
                                     bitmapData = waterfall_bmp.LockBits(
-                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 2 - 10),
+                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 1), // W6VH was 2 - 10
                                         ImageLockMode.ReadWrite,
                                         waterfall_bmp.PixelFormat);
                                     break;
@@ -11262,7 +11262,7 @@ namespace PowerSDR
                                 if (console.RX2Enabled)
                                 {
                                     bitmapData = waterfall_bmp.LockBits(
-                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 2 - 10),
+                                        new Rectangle(0, 0, waterfall_bmp.Width, waterfall_bmp.Height / 1), // W6VH was 2 - 10
                                         ImageLockMode.ReadWrite,
                                         waterfall_bmp.PixelFormat);
                                     break;
@@ -11283,14 +11283,14 @@ namespace PowerSDR
                         {
                             case DisplayMode.PANAFALL:
                                 bitmapData = waterfall_bmp2.LockBits(
-                                    new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height / 4 - 14),
+                                    new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height / 1), // W6VH was 4 - 14
                                     ImageLockMode.ReadWrite,
                                     waterfall_bmp2.PixelFormat);
                                 break;
                             default:
                                 {
                                     bitmapData = waterfall_bmp2.LockBits(
-                                       new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height / 2),
+                                       new Rectangle(0, 0, waterfall_bmp2.Width, waterfall_bmp2.Height / 1), // W6VH was 2
                                        ImageLockMode.ReadWrite,
                                        waterfall_bmp2.PixelFormat);
                                 }
@@ -12451,16 +12451,16 @@ namespace PowerSDR
                 rx2_peak_buffer[0] = CLEAR_FLAG; // set reset flag
         }
 
-        public static void ClearWaterfallBmp()
+        public static void ResetWaterfallBmp(int scale)
         {
             waterfall_bmp.Dispose();
-            waterfall_bmp = new Bitmap(W, H - 20, PixelFormat.Format24bppRgb);
+            waterfall_bmp = new Bitmap(W, (H / scale) - 20, PixelFormat.Format24bppRgb);
         }
 
-        public static void ClearWaterfallBmp2()
+        public static void ResetWaterfallBmp2(int scale)
         {
             waterfall_bmp2.Dispose();
-            waterfall_bmp2 = new Bitmap(W, H - 20, PixelFormat.Format24bppRgb);
+            waterfall_bmp2 = new Bitmap(W, (H / scale) - 20, PixelFormat.Format24bppRgb);
         }
 
         #endregion
