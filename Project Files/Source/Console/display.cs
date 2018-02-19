@@ -3864,7 +3864,7 @@ namespace PowerSDR
                 {
                     start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / rx_sample_rate);
                     num_samples = (int)((BUFFER_SIZE * (High - Low)) / rx_sample_rate);
-                    if (start_sample_index < 0) start_sample_index += 4096;
+                    if (start_sample_index < 0) start_sample_index += 16384;
                     if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                         num_samples = (BUFFER_SIZE - start_sample_index);
 
@@ -3885,12 +3885,12 @@ namespace PowerSDR
                         {
                             if (slope <= 1.0 || lindex == rindex)
                             {
-                                max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                max = current_display_data[lindex % 16384] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 16384] * (dval - (float)lindex);
                             }
                             else
                             {
                                 for (int j = lindex; j < rindex; j++)
-                                    if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
+                                    if (current_display_data[j % 16384] > max) max = current_display_data[j % 16384];
                             }
                         }
 
@@ -3902,12 +3902,12 @@ namespace PowerSDR
                         {
                             if (slope <= 1.0 || lindex == rindex)
                             {
-                                max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                max = current_display_data_bottom[lindex % 16384] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 16384] * (dval - (float)lindex);
                             }
                             else
                             {
                                 for (int j = lindex; j < rindex; j++)
-                                    if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
+                                    if (current_display_data_bottom[j % 16384] > max) max = current_display_data_bottom[j % 16384];
                             }
                         }
                         else max = current_display_data_bottom[i];
@@ -10523,7 +10523,7 @@ namespace PowerSDR
             {
                 start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / tx_sample_rate);
                 num_samples = (width * BUFFER_SIZE / tx_sample_rate);
-                if (start_sample_index < 0) start_sample_index += 4096;
+                if (start_sample_index < 0) start_sample_index += 16384;
                 if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                     num_samples = (BUFFER_SIZE - start_sample_index);
 
@@ -10546,12 +10546,13 @@ namespace PowerSDR
                         {
                             if (slope <= 1.0 || lindex == rindex)
                             {
-                                max = current_display_data[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                max = current_display_data[lindex % 16384] * ((float)lindex - dval + 1) +
+                                    current_display_data[(lindex + 1) % 16384] * (dval - (float)lindex);
                             }
                             else
                             {
                                 for (int j = lindex; j < rindex; j++)
-                                    if (current_display_data[j % 4096] > max) max = current_display_data[j % 4096];
+                                    if (current_display_data[j % 16384] > max) max = current_display_data[j % 16384];
                             }
                         }
 
@@ -10563,12 +10564,13 @@ namespace PowerSDR
                         {
                             if (slope <= 1.0 || lindex == rindex)
                             {
-                                max = current_display_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_display_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                max = current_display_data_bottom[lindex % 16384] * ((float)lindex - dval + 1) +
+                                    current_display_data_bottom[(lindex + 1) % 16384] * (dval - (float)lindex);
                             }
                             else
                             {
                                 for (int j = lindex; j < rindex; j++)
-                                    if (current_display_data_bottom[j % 4096] > max) max = current_display_data_bottom[j % 4096];
+                                    if (current_display_data_bottom[j % 16384] > max) max = current_display_data_bottom[j % 16384];
                             }
                         }
                         else max = current_display_data_bottom[i];
@@ -11144,7 +11146,7 @@ namespace PowerSDR
                         num_samples = (High - Low);
                         start_sample_index = (BUFFER_SIZE >> 1) + ((Low * BUFFER_SIZE) / sample_rate);
                         num_samples = ((High - Low) * BUFFER_SIZE / sample_rate);
-                        if (start_sample_index < 0) start_sample_index += 4096;
+                        if (start_sample_index < 0) start_sample_index += 16384;
                         if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1))
                             num_samples = BUFFER_SIZE - start_sample_index;
 
@@ -11164,12 +11166,13 @@ namespace PowerSDR
                             {
                                 if (slope <= 1.0 || lindex == rindex)
                                 {
-                                    max = current_waterfall_data[lindex % 4096] * ((float)lindex - dval + 1) + current_waterfall_data[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                    max = current_waterfall_data[lindex % 16384] * ((float)lindex - dval + 1) + 
+                                        current_waterfall_data[(lindex + 1) % 16384] * (dval - (float)lindex);
                                 }
                                 else
                                 {
                                     for (int j = lindex; j < rindex; j++)
-                                        if (current_waterfall_data[j % 4096] > max) max = current_waterfall_data[j % 4096];
+                                        if (current_waterfall_data[j % 16384] > max) max = current_waterfall_data[j % 16384];
                                 }
                             }
                             else
@@ -11183,12 +11186,13 @@ namespace PowerSDR
                             {
                                 if (slope <= 1.0 || lindex == rindex)
                                 {
-                                    max = current_waterfall_data_bottom[lindex % 4096] * ((float)lindex - dval + 1) + current_waterfall_data_bottom[(lindex + 1) % 4096] * (dval - (float)lindex);
+                                    max = current_waterfall_data_bottom[lindex % 16384] * ((float)lindex - dval + 1) +
+                                        current_waterfall_data_bottom[(lindex + 1) % 16384] * (dval - (float)lindex);
                                 }
                                 else
                                 {
                                     for (int j = lindex; j < rindex; j++)
-                                        if (current_waterfall_data_bottom[j % 4096] > max) max = current_waterfall_data_bottom[j % 4096];
+                                        if (current_waterfall_data_bottom[j % 16384] > max) max = current_waterfall_data_bottom[j % 16384];
                                 }
                             }
                             else
