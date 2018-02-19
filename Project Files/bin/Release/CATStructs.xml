@@ -959,7 +959,21 @@
 		<ngetparms>0</ngetparms>
 		<nansparms>1</nansparms>
 	</catstruct>
-	<catstruct code="ZZQR">
+  <catstruct code="ZZUX">
+    <desc>extended VFOA Lock status</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZUY">
+    <desc>extended VFOB Lock status</desc>
+    <active>true</active>
+    <nsetparms>1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>1</nansparms>
+  </catstruct>
+  <catstruct code="ZZQR">
 		<desc>Quick Memory Restore</desc>
 		<active>true</active>
 		<nsetparms>0</nsetparms>

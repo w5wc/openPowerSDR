@@ -22267,6 +22267,49 @@ namespace PowerSDR
         //    }
         //}
 
+
+        //-W2PA Separate locking functions for VFOA and B
+
+        //-W2PA VFOA's individual lock not yet used
+        private CheckState vfoA_lock = CheckState.Unchecked;
+        public CheckState VFOALock
+        {
+            get { return vfoA_lock; }
+            set
+            {
+                vfoA_lock = value;
+                switch (vfoA_lock)
+                {
+                    case CheckState.Unchecked:
+                        txtVFOAFreq.Enabled = false;
+                        break;
+                    case CheckState.Checked:
+                        txtVFOAFreq.Enabled = true;
+                        break;
+                }
+            }
+        }
+
+        private CheckState vfoB_lock = CheckState.Unchecked;
+        public CheckState VFOBLock
+        {
+            get { return vfoB_lock; }
+            set
+            {
+                vfoB_lock = value;
+                switch (vfoB_lock)
+                {
+                    case CheckState.Unchecked:
+                        txtVFOBFreq.Enabled = false;
+                        break;
+                    case CheckState.Checked:
+                        txtVFOBFreq.Enabled = true;
+                        break;
+                }
+            }
+        }
+
+
         private CheckState vfo_lock = CheckState.Unchecked;
         public CheckState VFOLock
         {
@@ -22285,7 +22328,9 @@ namespace PowerSDR
                     case CheckState.Checked: // lock only VFOA
                         enabled = false;
                         txtVFOAFreq.Enabled = false;
-                        txtVFOBFreq.Enabled = true;
+                        //-W2PA Commented out line below so that locking A doesn't necessarily unlock B,
+                        //      which is necessary since providing independent locking via CAT/MIDI interface
+                        //txtVFOBFreq.Enabled = true;  
                         chkVFOLock.Text = "VFOA Lock";
                         break;
                     case CheckState.Indeterminate: // lock both VFOA & VFOB
@@ -25209,7 +25254,7 @@ namespace PowerSDR
             }
             set
             {
-                if ((vfo_lock == CheckState.Indeterminate) || SetupForm == null) return;
+                if ((vfo_lock == CheckState.Indeterminate) || SetupForm == null || vfoB_lock == CheckState.Checked) return;
                 value = Math.Max(0, value);
                 txtVFOBFreq.Text = value.ToString("f6");
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);

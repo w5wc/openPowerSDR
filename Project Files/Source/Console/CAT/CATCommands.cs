@@ -6180,6 +6180,11 @@ namespace PowerSDR
                 {
                     case CheckState.Unchecked:
                         console.CATVFOLock = CheckState.Checked; 
+                        if (console.VFOBLock == CheckState.Checked)
+                        {
+                            console.CATVFOLock = CheckState.Indeterminate;
+                            console.VFOALock = CheckState.Checked;
+                        }                            
                         break;
                     case CheckState.Checked:
                         console.CATVFOLock = CheckState.Indeterminate;
@@ -6194,6 +6199,88 @@ namespace PowerSDR
             else if (s.Length == parser.nGet)
             {
                 if (console.CATVFOLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        //-W2PA  Out of order a bit.  Added these two functions to individually lock VFO A and B
+        //  But the button, as of now, can only indicate VFOA, VFOAB, or unlocked
+        //  VFOB locked alone is not indicated by the button.
+        //  To fix, this would be a future modification to implement separate buttons in the UI for each VFO.
+        //  ZZUX is not yet used, until these mods are implemented.
+        public string ZZUX(string s)  //-W2PA  18 Feb 2018  Lock VFOA
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                switch (console.VFOLock)
+                {
+                    case CheckState.Unchecked:
+                        console.CATVFOLock = CheckState.Checked;
+                        //-W2PA  If VFOB already locked, change button to VFOAB                     
+                        if (console.VFOBLock == CheckState.Checked) console.CATVFOLock = CheckState.Indeterminate; 
+                        break;
+                    case CheckState.Checked:
+                    case CheckState.Indeterminate:
+                        console.CATVFOLock = CheckState.Unchecked;
+                        break;
+                }
+
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.CATVFOLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        public string ZZUY(string s)  //-W2PA  18 Feb 2018  Lock VFOB  
+        //Note: This doesn't turn off VFOA lock and can't, at present, indicate VFOB lock on the UI button
+        //            other than when VFOA is already on, in which case it switches the button to VFOAB
+        //            See note above preceeding ZZUX. 
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                switch (console.VFOLock)
+                {
+                    case CheckState.Unchecked:
+                        //console.CATVFOLock = CheckState.Checked;
+                        break;
+                    case CheckState.Checked:
+                        console.CATVFOLock = CheckState.Indeterminate;
+                        break;
+                    case CheckState.Indeterminate:
+                        console.CATVFOLock = CheckState.Checked;
+                        break;
+                }
+
+                switch (s)
+                {
+                    case "0":
+                        console.VFOBLock = CheckState.Unchecked;
+                        break;
+                    case "1":
+                        console.VFOBLock = CheckState.Checked;
+                        break;
+                }
+
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.VFOBLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
                     return "1";
                 else
                     return "0";

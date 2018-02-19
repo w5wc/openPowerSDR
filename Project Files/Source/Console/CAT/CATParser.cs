@@ -1184,7 +1184,13 @@ namespace PowerSDR
 				case "ZZUA":
 					rtncmd = cmdlist.ZZUA();
 					break;
-				case "ZZVA":
+                case "ZZUX":
+                    rtncmd = cmdlist.ZZUX(suffix);
+                    break;
+                case "ZZUY":
+                    rtncmd = cmdlist.ZZUX(suffix);
+                    break;
+                case "ZZVA":
 					rtncmd = cmdlist.ZZVA(suffix);
 					break;
 				case "ZZVB":
