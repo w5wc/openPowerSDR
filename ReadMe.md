@@ -1,9 +1,9 @@
 # OpenHPSDR-PowerSDR
 
-Latest Release v3.4.8 February 18, 2018
+Latest Release v3.4.8 February 19, 2018
 
 Read the RealeaseNotes.md for more information.
-# 3.4.8 (2018-2-18)
+# 3.4.8 (2018-2-19)
 - Creates new wisdom file for each folder when using the -datapath command
 - Bug fix for Behringer mini-wheels mapping issue when mapping AGC gain
 - Added support for mapping drive level to a Behringer mini-wheel
