@@ -1188,7 +1188,7 @@ namespace PowerSDR
                     rtncmd = cmdlist.ZZUX(suffix);
                     break;
                 case "ZZUY":
-                    rtncmd = cmdlist.ZZUX(suffix);
+                    rtncmd = cmdlist.ZZUY(suffix);
                     break;
                 case "ZZVA":
 					rtncmd = cmdlist.ZZVA(suffix);

@@ -4519,7 +4519,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;txtWheelTune.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="chkVFOBTX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4702,7 +4702,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickRestore.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="btnMemoryQuickSave.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4744,7 +4744,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickSave.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="txtMemoryQuick.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 41</value>
@@ -4771,7 +4771,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;txtMemoryQuick.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="chkVFOLock.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4792,16 +4792,16 @@
     <value>Off</value>
   </data>
   <data name="chkVFOLock.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 35</value>
+    <value>34, 34</value>
   </data>
   <data name="chkVFOLock.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
+    <value>23, 23</value>
   </data>
   <data name="chkVFOLock.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
   <data name="chkVFOLock.Text" xml:space="preserve">
-    <value>VFO Lock</value>
+    <value>A</value>
   </data>
   <data name="chkVFOLock.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -4819,7 +4819,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;chkVFOLock.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="chkVFOSync.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4864,7 +4864,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;chkVFOSync.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="chkFullDuplex.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4912,7 +4912,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;chkFullDuplex.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btnTuneStepChangeLarger.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4951,7 +4951,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;btnTuneStepChangeLarger.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btnTuneStepChangeSmaller.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4990,7 +4990,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;btnTuneStepChangeSmaller.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="chkSplitDisplay.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -7747,7 +7747,55 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;btnTNFAdd.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
+  </data>
+  <data name="chkVFOBLock.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkVFOBLock.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="chkVFOBLock.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkVFOBLock.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="chkVFOBLock.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="chkVFOBLock.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="chkVFOBLock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 34</value>
+  </data>
+  <data name="chkVFOBLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="chkVFOBLock.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="chkVFOBLock.Text" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="chkVFOBLock.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="chkVFOBLock.ToolTip" xml:space="preserve">
+    <value>Keeps the VFO from changing while in the middle of a QSO.</value>
+  </data>
+  <data name="&gt;&gt;chkVFOBLock.Name" xml:space="preserve">
+    <value>chkVFOBLock</value>
+  </data>
+  <data name="&gt;&gt;chkVFOBLock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=3.4.8.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkVFOBLock.Parent" xml:space="preserve">
+    <value>grpVFOBetween</value>
+  </data>
+  <data name="&gt;&gt;chkVFOBLock.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -13156,7 +13204,37 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;lblTuneStep.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="labelTS1.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="labelTS1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="labelTS1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 33</value>
+  </data>
+  <data name="labelTS1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 28</value>
+  </data>
+  <data name="labelTS1.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="labelTS1.Text" xml:space="preserve">
+    <value>VFO Lock:</value>
+  </data>
+  <data name="&gt;&gt;labelTS1.Name" xml:space="preserve">
+    <value>labelTS1</value>
+  </data>
+  <data name="&gt;&gt;labelTS1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=3.4.8.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;labelTS1.Parent" xml:space="preserve">
+    <value>grpVFOBetween</value>
+  </data>
+  <data name="&gt;&gt;labelTS1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="grpVFOBetween.Location" type="System.Drawing.Point, System.Drawing">
     <value>360, 24</value>

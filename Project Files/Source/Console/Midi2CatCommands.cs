@@ -739,6 +739,52 @@ namespace PowerSDR
             return CmdState.NoChange;
         }
 
+        public CmdState LockVFOAOnOff(int msg, MidiDevice device) 
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                int VfoLockState = Convert.ToInt16(commands.ZZUX(""));
+
+                if (VfoLockState == 0)
+                {
+                    commands.ZZUX("1");
+                    return CmdState.On;
+                }
+                if (VfoLockState == 1)
+                {
+                    commands.ZZUX("0");
+                    return CmdState.Off;
+                }
+            }
+            return CmdState.NoChange;
+        }
+
+        public CmdState LockVFOBOnOff(int msg, MidiDevice device)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                int VfoLockState = Convert.ToInt16(commands.ZZUY(""));
+
+                if (VfoLockState == 0)
+                {
+                    commands.ZZUY("1");
+                    return CmdState.On;
+                }
+                if (VfoLockState == 1)
+                {
+                    commands.ZZUY("0");
+                    return CmdState.Off;
+                }
+            }
+            return CmdState.NoChange;
+        }
+
         public CmdState RitOnOff(int msg, MidiDevice device)
         {
             if (msg == 127)

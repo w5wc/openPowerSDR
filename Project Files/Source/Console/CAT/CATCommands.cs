@@ -6153,52 +6153,32 @@ namespace PowerSDR
 		// Reads or sets the VFO Lock button status
 		public string ZZVL(string s)
 		{
-            //if(s.Length == parser.nSet && (s == "0" || s == "1"))
-            //{
-            //    if(s == "0")
-            //        console.CATVFOLock = false;
-            //    else if(s == "1")
-            //        console.CATVFOLock = true;
-            //    return "";
-            //}
-            //else if(s.Length == parser.nGet)
-            //{
-            //    bool retval = console.CATVFOLock;
-            //    if(retval)
-            //        return "1";
-            //    else
-            //        return "0";
-            //}
-            //else
-            //{
-            //    return parser.Error1;
-            //}
-
             if (s.Length == parser.nSet && (s == "0" || s == "1"))
             {
                 switch (console.VFOLock)
                 {
                     case CheckState.Unchecked:
-                        console.CATVFOLock = CheckState.Checked; 
-                        if (console.VFOBLock == CheckState.Checked)
-                        {
-                            console.CATVFOLock = CheckState.Indeterminate;
-                            console.VFOALock = CheckState.Checked;
-                        }                            
+                        console.CATVFOLock = true;
+                        console.CATVFOBLock = false;
+                        console.VFOLock = CheckState.Checked;
                         break;
                     case CheckState.Checked:
-                        console.CATVFOLock = CheckState.Indeterminate;
+                        console.CATVFOLock = true;
+                        console.CATVFOBLock = true;
+                        console.VFOLock = CheckState.Indeterminate;
                         break;
                     case CheckState.Indeterminate:
-                         console.CATVFOLock = CheckState.Unchecked;
-                       break;
+                        console.CATVFOLock = false;
+                        console.CATVFOBLock = false;
+                        console.VFOLock = CheckState.Unchecked;
+                        break;
                 }
       
                 return "";
             }
             else if (s.Length == parser.nGet)
             {
-                if (console.CATVFOLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
+                if (console.CATVFOLock || console.CATVFOBLock)
                     return "1";
                 else
                     return "0";
@@ -6209,70 +6189,22 @@ namespace PowerSDR
             }
         }
 
-        //-W2PA  Out of order a bit.  Added these two functions to individually lock VFO A and B
-        //  But the button, as of now, can only indicate VFOA, VFOAB, or unlocked
-        //  VFOB locked alone is not indicated by the button.
-        //  To fix, this would be a future modification to implement separate buttons in the UI for each VFO.
-        //  ZZUX is not yet used, until these mods are implemented.
-        public string ZZUX(string s)  //-W2PA  18 Feb 2018  Lock VFOA
+        //-W2PA  Out of alphabetical order a bit, but related to ZZVL above. 
+        //       Added two functions to individually lock VFO A and B.
+
+        public string ZZUX(string s)  //-W2PA  Lock VFOA  
         {
             if (s.Length == parser.nSet && (s == "0" || s == "1"))
             {
-                switch (console.VFOLock)
-                {
-                    case CheckState.Unchecked:
-                        console.CATVFOLock = CheckState.Checked;
-                        //-W2PA  If VFOB already locked, change button to VFOAB                     
-                        if (console.VFOBLock == CheckState.Checked) console.CATVFOLock = CheckState.Indeterminate; 
-                        break;
-                    case CheckState.Checked:
-                    case CheckState.Indeterminate:
-                        console.CATVFOLock = CheckState.Unchecked;
-                        break;
-                }
-
-                return "";
-            }
-            else if (s.Length == parser.nGet)
-            {
-                if (console.CATVFOLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
-                    return "1";
-                else
-                    return "0";
-            }
-            else
-            {
-                return parser.Error1;
-            }
-        }
-
-        public string ZZUY(string s)  //-W2PA  18 Feb 2018  Lock VFOB  
-        //Note: This doesn't turn off VFOA lock and can't, at present, indicate VFOB lock on the UI button
-        //            other than when VFOA is already on, in which case it switches the button to VFOAB
-        //            See note above preceeding ZZUX. 
-        {
-            if (s.Length == parser.nSet && (s == "0" || s == "1"))
-            {
-                switch (console.VFOLock)
-                {
-                    case CheckState.Unchecked:
-                        //console.CATVFOLock = CheckState.Checked;
-                        break;
-                    case CheckState.Checked:
-                        console.CATVFOLock = CheckState.Indeterminate;
-                        break;
-                    case CheckState.Indeterminate:
-                        console.CATVFOLock = CheckState.Checked;
-                        break;
-                }
-
                 switch (s)
                 {
                     case "0":
-                        console.VFOBLock = CheckState.Unchecked;
+                        console.VFOALock = false;
+                        console.CATVFOLock = false;
                         break;
                     case "1":
-                        console.VFOBLock = CheckState.Checked;
+                        console.VFOALock = true;
+                        console.CATVFOLock = true;
                         break;
                 }
 
@@ -6280,7 +6212,38 @@ namespace PowerSDR
             }
             else if (s.Length == parser.nGet)
             {
-                if (console.VFOBLock == CheckState.Checked || console.CATVFOLock == CheckState.Indeterminate)
+                if (console.VFOLock == CheckState.Checked || console.VFOALock == true || console.CATVFOLock)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        public string ZZUY(string s)  //-W2PA  Lock VFOB  
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                switch (s)
+                {
+                    case "0":
+                        console.VFOBLock = false;
+                        console.CATVFOBLock = false;
+                        break;
+                    case "1":
+                        console.VFOBLock = true;
+                        console.CATVFOBLock = true;
+                        break;
+                }
+
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.VFOBLock || console.VFOLock == CheckState.Indeterminate || console.CATVFOBLock)
                     return "1";
                 else
                     return "0";

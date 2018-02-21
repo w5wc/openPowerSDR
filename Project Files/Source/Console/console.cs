@@ -1560,6 +1560,8 @@ namespace PowerSDR
         private CheckBoxTS chkSyncIT;
         private CheckBoxTS btnTNFAdd;
         private ComboBoxTS comboAMTXProfile;
+        private LabelTS labelTS1;
+        private CheckBoxTS chkVFOBLock;
         public PictureBox picWaterfall;
 
         #endregion
@@ -2270,6 +2272,7 @@ namespace PowerSDR
             this.lblCWBreakInDelay = new System.Windows.Forms.LabelTS();
             this.comboAMTXProfile = new System.Windows.Forms.ComboBoxTS();
             this.btnTNFAdd = new System.Windows.Forms.CheckBoxTS();
+            this.chkVFOBLock = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -2539,6 +2542,7 @@ namespace PowerSDR
             this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
             this.lblTuneStep = new System.Windows.Forms.LabelTS();
             this.grpVFOBetween = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS1 = new System.Windows.Forms.LabelTS();
             this.lblDisplayModeTop = new System.Windows.Forms.LabelTS();
             this.lblDisplayModeBottom = new System.Windows.Forms.LabelTS();
             this.grpDisplaySplit = new System.Windows.Forms.GroupBoxTS();
@@ -3973,7 +3977,6 @@ namespace PowerSDR
             this.chkVFOLock.FlatAppearance.BorderSize = 0;
             this.chkVFOLock.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkVFOLock.Name = "chkVFOLock";
-            this.chkVFOLock.ThreeState = true;
             this.toolTip1.SetToolTip(this.chkVFOLock, resources.GetString("chkVFOLock.ToolTip"));
             this.chkVFOLock.CheckedChanged += new System.EventHandler(this.chkVFOLock_CheckedChanged);
             this.chkVFOLock.CheckStateChanged += new System.EventHandler(this.chkVFOLock_CheckStateChanged);
@@ -4914,6 +4917,16 @@ namespace PowerSDR
             this.btnTNFAdd.Name = "btnTNFAdd";
             this.toolTip1.SetToolTip(this.btnTNFAdd, resources.GetString("btnTNFAdd.ToolTip"));
             this.btnTNFAdd.CheckedChanged += new System.EventHandler(this.btnTNFAdd_CheckedChanged);
+            // 
+            // chkVFOBLock
+            // 
+            resources.ApplyResources(this.chkVFOBLock, "chkVFOBLock");
+            this.chkVFOBLock.FlatAppearance.BorderSize = 0;
+            this.chkVFOBLock.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkVFOBLock.Name = "chkVFOBLock";
+            this.toolTip1.SetToolTip(this.chkVFOBLock, resources.GetString("chkVFOBLock.ToolTip"));
+            this.chkVFOBLock.CheckedChanged += new System.EventHandler(this.chkVFOBLock_CheckedChanged);
+            this.chkVFOBLock.CheckStateChanged += new System.EventHandler(this.chkVFOBLock_CheckStateChanged);
             // 
             // picSquelch
             // 
@@ -7189,6 +7202,8 @@ namespace PowerSDR
             // grpVFOBetween
             // 
             this.grpVFOBetween.BackColor = System.Drawing.Color.Transparent;
+            this.grpVFOBetween.Controls.Add(this.labelTS1);
+            this.grpVFOBetween.Controls.Add(this.chkVFOBLock);
             this.grpVFOBetween.Controls.Add(this.btnTNFAdd);
             this.grpVFOBetween.Controls.Add(this.chkVFOSync);
             this.grpVFOBetween.Controls.Add(this.lblTuneStep);
@@ -7203,6 +7218,12 @@ namespace PowerSDR
             resources.ApplyResources(this.grpVFOBetween, "grpVFOBetween");
             this.grpVFOBetween.Name = "grpVFOBetween";
             this.grpVFOBetween.TabStop = false;
+            // 
+            // labelTS1
+            // 
+            this.labelTS1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            resources.ApplyResources(this.labelTS1, "labelTS1");
+            this.labelTS1.Name = "labelTS1";
             // 
             // lblDisplayModeTop
             // 
@@ -8711,8 +8732,8 @@ namespace PowerSDR
             a.Add("chkRX2NR_checkstate/" + chkRX2NR.CheckState.ToString());
             a.Add("chkNB_checkstate/" + chkNB.CheckState.ToString());
             a.Add("chkRX2NB_checkstate/" + chkRX2NB.CheckState.ToString());
-            a.Add("chkVFOLock_checkstate/" + chkVFOLock.CheckState.ToString());  
-
+            a.Add("chkVFOLock_checkstate/" + chkVFOLock.CheckState.ToString());
+            a.Add("chkVFOBLock_checkstate/" + chkVFOBLock.CheckState.ToString());
             a.Add("current_datetime_mode/" + (int)current_datetime_mode);
             a.Add("rx1_display_cal_offset/" + rx1_display_cal_offset.ToString("f3"));
             a.Add("rx1_meter_cal_offset/" + rx1_meter_cal_offset);
@@ -9754,6 +9775,9 @@ namespace PowerSDR
                         break;
                     case "chkVFOLock_checkstate":  
                         chkVFOLock.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
+                        break;
+                    case "chkVFOBLock_checkstate":
+                        chkVFOBLock.CheckState = (CheckState)(Enum.Parse(typeof(CheckState), val));
                         break;
                     case "band_160m_index":
                         band_160m_index = Int32.Parse(val);
@@ -22271,84 +22295,25 @@ namespace PowerSDR
         //-W2PA Separate locking functions for VFOA and B
 
         //-W2PA VFOA's individual lock not yet used
-        private CheckState vfoA_lock = CheckState.Unchecked;
-        public CheckState VFOALock
+        private bool vfoA_lock = false;
+        public bool VFOALock
         {
             get { return vfoA_lock; }
             set
             {
+                bool enabled = true;
                 vfoA_lock = value;
                 switch (vfoA_lock)
                 {
-                    case CheckState.Unchecked:
-                        txtVFOAFreq.Enabled = false;
-                        break;
-                    case CheckState.Checked:
+                    case false:
                         txtVFOAFreq.Enabled = true;
                         break;
-                }
-            }
-        }
-
-        private CheckState vfoB_lock = CheckState.Unchecked;
-        public CheckState VFOBLock
-        {
-            get { return vfoB_lock; }
-            set
-            {
-                vfoB_lock = value;
-                switch (vfoB_lock)
-                {
-                    case CheckState.Unchecked:
-                        txtVFOBFreq.Enabled = false;
-                        break;
-                    case CheckState.Checked:
-                        txtVFOBFreq.Enabled = true;
-                        break;
-                }
-            }
-        }
-
-
-        private CheckState vfo_lock = CheckState.Unchecked;
-        public CheckState VFOLock
-        {
-            get { return vfo_lock; }
-            set
-            {
-                vfo_lock = value;
-                bool enabled = true;
-                switch (vfo_lock)
-                {
-                    case CheckState.Unchecked: // unlock both VFOs
-                        txtVFOAFreq.Enabled = enabled;
-                        txtVFOBFreq.Enabled = enabled;
-                        chkVFOLock.Text = "VFO Lock";
-                        break;
-                    case CheckState.Checked: // lock only VFOA
+                    case true:
                         enabled = false;
                         txtVFOAFreq.Enabled = false;
-                        //-W2PA Commented out line below so that locking A doesn't necessarily unlock B,
-                        //      which is necessary since providing independent locking via CAT/MIDI interface
-                        //txtVFOBFreq.Enabled = true;  
-                        chkVFOLock.Text = "VFOA Lock";
-                        break;
-                    case CheckState.Indeterminate: // lock both VFOA & VFOB
-                        enabled = false;
-                        txtVFOAFreq.Enabled = false;
-                        txtVFOBFreq.Enabled = false;
-                        chkVFOLock.Text = "VFOAB Lock";
-                        break;
-                    default:
-                        enabled = true;
-                        txtVFOAFreq.Enabled = enabled;
-                        txtVFOBFreq.Enabled = enabled;
-                        chkVFOLock.Text = "VFO Lock";
                         break;
                 }
 
-               // txtVFOAFreq.Enabled = enabled;
-               // txtVFOBFreq.Enabled = enabled;
                 radBand160.Enabled = enabled;
                 radBand80.Enabled = enabled;
                 radBand60.Enabled = enabled;
@@ -22398,7 +22363,56 @@ namespace PowerSDR
                 btnVFOSwap.Enabled = enabled;
 
                 btnMemoryQuickRestore.Enabled = enabled;
+
             }
+        }
+
+        private bool vfoB_lock = false;
+        public bool VFOBLock
+        {
+            get { return vfoB_lock; }
+            set
+            {
+                bool enabled = true;
+                vfoB_lock = value;
+                switch (vfoB_lock)
+                {
+                    case false:
+                        txtVFOBFreq.Enabled = true;
+                        break;
+                    case true:
+                        enabled = false;
+                        txtVFOBFreq.Enabled = false;
+                        chkVFOSync.Checked = false;
+                        break;
+                }
+
+             comboRX2Band.Enabled = enabled;
+             btnVFOAtoB.Enabled = enabled;
+             chkVFOSync.Enabled = enabled;
+             radRX2ModeLSB.Enabled = enabled;
+             radRX2ModeUSB.Enabled = enabled;
+             radRX2ModeDSB.Enabled = enabled;
+             radRX2ModeCWL.Enabled = enabled;
+             radRX2ModeCWU.Enabled = enabled;
+             radRX2ModeFMN.Enabled = enabled;
+             radRX2ModeAM.Enabled = enabled;
+             radRX2ModeSAM.Enabled = enabled;
+             radRX2ModeSPEC.Enabled = enabled;
+             radRX2ModeDIGL.Enabled = enabled;
+             radRX2ModeDIGU.Enabled = enabled;
+             radRX2ModeDRM.Enabled = enabled;
+
+           }
+
+        }
+
+
+        private CheckState vfo_lock = CheckState.Unchecked;
+        public CheckState VFOLock
+        {
+            get { return vfo_lock; }
+            set { vfo_lock = value; }
         }
 
         private double wave_freq = 0.0;
@@ -24483,17 +24497,16 @@ namespace PowerSDR
             }
         }
 
-        // Added 06/24/05 BT for CAT commands
-        //public bool CATVFOLock
-        //{
-        //    get { return chkVFOLock.Checked; }
-        //    set { chkVFOLock.Checked = value; }
-        //}
-
-        public CheckState CATVFOLock
+        public bool CATVFOLock
         {
-            get { return chkVFOLock.CheckState; }
-            set { chkVFOLock.CheckState = value; }
+            get { return chkVFOLock.Checked; }
+            set { chkVFOLock.Checked = value; }
+        }
+
+        public bool CATVFOBLock
+        {
+            get { return chkVFOBLock.Checked; }
+            set { chkVFOBLock.Checked = value; }
         }
 
         public string CATGetVersion()
@@ -25193,7 +25206,7 @@ namespace PowerSDR
             }
             set
             {
-                if ((vfo_lock != CheckState.Unchecked) || SetupForm == null) return;
+                if ((vfo_lock != CheckState.Unchecked) || vfoA_lock == true ||  SetupForm == null) return;
                 if (!this.InvokeRequired)
                 {
                     // UpdateVFOAFreq(value.ToString("f6"));
@@ -25233,7 +25246,7 @@ namespace PowerSDR
 
             set
             {
-                if ((vfo_lock != CheckState.Unchecked) || SetupForm == null) return;
+                if ((vfo_lock != CheckState.Unchecked) || vfoA_lock == true || SetupForm == null) return;
                 txtVFOABand.Text = value.ToString("f6");
                 txtVFOABand_LostFocus(this, EventArgs.Empty);
             }
@@ -25254,7 +25267,7 @@ namespace PowerSDR
             }
             set
             {
-                if ((vfo_lock == CheckState.Indeterminate) || SetupForm == null || vfoB_lock == CheckState.Checked) return;
+                if ((vfo_lock == CheckState.Indeterminate) || SetupForm == null || vfoB_lock == true) return;
                 value = Math.Max(0, value);
                 txtVFOBFreq.Text = value.ToString("f6");
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
@@ -34750,7 +34763,7 @@ namespace PowerSDR
                             break;
                     }
                 }
-                else if (e.KeyCode == key_band_up && (vfo_lock == CheckState.Unchecked))
+                else if (e.KeyCode == key_band_up && vfo_lock == CheckState.Unchecked && vfoA_lock == false)
                 {
                     switch (rx1_band)
                     {
@@ -34918,7 +34931,7 @@ namespace PowerSDR
                             break;
                     }
                 }
-                else if (e.KeyCode == key_band_down && (vfo_lock == CheckState.Unchecked))
+                else if (e.KeyCode == key_band_down && vfo_lock == CheckState.Unchecked && vfoA_lock == false)
                 {
                     switch (rx1_band)
                     {
@@ -35136,7 +35149,7 @@ namespace PowerSDR
                         chkMOX.Checked = false;
                     }
                 }
-                else if ((vfo_lock != CheckState.Unchecked) || !quick_qsy)
+                else if ((vfo_lock != CheckState.Unchecked) || vfoA_lock == true || !quick_qsy)
                 {
                     return;
                 }
@@ -35357,7 +35370,7 @@ namespace PowerSDR
                     chkTUN.Enabled = true;
                 }
                 chkVFOLock.Enabled = true;
-
+                chkVFOBLock.Enabled = true;
                 timer_peak_text.Enabled = true;
 
                 //if (SetupForm.radLineIn.Checked)
@@ -35408,7 +35421,7 @@ namespace PowerSDR
                 }
 
                 chkVFOLock.Enabled = false;
-
+                chkVFOBLock.Enabled = false;
                 chkPower.BackColor = SystemColors.Control;
                 txtVFOAFreq.ForeColor = vfo_text_dark_color;
                 txtVFOAMSD.ForeColor = vfo_text_dark_color;
@@ -37816,20 +37829,22 @@ namespace PowerSDR
 
         private void chkVFOLock_CheckedChanged(object sender, System.EventArgs e)
         {
-            //VFOLock = chkVFOLock.Checked;
-            //if (chkVFOLock.Checked)
-            //    chkVFOLock.BackColor = button_selected_color;
-            //else
-            //    chkVFOLock.BackColor = SystemColors.Control;
+            VFOALock = chkVFOLock.Checked;          
+        }
+
+        private void chkVFOBLock_CheckedChanged(object sender, EventArgs e)
+        {
+            VFOBLock = chkVFOBLock.Checked;
         }
 
         private void chkVFOLock_CheckStateChanged(object sender, EventArgs e)
         {
-            VFOLock = chkVFOLock.CheckState;
-            if (chkVFOLock.CheckState != CheckState.Unchecked)
-                chkVFOLock.BackColor = button_selected_color;
-            else
-                chkVFOLock.BackColor = SystemColors.Control;
+            //VFOALock = chkVFOLock.CheckState;
+        }
+
+        private void chkVFOBLock_CheckStateChanged(object sender, EventArgs e)
+        {
+           // VFOBLock = chkVFOBLock.CheckState;
         }
 
         private void btnBandVHF_Click(object sender, System.EventArgs e)
