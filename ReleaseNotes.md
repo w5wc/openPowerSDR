@@ -369,14 +369,14 @@ Changed previous VFO Lock function to a round-robin toggle: Unlocked, VFOA locke
 
 CAT interface:
 Added two functions to individually lock the two VFOs:
-     ZZUX and ZZUY locks/unlocks VFOA and VFOB, respectively. 1=lock, 0=unlock
-     ZZUL now implements a round-robin toggle for VFO locks: Unlocked, VFOA locked, VFOA&B locked, Unlocked.
+- ZZUX and ZZUY locks/unlocks VFOA and VFOB, respectively. 1=lock, 0=unlock
+- ZZUL now implements a round-robin toggle for VFO locks: Unlocked, VFOA locked, VFOA&B locked, Unlocked.
 Added the following new functions:
-     ZZUS initiates a PureSignal single cal function
-     ZZUT turns a two-tone test on or off (1 or 0)
-     ZZGU sets RX2 AGC speed
-     ZZAF,ZZAE sets VFOA N tune steps up,down respectively
-     ZZBF,ZZBE sets VFOB N tune steps up,down respectively
-     ZZXH sets VOX delay
-     ZZCN/CO sets VFO A/B CTUN state
-     ZZNU sets RX2 ANF state
+- ZZUS initiates a PureSignal single cal function
+- ZZUT turns a two-tone test on or off (1 or 0)
+- ZZGU sets RX2 AGC speed
+- ZZAF,ZZAE sets VFOA N tune steps up,down respectively
+- ZZBF,ZZBE sets VFOB N tune steps up,down respectively
+- ZZXH sets VOX delay
+- ZZCN/CO sets VFO A/B CTUN state
+- ZZNU sets RX2 ANF state
