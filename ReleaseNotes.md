@@ -371,6 +371,7 @@ CAT interface:
 Added two functions to individually lock the two VFOs:
 - ZZUX and ZZUY locks/unlocks VFOA and VFOB, respectively. 1=lock, 0=unlock
 - ZZUL now implements a round-robin toggle for VFO locks: Unlocked, VFOA locked, VFOA&B locked, Unlocked.
+
 Added the following new functions:
 - ZZUS initiates a PureSignal single cal function
 - ZZUT turns a two-tone test on or off (1 or 0)
