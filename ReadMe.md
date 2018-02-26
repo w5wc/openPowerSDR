@@ -1,9 +1,9 @@
 # OpenHPSDR-PowerSDR
 
-Latest Release v3.4.8 February 19, 2018
+Latest Release v3.4.8 February 25, 2018
 
 Read the RealeaseNotes.md for more information.
-# 3.4.8 (2018-2-19)
+# 3.4.8 (2018-2-25)
 - Creates new wisdom file for each folder when using the -datapath command
 - Bug fix for Behringer mini-wheels mapping issue when mapping AGC gain
 - Added support for mapping drive level to a Behringer mini-wheel
@@ -15,7 +15,8 @@ Read the RealeaseNotes.md for more information.
 - Removed the 750Hz CW filter and added a 150Hz CW filter (requires database reset to update)
 - Added an Audio Adaptive Variable Resampler with monitor tools
 - Increased display buffer to support larger than 4k displays
-- VFO Lock is now a tristate button. OFF-VFOA-VFOA+B
+- Added separate VFO Lock controls for VFOA and VFOB
+- Added several CAT Commands. (see ReleaseNotes for details)
 
 # 3.4.7 (2017-12-22)
 - Control added to force the LPF to the 6m/ByPass position during receive. Filters must be under manual control to use. (Setup=>General=>Ant/Filters=>LPF, HPF/LPF, BPF1)
