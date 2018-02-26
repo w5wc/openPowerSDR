@@ -1171,7 +1171,54 @@ namespace PowerSDR
                 return parser.Error1;
         }
 
-		// Sets or reads the SDR-1000 Audio Gain control
+        //Sets VFO A down nn Pre-set Tune Steps
+        public string ZZAE(string s)
+        {
+            int step = console.TuneStepIndex;
+            int numsteps = 0;
+            double stepFreq;
+                        
+            List<TuneStep> tune_list = console.TuneStepList;
+            stepFreq = tune_list[step].StepHz * 10e-7;
+            if (s.Length == parser.nSet)
+            {
+                numsteps = Convert.ToInt32(s);
+                if (numsteps >= 0 && step <= 99)
+                {
+                    console.VFOAFreq = console.CATVFOA - stepFreq * (double)numsteps;
+                    return "";
+                }
+                else
+                    return parser.Error1;
+            }
+            else
+                return parser.Error1;
+        }
+
+        //Sets VFO A up nn pre-set Steps
+        public string ZZAF(string s)
+        {
+            int step = console.TuneStepIndex;
+            int numsteps = 0;
+            double stepFreq;
+
+            List<TuneStep> tune_list = console.TuneStepList;
+            stepFreq = tune_list[step].StepHz * 10e-7;
+            if (s.Length == parser.nSet)
+            {
+                numsteps = Convert.ToInt32(s);
+                if (numsteps >= 0 && step <= 99)
+                {
+                    console.VFOAFreq = console.CATVFOA + stepFreq * (double)numsteps;
+                    return "";
+                }
+                else
+                    return parser.Error1;
+            }
+            else
+                return parser.Error1;
+        }
+		// Sets or reads the SDR-1000 Audio Gain control 
 		public string ZZAG(string s)
 		{
 			int af = 0;
@@ -1390,6 +1437,53 @@ namespace PowerSDR
 			return "";
 		}
 
+        //Sets VFO B down nn Pre-set Tune Steps
+        public string ZZBE(string s)
+        {
+            int step = console.TuneStepIndex;
+            int numsteps = 0;
+            double stepFreq;
+
+            List<TuneStep> tune_list = console.TuneStepList;
+            stepFreq = tune_list[step].StepHz * 10e-7;
+            if (s.Length == parser.nSet)
+            {
+                numsteps = Convert.ToInt32(s);
+                if (numsteps >= 0 && step <= 99)
+                {
+                    console.VFOBFreq = console.CATVFOB - stepFreq * (double)numsteps;
+                    return "";
+                }
+                else
+                    return parser.Error1;
+            }
+            else
+                return parser.Error1;
+        }
+
+        //Sets VFO B up nn pre-set Steps
+        public string ZZBF(string s)
+        {
+            int step = console.TuneStepIndex;
+            int numsteps = 0;
+            double stepFreq;
+
+            List<TuneStep> tune_list = console.TuneStepList;
+            stepFreq = tune_list[step].StepHz * 10e-7;
+            if (s.Length == parser.nSet)
+            {
+                numsteps = Convert.ToInt32(s);
+                if (numsteps >= 0 && step <= 99)
+                {
+                    console.VFOBFreq = console.CATVFOB + stepFreq * (double)numsteps;
+                    return "";
+                }
+                else
+                    return parser.Error1;
+            }
+            else
+                return parser.Error1;
+        }
 		// Sets the Band Group (HF/VHF)
 		public string ZZBG(string s)
 		{
@@ -1714,7 +1808,35 @@ namespace PowerSDR
             else
                 return parser.Error1;
         }
-        
+
+        //Sets or reads CTUN for RX2
+        public string ZZCO(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                if (s == "1")
+                {
+                    console.CTuneRX2Display = true;
+                    return "";
+                }
+                else if (s == "0")
+                {
+                    console.CTuneRX2Display = false;
+                    return "";
+                }
+                else
+                    return parser.Error1;
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.CTuneRX2Display)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+                return parser.Error1;
+        }
         // Sets or reads the compander button status
 		public string ZZCP(string s)
 		{
@@ -2835,7 +2957,29 @@ namespace PowerSDR
 			}
 		}
 
-		// Sets or reads the Audio Buffer Size
+        // Sets or reads the RX2 AGC constant 
+        public string ZZGU(string s)
+        {
+            if (s.Length == parser.nSet)
+            {
+                if ((Convert.ToInt32(s) > (int)AGCMode.FIRST && Convert.ToInt32(s) < (int)AGCMode.LAST))
+                    console.RX2AGCMode = (AGCMode)Convert.ToInt32(s);
+                else
+                    return parser.Error1;
+
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return ((int)console.RX2AGCMode).ToString();
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+		// Sets or reads the Audio Buffer Size                                              
 		public string ZZHA(string s)
 		{
 		
@@ -4153,6 +4297,23 @@ namespace PowerSDR
 			}
 		}
 
+        //Sets or reads the RX2 ANF button status
+        public string ZZNU(string s)
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                console.CATRX2ANF = Convert.ToInt32(s);
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                return console.CATRX2ANF.ToString();
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
         // Sets or reads the Noise Reduction status
         public string ZZNV(string s)
         {
@@ -5809,13 +5970,50 @@ namespace PowerSDR
 
 		}
 
+        public string ZZUS()  //-W2PA  Initiate PS Single Cal
+        {
+            console.CATSingleCal();
+            return "";
+        }
 
-		/// <summary>
-		/// Sets or reads the VAC RX Gain 
-		/// </summary>
-		/// <param name="s"></param>
-		/// <returns></returns>
-		public string ZZVB(string s)
+        public string ZZUT(string s)  //-W2PA  Toggle two tone test  
+        {
+            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            {
+                switch (s)
+                {
+                    case "0":
+                        console.CATTTTest = 0;
+                        break;
+                    case "1":
+                        console.CATTTTest = 1;
+
+                        break;
+                }
+
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                if (console.CATTTTest == 1)
+                    return "1";
+                else
+                    return "0";
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Sets or reads the VAC RX Gain 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ZZVB(string s)
 		{
 			int n = 0;
 			int x = 0;
@@ -6892,6 +7090,33 @@ namespace PowerSDR
 			}
 		}
 
+        //Reads or set the VOX Delay control
+        public string ZZXH(string s)
+        {
+            int n = 0;
+            double delaytime;
+
+            if (s != null && s != "")
+                n = Convert.ToInt32(s);
+            n = Math.Max(0, n);
+            n = Math.Min(4000, n);
+            delaytime = (double)n;
+            if (s.Length == parser.nSet)
+            {
+                console.VOXHangTime = delaytime;
+                return "";
+            }
+            else if (s.Length == parser.nGet)
+            {
+                n = (int)console.VOXHangTime;
+                return AddLeadingZeros(n);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+
+        }
 		//Sets or reads the XIT button status
 		public string ZZXS(string s)
 		{
