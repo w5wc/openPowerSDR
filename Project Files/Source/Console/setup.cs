@@ -4400,6 +4400,18 @@ namespace PowerSDR
             }
         }
 
+        public int VOXHangTime
+        {
+            get
+            {
+                if (udTXVOXHangTime != null) return (int)udTXVOXHangTime.Value;
+                else return 125;
+            }
+            set
+            {
+                if (udTXVOXHangTime != null) udTXVOXHangTime.Value = value;
+            }
+        }
         public int AGCMaxGain
         {
             get

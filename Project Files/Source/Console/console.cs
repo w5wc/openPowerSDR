@@ -21739,7 +21739,11 @@ namespace PowerSDR
         public double VOXHangTime
         {
             get { return vox_hang_time; }
-            set { vox_hang_time = value; }
+            set
+            {
+                vox_hang_time = value;
+                if (SetupForm != null) SetupForm.VOXHangTime = (int)value;
+            }
         }
 
         private bool vox_active = false;

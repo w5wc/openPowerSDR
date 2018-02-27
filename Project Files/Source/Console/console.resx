@@ -4792,7 +4792,7 @@
     <value>Off</value>
   </data>
   <data name="chkVFOLock.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 34</value>
+    <value>46, 34</value>
   </data>
   <data name="chkVFOLock.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -7768,7 +7768,7 @@
     <value>Off</value>
   </data>
   <data name="chkVFOBLock.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 34</value>
+    <value>69, 34</value>
   </data>
   <data name="chkVFOBLock.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -13213,10 +13213,10 @@
     <value>Off</value>
   </data>
   <data name="labelTS1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 33</value>
+    <value>12, 33</value>
   </data>
   <data name="labelTS1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 28</value>
+    <value>34, 28</value>
   </data>
   <data name="labelTS1.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
