@@ -7117,8 +7117,79 @@ namespace PowerSDR
             }
 
         }
-		//Sets or reads the XIT button status
-		public string ZZXS(string s)
+
+        //Reads RX1 combined status
+        public string ZZXN(string s)
+        {
+            int n = 0;
+            int m_agc = 0;
+            int m_att = 0;
+            if (s.Length == parser.nGet)
+            {
+                m_agc = (int)console.RX1AGCMode;
+                m_agc = m_agc & 7;                  // strip to 3 bits
+                m_att = (int)console.CATPreamp;
+                m_att = (m_att & 7) << 3;           // 3 bits, moved left
+                n = m_agc + m_att;
+                if (console.CATSquelch != 0)
+                    n += (1 << 6);
+                if (console.CATNB1 != 0)
+                    n += (1 << 7);
+                if (console.CATNB2 != 0)
+                    n += (1 << 8);
+                if (console.CATNR != 0)
+                    n += (1 << 9);
+                if (console.CATNR2 != 0)
+                    n += (1 << 10);
+                if (console.CATSNB != 0)
+                    n += (1 << 11);
+                if (console.CATANF != 0)
+                    n += (1 << 12);
+                return AddLeadingZeros(n);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        //Reads RX2 combined status
+        public string ZZXO(string s)
+        {
+            int n = 0;
+            int m_agc = 0;
+            int m_att = 0;
+            if (s.Length == parser.nGet)
+            {
+                m_agc = (int)console.RX2AGCMode;
+                m_agc = m_agc & 7;                  // strip to 3 bits
+                m_att = (int)console.RX2PreampMode;
+                m_att = (m_att & 7) << 3;           // 3 bits, moved left
+                n = m_agc + m_att;
+                if (console.CATSquelch2 == "1")
+                    n += (1 << 6);
+                if (console.CATRX2NB1 != 0)
+                    n += (1 << 7);
+                if (console.CATRX2NB2 != 0)
+                    n += (1 << 8);
+                if (console.CATRX2NR != 0)
+                    n += (1 << 9);
+                if (console.CATRX2NR2 != 0)
+                    n += (1 << 10);
+                if (console.CATRX2SNB != 0)
+                    n += (1 << 11);
+                if (console.CATRX2ANF != 0)
+                    n += (1 << 12);
+                return AddLeadingZeros(n);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
+
+        //Sets or reads the XIT button status
+        public string ZZXS(string s)
 		{
 			if(s.Length == parser.nSet)
 			{
@@ -7167,6 +7238,34 @@ namespace PowerSDR
 				return parser.Error1;
 			}
 		}
+
+        //Reads VFO combined status
+        public string ZZXV(string s)
+        {
+            int n = 0;
+            if (s.Length == parser.nGet)
+            {
+                if (console.RITOn == true)
+                    n += 1;
+                if (console.CATVFOLock == true)
+                    n += (1 << 1);
+                if (console.VFOSplit == true)
+                    n += (1 << 2);
+                if (console.CTuneDisplay == true)
+                    n += (1 << 3);
+                if (console.CTuneRX2Display == true)
+                    n += (1 << 4);
+                if ((console.CATPTT == true)||(console.MOX == true))
+                    n += (1 << 5);
+                if (console.TUN == true)
+                    n += (1 << 6);
+                return AddLeadingZeros(n);
+            }
+            else
+            {
+                return parser.Error1;
+            }
+        }
 
         // Reads or sets the VAC2 Direct I/Q checkbox on the setup form
         public string ZZYA(string s)

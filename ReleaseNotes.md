@@ -1,4 +1,4 @@
-# PowerSDR_mRX_PS 3.4.8.0 February 26, 2018
+# PowerSDR_mRX_PS 3.4.8.0 March 2, 2018
 
 
 # 3.2.22 (2015-1-24) 
@@ -347,7 +347,7 @@ Fixed a bug resulting in incorrect vertical display scale in transmit under cert
 - VFO Lock correctly locks VFOA and VFOB.
 - TX Amplitude scaling added to waterfall display. (Setup=>Display=>TX)
 
-# 3.4.8 (2018-2-26)
+# 3.4.8 (2018-3-2)
 - Creates new wisdom file for each folder when using the -datapath command
 - Bug fix for Behringer mini-wheels mapping issue when mapping AGC gain
 - Added support for mapping drive level to a Behringer mini-wheel
@@ -359,7 +359,7 @@ Fixed a bug resulting in incorrect vertical display scale in transmit under cert
 - Removed the 750Hz CW filter and added a 150Hz CW filter (requires database reset to update)
 - Added an Audio Adaptive Variable Resampler with monitor tools
 - Increased display buffer to support larger than 4k displays
-- Added separate VFO Lock controls for VFOA and VFOB
+- Added separate VFO Lock controls for VFOA and VFOB. New VFO Lock button will require additional skin files to operate correctly. Skins packaged with OpenHPSDR/PowerSDR will contain the required files. You may need to create them for other skin packages.
 
 MIDI interface:
 Bug fix for Behringer mini-wheels when mapping to AGC gain.
@@ -381,3 +381,6 @@ Added the following new functions:
 - ZZXH sets VOX delay
 - ZZCN/CO sets VFO A/B CTUN state
 - ZZNU sets RX2 ANF state
+- ZZXN gets combined RX1 status
+- ZZXO gets combined RX2 status
+- ZZXV gets combined VFO status

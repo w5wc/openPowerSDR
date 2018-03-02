@@ -1225,7 +1225,28 @@
     <ngetparms>0</ngetparms>
     <nansparms>4</nansparms>
   </catstruct>
-	<catstruct code="ZZGE">
+  <catstruct code="ZZXN">
+    <desc>RX1 Combined Status</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZXO">
+    <desc>RX2 Combined Status</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZXV">
+    <desc>VFO Combined Status</desc>
+    <active>true</active>
+    <nsetparms>-1</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
+  <catstruct code="ZZGE">
 		<desc>Noise Gate Enable</desc>
 		<active>true</active>
 		<nsetparms>1</nsetparms>
