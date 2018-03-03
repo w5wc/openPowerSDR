@@ -2474,7 +2474,7 @@ namespace PowerSDR
         public void AGCLevel_inc(int msg, MidiDevice device)  //-W2PA Support for Behringer CMD PL-1 style wheel/knobs
         {
             parser.nGet = 0;
-            parser.nSet = 1;  //-W2PA changed to allow for 2, 3, 4 digits
+            parser.nSet = 4; 
             parser.nAns = 4;
 
             try
@@ -2493,7 +2493,7 @@ namespace PowerSDR
                 {
                     if (currAGC < agcMax) currAGC++;
                 }
-                commands.ZZAR(Convert.ToString(currAGC));
+                commands.ZZAR("+" + currAGC.ToString("000"));
 
                 double setAGC = Convert.ToDouble(currAGC);
 
@@ -2542,7 +2542,7 @@ namespace PowerSDR
         public void RX2AGCLevel_inc(int msg, MidiDevice device)  //-W2PA Support for Behringer CMD PL-1 wheel/knobs
         {
             parser.nGet = 0;
-            parser.nSet = 1;  //-W2PA changed to allow for 2, 3, 4 digits
+            parser.nSet = 4;  
             parser.nAns = 4;
 
             try
@@ -2561,7 +2561,7 @@ namespace PowerSDR
                 {
                     if (currAGC < agcMax) currAGC++;
                 }
-                commands.ZZAS(Convert.ToString(currAGC));
+                commands.ZZAS("+" + currAGC.ToString("000"));
 
                 double setAGC = Convert.ToDouble(currAGC);
 
