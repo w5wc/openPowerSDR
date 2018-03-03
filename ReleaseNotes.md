@@ -370,7 +370,7 @@ Changed previous VFO Lock function to a round-robin toggle: Unlocked, VFOA locke
 CAT interface:
 Added two functions to individually lock the two VFOs:
 - ZZUX and ZZUY locks/unlocks VFOA and VFOB, respectively. 1=lock, 0=unlock
-- ZZUL now implements a round-robin toggle for VFO locks: Unlocked, VFOA locked, VFOA&B locked, Unlocked.
+- ZZVL now implements a round-robin toggle for VFO locks: Unlocked, VFOA locked, VFOA&B locked, Unlocked.
 
 Added the following new functions:
 - ZZUS initiates a PureSignal single cal function
