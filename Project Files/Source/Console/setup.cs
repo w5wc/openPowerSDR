@@ -8723,6 +8723,8 @@ namespace PowerSDR
 
             if (radGenModelANAN8000D.Checked || radGenModelANAN7000D.Checked)
             {
+                chkLPFBypass.Checked = false;
+                chkLPFBypass.Visible = false;
                 console.MKIIBPFPresent = true;
                 chkDisableRXOut.Visible = false;
                 chkBPF2Gnd.Visible = true;
@@ -8731,6 +8733,7 @@ namespace PowerSDR
             }
             else
             {
+                chkLPFBypass.Visible = true;
                 console.MKIIBPFPresent = false;
                 chkDisableRXOut.Visible = true;
                 chkBPF2Gnd.Visible = false;
@@ -21566,7 +21569,7 @@ namespace PowerSDR
 
         private void chkLPFBypass_CheckedChanged(object sender, EventArgs e)
         {
-           // console.LPFBypass = chkLPFBypass.Checked;
+            console.LPFBypass = chkLPFBypass.Checked;
         }
 
         private void timerVACrmatchMonitor_Tick(object sender, EventArgs e)
