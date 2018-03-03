@@ -7247,18 +7247,20 @@ namespace PowerSDR
             {
                 if (console.RITOn == true)
                     n += 1;
-                if (console.CATVFOLock == true)
+                if (console.VFOLock == CheckState.Checked || console.VFOALock == true || console.CATVFOLock)         // VFO A lock
                     n += (1 << 1);
-                if (console.VFOSplit == true)
+                if (console.VFOBLock || console.VFOLock == CheckState.Indeterminate || console.CATVFOBLock)         // VFO B lock
                     n += (1 << 2);
-                if (console.CTuneDisplay == true)
+                if (console.VFOSplit == true)
                     n += (1 << 3);
-                if (console.CTuneRX2Display == true)
+                if (console.CTuneDisplay == true)
                     n += (1 << 4);
-                if ((console.CATPTT == true)||(console.MOX == true))
+                if (console.CTuneRX2Display == true)
                     n += (1 << 5);
-                if (console.TUN == true)
+                if ((console.CATPTT == true)||(console.MOX == true))
                     n += (1 << 6);
+                if (console.TUN == true)
+                    n += (1 << 7);
                 return AddLeadingZeros(n);
             }
             else
