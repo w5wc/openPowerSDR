@@ -7393,10 +7393,13 @@ namespace PowerSDR
                 }
                 else if (!tx_on_vfob)
                 {
-                    g.DrawLine(tx_filter_pen, filter_left_x, top, filter_left_x, H);		// draw tx filter overlay
-                    g.DrawLine(tx_filter_pen, filter_left_x + 1, top, filter_left_x + 1, H);	// draw tx filter overlay
-                    g.DrawLine(tx_filter_pen, filter_right_x, top, filter_right_x, H);	// draw tx filter overlay
-                    g.DrawLine(tx_filter_pen, filter_right_x + 1, top, filter_right_x + 1, H);// draw tx filter overlay
+                    if (rx == 1)
+                    {
+                        g.DrawLine(tx_filter_pen, filter_left_x, top, filter_left_x, H);        // draw tx filter overlay
+                        g.DrawLine(tx_filter_pen, filter_left_x + 1, top, filter_left_x + 1, H);    // draw tx filter overlay
+                        g.DrawLine(tx_filter_pen, filter_right_x, top, filter_right_x, H);  // draw tx filter overlay
+                        g.DrawLine(tx_filter_pen, filter_right_x + 1, top, filter_right_x + 1, H);// draw tx filter overlay
+                    }
                 }
             }
 
@@ -8767,8 +8770,17 @@ namespace PowerSDR
 
         private static void DrawWaterfallGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
-            if (bottom) g.FillRectangle(display_background_brush, 0, bottom ? H : 0, W, H);
-            else if (current_display_mode_bottom == DisplayMode.PANAFALL && rx == 2) g.FillRectangle(display_background_brush, 0, 3 * H, W, H);
+            if (rx == 1)
+            {
+                if (current_display_mode == DisplayMode.PANAFALL)
+                {
+                    g.FillRectangle(display_background_brush, 0, H, W, H);
+                }
+            }
+            else if (rx == 2)
+            {
+                if (current_display_mode_bottom == DisplayMode.PANAFALL) g.FillRectangle(display_background_brush, 0, 3 * H, W, H);
+            }
 
             int low = 0;					// initialize variables
             int high = 0;

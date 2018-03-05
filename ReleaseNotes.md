@@ -1,4 +1,4 @@
-# PowerSDR_mRX_PS 3.4.8.0 March 2, 2018
+# PowerSDR_mRX_PS 3.4.8.0 March 4, 2018
 
 
 # 3.2.22 (2015-1-24) 
@@ -347,7 +347,7 @@ Fixed a bug resulting in incorrect vertical display scale in transmit under cert
 - VFO Lock correctly locks VFOA and VFOB.
 - TX Amplitude scaling added to waterfall display. (Setup=>Display=>TX)
 
-# 3.4.8 (2018-3-2)
+# 3.4.8 (2018-3-4)
 - Creates new wisdom file for each folder when using the -datapath command
 - Bug fix for Behringer mini-wheels mapping issue when mapping AGC gain
 - Added support for mapping drive level to a Behringer mini-wheel
