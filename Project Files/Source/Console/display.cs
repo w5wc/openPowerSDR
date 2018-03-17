@@ -7118,16 +7118,6 @@ namespace PowerSDR
                     {
                         if (console.VFOBTX)  // Tx on VFOB
                         {
-                            Low -= splitDiff;
-                            High -= splitDiff;
-
-                            if (console.CTuneDisplay)
-                            {
-                                Low += ctunDiff;
-                                High += ctunDiff;
-                                f_diff -= ctunDiff;                                
-                            }
-
                             if (console.TUN)  // Adjust display scale and cursor for CW offset in TUN mode
                             {
                                 if (rx1_dsp_mode == DSPMode.LSB || rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.DIGL)

@@ -34493,13 +34493,18 @@ namespace PowerSDR
             }
             else if (!e.Alt && !e.Control)
             {
-                if (this.ActiveControl is TextBoxTS) return;
-                if (this.ActiveControl is NumericUpDownTS) return;
+                // 3/10/2018 - Commented out to fix spacebar not activating PTT when text box controls have focus.
+                //if (this.ActiveControl is TextBoxTS) return;
+                //if (this.ActiveControl is NumericUpDownTS) return;
 
                 switch (e.KeyCode)
                 {
                     case Keys.Space:
                         {
+                            // Disables windows system "beep" when spacebar is pressed.
+                            e.Handled = true;
+                            e.SuppressKeyPress = true;
+
                             if (chkPower.Checked)
                             {
                                 if (spacebar_ptt)
