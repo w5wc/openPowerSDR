@@ -9886,7 +9886,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>39</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -11584,7 +11584,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>40</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -11815,7 +11815,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>42</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -14401,7 +14401,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificFM.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>41</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
