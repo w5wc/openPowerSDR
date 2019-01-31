@@ -33104,6 +33104,7 @@ namespace PowerSDR
             while (chkPower.Checked)
             {
                 dotdashptt = JanusAudio.nativeGetDotDashPTT();
+                bool straightkeyin = JanusAudio.getUserI04();
                 bool state = (dotdashptt & 0x01) != 0; // ptt                
                 state = (dotdashptt & 0x02) != 0; // dash    
 
@@ -33119,6 +33120,7 @@ namespace PowerSDR
                     FWDot = state;
                     //SetConsoleMox(state);
                 }
+
 
                 last_bmp = dotdashptt;
                 Thread.Sleep(10);
@@ -33249,10 +33251,10 @@ namespace PowerSDR
             bool inhibit_input;
             while (chkPower.Checked)
             {
-                if (tx_inhibit_enabled && current_hpsdr_model != HPSDRModel.HPSDR)
+                if (/*tx_inhibit_enabled && */ current_hpsdr_model != HPSDRModel.HPSDR)
                 {
                     if (anan7000dpresent || anan8000dpresent)
-                    inhibit_input = JanusAudio.getUserI02();
+                        inhibit_input = JanusAudio.getUserI02();
                     else
                     inhibit_input = JanusAudio.getUserI01();
 

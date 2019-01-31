@@ -556,14 +556,14 @@ void loop() {
     fault();           // Jump to FAULT handling
   }
 
-  if ((volt_50 <= 430) and (Operate == 1) and  (TestMode == 0) and (PTT == 0) and (supply_50_stby == 0))  // Undervoltage while in operate mode, in RX ! Fault in pallet ?
+  if ((volt_50 <= 400) and (Operate == 1) and  (TestMode == 0) and (PTT == 0) and (supply_50_stby == 0))  // Undervoltage while in operate mode, in RX ! Fault in pallet ?
   {
     FAULT = 2;
     fault();           // Jump to FAULT handling
   }
 
   // detect long lasting voltage dip
-  if ((volt_50 <= 450) and (Operate == 1) and (TestMode == 0)  and (PTT == 1) )  // Undervoltage while in TX mode
+  if ((volt_50 <= 430) and (Operate == 1) and (TestMode == 0)  and (PTT == 1) )  // Undervoltage while in TX mode
   {
     if (LoVolt50 == 0) LoVolt50Time = millis();
     LoVolt50 = 1;

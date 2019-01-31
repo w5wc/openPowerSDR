@@ -1323,6 +1323,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF15
             // 
+            this.chkXVTRRF15.Checked = true;
+            this.chkXVTRRF15.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF15.Enabled = false;
             this.chkXVTRRF15.Image = null;
             this.chkXVTRRF15.Location = new System.Drawing.Point(774, 408);
@@ -1333,6 +1335,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF14
             // 
+            this.chkXVTRRF14.Checked = true;
+            this.chkXVTRRF14.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF14.Enabled = false;
             this.chkXVTRRF14.Image = null;
             this.chkXVTRRF14.Location = new System.Drawing.Point(774, 384);
@@ -1343,6 +1347,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF13
             // 
+            this.chkXVTRRF13.Checked = true;
+            this.chkXVTRRF13.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF13.Enabled = false;
             this.chkXVTRRF13.Image = null;
             this.chkXVTRRF13.Location = new System.Drawing.Point(774, 360);
@@ -1353,6 +1359,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF12
             // 
+            this.chkXVTRRF12.Checked = true;
+            this.chkXVTRRF12.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF12.Enabled = false;
             this.chkXVTRRF12.Image = null;
             this.chkXVTRRF12.Location = new System.Drawing.Point(774, 336);
@@ -1363,6 +1371,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF11
             // 
+            this.chkXVTRRF11.Checked = true;
+            this.chkXVTRRF11.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF11.Enabled = false;
             this.chkXVTRRF11.Image = null;
             this.chkXVTRRF11.Location = new System.Drawing.Point(774, 312);
@@ -1373,6 +1383,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF10
             // 
+            this.chkXVTRRF10.Checked = true;
+            this.chkXVTRRF10.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF10.Enabled = false;
             this.chkXVTRRF10.Image = null;
             this.chkXVTRRF10.Location = new System.Drawing.Point(774, 288);
@@ -1383,6 +1395,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF9
             // 
+            this.chkXVTRRF9.Checked = true;
+            this.chkXVTRRF9.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF9.Enabled = false;
             this.chkXVTRRF9.Image = null;
             this.chkXVTRRF9.Location = new System.Drawing.Point(774, 264);
@@ -1393,6 +1407,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF8
             // 
+            this.chkXVTRRF8.Checked = true;
+            this.chkXVTRRF8.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF8.Enabled = false;
             this.chkXVTRRF8.Image = null;
             this.chkXVTRRF8.Location = new System.Drawing.Point(774, 240);
@@ -1403,6 +1419,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF7
             // 
+            this.chkXVTRRF7.Checked = true;
+            this.chkXVTRRF7.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF7.Enabled = false;
             this.chkXVTRRF7.Image = null;
             this.chkXVTRRF7.Location = new System.Drawing.Point(774, 216);
@@ -1413,6 +1431,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF6
             // 
+            this.chkXVTRRF6.Checked = true;
+            this.chkXVTRRF6.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF6.Enabled = false;
             this.chkXVTRRF6.Image = null;
             this.chkXVTRRF6.Location = new System.Drawing.Point(774, 192);
@@ -1423,6 +1443,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF5
             // 
+            this.chkXVTRRF5.Checked = true;
+            this.chkXVTRRF5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF5.Enabled = false;
             this.chkXVTRRF5.Image = null;
             this.chkXVTRRF5.Location = new System.Drawing.Point(774, 168);
@@ -1433,6 +1455,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF4
             // 
+            this.chkXVTRRF4.Checked = true;
+            this.chkXVTRRF4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF4.Enabled = false;
             this.chkXVTRRF4.Image = null;
             this.chkXVTRRF4.Location = new System.Drawing.Point(774, 144);
@@ -1443,6 +1467,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF3
             // 
+            this.chkXVTRRF3.Checked = true;
+            this.chkXVTRRF3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF3.Enabled = false;
             this.chkXVTRRF3.Image = null;
             this.chkXVTRRF3.Location = new System.Drawing.Point(774, 120);
@@ -1453,6 +1479,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF2
             // 
+            this.chkXVTRRF2.Checked = true;
+            this.chkXVTRRF2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF2.Enabled = false;
             this.chkXVTRRF2.Image = null;
             this.chkXVTRRF2.Location = new System.Drawing.Point(774, 96);
@@ -1463,6 +1491,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF1
             // 
+            this.chkXVTRRF1.Checked = true;
+            this.chkXVTRRF1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF1.Enabled = false;
             this.chkXVTRRF1.Image = null;
             this.chkXVTRRF1.Location = new System.Drawing.Point(774, 72);
@@ -1473,6 +1503,8 @@ namespace PowerSDR
             // 
             // chkXVTRRF0
             // 
+            this.chkXVTRRF0.Checked = true;
+            this.chkXVTRRF0.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkXVTRRF0.Enabled = false;
             this.chkXVTRRF0.Image = null;
             this.chkXVTRRF0.Location = new System.Drawing.Point(774, 48);
@@ -1484,7 +1516,7 @@ namespace PowerSDR
             // lblXVTRRF
             // 
             this.lblXVTRRF.Image = null;
-            this.lblXVTRRF.Location = new System.Drawing.Point(766, 16);
+            this.lblXVTRRF.Location = new System.Drawing.Point(761, 16);
             this.lblXVTRRF.Name = "lblXVTRRF";
             this.lblXVTRRF.Size = new System.Drawing.Size(40, 32);
             this.lblXVTRRF.TabIndex = 170;

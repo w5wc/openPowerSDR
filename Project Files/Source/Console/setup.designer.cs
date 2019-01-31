@@ -30197,6 +30197,7 @@
             this.grpExtTXInhibit.TabIndex = 71;
             this.grpExtTXInhibit.TabStop = false;
             this.grpExtTXInhibit.Text = "External TX Inhibit";
+            this.grpExtTXInhibit.Visible = false;
             // 
             // chkTXInhibit
             // 

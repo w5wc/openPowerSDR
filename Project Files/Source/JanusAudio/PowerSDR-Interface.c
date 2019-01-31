@@ -381,7 +381,7 @@ int getDDPTTcount = 0;
 int last_DDP = 0; 
 
 KD5TFDVK6APHAUDIO_API int nativeGetDotDashPTT() {
-	DotDashBits |= (~User_I02) & 0x04;   //**K5SO
+	//DotDashBits |= (~User_I02) & 0x04;   //**K5SO
 
 	if ( last_DDP != (DotDashBits & 0x7) ) { 
 		last_DDP = DotDashBits & 0x7; 
