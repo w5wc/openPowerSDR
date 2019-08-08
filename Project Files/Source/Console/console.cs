@@ -1061,6 +1061,10 @@ namespace PowerSDR
         // private bool dax_audio_enum = false;
 
         //public Midi2Cat.Midi2CatSetupForm Midi2Cat;
+        //
+        // G8NJJ: Titlebar strings for Andromeda
+        //
+        private string TitleBarMultifunction;                   // shows action assigned to multi encoder
 
         #endregion
 
@@ -7865,6 +7869,19 @@ namespace PowerSDR
             get { return spec_display; }
             set { spec_display = value; }
         }
+
+        //
+        // added G8NJJ for Andromeda controller
+        //
+        public string TitleBarMultifunctionString
+        {
+            set
+            {
+                TitleBarMultifunction = value;
+                this.Text = TitleBar.GetString() + TitleBarMultifunction;
+            }
+        }
+
 
         private bool swap_af = false;
         public bool SwapAF
@@ -18939,12 +18956,60 @@ namespace PowerSDR
             }
         }
 
-        /*   public bool CATDiversityEnable
+        public decimal CATDiversityRX1Gain
            {
                get
                {
                    if (diversityForm != null)
-                       return diversityForm.CATEnable;
+                    return diversityForm.DiversityGain;
+                else
+                    return 0.0m;
+            }
+            set
+            {
+                if (diversityForm != null)
+                    diversityForm.DiversityGain = value;
+            }
+        }
+
+        public decimal CATDiversityRX2Gain
+        {
+            get
+            {
+                if (diversityForm != null)
+                    return diversityForm.DiversityR2Gain;
+                else
+                    return 0.0m;
+            }
+            set
+            {
+                if (diversityForm != null)
+                    diversityForm.DiversityR2Gain = value;
+            }
+        }
+
+        public decimal CATDiversityPhase
+        {
+            get
+            {
+                if (diversityForm != null)
+                    return diversityForm.DiversityPhase;
+                else
+                    return 0.0m;
+            }
+            set
+            {
+                if (diversityForm != null)
+                    diversityForm.DiversityPhase = value;
+            }
+        }
+
+        public bool CATDiversityEnable
+        {
+            get
+            {
+                if (diversityForm != null)
+                    return diversityForm.DiversityEnabled;
                    else
                        return false;
                }
@@ -18952,11 +19017,46 @@ namespace PowerSDR
                {
                    if (diversityForm != null)
                        if (value)
-                           diversityForm.CATEnable = true;
+                        diversityForm.DiversityEnabled = true;
                        else
-                           diversityForm.CATEnable = false;
+                        diversityForm.DiversityEnabled = false;
+            }
+        }
+
+        public bool CATDiversityRXRefSource             // added G8NJJ
+        {
+            get
+            {
+                if (diversityForm != null)
+                    return diversityForm.DiversityRXRef;
+                else
+                    return false;
+            }
+            set
+            {
+                if (diversityForm != null)
+                    if (value)
+                        diversityForm.DiversityRXRef = true;
+                    else
+                        diversityForm.DiversityRXRef = false;
+            }
+        }
+
+        public int CATDiversityRXSource             // added G8NJJ
+        {
+            get
+            {
+                if (diversityForm != null)
+                    return diversityForm.DiversityRXSource;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (diversityForm != null)
+                    diversityForm.DiversityRXSource = value;
+            }
                }
-           } */
 
         public bool CATDiversityForm
         {
@@ -23679,6 +23779,25 @@ namespace PowerSDR
             }
         }
 
+        public int CATRX1RX2RadioButton
+        {
+            get
+            {
+                if (show_rx2)
+                    return 1;
+                else
+                    return 0;
+
+            }
+            set
+            {
+                if (value == 0)                     // RX1
+                    radRX1Show.Checked = true;
+                else if (value == 1)                // RX2
+                    radRX2Show.Checked = true;
+            }
+        }
+
         public void CATRX2BandUpDown(int direction)
         {
             comboRX2Band.Focus();
@@ -23826,9 +23945,9 @@ namespace PowerSDR
             set
             {
                 if (value == 0)
-                    chkRX2NB2.Checked = false;
-                else
-                    chkRX2NB2.Checked = true;
+                    chkRX2NB.CheckState = CheckState.Unchecked;             // edited 30/3/2018 G8NJJ to access the NB control not SNB
+                else if (value == 1)
+                    chkRX2NB.CheckState = CheckState.Indeterminate;         // edited 30/3/2018 G8NJJ to access the NB control not SNB
             }
         }
 
@@ -38307,9 +38426,12 @@ namespace PowerSDR
         {
             ClickTuneRX2Display = chkX2TR.Checked;
 
-            if (chkX2TR.Checked && chkVFOSync.Checked)
+            if (chkVFOSync.Checked)             // G8NJJ. If VFO sync, turn both CTUNEs on/off
             {
-                if (!chkFWCATU.Checked) chkFWCATU.Checked = true;
+                if (chkX2TR.Checked)
+                    CTuneDisplay = true;
+                else
+                    CTuneDisplay = false;
             }
 
             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
@@ -47998,7 +48120,7 @@ namespace PowerSDR
             else chkRX2ANF.BackColor = SystemColors.Control;
             radio.GetDSPRX(1, 0).AutoNotchFilter = chkRX2ANF.Checked;
             radio.GetDSPRX(1, 1).AutoNotchFilter = chkRX2ANF.Checked;
-            //cat_anf_status = Convert.ToInt32(chkRX2ANF.Checked);
+            catrx2_anf_status = Convert.ToInt32(chkRX2ANF.Checked);
             aNF2ToolStripMenuItem.Checked = chkRX2ANF.Checked;
         }
 
@@ -52410,8 +52532,12 @@ namespace PowerSDR
                 ClickTuneDisplay = chkFWCATU.Checked;
                 chkRIT.Checked = rit_on;
             }
-            else ClickTuneDisplay = false;  //-W2PA Was commented-out in 3.4.1 - don't know why
-
+            else
+            {
+                ClickTuneDisplay = false;  //-W2PA Was commented-out in 3.4.1 - don't know why
+                if (chkVFOSync.Checked)     // G8NJJ: if VFO synced, turn off both CTUNE buttons
+                    CTuneRX2Display = false;
+            }
             if (chkFWCATU.Checked && chkVFOSync.Checked)
             {
                 if (!chkX2TR.Checked) chkX2TR.Checked = true;
