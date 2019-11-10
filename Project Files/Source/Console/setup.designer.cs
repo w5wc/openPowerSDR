@@ -30782,7 +30782,7 @@
             0});
             this.udTXVOXThreshold.Location = new System.Drawing.Point(75, 35);
             this.udTXVOXThreshold.Maximum = new decimal(new int[] {
-            1000,
+            3000,
             0,
             0,
             0});

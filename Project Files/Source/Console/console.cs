@@ -6568,7 +6568,7 @@ namespace PowerSDR
             resources.ApplyResources(this.ptbVOX, "ptbVOX");
             this.ptbVOX.HeadImage = null;
             this.ptbVOX.LargeChange = 1;
-            this.ptbVOX.Maximum = 1000;
+            this.ptbVOX.Maximum = 3000;
             this.ptbVOX.Minimum = 0;
             this.ptbVOX.Name = "ptbVOX";
             this.ptbVOX.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -14775,15 +14775,14 @@ namespace PowerSDR
 
                 if (bpf1_hf_lna)
                 {
-                    if ((freq >= 21.0 && freq <= 21.45) ||
-                        (freq >= 24.89 && freq <= 24.99) ||
-                        (freq >= 28.0 && freq <= 29.7))
+                    if (freq >= 21.0 && freq <= 35.0) 
                     {
                         JanusAudio.SetAlexHPFBits(0x40);
                         SetupForm.BPF1_6led = true;
                         bpf1_hf_lna_offset = -15.0f;
                         return;
                     }
+                    else bpf1_hf_lna_offset = 0.0f;
                 }
                 else bpf1_hf_lna_offset = 0.0f;
 
@@ -14882,9 +14881,9 @@ namespace PowerSDR
                     SetupForm.BPBPF1led = true;
                 }
             }
-            else if (chkPower.Checked && alexpresent && SetupForm.radAlexAutoCntl.Checked && JanusAudio.MetisCodeVersion >= 24)
+            else if (chkPower.Checked && alexpresent && SetupForm.radAlexAutoCntl.Checked && JanusAudio.MetisCodeVersion == 24)
             {
-                if (freq >= 21.0 && freq <= 61.44)                       
+                if (freq >= 22.0 && freq <= 35.0)                       
                 {                   
                     bpf1_hf_lna_offset = -15.0f;
                 }
@@ -14909,15 +14908,14 @@ namespace PowerSDR
 
                 if (bpf2_hf_lna)
                 {
-                    if ((freq >= 21.0 && freq <= 21.45) ||
-                        (freq >= 24.89 && freq <= 24.99) ||
-                        (freq >= 28.0 && freq <= 29.7))
+                    if (freq >= 21.0 && freq <= 35.0) 
                     {
                         JanusAudio.SetAlex2HPFBits(0x40);
                         SetupForm.radAlex26BPFled.Checked = true;
                         bpf2_hf_lna_offset = -15.0f;
                         return;
                     }
+                    else bpf1_hf_lna_offset = 0.0f;
                 }
                 else bpf2_hf_lna_offset = 0.0f;
 
@@ -15016,9 +15014,9 @@ namespace PowerSDR
                     SetupForm.radAlex2BPHPFled.Checked = true;
                 }
             }
-            else if (chkPower.Checked && alexpresent && SetupForm.radAlexAutoCntl.Checked && JanusAudio.MetisCodeVersion >= 24)
+            else if (chkPower.Checked && alexpresent && SetupForm.radAlexAutoCntl.Checked && JanusAudio.MetisCodeVersion == 24)
             {
-                if (freq >= 21.0 && freq <= 61.44)
+                if (freq >= 22.0 && freq <= 35.0)
                 {
                     bpf2_hf_lna_offset = -15.0f;
                 }
@@ -22264,7 +22262,7 @@ namespace PowerSDR
         {
                 if (btnTNFAdd.Checked)
                 {
-                    if (!Alex.trx_ant_not_same)
+                    if (!Alex.trx_ant_not_same && !initializing)
                     {
                         btnTNFAdd.Checked = false;
                         return;
@@ -28337,7 +28335,7 @@ namespace PowerSDR
 
            // if (NWSeqError > 0) txtOverload.Text = "SeqErr: " + NWSeqError.ToString();
            // else 
-            if(overload)
+            if (overload)
             {
                 switch (oload_select)
                 {
@@ -33223,7 +33221,7 @@ namespace PowerSDR
             while (chkPower.Checked)
             {
                 dotdashptt = JanusAudio.nativeGetDotDashPTT();
-                bool straightkeyin = JanusAudio.getUserI04();
+               // bool straightkeyin = JanusAudio.getUserI04();
                 bool state = (dotdashptt & 0x01) != 0; // ptt                
                 state = (dotdashptt & 0x02) != 0; // dash    
 
@@ -33239,7 +33237,6 @@ namespace PowerSDR
                     FWDot = state;
                     //SetConsoleMox(state);
                 }
-
 
                 last_bmp = dotdashptt;
                 Thread.Sleep(10);
@@ -33373,7 +33370,7 @@ namespace PowerSDR
                 if (/*tx_inhibit_enabled && */ current_hpsdr_model != HPSDRModel.HPSDR)
                 {
                     if (anan7000dpresent || anan8000dpresent)
-                        inhibit_input = JanusAudio.getUserI02();
+                    inhibit_input = JanusAudio.getUserI02();
                     else
                     inhibit_input = JanusAudio.getUserI01();
 
@@ -35796,7 +35793,7 @@ namespace PowerSDR
 
             panelVFOAHover.Invalidate();
             panelVFOBHover.Invalidate();
-            CWFWKeyer = chkCWBreakInEnabled.Checked;                  // **K5SO
+            //CWFWKeyer = chkCWBreakInEnabled.Checked;                  // **K5SO
         }
 
         public void comboDisplayMode_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -36881,7 +36878,9 @@ namespace PowerSDR
                     (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU) &&
                      !chkTUN.Checked &&
                      current_ptt_mode != PTTMode.SPACE &&
-                    current_ptt_mode != PTTMode.CAT)
+                    current_ptt_mode != PTTMode.CAT
+                    && current_ptt_mode != PTTMode.CW
+                    )
                     JanusAudio.SetXmitBit(0);
                 else JanusAudio.SetXmitBit(1);
 
@@ -37362,12 +37361,12 @@ namespace PowerSDR
                 HighSWR = false;
             }
 
-            if (RX1DSPMode == DSPMode.CWL ||    // **K5SO  ...these additions are needed for external PTT-in support in CW mode
-                RX1DSPMode == DSPMode.CWU)      // **K5SO 
-            {                                   // **K5SO
-                if (mox || chkCWBreakInEnabled.Checked) CWFWKeyer = true;      // **K5SO
-                else CWFWKeyer = false;         // **K5SO
-            }                                   // **K5SO
+           // if (RX1DSPMode == DSPMode.CWL ||    // **K5SO  ...these additions are needed for external PTT-in support in CW mode
+            //    RX1DSPMode == DSPMode.CWU)      // **K5SO 
+           // {                                   // **K5SO
+            //    if (mox || chkCWBreakInEnabled.Checked) CWFWKeyer = true;      // **K5SO
+           //     else CWFWKeyer = false;         // **K5SO
+          //  }                                   // **K5SO
 
             if (tx) UIMOXChangedTrue();
             else UIMOXChangedFalse();
@@ -37377,6 +37376,21 @@ namespace PowerSDR
         private void chkMOX_Click(object sender, System.EventArgs e)
         {
             if (chkMOX.Checked)			// because the CheckedChanged event fires first
+            {
+                manual_mox = true;
+                if (cw_fw_keyer &&
+                   (RX1DSPMode == DSPMode.CWL ||
+                    RX1DSPMode == DSPMode.CWU))
+                    JanusAudio.SetXmitBit(1);
+            }
+            else
+            {
+                manual_mox = false;
+                if (chkTUN.Checked)
+                    chkTUN.Checked = false;
+            }
+
+        /*   if (chkMOX.Checked)			// because the CheckedChanged event fires first
             {
                 manual_mox = true;
                 //if (cw_fw_keyer &&                // **K5SO
@@ -37394,7 +37408,8 @@ namespace PowerSDR
                 if (chkTUN.Checked)
                     chkTUN.Checked = false;
                 CWFWKeyer = false;                  // **K5SO
-            }
+            } */
+
         }
 
         private void comboMeterRXMode_SelectedIndexChanged(object sender, System.EventArgs e)
